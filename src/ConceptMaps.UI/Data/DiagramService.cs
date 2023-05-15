@@ -82,43 +82,38 @@ public class DiagramService
     public void ArrangeNodes(Diagram diagram, string algorithm)
     {
         var graph = MakeGraph(diagram);
-        var nodes = diagram.Nodes.ToDictionary(node => node.Id, node => node);
-
-        var nodePositions = CalculateNodePositions(graph, nodes, algorithm);
-        foreach (var (id, node) in nodes)
+        
+        var nodePositions = CalculateNodePositions(graph, algorithm);
+        foreach (var (node, position) in nodePositions)
         {
-            if (nodePositions.TryGetValue(id, out var position))
-            {
-                node.Position = new Blazor.Diagrams.Core.Geometry.Point(position.X, position.Y);
-                node.RefreshAll();
-            }
+            node.Position = new Blazor.Diagrams.Core.Geometry.Point(position.X, position.Y);
+            node.RefreshAll();
         }
 
         diagram.Refresh();
         diagram.ZoomToFit();
     }
 
-    private static BidirectionalGraph<string, TaggedEdge<string, string>> MakeGraph(Diagram diagram)
+    private static BidirectionalGraph<NodeModel, Edge<NodeModel>> MakeGraph(Diagram diagram)
     {
-        var graph = new BidirectionalGraph<string, TaggedEdge<string, string>>(true);
+        var graph = new BidirectionalGraph<NodeModel, Edge<NodeModel>>(true);
 
         foreach (var node in diagram.Nodes)
         {
-            graph.AddVertex(node.Id);
+            graph.AddVertex(node);
         }
 
         foreach (var diagramLink in diagram.Links.Where(l => l.TargetNode is not null))
         {
-            var edgeTitle = diagramLink.Labels.FirstOrDefault()?.Content ?? string.Empty;
-            graph.AddEdge(new TaggedEdge<string, string>(diagramLink.SourceNode.Id, diagramLink.TargetNode!.Id, edgeTitle));
+            graph.AddEdge(new Edge<NodeModel>(diagramLink.SourceNode, diagramLink.TargetNode!));
         }
 
         return graph;
     }
 
-    private IDictionary<string, Point> CalculateNodePositions(BidirectionalGraph<string, TaggedEdge<string, string>> graph, Dictionary<string, NodeModel> nodes, string algorithmName)
+    private IDictionary<NodeModel, Point> CalculateNodePositions(BidirectionalGraph<NodeModel, Edge<NodeModel>> graph, string algorithmName)
     {
-        var layoutContext = CreateLayoutContext(nodes, graph);
+        var layoutContext = CreateLayoutContext(graph);
         var layoutParameters = this._layoutAlgorithmFactory.CreateParameters(algorithmName, null);
         AdaptLayoutParameters(layoutParameters);
 
@@ -128,7 +123,7 @@ public class DiagramService
             return algorithm.VerticesPositions;
         }
 
-        return new Dictionary<string, Point>();
+        return new Dictionary<NodeModel, Point>();
     }
 
     private static void AdaptLayoutParameters(ILayoutParameters layoutParameters)
@@ -176,12 +171,12 @@ public class DiagramService
         }
     }
 
-    private static LayoutContext<string, TaggedEdge<string, string>, BidirectionalGraph<string, TaggedEdge<string, string>>> CreateLayoutContext(Dictionary<string, NodeModel> nodes, BidirectionalGraph<string, TaggedEdge<string, string>> graph)
+    private static LayoutContext<NodeModel, Edge<NodeModel>, BidirectionalGraph<NodeModel, Edge<NodeModel>>> CreateLayoutContext(BidirectionalGraph<NodeModel, Edge<NodeModel>> graph)
     {
-        var positions = new Dictionary<string, Point>();
-        var sizes = nodes.ToDictionary(kvp => kvp.Key, kvp => ConvertSize(kvp.Value.Size!));
+        var positions = new Dictionary<NodeModel, Point>();
+        var sizes = graph.Vertices.ToDictionary(node => node, node => ConvertSize(node.Size!));
 
-        return new LayoutContext<string, TaggedEdge<string, string>, BidirectionalGraph<string, TaggedEdge<string, string>>>(graph, positions, sizes, LayoutMode.Simple);
+        return new LayoutContext<NodeModel, Edge<NodeModel>, BidirectionalGraph<NodeModel, Edge<NodeModel>>>(graph, positions, sizes, LayoutMode.Simple);
     }
 
     private static GraphShape.Size ConvertSize(Size size) => new (size?.Width ?? 100, size?.Height ?? 80);

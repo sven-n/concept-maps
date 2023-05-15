@@ -1,5 +1,6 @@
 ﻿namespace ConceptMaps.UI.Data;
 
+using Blazor.Diagrams.Core.Models;
 using GraphShape.Algorithms.Layout;
 using QuikGraph;
 
@@ -7,9 +8,9 @@ using QuikGraph;
 /// Simplified class definition for the <see cref="StandardLayoutAlgorithmFactory{TVertex,TEdge,TGraph}"/>
 /// </summary>
 public class StandardLayoutAlgorithmFactory : StandardLayoutAlgorithmFactory<
-        string,
-        TaggedEdge<string, string>,
-        BidirectionalGraph<string, TaggedEdge<string, string>>>,
+        NodeModel,
+        Edge<NodeModel>,
+        BidirectionalGraph<NodeModel, Edge<NodeModel>>>,
     ILayoutAlgorithmFactory
 {
 }
