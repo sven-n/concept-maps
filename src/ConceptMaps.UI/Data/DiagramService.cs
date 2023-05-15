@@ -44,10 +44,8 @@ public class DiagramService
             {
                 nodeModel = new NodeModel(word)
                 {
-                    Title = word
+                    Title = word,
                 };
-
-                
 
                 nodes.Add(word, nodeModel);
                 diagram.Nodes.Add(nodeModel);
@@ -122,6 +120,8 @@ public class DiagramService
     {
         var layoutContext = CreateLayoutContext(nodes, graph);
         var layoutParameters = this._layoutAlgorithmFactory.CreateParameters(algorithmName, null);
+        AdaptLayoutParameters(layoutParameters);
+
         if (this._layoutAlgorithmFactory.CreateAlgorithm(algorithmName, layoutContext, layoutParameters) is { } algorithm)
         {
             algorithm.Compute();
@@ -130,7 +130,52 @@ public class DiagramService
 
         return new Dictionary<string, Point>();
     }
-    
+
+    private static void AdaptLayoutParameters(ILayoutParameters layoutParameters)
+    {
+        // TODO: Set height/width by actual canvas size
+        // TODO: Make configurable on the UI
+        switch (layoutParameters)
+        {
+            case SimpleTreeLayoutParameters treeParameters:
+                treeParameters.LayerGap = 50;
+                treeParameters.VertexGap = 50;
+                break;
+            case BalloonTreeLayoutParameters balloonTreeParameters:
+                balloonTreeParameters.MinRadius = 50;
+                break;
+            case BoundedFRLayoutParameters boundedFrLayoutParameters:
+                boundedFrLayoutParameters.Height = 500;
+                boundedFrLayoutParameters.Width = 800;
+                break;
+            case ISOMLayoutParameters isoMLayoutParameters:
+                isoMLayoutParameters.MinRadius = 300;
+                isoMLayoutParameters.InitialRadius = 300;
+                isoMLayoutParameters.Height = 500 * 2;
+                isoMLayoutParameters.Width = 800 * 2;
+                break;
+            case KKLayoutParameters kkLayoutParameters:
+                kkLayoutParameters.Height = 500;
+                kkLayoutParameters.Width = 800;
+                break;
+            case LinLogLayoutParameters linLogLayoutParameters:
+                // LinLogLayoutParameters.AttractionExponent = 20;
+                linLogLayoutParameters.GravitationMultiplier = 0.01;
+                break;
+            case SugiyamaLayoutParameters sugiyamaLayoutParameters:
+                sugiyamaLayoutParameters.LayerGap = 50;
+                sugiyamaLayoutParameters.SliceGap = 50;
+                break;
+            case RandomLayoutParameters randomLayoutParameters:
+                randomLayoutParameters.Width = 800;
+                randomLayoutParameters.Height = 500;
+                break;
+            case CompoundFDPLayoutParameters compoundFdpLayoutParameters:
+                compoundFdpLayoutParameters.IdealEdgeLength = 75;
+                break;
+        }
+    }
+
     private static LayoutContext<string, TaggedEdge<string, string>, BidirectionalGraph<string, TaggedEdge<string, string>>> CreateLayoutContext(Dictionary<string, NodeModel> nodes, BidirectionalGraph<string, TaggedEdge<string, string>> graph)
     {
         var positions = new Dictionary<string, Point>();
