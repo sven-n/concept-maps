@@ -36,20 +36,32 @@ public class Crawler : ICrawler
     /// <inheritdoc />
     public async Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, CancellationToken cancellationToken = default)
     {
+        var crawledPages = new HashSet<Uri>();
         var config = new CrawlConfiguration
         {
             MinCrawlDelayPerDomainMilliSeconds = 1000,
             IsExternalPageCrawlingEnabled = false,
-            CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(30).TotalSeconds,
+            CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(10).TotalSeconds,
+            MaxPagesToCrawl = 100,
         };
 
         using var crawler = new PoliteWebCrawler(config);
-        crawler.PageCrawlCompleted += (_, args) => OnPageCrawlCompleted(args.CrawledPage, contentWriter, relationsWriter);
+        crawler.PageCrawlCompleted += (_, args) =>
+        {
+            OnPageCrawlCompleted(args.CrawledPage, contentWriter, relationsWriter);
+            if (args.CrawledPage.HttpResponseMessage?.IsSuccessStatusCode ?? false)
+            {
+                crawledPages.Add(args.CrawledPage.Uri);
+            }
+        };
         crawler.PageCrawlStarting += (sender, args) => this._logger.LogInformation("Crawling page {page} ...", args.PageToCrawl.Uri);
         crawler.ShouldCrawlPageDecisionMaker += OnShouldCrawlPage;
         
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        await crawler.CrawlAsync(settings.EntryUri, cts);
+        foreach (var entryUri in settings.EntryUris)
+        {
+            await crawler.CrawlAsync(entryUri, cts);
+        }
 
         CrawlDecision OnShouldCrawlPage(PageToCrawl page, CrawlContext context)
         {
@@ -57,6 +69,7 @@ public class Crawler : ICrawler
             {
                 Allow = settings.BaseUri.IsBaseOf(page.Uri)
                         && !settings.BlockUris.Contains(page.Uri)
+                        && !crawledPages.Contains(page.Uri)
             };
         }
     }

@@ -12,7 +12,7 @@ public class GameOfThronesRelationshipExtractor : IRelationshipExtractor
     /// </summary>
     private static readonly HashSet<string?> RelevantDataSourceNames = new()
     {
-        "Father", "Mother", "Spouse", "Siblings",
+        "Father", "Mother", "Spouse", "Siblings", "Children"
     };
 
     /// <inheritdoc />

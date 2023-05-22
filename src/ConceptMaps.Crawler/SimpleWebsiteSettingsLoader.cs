@@ -3,8 +3,9 @@
 /// <summary>
 /// Loader for <see cref="WebsiteSettings"/> from a simple text file.
 /// Empty lines, and lines starting with '#' are filtered out.
-/// The first real line is the <see cref="WebsiteSettings.EntryUri"/>.
-/// The next line is the <see cref="WebsiteSettings.BaseUri"/>. All pages which should be crawled should have this address as base.
+/// The file is separated in segments.
+/// The first segments contains one or more <see cref="WebsiteSettings.EntryUris"/>.
+/// The next segment contains the <see cref="WebsiteSettings.BaseUri"/>. All pages which should be crawled should have this address as base.
 /// After that, a dynamic amount of <see cref="WebsiteSettings.BlockUris"/> which should not be crawled, can be defined, one per line.
 /// </summary>
 public class SimpleWebsiteSettingsLoader : IWebsiteSettingsLoader
@@ -14,6 +15,7 @@ public class SimpleWebsiteSettingsLoader : IWebsiteSettingsLoader
     {
         var lines = File.ReadLines(settingsFilePath)
             .Where(line => !line.StartsWith("#"))
+            .Select(line => line.Trim())
             .Where(line => !string.IsNullOrWhiteSpace(line))
             .ToList();
 
@@ -23,8 +25,8 @@ public class SimpleWebsiteSettingsLoader : IWebsiteSettingsLoader
         }
 
         return new WebsiteSettings(
-            entryUri: lines[0], 
-            baseUri: lines.Count > 1 ? lines[1] : string.Empty,
-            blockUris: new HashSet<string>(lines.Skip(2).Distinct()));
+            entryUris: lines.SkipWhile(l => l != "[EntryPoints]").Skip(1).TakeWhile(l => l != "[Base]"), 
+            baseUri: lines.SkipWhile(l => l != "[Base]").Skip(1).FirstOrDefault() ?? string.Empty,
+            blockUris: new HashSet<string>(lines.SkipWhile(l => l != "[BlockUris]").Distinct()));
     }
 }
