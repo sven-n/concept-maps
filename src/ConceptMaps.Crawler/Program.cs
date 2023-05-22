@@ -6,6 +6,8 @@ if (args.Length == 0)
     Console.WriteLine("The path to a configuration must be provided as first starting parameter.");
 }
 
+var timestamp = DateTime.Now;
+
 var relationshipExtractorFactory = new RelationshipExtractorFactory();
 relationshipExtractorFactory.Register(new GameOfThronesRelationshipExtractor());
 
@@ -13,6 +15,7 @@ relationshipExtractorFactory.Register(new GameOfThronesRelationshipExtractor());
 var serviceCollection = new ServiceCollection()
     .AddLogging(builder => builder
         .AddConsole()
+        .AddFile($"{timestamp:s}_Log.txt".Replace(':', '_'))
         .AddFilter(level => level >= LogLevel.Information))
     .AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
     .AddSingleton(relationshipExtractorFactory)
@@ -23,7 +26,6 @@ await using var serviceProvider = serviceCollection.BuildServiceProvider();
 var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
 var settings = settingsLoader.LoadSettings(args[0]);
 
-var timestamp = DateTime.Now;
 await using var contentWriter = File.CreateText($"{timestamp:s}_Text.txt".Replace(':','_'));
 await using var relationsWriter = File.CreateText($"{timestamp:s}_Relationships.txt".Replace(':', '_'));
 

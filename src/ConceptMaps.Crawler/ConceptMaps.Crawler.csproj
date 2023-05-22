@@ -11,6 +11,7 @@
     <PackageReference Include="AbotX" Version="2.1.12" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
