@@ -4,6 +4,19 @@ using Microsoft.Extensions.DependencyInjection;
 if (args.Length == 0)
 {
     Console.WriteLine("The path to a configuration must be provided as first starting parameter.");
+    return;
+}
+
+if (args.Length == 2)
+{
+    // Bei 2 Parametern nehmen wir an, dass wir bereits gecrawled haben, und nun
+    // nur noch die Beziehungen analysieren wollen
+    Console.WriteLine("Analyzing for relationship sentences ...");
+    new RelationshipAnalyzer().AnalyzeAndStoreResults(
+        textFilePath: args[0],
+        relationshipFilePath: args[1],
+        resultFilePath: args[1].Replace("_Text.txt", "_SentenceRelationships.json"));
+    return;
 }
 
 var timestamp = DateTime.Now;
@@ -26,14 +39,20 @@ await using var serviceProvider = serviceCollection.BuildServiceProvider();
 var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
 var settings = settingsLoader.LoadSettings(args[0]);
 
-await using var contentWriter = File.CreateText($"{timestamp:s}_Text.txt".Replace(':','_'));
-await using var relationsWriter = File.CreateText($"{timestamp:s}_Relationships.txt".Replace(':', '_'));
+var textFilePath = $"{timestamp:s}_Text.txt".Replace(':', '_');
+var relationshipFilePath = $"{timestamp:s}_Relationships.txt".Replace(':', '_');
+var sentencesFilePath = $"{timestamp:s}_SentenceRelationships.json".Replace(':', '_');
 
 // todo: Abbrechen ermöglichen.
 using var cts = new CancellationTokenSource();
 
 var crawler = serviceProvider.GetRequiredService<ICrawler>();
-await crawler.CrawlAsync(settings, contentWriter, relationsWriter, cts.Token);
+await crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, cts.Token);
+
+Console.WriteLine("Finished Crawling, starting analyzing for relationship sentences ...");
+
+// After crawling analyze the sentences for possible relationships
+var relationshipAnalyzer = new RelationshipAnalyzer();
+relationshipAnalyzer.AnalyzeAndStoreResults(textFilePath, relationshipFilePath, sentencesFilePath);
 
 Console.WriteLine("Finished");
-
