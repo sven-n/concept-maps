@@ -32,7 +32,7 @@ internal class RelationshipAnalyzer
             .Distinct()
             .ToList();
 
-        var foundSentences = this.FindSentences(text, parsedRelationships);
+        var foundSentences = FindSentences(text, parsedRelationships);
         var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             WriteIndented = true,
@@ -59,42 +59,33 @@ internal class RelationshipAnalyzer
         }
     }
 
-    private List<SentenceRelationships> FindSentences(string text, List<Relationship> possibleRelationships)
+    private static List<SentenceRelationships> FindSentences(string text, List<Relationship> possibleRelationships)
     {
         var sentences = text.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        return sentences.Select(ProcessSentence).Where(result => result.relationships.Any()).ToList();
-
-        SentenceRelationships? ProcessSentence(string sentence)
-        {
-            return new SentenceRelationships(sentence, possibleRelationships
-                .Where(relationship => (sentence.Contains(relationship.FirstEntity) || sentences.Contains(relationship.FirstEntityForeName)
-                        && ( sentence.Contains(relationship.SecondEntity) || sentences.Contains(relationship.SecondEntityForeName))))
-                .ToList());
-        }
+        return sentences
+            .Select(sentence => ProcessSentence(sentence, possibleRelationships))
+            .Where(result => result.Relationships.Any())
+            .ToList();
     }
 
-    private class Relationship
+    private static SentenceRelationships ProcessSentence(string sentence, List<Relationship> possibleRelationships)
     {
-        public Relationship(string firstEntity, string relationshipType, string secondEntity)
-        {
-            this.FirstEntity = firstEntity;
-            this.RelationshipType = relationshipType;
-            this.SecondEntity = secondEntity;
-
-            this.FirstEntityForeName = firstEntity.Split(' ').First();
-            this.SecondEntityForeName = secondEntity.Split(' ').First();
-        }
-
-        public string FirstEntity { get; init; }
-        public string RelationshipType { get; init; }
-        public string SecondEntity { get; init; }
-
-        [JsonIgnore]
-        public string FirstEntityForeName { get; }
-
-        [JsonIgnore]
-        public string SecondEntityForeName { get; }
+        return new SentenceRelationships(
+            sentence,
+            possibleRelationships.Where(relationship =>
+                           (sentence.Contains(relationship.FirstEntity) || sentence.Contains(relationship.FirstEntityForeName)) 
+                        && (sentence.Contains(relationship.SecondEntity) || sentence.Contains(relationship.SecondEntityForeName)))
+            .ToList());
     }
 
-    private record SentenceRelationships(string sentence, List<Relationship> relationships);
+    private record Relationship(string FirstEntity, string RelationshipType, string SecondEntity)
+    {
+        [JsonIgnore]
+        public string FirstEntityForeName { get; } = FirstEntity.Split(' ').First();
+
+        [JsonIgnore]
+        public string SecondEntityForeName { get; } = SecondEntity.Split(' ').First();
+    }
+
+    private record SentenceRelationships(string Sentence, List<Relationship> Relationships);
 }
