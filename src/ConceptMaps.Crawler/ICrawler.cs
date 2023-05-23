@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace ConceptMaps.Crawler;
 
-namespace ConceptMaps.Crawler;
+using System.Text;
 
 /// <summary>
 /// Interface for a crawler implementation.
@@ -32,8 +32,15 @@ public static class CrawlerExtensions
     /// <param name="cancellationToken">The cancellation token.</param>
     public static async ValueTask CrawlAsync(this ICrawler crawler, WebsiteSettings settings, string textFilePath, string relationshipFilePath, CancellationToken cancellationToken)
     {
-        await using var contentWriter = File.CreateText(textFilePath);
-        await using var relationsWriter = File.CreateText(relationshipFilePath);
+        await using var contentWriter = CreateUtf8StreamWriter(textFilePath);
+        await using var relationsWriter = CreateUtf8StreamWriter(relationshipFilePath);
         await crawler.CrawlAsync(settings, contentWriter, relationsWriter, cancellationToken);
+    }
+
+    private static StreamWriter CreateUtf8StreamWriter(string path)
+    {
+        var fileStream = File.Create(path);
+        fileStream.Write(Encoding.UTF8.GetPreamble());
+        return new StreamWriter(fileStream, Encoding.UTF8, leaveOpen: false);
     }
 }

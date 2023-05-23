@@ -75,6 +75,7 @@ public class Crawler : ICrawler
                 Allow = settings.BaseUri.IsBaseOf(page.Uri)
                         && !settings.BlockUris.Contains(page.Uri)
                         && !crawledPages.Contains(page.Uri)
+                        && !page.Uri.AbsoluteUri.Contains("/File:")
             };
         }
     }
