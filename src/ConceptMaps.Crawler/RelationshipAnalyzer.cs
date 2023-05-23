@@ -1,6 +1,8 @@
 ﻿namespace ConceptMaps.Crawler;
 
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Analyzes the text for possible sentences which include hints to the relationships
@@ -36,7 +38,7 @@ internal class RelationshipAnalyzer
             WriteIndented = true,
         };
 
-        File.WriteAllText(resultFilePath, JsonSerializer.Serialize(foundSentences, serializerOptions));
+        File.WriteAllText(resultFilePath, JsonSerializer.Serialize(foundSentences, serializerOptions), Encoding.UTF8);
     }
 
     /// <summary>
@@ -47,11 +49,11 @@ internal class RelationshipAnalyzer
     /// <returns>The normalized relationship.</returns>
     private static Relationship NormalizeRelationship(Relationship relationship)
     {
-        switch (relationship.relationshipType)
+        switch (relationship.RelationshipType)
         {
             case "mother":
             case "father":
-                return new Relationship(relationship.secondEntity, "children", relationship.firstEntity);
+                return new Relationship(relationship.SecondEntity, "children", relationship.FirstEntity);
             default:
                 return relationship;
         }
@@ -65,15 +67,34 @@ internal class RelationshipAnalyzer
         SentenceRelationships? ProcessSentence(string sentence)
         {
             return new SentenceRelationships(sentence, possibleRelationships
-                .Where(relationship => (sentence.Contains(relationship.firstEntity)
-                                        || sentences.Contains(relationship.firstEntity.Split(' ').First()) // check for the fore name, too
-                        && ( sentence.Contains(relationship.secondEntity)
-                             || sentences.Contains(relationship.secondEntity.Split(' ').First())))) // check for the fore name, too
+                .Where(relationship => (sentence.Contains(relationship.FirstEntity) || sentences.Contains(relationship.FirstEntityForeName)
+                        && ( sentence.Contains(relationship.SecondEntity) || sentences.Contains(relationship.SecondEntityForeName))))
                 .ToList());
         }
     }
 
-    private record Relationship(string firstEntity, string relationshipType, string secondEntity);
+    private class Relationship
+    {
+        public Relationship(string firstEntity, string relationshipType, string secondEntity)
+        {
+            this.FirstEntity = firstEntity;
+            this.RelationshipType = relationshipType;
+            this.SecondEntity = secondEntity;
+
+            this.FirstEntityForeName = firstEntity.Split(' ').First();
+            this.SecondEntityForeName = secondEntity.Split(' ').First();
+        }
+
+        public string FirstEntity { get; init; }
+        public string RelationshipType { get; init; }
+        public string SecondEntity { get; init; }
+
+        [JsonIgnore]
+        public string FirstEntityForeName { get; }
+
+        [JsonIgnore]
+        public string SecondEntityForeName { get; }
+    }
 
     private record SentenceRelationships(string sentence, List<Relationship> relationships);
 }
