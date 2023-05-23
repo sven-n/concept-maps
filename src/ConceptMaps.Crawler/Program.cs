@@ -24,11 +24,14 @@ var timestamp = DateTime.Now;
 var relationshipExtractorFactory = new RelationshipExtractorFactory();
 relationshipExtractorFactory.Register(new GameOfThronesRelationshipExtractor());
 
+var configName = args[0].Split('.').First();
+var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
+
 // Preparing dependency injection container ...
 var serviceCollection = new ServiceCollection()
     .AddLogging(builder => builder
         .AddConsole()
-        .AddFile($"{timestamp:s}_Log.txt".Replace(':', '_'))
+        .AddFile($"{fileNamePrefix}_Log.txt")
         .AddFilter(level => level >= LogLevel.Information))
     .AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
     .AddSingleton(relationshipExtractorFactory)
@@ -39,9 +42,9 @@ await using var serviceProvider = serviceCollection.BuildServiceProvider();
 var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
 var settings = settingsLoader.LoadSettings(args[0]);
 
-var textFilePath = $"{timestamp:s}_Text.txt".Replace(':', '_');
-var relationshipFilePath = $"{timestamp:s}_Relationships.txt".Replace(':', '_');
-var sentencesFilePath = $"{timestamp:s}_SentenceRelationships.json".Replace(':', '_');
+var textFilePath = $"{fileNamePrefix}_Text.txt";
+var relationshipFilePath = $"{fileNamePrefix}_Relationships.txt";
+var sentencesFilePath = $"{fileNamePrefix}_SentenceRelationships.json";
 
 // todo: Abbrechen ermöglichen.
 using var cts = new CancellationTokenSource();
