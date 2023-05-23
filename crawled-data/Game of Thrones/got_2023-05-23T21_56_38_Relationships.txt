@@ -1,0 +1,146 @@
+﻿Sansa Stark;Father;Eddard Stark
+Sansa Stark;Mother;Catelyn Stark
+Sansa Stark;Spouse;Tyrion Lannister
+Sansa Stark;Spouse;Ramsay Bolton
+Sansa Stark;Siblings;Robb Stark
+Sansa Stark;Siblings;Jon Snow
+Sansa Stark;Siblings;Arya Stark
+Sansa Stark;Siblings;Bran Stark
+Sansa Stark;Siblings;Rickon Stark
+Ramsay Bolton;Father;Roose Bolton
+Ramsay Bolton;Mother;Miller's wife
+Ramsay Bolton;Spouse;Sansa Stark
+Ramsay Bolton;Siblings;Roose Bolton's son
+Jon Snow;Father;Rhaegar Targaryen
+Jon Snow;Father;Eddard Stark
+Jon Snow;Mother;Lyanna Stark
+Eddard Stark;Father;Rickard Stark
+Eddard Stark;Spouse;Catelyn Stark
+Eddard Stark;Children;Robb Stark
+Eddard Stark;Children;Jon Snow
+Eddard Stark;Children;Sansa Stark
+Eddard Stark;Children;Arya Stark
+Eddard Stark;Children;Bran Stark
+Eddard Stark;Children;Rickon Stark
+Eddard Stark;Siblings;Brandon Stark (son of Rickard)
+Eddard Stark;Siblings;Lyanna Stark
+Eddard Stark;Siblings;Benjen Stark
+Catelyn Stark;Father;Hoster Tully
+Catelyn Stark;Mother;Minisa Tully
+Catelyn Stark;Spouse;Eddard Stark
+Catelyn Stark;Children;Robb Stark
+Catelyn Stark;Children;Sansa Stark
+Catelyn Stark;Children;Arya Stark
+Catelyn Stark;Children;Bran Stark
+Catelyn Stark;Children;Rickon Stark
+Catelyn Stark;Siblings;Lysa Arryn
+Catelyn Stark;Siblings;Edmure Tully
+Tyrion Lannister;Father;Tywin Lannister
+Tyrion Lannister;Mother;Joanna Lannister
+Tyrion Lannister;Spouse;Tysha
+Tyrion Lannister;Spouse;Sansa Stark
+Tyrion Lannister;Siblings;Cersei Lannister
+Tyrion Lannister;Siblings;Jaime Lannister
+Robb Stark;Father;Eddard Stark
+Robb Stark;Mother;Catelyn Stark
+Robb Stark;Spouse;Talisa Stark
+Robb Stark;Siblings;Jon Snow
+Robb Stark;Siblings;Sansa Stark
+Robb Stark;Siblings;Arya Stark
+Robb Stark;Siblings;Bran Stark
+Robb Stark;Siblings;Rickon Stark
+Arya Stark;Father;Eddard Stark
+Arya Stark;Mother;Catelyn Stark
+Arya Stark;Siblings;Robb Stark
+Arya Stark;Siblings;Jon Snow
+Arya Stark;Siblings;Sansa Stark
+Arya Stark;Siblings;Bran Stark
+Arya Stark;Siblings;Rickon Stark
+Bran Stark;Father;Eddard Stark
+Bran Stark;Mother;Catelyn Stark
+Bran Stark;Siblings;Robb Stark
+Bran Stark;Siblings;Jon Snow
+Bran Stark;Siblings;Sansa Stark
+Bran Stark;Siblings;Arya Stark
+Bran Stark;Siblings;Rickon Stark
+Rickon Stark;Father;Eddard Stark
+Rickon Stark;Mother;Catelyn Stark
+Rickon Stark;Siblings;Robb Stark
+Rickon Stark;Siblings;Jon Snow
+Rickon Stark;Siblings;Sansa Stark
+Rickon Stark;Siblings;Arya Stark
+Rickon Stark;Siblings;Bran Stark
+Lyanna Mormont;Mother;Maege Mormont
+Joffrey Baratheon;Father;Jaime Lannister
+Joffrey Baratheon;Father;Robert Baratheon
+Joffrey Baratheon;Mother;Cersei Lannister
+Joffrey Baratheon;Spouse;Margaery Tyrell
+Joffrey Baratheon;Siblings;Robert Baratheon's son
+Joffrey Baratheon;Siblings;Myrcella Baratheon
+Joffrey Baratheon;Siblings;Tommen Baratheon
+Cersei Lannister;Father;Tywin Lannister
+Cersei Lannister;Mother;Joanna Lannister
+Cersei Lannister;Spouse;Robert Baratheon
+Cersei Lannister;Children;Robert Baratheon's son
+Cersei Lannister;Siblings;Jaime Lannister
+Cersei Lannister;Siblings;Tyrion Lannister
+Margaery Tyrell;Father;Mace Tyrell
+Margaery Tyrell;Mother;Alerie Tyrell
+Margaery Tyrell;Spouse;Renly Baratheon
+Margaery Tyrell;Spouse;Joffrey Baratheon
+Margaery Tyrell;Spouse;Tommen Baratheon
+Margaery Tyrell;Siblings;Loras Tyrell
+Petyr Baelish;Father;Baelish (father of Petyr)
+Petyr Baelish;Spouse;Lysa Arryn
+Theon Greyjoy;Father;Balon Greyjoy
+Theon Greyjoy;Mother;Alannys Greyjoy
+Theon Greyjoy;Siblings;Rodrik Greyjoy
+Theon Greyjoy;Siblings;Maron Greyjoy
+Theon Greyjoy;Siblings;Yara Greyjoy
+Brienne of Tarth;Father;Selwyn Tarth
+Daenerys Targaryen;Father;Aerys II Targaryen
+Daenerys Targaryen;Mother;Rhaella Targaryen
+Daenerys Targaryen;Spouse;Drogo
+Daenerys Targaryen;Children;Rhaego
+Daenerys Targaryen;Siblings;Rhaegar Targaryen
+Daenerys Targaryen;Siblings;Viserys Targaryen (son of Aerys II)
+Robert Baratheon;Father;Steffon Baratheon
+Robert Baratheon;Mother;Cassana Baratheon
+Robert Baratheon;Spouse;Cersei Lannister
+Robert Baratheon;Children;Bastardy
+Robert Baratheon;Children;Mya Stone
+Robert Baratheon;Children;Bella
+Robert Baratheon;Children;Gendry Baratheon
+Robert Baratheon;Children;Edric Storm
+Robert Baratheon;Children;Barra
+Robert Baratheon;Siblings;Stannis Baratheon
+Robert Baratheon;Siblings;Renly Baratheon
+Rickard Stark;Children;Brandon Stark (son of Rickard)
+Rickard Stark;Children;Eddard Stark
+Rickard Stark;Children;Lyanna Stark
+Rickard Stark;Children;Benjen Stark
+Brandon Stark (son of Rickard);Father;Rickard Stark
+Brandon Stark (son of Rickard);Siblings;Eddard Stark
+Brandon Stark (son of Rickard);Siblings;Lyanna Stark
+Brandon Stark (son of Rickard);Siblings;Benjen Stark
+Aerys II Targaryen;Father;Aegon V Targaryen
+Aerys II Targaryen;Spouse;Rhaella Targaryen
+Aerys II Targaryen;Children;Rhaegar Targaryen
+Aerys II Targaryen;Children;Viserys Targaryen (son of Aerys II)
+Aerys II Targaryen;Children;Daenerys Targaryen
+Aerys II Targaryen;Siblings;Duncan Targaryen
+Aerys II Targaryen;Siblings;Daeron Targaryen (son of Aegon V)
+Aerys II Targaryen;Siblings;Rhaelle Baratheon
+Jeyne Poole;Father;Vayon Poole
+Gregor Clegane;Father;Clegane (father of Gregor and Sandor)
+Gregor Clegane;Siblings;Sandor Clegane
+Sandor Clegane;Father;Clegane (father of Gregor and Sandor)
+Sandor Clegane;Siblings;Gregor Clegane
+Loras Tyrell;Father;Mace Tyrell
+Loras Tyrell;Mother;Alerie Tyrell
+Loras Tyrell;Siblings;Margaery Tyrell
+Renly Baratheon;Father;Steffon Baratheon
+Renly Baratheon;Mother;Cassana Baratheon
+Renly Baratheon;Spouse;Margaery Tyrell
+Renly Baratheon;Siblings;Robert Baratheon
+Renly Baratheon;Siblings;Stannis Baratheon
