@@ -49,12 +49,17 @@ public class Crawler : ICrawler
         crawler.PageCrawlCompleted += (_, args) =>
         {
             OnPageCrawlCompleted(args.CrawledPage, contentWriter, relationsWriter);
-            if (args.CrawledPage.HttpResponseMessage?.IsSuccessStatusCode ?? false)
+            if (args.CrawledPage.HttpResponseMessage?.IsSuccessStatusCode is not true)
             {
-                crawledPages.Add(args.CrawledPage.Uri);
+                // we could try again later
+                crawledPages.Remove(args.CrawledPage.Uri);
             }
         };
-        crawler.PageCrawlStarting += (sender, args) => this._logger.LogInformation("Crawling page {page} ...", args.PageToCrawl.Uri);
+        crawler.PageCrawlStarting += (sender, args) =>
+        {
+            this._logger.LogInformation("Crawling page {page} ...", args.PageToCrawl.Uri);
+            crawledPages.Add(args.PageToCrawl.Uri);
+        };
         crawler.ShouldCrawlPageDecisionMaker += OnShouldCrawlPage;
         
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
