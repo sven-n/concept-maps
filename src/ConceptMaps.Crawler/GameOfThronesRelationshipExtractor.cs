@@ -10,7 +10,7 @@ public class GameOfThronesRelationshipExtractor : IRelationshipExtractor
     /// <summary>
     /// The relevant values for the "data-source" attribute of "pi-data"-DIVs.
     /// </summary>
-    private static readonly HashSet<string?> RelevantDataSourceNames = new()
+    private static readonly HashSet<string?> RelevantDataSourceNames = new(StringComparer.InvariantCultureIgnoreCase)
     {
         "Father", "Mother", "Spouse", "Siblings", "Children"
     };
