@@ -15,7 +15,7 @@ if (args.Length == 2)
     new RelationshipAnalyzer().AnalyzeAndStoreResults(
         textFilePath: args[0],
         relationshipFilePath: args[1],
-        resultFilePath: args[1].Replace("_Text.txt", "_SentenceRelationships.json"));
+        resultFilePath: args[0].Replace("_Text.txt", "_SentenceRelationships.json"));
     return;
 }
 
