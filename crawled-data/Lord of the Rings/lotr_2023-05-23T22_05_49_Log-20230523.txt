@@ -1,0 +1,320 @@
+2023-05-23T22:05:50.3065742+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Ring_bearers ... (2103099f)
+2023-05-23T22:05:50.9129772+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Ring_bearers successfully. (17d3486f)
+2023-05-23T22:05:52.8047822+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Hobbit ... (2103099f)
+2023-05-23T22:05:52.8055367+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings ... (2103099f)
+2023-05-23T22:05:52.8055424+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Battle_of_Maldon_(book) ... (2103099f)
+2023-05-23T22:05:52.8047904+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Books ... (2103099f)
+2023-05-23T22:05:52.8055580+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Fall_of_Númenor_(book) ... (2103099f)
+2023-05-23T22:05:52.8055655+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Nature_of_Middle-earth ... (2103099f)
+2023-05-23T22:05:52.8055793+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Novels ... (2103099f)
+2023-05-23T22:05:52.8055821+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/J.R.R._Tolkien:_The_Art_of_the_Manuscript ... (2103099f)
+2023-05-23T22:05:52.8094649+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Fellowship_of_the_Rings_(novel) ... (2103099f)
+2023-05-23T22:05:52.8135806+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Two_Towers ... (2103099f)
+2023-05-23T22:05:52.8189884+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Return_of_the_King ... (2103099f)
+2023-05-23T22:05:52.9021178+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Nature_of_Middle-earth successfully. (17d3486f)
+2023-05-23T22:05:53.8397201+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Silmarillion ... (2103099f)
+2023-05-23T22:05:53.8954085+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Hobbit successfully. (17d3486f)
+2023-05-23T22:05:54.8670521+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Children_of_Húrin ... (2103099f)
+2023-05-23T22:05:54.9071183+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Battle_of_Maldon_(book) successfully. (17d3486f)
+2023-05-23T22:05:55.8933106+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Reference_works‎ ... (2103099f)
+2023-05-23T22:05:55.9394524+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings successfully. (17d3486f)
+2023-05-23T22:05:56.9351419+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Atlas_of_Middle-earth ... (2103099f)
+2023-05-23T22:05:56.9724803+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Novels successfully. (17d3486f)
+2023-05-23T22:05:57.9604483+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_History_of_The_Lord_of_the_Rings ... (2103099f)
+2023-05-23T22:05:58.0603522+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Fall_of_Númenor_(book) successfully. (17d3486f)
+2023-05-23T22:05:58.9840124+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Complete_Guide_to_Middle-earth ... (2103099f)
+2023-05-23T22:05:59.0222653+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/J.R.R._Tolkien:_The_Art_of_the_Manuscript successfully. (17d3486f)
+2023-05-23T22:06:00.0247986+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/A_Reader%27s_Companion ... (2103099f)
+2023-05-23T22:06:00.0779703+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Books successfully. (17d3486f)
+2023-05-23T22:06:01.0498963+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Reference_works ... (2103099f)
+2023-05-23T22:06:01.0840663+02:00  [ERR] Couldn't crawl page https://lotr.fandom.com/wiki/The_Fellowship_of_the_Rings_(novel): "StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.HttpConnectionResponseContent, Headers:
+{
+  Connection: keep-alive
+  X-Content-Type-Options: nosniff
+  report-to: {\"group\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"endpoints\":[{\"url\":\"https://services.fandom.com/browser-errors/report\"}]}
+  nel: {\"report_to\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"failure_fraction\":0.01}
+  Content-Security-Policy: upgrade-insecure-requests
+  content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' https: 'self' data: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline' internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; default-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; style-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com 'unsafe-inline'; img-src * data: blob:; object-src 'none'; report-uri https://services.fandom.com/csp-logger/csp/ucp; worker-src 'self' blob:
+  X-Request-ID: 708a40137e115466
+  x-envoy-upstream-service-time: 89
+  X-Datacenter: SJC
+  X-Cacheable: YES
+  Accept-Ranges: bytes
+  Date: Tue, 23 May 2023 20:06:01 GMT
+  Age: 4658
+  X-Served-By: cache-wk-sjc11421-SJC, cache-muc13969-MUC
+  X-Cache: MISS, HIT
+  X-Cache-Hits: 0, 1
+  X-Timer: S1684872362.709987,VS0,VE2
+  Vary: Accept-Encoding, Cookie
+  Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+  Content-Length: 198604
+  Content-Type: text/html; charset=UTF-8
+  Content-Language: en
+}" (1e95953b)
+2023-05-23T22:06:02.0830201+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_History_of_Middle-earth ... (2103099f)
+2023-05-23T22:06:02.3142201+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Two_Towers successfully. (17d3486f)
+2023-05-23T22:06:03.1136810+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lost_Road_and_Other_Writings ... (2103099f)
+2023-05-23T22:06:03.3530217+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Return_of_the_King successfully. (17d3486f)
+2023-05-23T22:06:04.1520415+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Book_of_Lost_Tales_I ... (2103099f)
+2023-05-23T22:06:04.1883369+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Silmarillion successfully. (17d3486f)
+2023-05-23T22:06:05.1798423+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Book_of_Lost_Tales_II ... (2103099f)
+2023-05-23T22:06:05.2122993+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Children_of_Húrin successfully. (17d3486f)
+2023-05-23T22:06:06.2037511+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lays_of_Beleriand ... (2103099f)
+2023-05-23T22:06:06.4319534+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Reference_works‎ successfully. (17d3486f)
+2023-05-23T22:06:07.2433795+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_War_of_the_Jewels_(book) ... (2103099f)
+2023-05-23T22:06:07.2828377+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Atlas_of_Middle-earth successfully. (17d3486f)
+2023-05-23T22:06:08.2767362+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Secondary_literature ... (2103099f)
+2023-05-23T22:06:08.3077667+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_History_of_The_Lord_of_the_Rings successfully. (17d3486f)
+2023-05-23T22:06:09.3033080+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:In-universe_books ... (2103099f)
+2023-05-23T22:06:09.3319180+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Complete_Guide_to_Middle-earth successfully. (17d3486f)
+2023-05-23T22:06:10.3283138+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Red_Book_of_Westmarch ... (2103099f)
+2023-05-23T22:06:10.5988136+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/A_Reader%27s_Companion successfully. (17d3486f)
+2023-05-23T22:06:11.3742437+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Old_Words_and_Names_in_the_Shire ... (2103099f)
+2023-05-23T22:06:11.4036937+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Reference_works successfully. (17d3486f)
+2023-05-23T22:06:12.3983408+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Yearbook_of_Tuckborough ... (2103099f)
+2023-05-23T22:06:12.4290492+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_History_of_Middle-earth successfully. (17d3486f)
+2023-05-23T22:06:13.4283583+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Book_of_Mazarbul ... (2103099f)
+2023-05-23T22:06:13.4641558+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lost_Road_and_Other_Writings successfully. (17d3486f)
+2023-05-23T22:06:14.4624327+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Herblore_of_the_Shire ... (2103099f)
+2023-05-23T22:06:14.6916742+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Book_of_Lost_Tales_I successfully. (17d3486f)
+2023-05-23T22:06:15.4909175+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Golden_Book ... (2103099f)
+2023-05-23T22:06:15.7426939+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Book_of_Lost_Tales_II successfully. (17d3486f)
+2023-05-23T22:06:16.5269870+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Characters ... (2103099f)
+2023-05-23T22:06:16.5564900+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lays_of_Beleriand successfully. (17d3486f)
+2023-05-23T22:06:17.5560360+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Ring_bearers‎‎ ... (2103099f)
+2023-05-23T22:06:17.5873241+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_War_of_the_Jewels_(book) successfully. (17d3486f)
+2023-05-23T22:06:18.5855383+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Frodo_Baggins ... (2103099f)
+2023-05-23T22:06:18.6190545+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Secondary_literature successfully. (17d3486f)
+2023-05-23T22:06:19.6133699+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Bilbo_Baggins ... (2103099f)
+2023-05-23T22:06:19.6628694+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:In-universe_books successfully. (17d3486f)
+2023-05-23T22:06:20.6456423+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Thrór ... (2103099f)
+2023-05-23T22:06:20.6752185+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Red_Book_of_Westmarch successfully. (17d3486f)
+2023-05-23T22:06:21.6748942+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Galadriel ... (2103099f)
+2023-05-23T22:06:21.7051731+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Old_Words_and_Names_in_the_Shire successfully. (17d3486f)
+2023-05-23T22:06:22.7154697+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Gandalf ... (2103099f)
+2023-05-23T22:06:22.7429898+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Yearbook_of_Tuckborough successfully. (17d3486f)
+2023-05-23T22:06:23.7445122+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Villains ... (2103099f)
+2023-05-23T22:06:23.7837852+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Book_of_Mazarbul successfully. (17d3486f)
+2023-05-23T22:06:24.7714963+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Shelob ... (2103099f)
+2023-05-23T22:06:24.7985836+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Herblore_of_the_Shire successfully. (17d3486f)
+2023-05-23T22:06:25.8067347+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Gothmog_(Lieutenant_of_Morgul) ... (2103099f)
+2023-05-23T22:06:25.8344729+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Golden_Book successfully. (17d3486f)
+2023-05-23T22:06:26.8330125+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Khamûl ... (2103099f)
+2023-05-23T22:06:26.8664976+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Characters successfully. (17d3486f)
+2023-05-23T22:06:27.8739044+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Carcharoth ... (2103099f)
+2023-05-23T22:06:28.1177366+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Ring_bearers‎‎ successfully. (17d3486f)
+2023-05-23T22:06:28.8959123+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Draugluin ... (2103099f)
+2023-05-23T22:06:28.9389252+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Frodo_Baggins successfully. (17d3486f)
+2023-05-23T22:06:29.9363713+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Gothmog_(Balrog) ... (2103099f)
+2023-05-23T22:06:29.9810361+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Bilbo_Baggins successfully. (17d3486f)
+2023-05-23T22:06:30.9610042+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Dragons ... (2103099f)
+2023-05-23T22:06:30.9982781+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Thrór successfully. (17d3486f)
+2023-05-23T22:06:31.9881603+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Lord_of_the_Rings_Characters‎‎ ... (2103099f)
+2023-05-23T22:06:32.0340745+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Galadriel successfully. (17d3486f)
+2023-05-23T22:06:33.0292057+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Legolas ... (2103099f)
+2023-05-23T22:06:33.0933183+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Gandalf successfully. (17d3486f)
+2023-05-23T22:06:34.0498981+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Faramir ... (2103099f)
+2023-05-23T22:06:34.0808180+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Villains successfully. (17d3486f)
+2023-05-23T22:06:35.0824862+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Aragorn ... (2103099f)
+2023-05-23T22:06:35.1159110+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Shelob successfully. (17d3486f)
+2023-05-23T22:06:36.1113243+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Frodo ... (2103099f)
+2023-05-23T22:06:36.1530045+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Gothmog_(Lieutenant_of_Morgul) successfully. (17d3486f)
+2023-05-23T22:06:37.1404730+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Gollum ... (2103099f)
+2023-05-23T22:06:37.1727400+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Khamûl successfully. (17d3486f)
+2023-05-23T22:06:38.1804897+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Ugluk ... (2103099f)
+2023-05-23T22:06:38.2175183+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Carcharoth successfully. (17d3486f)
+2023-05-23T22:06:39.2115435+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Lord_of_the_Rings_Characters ... (2103099f)
+2023-05-23T22:06:39.2414432+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Draugluin successfully. (17d3486f)
+2023-05-23T22:06:40.2352702+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Hobbit_Characters ... (2103099f)
+2023-05-23T22:06:40.2655707+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Gothmog_(Balrog) successfully. (17d3486f)
+2023-05-23T22:06:41.2788335+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Beorn ... (2103099f)
+2023-05-23T22:06:41.3146960+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Dragons successfully. (17d3486f)
+2023-05-23T22:06:42.3055725+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Bard ... (2103099f)
+2023-05-23T22:06:42.5404688+02:00  [ERR] Couldn't crawl page https://lotr.fandom.com/wiki/Category:The_Lord_of_the_Rings_Characters‎‎: "StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.HttpConnectionResponseContent, Headers:
+{
+  Connection: keep-alive
+  X-Content-Type-Options: nosniff
+  report-to: {\"group\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"endpoints\":[{\"url\":\"https://services.fandom.com/browser-errors/report\"}]}
+  nel: {\"report_to\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"failure_fraction\":0.01}
+  Content-Security-Policy: upgrade-insecure-requests
+  content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' https: 'self' data: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline' internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; default-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; style-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com 'unsafe-inline'; img-src * data: blob:; object-src 'none'; report-uri https://services.fandom.com/csp-logger/csp/ucp; worker-src 'self' blob:
+  X-Request-ID: 31a71aa87cce89e1
+  x-envoy-upstream-service-time: 138
+  X-Datacenter: SJC
+  X-Cacheable: YES
+  Accept-Ranges: bytes
+  Date: Tue, 23 May 2023 20:06:43 GMT
+  Age: 4658
+  X-Served-By: cache-wk-sjc11420-SJC, cache-muc13969-MUC
+  X-Cache: MISS, HIT
+  X-Cache-Hits: 0, 1
+  X-Timer: S1684872403.166758,VS0,VE2
+  Vary: Accept-Encoding, Cookie
+  Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+  Content-Length: 211292
+  Content-Type: text/html; charset=UTF-8
+  Content-Language: en
+}" (1e95953b)
+2023-05-23T22:06:43.3284632+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Balin ... (2103099f)
+2023-05-23T22:06:43.3692152+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Legolas successfully. (17d3486f)
+2023-05-23T22:06:44.3650879+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Bofur ... (2103099f)
+2023-05-23T22:06:44.4227755+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Faramir successfully. (17d3486f)
+2023-05-23T22:06:45.3921339+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Dwalin ... (2103099f)
+2023-05-23T22:06:45.6559700+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Aragorn successfully. (17d3486f)
+2023-05-23T22:06:46.4364065+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Thorin_II_Oakenshield ... (2103099f)
+2023-05-23T22:06:46.6812946+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Frodo successfully. (17d3486f)
+2023-05-23T22:06:47.4668905+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Master_of_Lake-town ... (2103099f)
+2023-05-23T22:06:47.5258503+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Gollum successfully. (17d3486f)
+2023-05-23T22:06:48.4975914+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Silmarillion_Characters‎ ... (2103099f)
+2023-05-23T22:06:48.7307191+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Ugluk successfully. (17d3486f)
+2023-05-23T22:06:49.5241240+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Morgoth ... (2103099f)
+2023-05-23T22:06:49.5533050+02:00  [ERR] Couldn't crawl page https://lotr.fandom.com/wiki/Category:The_Lord_of_the_Rings_Characters: "StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.HttpConnectionResponseContent, Headers:
+{
+  Connection: keep-alive
+  X-Content-Type-Options: nosniff
+  report-to: {\"group\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"endpoints\":[{\"url\":\"https://services.fandom.com/browser-errors/report\"}]}
+  nel: {\"report_to\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"failure_fraction\":0.01}
+  Content-Security-Policy: upgrade-insecure-requests
+  content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' https: 'self' data: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline' internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; default-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; style-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com 'unsafe-inline'; img-src * data: blob:; object-src 'none'; report-uri https://services.fandom.com/csp-logger/csp/ucp; worker-src 'self' blob:
+  X-Request-ID: 31a71aa87cce89e1
+  x-envoy-upstream-service-time: 138
+  X-Datacenter: SJC
+  X-Cacheable: YES
+  Accept-Ranges: bytes
+  Date: Tue, 23 May 2023 20:06:50 GMT
+  Age: 4665
+  X-Served-By: cache-wk-sjc11420-SJC, cache-muc13969-MUC
+  X-Cache: MISS, HIT
+  X-Cache-Hits: 0, 2
+  X-Timer: S1684872410.184169,VS0,VE0
+  Vary: Accept-Encoding, Cookie
+  Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+  Content-Length: 211292
+  Content-Type: text/html; charset=UTF-8
+  Content-Language: en
+}" (1e95953b)
+2023-05-23T22:06:50.5508320+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Melian ... (2103099f)
+2023-05-23T22:06:50.6039363+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:The_Hobbit_Characters successfully. (17d3486f)
+2023-05-23T22:06:51.5907402+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Celebrimbor ... (2103099f)
+2023-05-23T22:06:51.6243712+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Beorn successfully. (17d3486f)
+2023-05-23T22:06:52.6138585+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Finarfin ... (2103099f)
+2023-05-23T22:06:52.6528116+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Bard successfully. (17d3486f)
+2023-05-23T22:06:53.6421346+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Beren ... (2103099f)
+2023-05-23T22:06:53.6755769+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Balin successfully. (17d3486f)
+2023-05-23T22:06:54.6729286+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Túrin_Turambar ... (2103099f)
+2023-05-23T22:06:54.7134129+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Bofur successfully. (17d3486f)
+2023-05-23T22:06:55.7026032+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Manwë ... (2103099f)
+2023-05-23T22:06:55.7412935+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Dwalin successfully. (17d3486f)
+2023-05-23T22:06:56.7453750+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Silmarillion_Characters ... (2103099f)
+2023-05-23T22:06:56.8035454+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Thorin_II_Oakenshield successfully. (17d3486f)
+2023-05-23T22:06:57.7711284+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Kings ... (2103099f)
+2023-05-23T22:06:57.8006161+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Master_of_Lake-town successfully. (17d3486f)
+2023-05-23T22:06:58.8104439+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Denethor_(First_Age) ... (2103099f)
+2023-05-23T22:06:59.0378912+02:00  [ERR] Couldn't crawl page https://lotr.fandom.com/wiki/Category:The_Silmarillion_Characters‎: "StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.HttpConnectionResponseContent, Headers:
+{
+  Connection: keep-alive
+  X-Content-Type-Options: nosniff
+  report-to: {\"group\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"endpoints\":[{\"url\":\"https://services.fandom.com/browser-errors/report\"}]}
+  nel: {\"report_to\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"failure_fraction\":0.01}
+  Content-Security-Policy: upgrade-insecure-requests
+  content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' https: 'self' data: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline' internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; default-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; style-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com 'unsafe-inline'; img-src * data: blob:; object-src 'none'; report-uri https://services.fandom.com/csp-logger/csp/ucp; worker-src 'self' blob:
+  X-Request-ID: 36f9a051937314e4
+  x-envoy-upstream-service-time: 112
+  X-Datacenter: SJC
+  X-Cacheable: YES
+  Accept-Ranges: bytes
+  Date: Tue, 23 May 2023 20:06:59 GMT
+  Age: 4658
+  X-Served-By: cache-wk-sjc11421-SJC, cache-muc13969-MUC
+  X-Cache: MISS, HIT
+  X-Cache-Hits: 0, 1
+  X-Timer: S1684872420.671117,VS0,VE1
+  Vary: Accept-Encoding, Cookie
+  Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+  Content-Length: 210971
+  Content-Type: text/html; charset=UTF-8
+  Content-Language: en
+}" (1e95953b)
+2023-05-23T22:06:59.8394266+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Thorondor ... (2103099f)
+2023-05-23T22:07:00.1272620+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Morgoth successfully. (17d3486f)
+2023-05-23T22:07:00.8697294+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/King_of_the_Dead ... (2103099f)
+2023-05-23T22:07:00.9005737+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Melian successfully. (17d3486f)
+2023-05-23T22:07:01.8939516+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Kings_of_Gondor ... (2103099f)
+2023-05-23T22:07:01.9493785+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Celebrimbor successfully. (17d3486f)
+2023-05-23T22:07:02.9237208+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Kings_of_Arnor ... (2103099f)
+2023-05-23T22:07:02.9600635+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Finarfin successfully. (17d3486f)
+2023-05-23T22:07:03.9623265+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Kings_of_Rohan ... (2103099f)
+2023-05-23T22:07:04.0946681+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Beren successfully. (17d3486f)
+2023-05-23T22:07:04.9905234+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Bladorthin ... (2103099f)
+2023-05-23T22:07:05.2426492+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Túrin_Turambar successfully. (17d3486f)
+2023-05-23T22:07:06.0164305+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Characters_by_race ... (2103099f)
+2023-05-23T22:07:06.0553034+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Manwë successfully. (17d3486f)
+2023-05-23T22:07:07.0555523+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Fellowship_members ... (2103099f)
+2023-05-23T22:07:07.0840388+02:00  [ERR] Couldn't crawl page https://lotr.fandom.com/wiki/Category:The_Silmarillion_Characters: "StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.HttpConnectionResponseContent, Headers:
+{
+  Connection: keep-alive
+  X-Content-Type-Options: nosniff
+  report-to: {\"group\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"endpoints\":[{\"url\":\"https://services.fandom.com/browser-errors/report\"}]}
+  nel: {\"report_to\":\"nel\",\"max_age\":86400,\"include_subdomains\":true,\"failure_fraction\":0.01}
+  Content-Security-Policy: upgrade-insecure-requests
+  content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' https: 'self' data: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline' internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; default-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com; style-src 'self' data: blob: https://images.wikia.com https://static.wikia.nocookie.net https: 'self' data: blob: internal-soap.wikia.com internal-soap.fandom.com internal-soap.wikia.org internal-soap.gamepedia.com www.fandom.com www.wikia.com www.wikia.org www.gamepedia.com 'unsafe-inline'; img-src * data: blob:; object-src 'none'; report-uri https://services.fandom.com/csp-logger/csp/ucp; worker-src 'self' blob:
+  X-Request-ID: 36f9a051937314e4
+  x-envoy-upstream-service-time: 112
+  X-Datacenter: SJC
+  X-Cacheable: YES
+  Accept-Ranges: bytes
+  Date: Tue, 23 May 2023 20:07:07 GMT
+  Age: 4666
+  X-Served-By: cache-wk-sjc11421-SJC, cache-muc13969-MUC
+  X-Cache: MISS, HIT
+  X-Cache-Hits: 0, 2
+  X-Timer: S1684872428.715467,VS0,VE0
+  Vary: Accept-Encoding, Cookie
+  Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+  Content-Length: 210971
+  Content-Type: text/html; charset=UTF-8
+  Content-Language: en
+}" (1e95953b)
+2023-05-23T22:07:08.0828465+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Children ... (2103099f)
+2023-05-23T22:07:08.1180593+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Kings successfully. (17d3486f)
+2023-05-23T22:07:09.1146597+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Queens ... (2103099f)
+2023-05-23T22:07:09.1509927+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Denethor_(First_Age) successfully. (17d3486f)
+2023-05-23T22:07:10.1530642+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:Adaptations ... (2103099f)
+2023-05-23T22:07:10.1830403+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Thorondor successfully. (17d3486f)
+2023-05-23T22:07:11.1871029+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Tolkien_(2019_film) ... (2103099f)
+2023-05-23T22:07:11.2203969+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/King_of_the_Dead successfully. (17d3486f)
+2023-05-23T22:07:12.2215937+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings_film_trilogy ... (2103099f)
+2023-05-23T22:07:12.2507719+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Kings_of_Gondor successfully. (17d3486f)
+2023-05-23T22:07:13.2645073+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring ... (2103099f)
+2023-05-23T22:07:13.3004530+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Kings_of_Arnor successfully. (17d3486f)
+2023-05-23T22:07:14.2915059+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Two_Towers ... (2103099f)
+2023-05-23T22:07:14.3241385+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Kings_of_Rohan successfully. (17d3486f)
+2023-05-23T22:07:15.3161225+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Return_of_the_King ... (2103099f)
+2023-05-23T22:07:15.3465007+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Bladorthin successfully. (17d3486f)
+2023-05-23T22:07:16.3468595+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Hobbit_film_trilogy ... (2103099f)
+2023-05-23T22:07:16.3739074+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Characters_by_race successfully. (17d3486f)
+2023-05-23T22:07:17.3819077+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Hobbit:_An_Unexpected_Journey ... (2103099f)
+2023-05-23T22:07:17.4174921+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Fellowship_members successfully. (17d3486f)
+2023-05-23T22:07:18.4197346+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Hobbit:_The_Desolation_of_Smaug ... (2103099f)
+2023-05-23T22:07:18.4449353+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Children successfully. (17d3486f)
+2023-05-23T22:07:19.4472708+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Hobbit:_The_Battle_of_the_Five_Armies ... (2103099f)
+2023-05-23T22:07:19.4751679+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Queens successfully. (17d3486f)
+2023-05-23T22:07:20.4722575+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Rings_of_Power ... (2103099f)
+2023-05-23T22:07:20.5048140+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:Adaptations successfully. (17d3486f)
+2023-05-23T22:07:21.5139468+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Category:The_Rings_of_Power_episodes ... (2103099f)
+2023-05-23T22:07:21.5420903+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Tolkien_(2019_film) successfully. (17d3486f)
+2023-05-23T22:07:22.5359358+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/A_Shadow_of_the_Past_(episode) ... (2103099f)
+2023-05-23T22:07:22.5791846+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings_film_trilogy successfully. (17d3486f)
+2023-05-23T22:07:23.5649232+02:00  [INF] Crawling page https://lotr.fandom.com/wiki/Adrift_(episode) ... (2103099f)
+2023-05-23T22:07:23.6063174+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring successfully. (17d3486f)
+2023-05-23T22:07:24.6322858+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Two_Towers successfully. (17d3486f)
+2023-05-23T22:07:25.6858427+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Return_of_the_King successfully. (17d3486f)
+2023-05-23T22:07:26.6953579+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Hobbit_film_trilogy successfully. (17d3486f)
+2023-05-23T22:07:27.7487773+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Hobbit:_An_Unexpected_Journey successfully. (17d3486f)
+2023-05-23T22:07:28.7763947+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Hobbit:_The_Desolation_of_Smaug successfully. (17d3486f)
+2023-05-23T22:07:29.8124277+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Hobbit:_The_Battle_of_the_Five_Armies successfully. (17d3486f)
+2023-05-23T22:07:30.8478146+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/The_Lord_of_the_Rings:_The_Rings_of_Power successfully. (17d3486f)
+2023-05-23T22:07:31.8559819+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Category:The_Rings_of_Power_episodes successfully. (17d3486f)
+2023-05-23T22:07:33.1615314+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/A_Shadow_of_the_Past_(episode) successfully. (17d3486f)
+2023-05-23T22:07:34.2941853+02:00  [INF] Crawled page https://lotr.fandom.com/wiki/Adrift_(episode) successfully. (17d3486f)

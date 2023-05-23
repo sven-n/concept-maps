@@ -1,0 +1,14 @@
+﻿Galadriel;spouse;Celeborn
+Faramir;spouse;Éowyn
+Faramir;children;Elboron
+Aragorn II Elessar;spouse;Arwen
+Aragorn II Elessar;children;Eldarion
+Bard;children;Bain
+Balin;siblings;Dwalin
+Bofur;siblings;Bombur
+Melian;spouse;Elu Thingol
+Celebrimbor;spouse;Galadriel
+Finarfin;spouse;Eärwen
+Beren;spouse;Lúthien
+Túrin;spouse;Niënor
+Manwë;spouse;Varda

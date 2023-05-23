@@ -1,0 +1,1382 @@
+﻿[
+  {
+    "sentence": "\u0022 Soon after, 13 Dwarves (Thorin II Oakenshield, Gl\u00F3in, \u00D3in, Ori, Nori, Dori, Dwalin, Balin, F\u00EDli and K\u00EDli, Bifur, Bofur, and Bombur) show up and begin rudely discussing their planned treasure hunt while the hapless Bilbo provides the obligatory hospitality",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      },
+      {
+        "firstEntity": "Bofur",
+        "relationshipType": "siblings",
+        "secondEntity": "Bombur"
+      }
+    ]
+  },
+  {
+    "sentence": "Following the massive success of The Lord of the Rings, Tolkien considered a sequel entitled The New Shadow, in which the Men of Gondor turn to dark cults and consider an uprising against Aragorn\u0027s son, Eldarion",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "children",
+        "secondEntity": "Eldarion"
+      }
+    ]
+  },
+  {
+    "sentence": "Unlike The Fall of Gondolin (2018) and Beren and L\u00FAthien (2017), this book presents one unified account of history - specifically, of the entire Second Age - drawn from all available sources such as the Akallab\u00EAth and Appendix B of The Lord of the Rings, as opposed to iterations of a tale",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Christopher later came to regret their overhanded \u0027manipulation\u0027 in The Silmarillion\r\nIn Beren and L\u00FAthien Christopher Tolkien went back to the story and introduced much of his father\u0027s original plans for it, and his father\u0027s explanation for how Dwarven enemy (and its allies) made it past the Girdle of Melian, which had been explained in the Quenta Noldorinwa",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Other issues with the story that were inventions or removals by Guy Gavriel Kay (and Christopher Tolkien) are also discussed in The History of Middle-earth include Thingol being slain inside his palace and:\r\nBeren and L\u00FAthien restores much of the original story as J",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "It is the expanded account of the story of the wanderings and deeds of\u00A0T\u00FArin Turambar, son of H\u00FArin,\u00A0and his sister Ni\u00EBnor, in their struggle against fate (and the curse cast upon H\u00FArin\u0027s kin)",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "Sardonic and mocking, Glaurung manipulated the fates of T\u00FArin and Ni\u00EBnor by lies of diabolic cunning and guile, and the curse of Morgoth was fulfilled",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "Certain aspects related to H\u00FArin following the story are left out but do get brought up in the follow up Beren and L\u00FAthien, as does extended story for M\u00EEm and his curse of the gold of Glaurung, and its relevance to the fall of Doriath, and corruption of the Dwarves and others who touch it",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Tolkien wrote about the sagas of T\u00FArin Turambar and of Beren and L\u00FAthien, which are known as the Lay of the Children of H\u00FArin and the Lay of Leithian (or Release from Bondage)",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel and Frodo\r\nDeeply grieved by their loss, the Fellowship journeyed to the Elven kingdom of Lothl\u00F3rien, where they met the Lady Galadriel and Lord Celeborn",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel was the \u0022Lady\u0022 of the woods of Lothl\u00F3rien, which she ruled with Celeborn, her husband",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "She was the only daughter and youngest child of Finarfin, prince of the \u00D1oldor, and E\u00E4rwen, whose cousin was L\u00FAthien",
+    "relationships": [
+      {
+        "firstEntity": "Finarfin",
+        "relationshipType": "spouse",
+        "secondEntity": "E\u00E4rwen"
+      }
+    ]
+  },
+  {
+    "sentence": "In F\u00EBanor\u0027s rebellion that followed, Galadriel had no part, and together with Celeborn, fought against F\u00EBanor defending her mother\u0027s kin in defense of Alqualond\u00EB, and Celeborn\u0027s ship was spared of the attack of the Noldor",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Celeborn and Galadriel traveled first to Lindon, where they ruled over a group of Elves as a fiefdom under Gil-galad, the High King of the \u00D1oldor",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Subsequently, when Celebrimbor took over the rule of Eregion, Galadriel left by way of the mines of Khazad-d\u00FBm",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "After the death of King Amd\u00EDr, in the War of the Last Alliance, and the departure his son Amroth, Celeborn and Galadriel became the Lord and Lady of Lothl\u00F3rien",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel, Gil-galad, and C\u00EDrdan receive the Three Rings of Power\r\nIn the Second Age, the Maia Annatar, \u0022Lord of Gifts\u0022, guided Celebrimbor and the other \u00D1oldor of Eregion in the creation of the Rings of Power",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel counseled Celebrimbor in the hiding of the rings, and when Eregion was attacked, she was entrusted with one of the Three Rings of the Elves",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "The tales tell little of Galadriel or of Celeborn during many centuries in the Third Age, but after the formation of the White Council in TA 2463 she put forth her might in opposition of Sauron",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel, her husband Celeborn, and Elrond about to leave for Valinor\r\nIt is said that the power of her Ring could not be overcome unless Sauron himself would come to do battle",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "\u2014Unfinished Tales, \u0022The History of Galadriel and Celeborn\u0022\r\nRegarding her decision to remain in Middle-earth, a passage says:\r\nAfter the overthrow of Morgoth at the end of the First Age a ban was set upon her return, and she had replied proudly that she had no wish to do so",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "\u2014Unfinished Tales, \u0022The History of Galadriel and Celeborn\u0022\r\nThe majority of Galadriel\u0027s powers were said to stem from the artifact she controlled: Nenya, the Ring of Water",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Besides her magical powers, Galadriel was also very wise and intelligent: she was one of the very few who were not fooled by Sauron in the Second Age, and therefore suggested to Celebrimbor to hide the Three Rings",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel is the Sindarin translation of Telerin Quenya Alat\u00E1riel, the name given her by Celeborn, meaning \u0022maiden crowned with a garland of bright radiance\u0022 in reference to her hair",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel appears in person later when the Fellowship arrive in L\u00F3rien, greeting them alongside her husband Celeborn",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "In the extended edition, Galadriel and Celeborn give the other members of the Fellowship various gifts as well",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel reacts to \u0022Halbrand\u0022 revealing himself to be Sauron\r\nGaladriel arrives six days later in Ost-in-Edhil, where Halbrand receives medical attention and soon recovers, finding his way to Celebrimbor\u0027s forge and quickly gaining his trust by revealing his knowledge of metallurgy",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel, however, becomes suspicious of Halbrand after Celebrimbor voices a number of phrases she first heard from Adar, who had heard them from Sauron",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Though persuasive, Galadriel ultimately rejects his offer, though she keeps his identity a secret so that Celebrimbor will go through with forging the needed artifacts",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "In his \u0022youth\u0022 he became one of the Maiar who served Manw\u00EB, Varda, Irmo, and Nienna",
+    "relationships": [
+      {
+        "firstEntity": "Manw\u00EB",
+        "relationshipType": "spouse",
+        "secondEntity": "Varda"
+      }
+    ]
+  },
+  {
+    "sentence": "When the Valar decided to send the Istari (also called Wizards) to Middle-earth to counsel and assist all those who opposed the Dark Lord Sauron, Manw\u00EB and Varda included Ol\u00F3rin among the five to be sent",
+    "relationships": [
+      {
+        "firstEntity": "Manw\u00EB",
+        "relationshipType": "spouse",
+        "secondEntity": "Varda"
+      }
+    ]
+  },
+  {
+    "sentence": "Thus, Manw\u00EB insisted that Ol\u00F3rin should go as the third, but Varda convinced him to send Ol\u00F3rin as the second instead",
+    "relationships": [
+      {
+        "firstEntity": "Manw\u00EB",
+        "relationshipType": "spouse",
+        "secondEntity": "Varda"
+      }
+    ]
+  },
+  {
+    "sentence": "After the coronation and wedding of Aragorn to Arwen, Gandalf left with the rest of the remaining Fellowship on the journey home",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "He became involved with the Quest for the Silmaril when Beren and L\u00FAthien had to pass him upon their entrance of Angband",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Draugluin was slain by Huan during the Quest for the Silmaril after a long battle, and Beren and L\u00FAthien used his pelt to sneak into Angband",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "In the wind from the Sea\nThe white lilies sway,\nAnd the golden bells are shaken of mallos and alfirin\nIn the green fields of Lebennin,\nIn the wind from the Sea!\n\n-The Return of the King, Book Five, Chapter IX: \u0022The Last Debate\u0022\r\nLegolas and Gimli sail to Valinor, by Ted Nasmith\r\nAfter the destruction of the One Ring and of Sauron, Legolas stayed for the coronation of Aragorn and his marriage to Arwen",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Once the company reach the Woods of Lothl\u00F3rien, Galadriel and Celeborn inquire about Gandalf",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Legolas then steps aside to reveal Arwen, whereupon Aragorn finally marries her",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "He soon returns back to Minas Tirith for the wedding of Aragorn and Arwen, after which he continues the exploration of the pass of Cirith Ungol, eventually discovering the entrance to Shelob\u0027s Lair",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "After the War of the Ring, Faramir became the first Prince of Ithilien and married \u00C9owyn of Rohan",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Before Aragorn left to lead the soldiers to the Black Gate, he commanded the Warden of the Houses of Healing to have Faramir and \u00C9owyn\u00A0to remain resting for at least ten days",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "After \u00C9owyn demanded that the Warden take her to the Steward of the City to have her released so she could ride out in battle, Faramir, whose heart was moved with pity and pierced by her beauty, told \u00C9owyn that he too, had to heed the advice of the Warden",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Faramir and \u00C9owyn walked together in the gardens nearly every day, and he learned from Merry Brandybuck of \u00C9owyn\u0027s despair of feeling trapped, waiting on the waning of\u00A0Th\u00E9oden, and of Aragorn\u0027s rejection of her love",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Faramir and \u00C9owyn together looking towards Mordor\r\nOn March 25, Faramir gave \u00C9owyn a dark blue mantle sewn with silver stars that had once belonged to his mother Finduilas, as they stood at the wall that looked towards Mordor",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Somehow, to Faramir and the people of the city, a hope and joy welled in their hearts and he kissed \u00C9owyn\u2019s brow",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "There, \u00C9owyn\u2019s grief was fully healed, and no longer did she desire glory or greatness and realized that she had come to love Faramir in return",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Family portrait, by Anke Eissmann\r\nAfter the funeral of Th\u00E9oden, Faramir married \u00C9owyn in Edoras",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Elboron would succeed Faramir as Steward of Gondor, Prince of Ithilien, and Lord of Emyn Arnen, after Faramir\u0027s death in FO 82",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "children",
+        "secondEntity": "Elboron"
+      }
+    ]
+  },
+  {
+    "sentence": "One of his grandsons, Barahir, wrote the Tale of Aragorn and Arwen",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "In the 1980 animated film The Return of the King, during Aragon\u0027s Coronation precession, there is a minor character that is seen on a horse next to \u00C9owyn, it is speculate that this character is Faramir as the couple exchange an affectionate look and are later seen riding out together behind Aragorn",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "It was also around this time that Aragorn met and fell in love with Arwen, Elrond\u0027s daughter, newly returned from her mother\u0027s homeland of Lothl\u00F3rien where she had been visiting her grandmother Galadriel",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "As both Elrond and Aragorn knew, to marry a mortal, Arwen would be required to choose mortality, and thus deprive the deathless Elrond of his daughter while the world lasted",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "When they arrived at the Battle of the Pelennor Fields, Aragorn unfurled a standard that Arwen had made for him which showed both the White Tree of Gondor along with the jeweled crown and seven stars of the House of Elendil",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Aragorn healed Faramir, Denethor\u0027s last heir, \u00C9owyn and Merry, who together slew the Witch-king as well as many others",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Aragorn married Arwen shortly afterwards, and ruled the Kingdom of Gondor and Arnor until 120 of the Fourth Age",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Arwen remained at Aragorn\u0027s side until he died",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "A year after Aragorn\u0027s death, Arwen died in Lothl\u00F3rien of a broken heart",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "\u0022\r\nIn The Tale of Aragorn and Arwen, he was said to be often grim and sad, with unexpected moments of levity",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "One significant feature which was not established until late stages was Aragorn\u0027s relationship with Arwen",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "The first mention of Elrond\u0027s daughter, named Arwen Und\u00F3miel, was in reference to the banner which she made for Aragorn, but Tolkien did not give any hint whether she had any further part to play",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "It is only in his working on the appendices for The Lord of the Rings that Tolkien recorded the full Tale of Aragorn and Arwen",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel and Frodo\r\nDeeply grieved by their loss, the Fellowship journeyed to the Elven kingdom of Lothl\u00F3rien, where they met the Lady Galadriel and Lord Celeborn",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Bard and his children, Bain, Sigrid, and Tilda\r\nBard is portrayed by the Welsh actor\u00A0Luke Evans in The Hobbit: The Desolation of Smaug and The Hobbit: The Battle of the Five Armies",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "In addition to his son Bain, the film version of Bard also has two daughters, Sigrid and Tilda, played in The Desolation of Smaug by James Nesbitt\u0027s daughters, Peggy and Mary, respectively",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "When Smaug is finally awakened, Bard takes out the Black Arrow and prepares to use it, but as he and Bain attempt to get to the Dwarvish wind lance to mount the Black Arrow, the town guard began searching for Bard at the orders of the Master",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "Passing Bain the Black Arrow and instructing him to hide it, Bard attempts to lead the guards away and is soon captured and imprisoned as Smaug flies towards Lake-town",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "Bard eventually runs out of arrows and his son, Bain comes up with the Black Arrow",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "Bard\u0027s bow has now been broken, so he ties the bow string to the posts on the tower and rests the Black Arrow on Bain\u0027s shoulder",
+    "relationships": [
+      {
+        "firstEntity": "Bard",
+        "relationshipType": "children",
+        "secondEntity": "Bain"
+      }
+    ]
+  },
+  {
+    "sentence": "Gandalf decided to introduce the Dwarves by pairs so as not to overwhelm Beorn, and Balin and Dwalin were chosen to come first",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "In The Hobbit: The Battle of the Five Armies, Balin fights in and survives the battle, during which he helps to man a dwarven war chariot and transport Dwalin, F\u00EDli, and K\u00EDli to Ravenhill",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Balin\u0027s (Cinematic trilogy) Weapon\r\nLonely Mountain\r\nBifur (cousin)\r\nshorter than Dwalin\r\nBofur was a Dwarf of the late-Third Age",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "While answering Thorin Oakenshield\u0027s quest to Erebor, Bofur went to the meeting at Bag End with his brother Bombur and cousin Bifur",
+    "relationships": [
+      {
+        "firstEntity": "Bofur",
+        "relationshipType": "siblings",
+        "secondEntity": "Bombur"
+      }
+    ]
+  },
+  {
+    "sentence": "Bofur maintains a close but feisty relationship with his brother Bombur whom he often teases but always looks after",
+    "relationships": [
+      {
+        "firstEntity": "Bofur",
+        "relationshipType": "siblings",
+        "secondEntity": "Bombur"
+      }
+    ]
+  },
+  {
+    "sentence": "Along with his brother Bombur and his cousin Bifur, Bofur joined the Quest for the Lonely Mountain partly to seek his fortune \u2013 and partly because he was told the beer was free",
+    "relationships": [
+      {
+        "firstEntity": "Bofur",
+        "relationshipType": "siblings",
+        "secondEntity": "Bombur"
+      }
+    ]
+  },
+  {
+    "sentence": "Once the company have reached\u00A0Rivendell, Bofur tosses his brother\u00A0Bombur\u00A0a sausage, causing the bench he is sitting on to break, causing all the Dwarves to break out in laughter",
+    "relationships": [
+      {
+        "firstEntity": "Bofur",
+        "relationshipType": "siblings",
+        "secondEntity": "Bombur"
+      }
+    ]
+  },
+  {
+    "sentence": "Born in TA 2772, two years after the dragon Smaug had desolated Erebor, Dwalin was the son of Fundin and younger brother of Balin",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Later in TA 2841, Dwalin, along with his brother Balin, and a few others accompanied Thr\u00E1in when he left the Ered Luin on a Quest to reclaim Erebor",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Soon Balin arrived, and he and Dwalin sat talking while Bilbo kept answering the door for the arrival of more and more Dwarves",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Later, when Bilbo griped aloud in his kitchen about the lack of help in setting out refreshments, Dwalin and Balin were the first (followed by F\u00EDli and K\u00EDli) to lend a hand",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Dwalin appears not to have joined his brother Balin\u0027s expedition to resettle Moria in TA 2989, meaning he was not among those who lost their lives there when the colony was overrun by Orcs five years later",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Some time later, the Elf-maiden L\u00FAthien and her human lover Beren, seeking to recover a Silmaril, came disguised to Morgoth\u0027s court",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Beren and L\u00FAthien fled in terror, but were not chased, as Morgoth and his court had not yet woken",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "From a distance Morgoth put the son and daughter of H\u00FArin, T\u00FArin and Ni\u00EBnor, under a species of diabolic oppression: his thought followed them and gave them bad luck, though they were not possessed",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "Melian \u0022the Maia\u0022 was an Ainu of the race of the Maiar of Yavanna, wife of King Elu Thingol, Queen of Doriath, and mother of L\u00FAthien Tin\u00FAviel",
+    "relationships": [
+      {
+        "firstEntity": "Melian",
+        "relationshipType": "spouse",
+        "secondEntity": "Elu Thingol"
+      }
+    ]
+  },
+  {
+    "sentence": "Melian encounters Elw\u00EB the woods of Nan Elmoth, by WilderWein77\r\nWhile in the forest of Nan Elmoth she met and fell in love with the Elven-king Elu Thingol, and later she ruled the kingdom of Doriath by his side",
+    "relationships": [
+      {
+        "firstEntity": "Melian",
+        "relationshipType": "spouse",
+        "secondEntity": "Elu Thingol"
+      }
+    ]
+  },
+  {
+    "sentence": "After Thingol\u0027s death she left Doriath, visiting Beren and L\u00FAthien for a time warning them of the Dwarves treachery, and the curse on the M\u00EEm\u0027s treasure",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "This encounter foreshadowed Beren\u0027s first meeting of L\u00FAthien, whom he would call \u0022Nightingale\u0022, in the final versions of their own tale",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Another earlier version had Celebrimbor revolting against Galadriel after she and Celeborn established Eregion",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      },
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Celebrimbor and Galadriel were later reconciled once Sauron\u0027s trickery was revealed",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Galadriel becomes suspicious when Celebrimbor repeats several phrases said by Adar to be from Sauron, and though she soon discovers Halbrand\u0027s true identity, she withholds this knowledge from Celebrimbor so that the forging can continue",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "At Galadriel\u0027s suggestion, Celebrimbor forges three rings instead of the initially proposed two, and is satisfied with his new creation",
+    "relationships": [
+      {
+        "firstEntity": "Celebrimbor",
+        "relationshipType": "spouse",
+        "secondEntity": "Galadriel"
+      }
+    ]
+  },
+  {
+    "sentence": "Finarfin and E\u00E4rwen, by L\u012Bga K\u013Cavi\u0146a\r\nFinarfin was the youngest child and third son of Finw\u00EB, High-King of the \u00D1oldor in Aman, with his second wife Indis of the Vanyar",
+    "relationships": [
+      {
+        "firstEntity": "Finarfin",
+        "relationshipType": "spouse",
+        "secondEntity": "E\u00E4rwen"
+      }
+    ]
+  },
+  {
+    "sentence": "In YT 1280, Finarfin married E\u00E4rwen, the daughter of Olw\u00EB, King of the Teleri, which therefore made him related to Thingol, King of Doriath, Olw\u00EB\u0027s brother",
+    "relationships": [
+      {
+        "firstEntity": "Finarfin",
+        "relationshipType": "spouse",
+        "secondEntity": "E\u00E4rwen"
+      }
+    ]
+  },
+  {
+    "sentence": "The encounter of Beren and L\u00FAthien by Marinela Mexi\r\nAfter the ruin of the Outlaws of Dorthonion and the death of his father, Beren hunted the Orcs responsible, killing Gorgol and reclaiming the hand of his father and Ring of Barahir",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Beren and L\u00FAthien in the Court of Thingol, by DonatoArts\r\nThingol haughtily refused to give L\u00FAthien\u0027s hand in marriage",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "The task was intended to be impossible, but Beren and L\u00FAthien, with the aid of Finrod of Nargothrond and Huan the Great Hound, braved many perils (even besting Sauron, then Morgoth\u0027s most powerful lieutenant) and took a Silmaril",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "L\u00FAthien and the unconscious Beren were rescued by the Eagles of Manw\u00EB",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Beren being revived by L\u00FAthien - by Justin Gerard\r\nL\u00FAthien\u0027s love for Beren was so strong that, upon hearing of his death, she lay down and died",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Thus Beren and L\u00FAthien lived again, and dwelt on Tol Galen in the middle of the river Adurant in Ossiriand",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "L\u00FAthien bore Beren a son, named Dior, Thingol\u0027s heir, considered to be one of the fairest beings to ever live, for in him flowed the blood of Men, of Elves, and of the Ainur",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Through his descendants, the blood of Beren and of L\u00FAthien was preserved among the Eldar and the Edain",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "The union of Beren and L\u00FAthien was the first between a mortal Man and an Elven maid",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Beren\u0027s romance with L\u00FAthien is one of the great stories of the Elder Days, and it is mirrored by the later romance between their descendants Aragorn and Arwen Evenstar",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      },
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "The story of Beren and L\u00FAthien, though mentioned only briefly in The Lord of the Rings, was a central part of the legendarium",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "The inscription on his gravestone reads:\r\nThe name of L\u00FAthien also appears on the stone of his wife Edith:\r\nIn the earliest version of the legendarium, Beren was going to be human, but Tolkien erased over the original versions and wrote over much of the text",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "According to Beren and L\u00FAthien Egnor and Egnor (Aegnor) are two separate persons",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "Some of the artwork included in the book (all of which is drawn by Alan Lee) seems to reflect Beren\u0027s interchanging Elven ancestry - in particular the cover artwork, which appears to portray a scene from The Tale of Tin\u00FAviel with Beren, L\u00FAthien, and Huan",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "After this, T\u00FArin\u0027s second sister Ni\u00EBnor was born",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "T\u00FArin and N\u00EDniel in Brethil, by Gustavo Malek\r\nT\u00FArin was caught by the powerful gaze of Glaurung at the smashed gate of the city, and stood by idly as Finduilas and hundreds of captives was dragged away, Finduilas called to him, once her cries were drowned out in the distance, T\u00FArin was released from Glaurung\u0027s spell, which deceived T\u00FArin into believing Morwen and Ni\u00EBnor were suffering in Dor-l\u00F3min, and T\u00FArin abandoned Finduilas to seek out his kin",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "In actuality, Morwen and Ni\u00EBnor were safely in Doriath, as T\u00FArin\u0027s own efforts had made the way passable",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "Horrified, and believing T\u00FArin dead, Ni\u00EBnor N\u00EDniel killed herself by leaping into the ravines of the river",
+    "relationships": [
+      {
+        "firstEntity": "T\u00FArin",
+        "relationshipType": "spouse",
+        "secondEntity": "Ni\u00EBnor"
+      }
+    ]
+  },
+  {
+    "sentence": "Manw\u00EB (Quenya; IPA: [\u02C8man\u02B7e] - \u0022Blessed One\u0022) was the leader of the Ainur, one of the Aratar, King of the Valar, husband of Varda, brother of the Dark Lord Melkor, and King of Arda",
+    "relationships": [
+      {
+        "firstEntity": "Manw\u00EB",
+        "relationshipType": "spouse",
+        "secondEntity": "Varda"
+      }
+    ]
+  },
+  {
+    "sentence": "In earlier versions of the legendarium Manw\u00EB and Varda were called with the title of Wanwavoisi and they were conceived as the parents of Eonw\u00EB (called Fionw\u00EB \u00DArion) and Ilmar\u00EB (called Erinti)",
+    "relationships": [
+      {
+        "firstEntity": "Manw\u00EB",
+        "relationshipType": "spouse",
+        "secondEntity": "Varda"
+      }
+    ]
+  },
+  {
+    "sentence": "He, Landroval, and Gwaihir rescued Beren and L\u00FAthien when Angband was aroused",
+    "relationships": [
+      {
+        "firstEntity": "Beren",
+        "relationshipType": "spouse",
+        "secondEntity": "L\u00FAthien"
+      }
+    ]
+  },
+  {
+    "sentence": "It features a more pronounced romantic triangle with Arwen and \u00C9owyn, including a scene of Aragorn and \u00C9owyn \u0022asleep in each other\u0027s arms\u0022; and has Elladan, Elrohir, and Erkenbrand join Aragorn on the Paths of the Dead (the latter dying in the process), which are described as though made of flesh and feature an undead Isildur as King of the Dead",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "The second script included a sex scene between Aragorn and Arwen in the Glittering Caves, interrupted by Legolas and Gimli\u0027s sight-seeing the caves",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "For Faramir, Jackson wanted to \u0022go his own way\u0022 but New Line suggested Stephen Dorff, who declined, and then Ethan Hawke, with then-wife Uma Thurman to play \u00C9owyn",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Notable scenes filmed in the pick-ups include the flashback with Boromir (where he is sent to Rivendell by his father Denethor) featured in The Two Towers Extended Edition, as well as the re-shot Witch-king scenes with his new helmet design, the improved Orc designs and the new character of Gothmog, and a re-shoot of Aragorn and Arwen kissing at the coronation scene, all for The Return of the King",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "While the films were generally well received, some readers of the book decried certain changes made in the adaptation, including changes in tone and themes; various changes made to characters such as Aragorn, Arwen, Denethor, Faramir and Gimli, as well as to the main protagonist Frodo himself; changes made to events (such as the Elves participating at the Battle of Helm\u0027s Deep, and Faramir taking the hobbits to Osgiliath); and the deletion of the penultimate chapter of Tolkien\u0027s work, \u0022The Scouring of the Shire\u0022, a part he felt thematically necessary",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "The group escapes the underground realm and flees into the Elven realm of Lothl\u00F3rien, where they are sheltered by its rulers, Galadriel and her husband Celeborn",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Aragorn tells \u00C9owyn that Arwen, whom he loves, is leaving Middle-earth to be with her people in the Undying Lands",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "When she refuses, Elrond, in a devastating speech, uses his powers of foresight and reveals the darkness of Arwen\u0027s future if she chooses to remain in Middle-earth with Aragorn",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "As he is mortal, Aragorn will eventually die even if he becomes King of Gondor, leaving Arwen to fade away with her grief when he is gone",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "On the journey, she has a vision of Eldarion, her future son by Aragorn, which convinces her to turn back to Rivendell",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "children",
+        "secondEntity": "Eldarion"
+      }
+    ]
+  },
+  {
+    "sentence": "Meanwhile, in his tent, Aragorn has a nightmare about Arwen dying at Sauron\u0027s power and the Evenstar shattering",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Upon awakening in sudden anger, Aragorn is called to Th\u00E9oden\u2019s tent, where he meets Elrond, who says of Arwen dying - as Sauron\u0027s power grows, her lifespan degenerates",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Later, \u00C9owyn awakens in a bed, where she sights Faramir, who is too healing",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "However, Sauron shows Aragorn a vision of Arwen dead and Aragorn, in his grief, drops the seeing stone, smashing the Evenstar",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "In Minas Tirith, \u00C9owyn believes that all hope is lost, but she is comforted by Faramir, who says that it is just the damp of the first spring rain",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "During the ceremony, Aragorn greets Lady \u00C9owyn and Lord Faramir, King \u00C9omer of Rohan and a delegation of Elves, greeting Legolas with them, including Elrond and Arwen, who emerges from behind a banner",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      },
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "There, they find Elrond, Galadriel and Celeborn also waiting to board the ship",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  },
+  {
+    "sentence": "Most importantly they spent three weeks working on the last 45 minutes of the film, for appropriate intercutting and leaving out scenes such as the Mouth of Sauron, and the fates of characters like Legolas, Gimli, \u00C9owyn and Faramir",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Right before Pippin takes the palant\u00EDr, Aragorn enters the Great Hall and has a conversation with \u00C9owyn about a dream she had, about a great wave over a green countryside, which was originally Faramir\u0027s dream in the book",
+    "relationships": [
+      {
+        "firstEntity": "Faramir",
+        "relationshipType": "spouse",
+        "secondEntity": "\u00C9owyn"
+      }
+    ]
+  },
+  {
+    "sentence": "Before Aragorn sets off, he confronts Sauron in the palant\u00EDr, however Sauron shows Aragorn an image of an unconscious Arwen, which frightens Aragorn into backing away",
+    "relationships": [
+      {
+        "firstEntity": "Aragorn II Elessar",
+        "relationshipType": "spouse",
+        "secondEntity": "Arwen"
+      }
+    ]
+  },
+  {
+    "sentence": "Ken Stott was their first choice for Balin, although they also had Graham McTavish read for the role after reading for Dwalin, and had considred Peter Mullan",
+    "relationships": [
+      {
+        "firstEntity": "Balin",
+        "relationshipType": "siblings",
+        "secondEntity": "Dwalin"
+      }
+    ]
+  },
+  {
+    "sentence": "Tolkien\u0022, which can include \u0022Akallab\u00EAth\u0022 and \u0022Of the Rings of Power and the Third Age\u0022 from The Silmarillion, and \u0022The History of Galadriel and Celeborn\u0022 and \u0022The Line of Elros: Kings of N\u00FAmenor\u0022 from Unfinished Tales",
+    "relationships": [
+      {
+        "firstEntity": "Galadriel",
+        "relationshipType": "spouse",
+        "secondEntity": "Celeborn"
+      }
+    ]
+  }
+]
