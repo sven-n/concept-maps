@@ -3,9 +3,11 @@
 using AngleSharp.Dom;
 
 /// <summary>
-/// <see cref="IRelationshipExtractor"/> for the english Game of Thrones Fandom page.
+/// <see cref="IRelationshipExtractor"/> for the Fandom wikis which specify the
+/// relationship between persons in elements which are marked with the corresponding
+/// relationship type in a "data-source" attribute.
 /// </summary>
-public class GameOfThronesRelationshipExtractor : IRelationshipExtractor
+public class FandomWithDataSourceAttributesRelationshipExtractor : IRelationshipExtractor
 {
     /// <summary>
     /// The relevant values for the "data-source" attribute of "pi-data"-DIVs.
@@ -16,7 +18,11 @@ public class GameOfThronesRelationshipExtractor : IRelationshipExtractor
     };
 
     /// <inheritdoc />
-    public Uri BaseUri { get; } = new("https://gameofthrones.fandom.com/wiki/");
+    public IEnumerable<Uri> BaseUris { get; } = new List<Uri>
+        {
+            new("https://gameofthrones.fandom.com/wiki/"),
+            new("https://lotr.fandom.com/wiki/")
+        };
 
     /// <inheritdoc />
     public IEnumerable<(string CurrentPerson, string RelationType, string RelativeName)> ExtractRelationships(IDocument document)

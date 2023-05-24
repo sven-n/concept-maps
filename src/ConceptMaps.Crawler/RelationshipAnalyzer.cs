@@ -14,17 +14,16 @@ using System.Text.Json.Serialization;
 /// </summary>
 internal class RelationshipAnalyzer
 {
+    private readonly List<Relationship> _relationships;
+    private readonly HashSet<string> _uniqueFirstNames;
+
     /// <summary>
-    /// Analyzes the text with the possible relationships and stores the results
-    /// as a json file in a result file.
+    /// Initializes a new instance of the <see cref="RelationshipAnalyzer"/> class.
     /// </summary>
-    /// <param name="textFilePath">The text file path.</param>
     /// <param name="relationshipFilePath">The relationship file path.</param>
-    /// <param name="resultFilePath">The result file path.</param>
-    public void AnalyzeAndStoreResults(string textFilePath, string relationshipFilePath, string resultFilePath)
+    public RelationshipAnalyzer(string relationshipFilePath)
     {
-        var text = File.ReadAllText(textFilePath);
-        var parsedRelationships = File.ReadAllLines(relationshipFilePath)
+        this._relationships = File.ReadAllLines(relationshipFilePath)
             .Select(line => line.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             .Where(tokens => tokens.Length == 3)
             .Select(tokens => new Relationship(tokens[0], tokens[1].ToLower(), tokens[2]))
@@ -32,7 +31,22 @@ internal class RelationshipAnalyzer
             .Distinct()
             .ToList();
 
-        var foundSentences = FindSentences(text, parsedRelationships);
+        var names = this._relationships.SelectMany(r => new[] { r.FirstEntity, r.SecondEntity }).Distinct();
+        var firstNames = names.Select(name => name.Split(' ').First()).ToList();
+        this._uniqueFirstNames = firstNames.Where(firstName => firstNames.Count(n => n == firstName) == 1).ToHashSet();
+
+    }
+
+    /// <summary>
+    /// Analyzes the text with the possible relationships and stores the results
+    /// as a json file in a result file.
+    /// </summary>
+    /// <param name="textFilePath">The text file path.</param>
+    /// <param name="resultFilePath">The result file path.</param>
+    public void AnalyzeAndStoreResults(string textFilePath, string resultFilePath)
+    {
+        var text = File.ReadAllText(textFilePath);
+        var foundSentences = this.FindSentences(text);
         var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             WriteIndented = true,
@@ -59,23 +73,34 @@ internal class RelationshipAnalyzer
         }
     }
 
-    private static List<SentenceRelationships> FindSentences(string text, List<Relationship> possibleRelationships)
+    private List<SentenceRelationships> FindSentences(string text)
     {
         var sentences = text.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         return sentences
-            .Select(sentence => ProcessSentence(sentence, possibleRelationships))
+            .Select(this.ProcessSentence)
             .Where(result => result.Relationships.Any())
             .ToList();
     }
 
-    private static SentenceRelationships ProcessSentence(string sentence, List<Relationship> possibleRelationships)
+    /// <summary>
+    /// Processes the sentence. A sentence contains the relationship, if the forename of each entity is included.
+    /// If a name contains more than 2 tokens, n-1 tokens must 
+    /// </summary>
+    /// <param name="sentence">The sentence.</param>
+    /// <returns>The relationships for a sentence.</returns>
+    private SentenceRelationships ProcessSentence(string sentence)
     {
         return new SentenceRelationships(
             sentence,
-            possibleRelationships.Where(relationship =>
-                           (sentence.Contains(relationship.FirstEntity) || sentence.Contains(relationship.FirstEntityForeName)) 
-                        && (sentence.Contains(relationship.SecondEntity) || sentence.Contains(relationship.SecondEntityForeName)))
+            this._relationships.Where(
+                    rel => SentenceContainsName(sentence, rel.FirstEntity, rel.FirstEntityForeName)
+                           && SentenceContainsName(sentence, rel.SecondEntity, rel.SecondEntityForeName))
             .ToList());
+    }
+
+    private bool SentenceContainsName(string sentence, string fullName, string foreName)
+    {
+        return sentence.Contains(this._uniqueFirstNames.Contains(foreName) ? foreName : fullName);
     }
 
     private record Relationship(string FirstEntity, string RelationshipType, string SecondEntity)

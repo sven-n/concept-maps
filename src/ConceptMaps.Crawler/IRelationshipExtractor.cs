@@ -11,7 +11,7 @@ public interface IRelationshipExtractor
     /// <summary>
     /// Gets the base URI for the page on which the extractor should be used.
     /// </summary>
-    Uri BaseUri { get; }
+    IEnumerable<Uri> BaseUris { get; }
 
     /// <summary>
     /// Extracts the relationships from the content of the document.

@@ -1,0 +1,72 @@
+﻿Harry Potter;father;James Potter I
+Harry Potter;mother;Lily J. Potter
+Harry Potter;spouse;Ginevra Weasley
+Harry Potter;children;James Potter II
+Harry Potter;children;Albus Potter
+Harry Potter;children;Lily L. Potter
+Albus Dumbledore;father;Percival Dumbledore
+Albus Dumbledore;mother;Kendra Dumbledore
+Ronald Weasley;father;Arthur Weasley
+Ronald Weasley;mother;Molly Weasley
+Ronald Weasley;spouse;Hermione Granger
+Ronald Weasley;children;Rose Granger-Weasley
+Ronald Weasley;children;Hugo Granger-Weasley
+Ginevra Weasley;father;Arthur Weasley
+Ginevra Weasley;mother;Molly Weasley
+Ginevra Weasley;spouse;Harry Potter
+Ginevra Weasley;children;James Potter II
+Ginevra Weasley;children;Albus Potter
+Ginevra Weasley;children;Lily L. Potter
+Hermione Granger;father;Hermione Granger's father
+Hermione Granger;mother;Hermione Granger's mother
+Hermione Granger;spouse;Ronald Weasley
+Hermione Granger;children;Rose Granger-Weasley
+Hermione Granger;children;Hugo Granger-Weasley
+Tom Riddle;father;Tom Riddle Senior
+Tom Riddle;mother;Merope Riddle
+Tom Riddle;mother;House of Gaunt
+Tom Riddle;children;Delphini
+Neville Longbottom;father;Frank Longbottom
+Neville Longbottom;mother;Alice Longbottom
+Neville Longbottom;spouse;Hannah Abbott
+Draco Malfoy;father;Lucius Malfoy
+Draco Malfoy;mother;Narcissa Malfoy
+Draco Malfoy;mother;House of Black
+Draco Malfoy;spouse;Astoria Malfoy
+Draco Malfoy;children;Scorpius Malfoy
+Rubeus Hagrid;mother;Fridwulfa
+Severus Snape;father;Tobias Snape
+Severus Snape;mother;Eileen Prince
+Emma Watson;siblings;Alexander Watson
+Ralph Fiennes;father;wikipedia:Mark Fiennes
+Ralph Fiennes;mother;wikipedia:Jennifer Lash
+Ralph Fiennes;siblings;wikipedia:Joseph Fiennes
+Ralph Fiennes;siblings;wikipedia:Martha Fiennes
+Ralph Fiennes;siblings;wikipedia:Magnus Fiennes
+Ralph Fiennes;siblings;wikipedia:Sophie Fiennes
+Chris Columbus;children;Eleanor Columbus
+Chris Columbus;children;Brendan Columbus
+Chris Columbus;children;Violet Columbus
+Chris Columbus;children;Isabella Columbus
+Alfonso Cuarón;children;Tess Bu Cuarón
+Natsai Onai;mother;Mudiwa Onai
+Garreth Weasley;father;G. Weasley
+Phineas Nigellus Black;spouse;Ursula Flint
+Phineas Nigellus Black;children;Sirius Black II
+Phineas Nigellus Black;children;Phineas Black
+Phineas Nigellus Black;children;Arcturus Black II
+Phineas Nigellus Black;children;Belvina Black
+Phineas Nigellus Black;children;House of Black
+Phineas Nigellus Black;children;Cygnus Black II
+Eleazar Fig;spouse;Miriam Fig
+Abraham Ronen;spouse;M. Ronen
+Matilda Weasley;siblings;G. Weasley
+Jacob's sibling;father;Peregrine
+Grim Fawley;mother;Lucretia Fawley
+Grim Fawley;father;Marshall Fawley
+Grim Fawley;spouse;Penelope Fawley
+Grim Fawley;children;Addison Fawley
+Grim Fawley;children;Melody Fawley
+Daniel Page;mother;Kaleena Page
+Lottie Turner;father;Ambrose Turner
+Ivy Warrington;siblings;Winifred Warrington

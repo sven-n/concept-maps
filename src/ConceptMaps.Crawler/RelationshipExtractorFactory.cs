@@ -14,7 +14,7 @@ public class RelationshipExtractorFactory
     /// <returns>The suitable <see cref="IRelationshipExtractor"/>.</returns>
     public IRelationshipExtractor GetExtractor(Uri uri)
     {
-        return _registeredExtractors.FirstOrDefault(extractor => extractor.BaseUri.IsBaseOf(uri))
+        return _registeredExtractors.FirstOrDefault(extractor => extractor.BaseUris.Any(baseUri => baseUri.IsBaseOf(uri)))
                ?? _registeredExtractors.First();
     }
 

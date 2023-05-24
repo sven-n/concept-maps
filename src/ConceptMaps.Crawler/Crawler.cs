@@ -105,7 +105,8 @@ public class Crawler : ICrawler
             .GetElementsByTagName("p") // search for all <p> elements
             .Where(p => !p.HasTableAsParent()) // we don't want children of tables (e.g. at the bottom of the page)
             .Select(p => p.TextContent.Trim()) // remove whitespace from the start and end of the content.
-            .Select(text => text.Replace("READ MORE", string.Empty)) // filter out "READ MORE"
+            .Select(text => text.Replace("READ MORE", string.Empty)) // filter out "READ MORE" (LOTR)
+            .Select(text => text.Replace("Point me!", string.Empty)) // filter out "Point me!" (HP)
             .Where(text => !string.IsNullOrWhiteSpace(text)) // we don't want empty or white space 
             .Select(text => RemoveCitationBrackets.Replace(text, string.Empty)); // remove the citation marks, e.g. '[2]'
 

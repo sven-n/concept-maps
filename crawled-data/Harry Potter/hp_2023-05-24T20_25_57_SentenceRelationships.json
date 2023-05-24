@@ -1,0 +1,1857 @@
+﻿[
+  {
+    "sentence": "During the next school year, in defiance of Dolores Umbridge\u0027s and the Ministry of Magic\u0027s strict regime against the teaching of Defence Against the Dark Arts and the continued introduction of the new Educational Decree, Ronald Weasley and Hermione Granger first had the idea of creating an illegal Defence Against the Dark Arts group called Dumbledore\u0027s Army",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "While inside the shop he was forced to hide in a Crushing Cabinet, as Draco Malfoy and his father Lucius Malfoy entered",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Also his friends, Ronald Weasley and Hermione Granger seemed to block him from information and he was blocked entirely from the wizarding world except for the Daily Prophet that said that Harry was wrong",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "They were informed of this by Neville\u0027s grandmother, who made it known that Frank and Alice were tortured by Death Eaters for information regarding Voldemort",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "Dumbledore telling Harry the whole prophecy\r\nBack at Hogwarts, Harry appeared in Dumbledore\u0027s office and tried to get out after Phineas Nigellus Black mentioned Sirius, only to find the door locked",
+    "relationships": [
+      {
+        "firstEntity": "Phineas Nigellus Black",
+        "relationshipType": "children",
+        "secondEntity": "Sirius Black II"
+      }
+    ]
+  },
+  {
+    "sentence": "Later on Harry, Ginny, and Draco then learnt that Albus and Scorpius were missing",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Ginny concluded Albus ran away after his argument with Harry, and Draco was upset that Scorpius had been pulled into their family issues",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When Albus and Scorpius went time travelling again, Harry and Ginny received a visit from Draco",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When Draco speaks of the great bond and sacrifices he has made for Scorpius and his late wife, Harry finally realised he was dangerously isolating Albus",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Harry, Ron, Draco, and others travelling back in time to assist Albus and Scorpius\r\nThey travelled back in time to join Albus and Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "He also made sure his younger son Albus Potter would not be teased a lot by Harry\u0027s older son, James Potter",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "By 2017, Harry had adopted a more moderate attitude on the Houses, telling his younger son Albus Potter that \u0022it doesn\u0027t matter to us\u0022 if Albus was Sorted in Slytherin or Gryffindor",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Lucius Malfoy was also sacked from his position as a governor of Hogwarts, much to Draco\u0027s dismay and Harry\u0027s satisfaction",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Dumbledore\u0027s moving portrait, featuring Fawkes\r\nIn 2020, after his son, Albus Potter, got injured due to using a prototype Time-Turner to save Cedric Diggory, Harry visited the portrait of Dumbledore",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Harry approached him again after hearing Albus and Scorpius Malfoy, the son of Draco Malfoy, are kidnapped by Delphini, the daughter of Lord Voldemort, where he asked Harry what he was doing and answered Harry\u0027s questions",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Its members were Harry Potter, Ron Weasley, Hermione Granger, Ginny Weasley, Neville Longbottom, Luna Lovegood, Fred and George Weasley, Cho Chang, Dean Thomas, Seamus Finnigan, Parvati and Padma Patil, Lavender Brown, Hannah Abbott, Ernie Macmillan, Susan Bones, Justin Finch-Fletchley, Michael Corner, Terry Boot, Anthony Goldstein, Katie Bell, Alicia Spinnet, Angelina Johnson, Colin and Dennis Creevey, Zacharias Smith and Marietta Edgecombe",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "In 1991, Lucius\u0027s son, Draco, started attending Hogwarts",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Lucius was stunned and imprisoned in Azkaban, failing to give Voldemort the Prophecy about the Chosen one, so Voldemort became angry and made Draco a Death Eater and ordered him to kill Dumbledore, otherwise he would kill his family",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Ronald Bilius Weasley was born 1 March 1980, to Arthur and Molly Weasley (n\u00E9e Prewett), at the height of the First Wizarding War",
+    "relationships": [
+      {
+        "firstEntity": "Arthur Weasley",
+        "relationshipType": "children",
+        "secondEntity": "Ronald Weasley"
+      },
+      {
+        "firstEntity": "Molly Weasley",
+        "relationshipType": "children",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "Ron, Hermione and their children Rose and Hugo all attended the final of the 427th Quidditch World Cup in the Patagonian Desert in July 2014, alongside Harry, Ginny, James, Albus, Teddy Lupin, Neville, Hannah, Luna, Rolf, Bill, Fleur, Victoire, and potentially others",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "Ron, Hermione, Harry, Ginny and Draco were very forgiving of Albus and Scorpius so McGonagall reminded them of the great dangers of what they had done",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Harry, Ron, Draco, and others travelling back in time to assist Albus and Scorpius\r\nAlbus and Scorpius were kidnapped by Delphi and made to time-travel to 31 October, 1981",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "He also had two children with Hermione Granger, Rose, and Hugo Weasley",
+    "relationships": [
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "children",
+        "secondEntity": "Rose Granger-Weasley"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "children",
+        "secondEntity": "Hugo Granger-Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "He also told her to beat Draco Malfoy\u0027s son Scorpius Malfoy on their tests, and that he was grateful she had inherited her mother\u0027s brains",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Like their fathers, Arthur Weasley and Lucius Malfoy, Ron and Draco despised each other and frequently exchanged insults",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Ron discouraged his daughter Rose from becoming \u0022too friendly\u0022 with Draco\u0027s son Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Nevertheless, he admitted that he felt sorry for Draco for the loss of Astoria, showing that despite their mutual enmity, even Ron in the end was not entirely without empathy for him",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Rowling\r\nGinevra Molly \u0022Ginny\u0022 Potter (n\u00E9e Weasley) (b",
+    "relationships": [
+      {
+        "firstEntity": "Molly Weasley",
+        "relationshipType": "children",
+        "secondEntity": "Ginevra Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "Ginevra Molly Weasley was born on 11 August 1981, to Arthur and Molly Weasley (n\u00E9e Prewett), the first girl born into the Weasley family in a long time, and the last for that generation after her six older brothers: Bill, Charlie, Percy, Fred, George and Ron",
+    "relationships": [
+      {
+        "firstEntity": "Arthur Weasley",
+        "relationshipType": "children",
+        "secondEntity": "Ginevra Weasley"
+      },
+      {
+        "firstEntity": "Molly Weasley",
+        "relationshipType": "children",
+        "secondEntity": "Ginevra Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco was with his father, Lucius, and the elder Malfoy took the opportunity to insult the Weasley family for associating with the Muggle parents of Muggle-born witch Hermione Granger and \u2014 in his eyes \u2014 being a disgrace to wizards",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "In the same year, she joined Harry Potter, Hermione Granger, and Draco Malfoy going back in time to save Albus Potter and Scorpius Malfoy and thwart Delphini\u0027s evil plans",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "\u0027 She was also quite horrified when she heard that Neville\u0027s parents, Alice and Frank Longbottom, had been tortured into insanity by Bellatrix Lestrange and become permanent residents of St Mungo\u0027s Hospital for Magical Maladies and Injuries",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "After the Second Wizarding War, Hagrid appeared to be friendly with Albus Potter, the youngest son of Ginny and Harry",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Hermione, along with Ron, Harry, Ginny and Draco were very forgiving of what Albus and Scorpius did, but McGonagall reminded them of great dangers that happened, and could still have been, because they meddled with time",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When Albus and Scorpius were kidnapped by Delphi and made to travel in time again to 31 October 1981, Hermione travelled in time again with Ron, Harry, Ginny and Draco Malfoy to save them",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "She went to check a photograph of Grim and Penelope that was on Gareth\u0027s desk, only to find it had gone missing",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco\u0027s civility towards Hermione during this time was likely reinforced due to her being the Minister For Magic in Britain at the time, and possibly due to her relations to Albus Potter, the best friend of his own son, Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Descended from Salazar Slytherin on his mother\u0027s side through the House of Gaunt, Tom Riddle was conceived whilst his father, Tom Riddle Senior, was under the effects of a love potion supplied by his mother, Merope Gaunt",
+    "relationships": [
+      {
+        "firstEntity": "Tom Riddle Senior",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      },
+      {
+        "firstEntity": "Merope Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      },
+      {
+        "firstEntity": "House of Gaunt",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      }
+    ]
+  },
+  {
+    "sentence": "Tom\u0027s father, Tom Riddle Senior, was a wealthy Muggle living in the village of Little Hangleton, near the Gaunt shack, who was forced into a relationship with Merope Gaunt through the suspected use of the Imperius Curse or a love potion",
+    "relationships": [
+      {
+        "firstEntity": "Tom Riddle Senior",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      },
+      {
+        "firstEntity": "Merope Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      }
+    ]
+  },
+  {
+    "sentence": "Morfin mentioned offhandedly at one point during this meeting that he thought that Tom looked \u0027mighty like that Muggle\u0027, Merope\u0027s husband, Tom Riddle Snr",
+    "relationships": [
+      {
+        "firstEntity": "Merope Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      }
+    ]
+  },
+  {
+    "sentence": "There were, at the time, two babies to whom the prophecy could have referred \u2014 Harry Potter, the half-blood son of James and Lily Potter; and Neville Longbottom, the pure-blood son of Frank and Alice Longbottom",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "In July 1996, Voldemort required a spy within Hogwarts and inducted Lucius Malfoy\u0027s son Draco as a Death Eater",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Forced to concede he could not fight and win against his old teacher, the Dark Lord ordered Draco to kill Dumbledore, for he wished to punish Lucius for his failings by giving his son a task he could not do",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Harry, Albus, Draco, Scorpius, Ginny, Ron, and Hermione would then go back to try to stop her",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Though she would ultimately fail, one of the attempts by Albus Potter and Scorpius Malfoy to change the timeline and save Cedric and prevent his death (unknowingly to them orchestrated by Delphini herself), would result in a temporary timeline where Cedric never died, and where Voldemort succeeded in killing Harry at the Battle of Hogwarts",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "His cold-blooded murder of the man he believed to be one of his most powerful and useful followers, Severus Snape, just to be sure he was the true master of the Elder Wand and his callous attempt to sacrifice Draco Malfoy by ordering him to assassinate Dumbledore as punishment for Lucius Malfoy\u0027s blunders, are evidence of this",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "The fact that Voldemort was conceived through coerced \u0027love\u0027 (theorised to be a love potion by Dumbledore or to be the Imperius Curse by Harry)\u2014administered/used by witch Merope Gaunt to Muggle Tom Riddle Snr - was related to his inability to understand love: it was a symbolic way of showing that he came from a loveless union - but of course, everything would have changed if Merope had chosen to live for the sake of raising her son with love",
+    "relationships": [
+      {
+        "firstEntity": "Merope Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      }
+    ]
+  },
+  {
+    "sentence": "However, in the alternative timeline created via a mistake caused by Scorpius and Albus, Voldemort had apparently put Delphini (known as the Augurey) in charge of the Ministry: Dolores Umbridge (Headmistress of Hogwarts in this timeline) constantly informs the Augurey with dispatches about everything that is going on in Hogwarts; the Augurey gives instructions to Draco Malfoy (Head of Magical Law Enforcement of the Ministry of Magic in this timeline), e",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When the Death Eaters under his command lost the Battle of the Department of Mysteries and failed to retrieve the Prophecy, the Dark Lord was extremely displeased; Lucius was sent to prison after the battle and, as punishment for the elder Malfoy\u0027s failure, Voldemort gave his son Draco Malfoy the nearly impossible task of murdering Albus Dumbledore, with the expectation that he, too, would fail, and then be punished accordingly by the Dark Lord",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Voldemort snubbed Lucius\u0027 concerns for Draco and jeered that perhaps the teenager had chosen to ally himself with Harry Potter when he did not leave the school with the other Slytherins",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Harry was alive, however, and Narcissa, concerned for her son, demanded news of Draco from Harry and, upon learning that Draco was alive and well, lied to the Dark Lord, stating that Harry was dead",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": ", kill)\u0027 Draco after killing Harry, likely as punishment not only for Draco\u0027s unintentional interference in Voldemort\u0027s plans, but also for Narcissa\u0027s deception and Lucius\u0027 failures",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "The later also defected to protect Lily Evans whose husband James Potter I and son Harry Potter were targeted by Lord Voldemort for death, whereas the former defected for the welfare of Kreacher",
+    "relationships": [
+      {
+        "firstEntity": "James Potter I",
+        "relationshipType": "children",
+        "secondEntity": "Harry Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Shortly after Voldemort lost his powers in 1981, the Longbottom family suffered at the hands of Bellatrix Lestrange, her husband Rodolphus, her brother-in-law Rabastan, and Barty Crouch Jnr, who tortured Alice and Frank Longbottom, new parents to Neville Longbottom, to the point of insanity",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "com\nOther Wiki\nWizards Unite Wiki \u2022 \nPottermore Wiki \u2022 \nHarry Potter Answers Wiki \u2022 \nHarry Potter Fanfiction Wiki \u2022 \nHarry Potter Fanon Wiki \u2022 \nHarry Potter and the Methods of Rationality Wiki \u2022 \nThe Potter Dictionary Wiki \u2022 \nDumbledore\u0027s Army Role-Play Wiki \u2022 \nLEGO Harry Potter Wiki \u2022 \nAVPM Wiki \u2022 \nThe J K Rowling Adult Fiction Wiki\r\nGo to these sites for info or for help with your own wiki!\r\nAlice\u0027s Adventures in Wonderland \u2022 \nAmulet \u2022 \nAnne of Green Gables \u2022 \nThe Chronicles of Narnia \u2022 \nDear America \u2022 \nGoosebumps \u2022 \nThe Green Ember \u2022 \nHarry Potter \u2022 \nHow to Train Your Dragon \u2022 \nJumanji \u2022 \nKeeper of the Lost Cities \u2022 \nLittle House on the Prairie \u2022 \nThe Magic School Bus \u2022 \nMiss Peregrine\u0027s Home for Peculiar Children \u2022 \nNight Speakers \u2022 \nOz \u2022 \nPeter Pan \u2022 \nThe Polar Express \u2022 \nThe Railway Series \u2022 \nRainbow Magic \u2022 \nTracy Beaker \u2022 \nThe Unwanteds Series \u2022 \nWings of Fire \u2022 \nWonder\r\nWant your community included? See how!\r\nProfessor Neville Longbottom (b",
+    "relationships": [
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "Neville began school at Hogwarts School of Witchcraft and Wizardry in 1991 and was sorted into Gryffindor House, along with Harry Potter, Hermione Granger, and Ronald Weasley",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "After the end of the Second Wizarding War, Neville briefly served as an Auror, before becoming the Herbology professor and the Head of Gryffindor House at Hogwarts and marrying Hannah Abbott from Hufflepuff",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "He was also the godfather of Harry and Ginny\u0027s second son, Albus Potter",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Infant Neville with his mother and father\r\nNeville Longbottom was born on 30 July 1980 to Frank and Alice Longbottom, a pair of Aurors",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "Hannah had retired from being landlady as of 2014, she and Neville were childless and scathingly reported by Rita Skeeter as \u0022enjoying a little more Ogden\u0027s Firewhisky than most would expect from custodians of our children\u0022",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "It was reported by Rita Skeeter that Neville was the godfather of Harry\u0027s second son, Albus Potter",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Neville mastering the Boggart-Banishing Spell\r\nNeville\u0027s second wand: 13\u0022, cherry wood, and unicorn hair core\r\nTrevor, Neville\u0027s pet toad\r\nNeville\u0027s Remembrall\r\nMimbulus Mimbletonia\r\nFrank and Alice with baby Neville\r\nAs Neville\u0027s parents, Alice and Frank Longbottom, had been permanent residents of St Mungo\u0027s Hospital for Magical Maladies and Injuries since Neville\u0027s infancy, he never knew them as the popular and talented Aurors they were reputed to be",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "Hannah Abbott, his future wife\r\nNeville and Hannah Abbott were never shown as being more than classmates during school",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "Since Hannah was in Hufflepuff House and Neville in Gryffindor, they probably did not spend too much time together, though it is possible that they became friends when they were both members of Dumbledore\u0027s Army",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "Sometime after leaving Hogwarts, Neville and Hannah married and moved into the Leaky Cauldron, where she worked as the landlady and Neville as the Hogwarts Herbology teacher",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "It stands to reason that, since Herbology was where Neville excelled, he may have been confident and even charming amongst the plant life, thus attracting Hannah\u0027s attention",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "Since Hannah lost her mother in her sixth year, it may also have been Neville\u0027s ability to sympathise with her grief that brought the two together, or simply Hannah felt attracted to Neville\u0027s heroism in the Battle of Hogwarts and when the war was over she kept contact with him, they fell in love and got married",
+    "relationships": [
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "After Lord Voldemort\u0027s first defeat, four fanatically loyal Death Eaters tortured Neville\u0027s parents, Frank and Alice Longbottom, to the point of insanity, using the Cruciatus Curse, in an attempt to force Voldemort\u0027s whereabouts out of them; this fact initially haunted Neville, but eventually spurred him to rise to his full potential",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "Neville as a LEGO mini-figure (first edition)\r\nNeville as a LEGO mini-figure (second edition)\r\nNeville as a LEGO mini-figure (third edition)\r\nNeville Longbottom (holding Trevor) as a POP! Vinyl\r\nNeville Longbottom holding The Monster Book of Monsters as a POP! Vinyl\r\n\u0022Neville Longbottom\u0022 Trading Card from the Quidditch Cup Expansion of the Harry Potter Trading Card Game depicting Neville and Trevor\r\nQuidditch Fan Neville Longbottom as he appears in Harry Potter: Wizards Unite\r\nNeville Longbottom as he appears in Harry Potter: Wizards Unite\r\nDraco Lucius Malfoy (b",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Lord Voldemort charged Draco with making up for Lucius\u0027s failure, and he became a Death Eater at age sixteen but was quickly disillusioned with the lifestyle",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "By 2017, Draco had married Astoria Greengrass and had one child, Scorpius Hyperion Malfoy",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco on the Black Family Tree tapestry\r\nDraco Lucius Malfoy was born on 5 June 1980, to Lucius and Narcissa Malfoy (n\u00E9e Black), who were both born into old, wealthy pure-blood families",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Lucius had requested the two in particular, as Jacob\u0027s sibling was ostensibly the best student in their year, whilst Merula was the daughter of two of Lucius\u0027 former Death Eater colleagues and thus considered the \u0027right\u0027 type of person for Draco to associate with",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "After Harry was given a free copy of books by Lockhart personally, Draco afterwards approached him to insult him, and after Ginevra Weasley defended him, he mocked her as his girlfriend (unintentionally predicting the future)",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "spouse",
+        "secondEntity": "Ginevra Weasley"
+      },
+      {
+        "firstEntity": "Ginevra Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Harry Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco\u0027s father Lucius Malfoy was also present, who met Harry for the first time, and also encountered Arthur Weasley, who he insulted for associating with Muggles, such as the Grangers",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "It does not appear that Draco was aware of this, as Lucius\u0027s instructions to his son that year were to \u0027keep his head down\u0027",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "It is implied that Draco was expected to fail and that Voldemort assigned him the task with the intention of punishing Lucius Malfoy for his failure at the Department of Mysteries",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When Harry overhead some parts of Draco\u0027s conversation with his fellow Slytherins about the mission, Draco used a Full Body-Bind Curse to paralyse Harry and stomped hard on his face, crushing his nose, in revenge for imprisoning his father, Lucius, causing Harry to hate Draco more than ever, while disregarding what Harry heard as not important enough to condemn him",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Snape, who had made an Unbreakable Vow with Narcissa to step in if Draco failed in his task, used the Killing Curse on the Headmaster",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Due to Draco\u0027s helpful role in Dumbledore\u0027s death, Voldemort liberated Lucius from Azkaban",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "This is due to Voldemort no longer holding Lucius in high esteem and shifting his favour to Draco\u0027s maternal aunt Bellatrix Lestrange and Hogwarts teacher Severus Snape",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Narcissa would lend Draco her wand; it was powerful, yet it didn\u0027t \u0027understand\u0027 him, as he had not won its loyalty",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Given Lucius\u0027 previous remarks alluding to \u0027forgiveness\u0027, it is likely that Draco was doing this in an attempt to redeem his family in Voldemort\u0027s eyes",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco eventually married Astoria Greengrass, the younger sister of fellow Slytherin classmate Daphne Greengrass, who had gone through a similar (though less violent and frightening) conversion from pure-blood ideals to a more accepting and tolerant way of life",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco with his son Scorpius\r\nThe two had a son together, named Scorpius Malfoy, who was raised by his mother not to believe that Muggles and Muggle-borns were scum; as such, family gatherings were fraught with tension",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco raised Scorpius to be a much kinder and more accepting Malfoy than he was in his youth",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "For much of his youth, Draco took after his bigoted father, Lucius Malfoy, as a role model, and frequently boasted about his family\u0027s influence and wealth",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "As a husband, Draco was very loving and devoted and was even fully willing to let the Malfoy bloodline end to protect her from her family\u0027s curse as it made childbirth dangerous and detrimental to her health, which he maintained even despite Lucius\u0027s dislike, only relenting after Astoria said she wanted to leave behind a child for him and not for family beliefs",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Although Scorpius\u0027s birth would cause Astoria\u0027s death, Draco\u0027s love for his son was clearly great, considering the day he was born the greatest day of his life",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "He did not let his histories with Harry, Ron and Hermione hamper his judgement towards Scorpius\u0027s bond with Albus Potter and crush on Rose Granger-Weasley, children of his former rivals, fully supporting his son instead",
+    "relationships": [
+      {
+        "firstEntity": "Harry Potter",
+        "relationshipType": "children",
+        "secondEntity": "Albus Potter"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco even went as far as to protest to Harry for having made Albus distant from Scorpius, showing how much he valued the friendship between Albus and Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco was more strict with Scorpius than his parents were to him, accepting that his son must be punished for having brought the wizarding world back to the times where Voldemort was in power",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco had came to trust the luck and instincts of both Harry and Hermione, taking the orders of the Minister For Magic without hesitation, even expressing he was impressed with her battle commands, albeit in a mildly amused manner, acknowledging Harry was always ready to solve the thickest of situations, and he even went as far as to confess to Harry that he never truly craved power like his father and that his ambition was actually to become a star Quidditch player, but he wasn\u0027t good enough, and mainly he just wanted to be happy along with the truth of Astoria\u0027s death, and his envy of Harry\u0027s friendships, as he only ever had Crabbe and Goyle, outright acknowledging Harry as a friend and showing respect for him, which was mutually returned by Harry",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco attending a first-year Potions class\r\nDraco in his Quidditch robes\r\nDraco duelling Harry and Ron during the Skirmish at Malfoy Manor\r\nDraco Malfoy duelling Harry Potter in 1992\r\nDraco casting the Snake Summons Spell in 1992\r\nDraco making a paper plane fly\r\nDraco attempting to curse Harry Potter\r\nDraco\u0027s hawthorn wand\r\nLucius and Draco in 1997\r\nLucius and Narcissa Malfoy both spoiled their only child",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "In 1992, Lucius bought broomsticks for the entire Slytherin Quidditch team when Draco was made Seeker, and Narcissa often sent care packages to her son",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "She also refused to send Draco abroad to Durmstrang Institute, as Lucius originally wanted, insisting he stay closer to home by attending Hogwarts, despite Lucius\u0027s desire to keep Draco away from the influence of Muggle-borns in Hogwarts and also because Durmstrang Institute was known to teach dark arts rather than just the defences which was why Lucius Malfoy had wanted Draco a place in that school, but, finally fulfilling Narcissa\u0027s wish for him to study somewhere not too far from home",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Narcissa Malfoy, Draco\u0027s mother\r\nIt became clear during the Second Wizarding War that the Malfoys cared about one another more than they cared for following Lord Voldemort",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Narcissa went so far as to lie directly to Voldemort about Harry Potter being dead, in order to be allowed to return to Hogwarts and search for Draco, which also follows the saying that Harry Potter had been saved by a mother\u0027s love more than once",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "However, after the war, Draco\u0027s relationship with his parents may have somewhat faltered, as his marriage with Astoria led them to think she is a somewhat disappointing daughter-in-law, mainly because Astoria\u0027s change of belief after the atrocities brought by Death Eaters\u0027 ideology, something they find unfitting for a fellow member of one of the Sacred Twenty-Eight clans",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco himself has lost his bigotry for less-than-pure wizards, and his willingness to let the Malfoy bloodline end at himself in order to preserve Astoria\u0027s health due to her blood-bourne curse earned Lucius\u0027 dislike",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco with his wife and son\r\nSometime after the end of the war, Draco married Astoria Greengrass, whose older sister was in the same year as him at Hogwarts",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco and his wife evidently loved and cared for their son, raising him to be a better person than himself, proven when Scorpius has a crush on Rose Granger-Weasley (daughter of Draco\u0027s former rivals) and is best friend of Albus Potter (youngest son of Draco\u0027s former arch-rival) he and his wife considered the day their son was born the best day of their lives",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Astoria\u0027s death has caused Draco to be heartbroken, and he even considered using the illegal \u0027true\u0027 Time-Turner he received from his father as a means to see her again, though he barely resisted the urge",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco would have gladly let the Malfoy family line end with him if it were to preserve Astoria\u0027s health, disregarding Lucius\u0027 wishes, but Astoria did want to leave behind someone for her husband, not for the sake of family beliefs",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco certainly raised Scorpius more strictly than how Lucius and Narcissa raised him, as when Scorpius was to be punished by Minerva McGonagall for utilising the Time-Turner to corrupt reality to the point of reviving Voldemort, Draco stated he was prepared to listen to how his son is to be punished",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Bellatrix Lestrange, his maternal aunt\r\nBellatrix Lestrange was Draco\u0027s maternal aunt, being the sister of Narcissa",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "When Draco was younger he didn\u0027t have much contact with his aunt because she was imprisoned in Azkaban for torturing the Aurors Alice and Frank Longbottom (who were the parents of Neville Longbottom, a Gryffindor in the same year at Hogwarts as Draco), into insanity",
+    "relationships": [
+      {
+        "firstEntity": "Frank Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      },
+      {
+        "firstEntity": "Alice Longbottom",
+        "relationshipType": "children",
+        "secondEntity": "Neville Longbottom"
+      }
+    ]
+  },
+  {
+    "sentence": "His cousin, the illegitimate child of Bellatrix Lestrange, his aunt, and Tom Riddle, his former leader, was Delphini, whom he helped Harry Potter fight in the year 2020, after discovering she was Voldemort\u0027s daughter, and after she tried to kill his son Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Tom Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Delphini"
+      }
+    ]
+  },
+  {
+    "sentence": "Whether she was ever his girlfriend is unknown, but Draco eventually married Astoria Greengrass",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "However, after Lucius\u0027s imprisonment in Azkaban, Draco came to resent and mistrust Snape, believing him to have usurped his father\u0027s place in the ranks of the Death Eaters, and that he was trying to take Draco\u0027s chance of glory as well",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Snape\u0027s defence of Malfoy saved the boy\u0027s life and convinced Voldemort to free Lucius Malfoy from Azkaban, for which Draco reconciled with Snape",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Over the years, Draco and Harry made their peace as adults, but still were not friends by the time Scorpius and Albus started school",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco would grow to have a deep respect and friendly relationship with Albus Potter and trusted him with helping Scorpius heal from the grief of losing his mother",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Although this enmity seems to have faded with age, Ron discouraged his daughter Rose from becoming friends with Draco\u0027s son, Scorpius",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco\u0027s son Scorpius would eventually develop a deep crush and even fall in love with Hermione\u0027s daughter, Rose Granger-Weasley",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "In fact, Voldemort wanted to punish Lucius Malfoy for not retrieving a Prophecy from the Department of Mysteries in his assumption that Draco would fail and have to be punished accordingly",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Also, the rest of the team appeared to have the same views as he did because they smirked when Malfoy called Hermione Granger a \u0027Mudblood\u0027 and laughed when a curse backfired on Ronald Weasley after the disagreement with Hermione Granger",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "Draco\u0027s father and partial namesake, Lucius Malfoy\r\nTom Felton as Draco Malfoy in Harry Potter and the Deathly Hallows: Part 2\r\nDraco Malfoy in LEGO Harry Potter: Years 1-4\r\nDraco Malfoy in LEGO Dimensions\r\nDraco Malfoy as a LEGO minfigure (first edition)\r\nDraco Malfoy as a LEGO minifigure (new edition)\r\nDraco Malfoy as a POP! Vinyl\r\nDraco Malfoy (in his Quidditch robes) as a POP! Vinyl\r\nDraco Malfoy as seen in Harry Potter: Wizards Unite\r\nDraco Malfoy as seen in Harry Potter: Puzzles \u0026 Spells\r\nJ",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Buckbeak attacked Draco, and the Ministry of Magic issued an order for Buckbeak\u0027s execution after a hearing in which Lucius Malfoy\u0027s pull at the Ministry was demonstrated, the incident also damaging Hagrid\u0027s self-confidence; later lessons focused on tamer creatures like flobberworms",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "However, despite his loyalty, Hagrid was not good at keeping secrets and accidentally told Quirinus Quirrell, Harry Potter, Ronald Weasley, and Hermione Granger, the secret of how to get past his three headed dog, Fluffy, which all four of them used to get through to the Philosopher\u0027s Stone",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      }
+    ]
+  },
+  {
+    "sentence": "Grawp, his half-brother\r\nRubeus Hagrid was born to Mr Hagrid, a wizard, and the giantess Fridwulfa",
+    "relationships": [
+      {
+        "firstEntity": "Fridwulfa",
+        "relationshipType": "children",
+        "secondEntity": "Rubeus Hagrid"
+      }
+    ]
+  },
+  {
+    "sentence": "Lucius and Draco Malfoy, his enemies\r\nHagrid was disgusted by the Malfoy family\u0027s pure blood supremacist values, their open ill-treatment of Muggle-borns and \u0022blood traitors\u0022, their allegiance to Lord Voldemort and their disrespect towards Albus Dumbledore; even going so far as to accuse them of \u0027bad blood\u0027, rather against the principles espoused by Dumbledore",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Hagrid did not get along any better with Lucius\u0027s son Draco",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Given that Draco\u0027s wife Astoria helped to raise their son to be a kinder man than Draco was in his youth, it can be assumed that Scorpius Malfoy had a better relationship with Hagrid than his father did",
+    "relationships": [
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "spouse",
+        "secondEntity": "Astoria Malfoy"
+      },
+      {
+        "firstEntity": "Draco Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Scorpius Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "The Death Eaters whom Hagrid knew the most were Severus Snape, Lucius Malfoy and his son Draco, clashing with Lucius before he was put in Azkaban, and had clashes with Draco while he taught Care of Magical Creatures",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "The only child of Muggle Tobias Snape and witch Eileen Snape (n\u00E9e Prince), Severus was raised in the Muggle dwelling of Spinner\u0027s End, which was in close proximity to the home of the Evans family, though in a poorer area",
+    "relationships": [
+      {
+        "firstEntity": "Tobias Snape",
+        "relationshipType": "children",
+        "secondEntity": "Severus Snape"
+      },
+      {
+        "firstEntity": "Eileen Prince",
+        "relationshipType": "children",
+        "secondEntity": "Severus Snape"
+      }
+    ]
+  },
+  {
+    "sentence": "Severus Snape was born 9 January 1960 to Tobias Snape, an abusive Muggle, and Eileen Prince, a neglectful pure-blood witch",
+    "relationships": [
+      {
+        "firstEntity": "Tobias Snape",
+        "relationshipType": "children",
+        "secondEntity": "Severus Snape"
+      },
+      {
+        "firstEntity": "Eileen Prince",
+        "relationshipType": "children",
+        "secondEntity": "Severus Snape"
+      }
+    ]
+  },
+  {
+    "sentence": "Most likely the two had good rapport at Hogwarts (which could also be a reason why Narcissa Malfoy trusted Severus to take care of Draco Malfoy and why he seemed to favour Draco during his later teaching years even when Draco refused it in the task to kill Dumbledore)",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Narcissa\u0027s son Draco had been given a difficult task by Voldemort, and Narcissa swore Snape to an Unbreakable Vow, on pain of death should he break it, that he would protect Draco, help him complete Voldemort\u0027s task, and finish the task himself if Draco failed",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Both were the only children of Muggle fathers and pure-blood mothers (Voldemort: Tom Riddle Snr and Merope Gaunt; Snape: Tobias Snape and Eileen Prince)",
+    "relationships": [
+      {
+        "firstEntity": "Merope Riddle",
+        "relationshipType": "children",
+        "secondEntity": "Tom Riddle"
+      }
+    ]
+  },
+  {
+    "sentence": "Lucius and Draco Malfoy, whom he was on good terms with\r\nSnape appeared to be on good terms with the Malfoy family",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Perhaps because of this, Snape also favoured Lucius\u0027s son Draco",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "Narcissa Malfoy, on the other hand, begged Snape to assist Draco in his task to assassinate Dumbledore, fearing that her son was being set up to fail",
+    "relationships": [
+      {
+        "firstEntity": "Narcissa Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "In the series we are introduced to 8 Gryffindor students (Harry Potter, Ronald Weasley, Neville Longbottom, Dean Thomas, Seamus Finnigan, Hermione Granger, Lavender Brown and Parvati Patil), 4 Hufflepuff students (Ernie Macmillan, Justin Finch-Fletchley, Hannah Abbott, and Susan Bones), 6 Ravenclaw students (Terry Boot, Mandy Brocklehurst, Michael Corner, Anthony Goldstein, Padma Patil, and\u00A0Lisa Turpin) and 8 Slytherin students (Draco Malfoy, Vincent Crabbe, Gregory Goyle, Blaise Zabini, Theodore Nott, Pansy Parkinson, Millicent Bulstrode and Daphne Greengrass) of Harry\u0027s year",
+    "relationships": [
+      {
+        "firstEntity": "Ronald Weasley",
+        "relationshipType": "spouse",
+        "secondEntity": "Hermione Granger"
+      },
+      {
+        "firstEntity": "Hermione Granger",
+        "relationshipType": "spouse",
+        "secondEntity": "Ronald Weasley"
+      },
+      {
+        "firstEntity": "Neville Longbottom",
+        "relationshipType": "spouse",
+        "secondEntity": "Hannah Abbott"
+      }
+    ]
+  },
+  {
+    "sentence": "Great Britain\r\nProfessor Phineas Nigellus Black (1847 \u2013 1925) was a pure-blood wizard born to the House of Black",
+    "relationships": [
+      {
+        "firstEntity": "Phineas Nigellus Black",
+        "relationshipType": "children",
+        "secondEntity": "House of Black"
+      }
+    ]
+  },
+  {
+    "sentence": "Phineas Nigellus Black\u0027s older brother, Sirius, died in childhood",
+    "relationships": [
+      {
+        "firstEntity": "Phineas Nigellus Black",
+        "relationshipType": "children",
+        "secondEntity": "Sirius Black II"
+      }
+    ]
+  },
+  {
+    "sentence": "Phineas Nigellus\u0027s great-great-grandson Sirius, last of the Blacks, standing in front of the Black family tree\r\nPhineas Nigellus Black was married to Ursula Flint",
+    "relationships": [
+      {
+        "firstEntity": "Phineas Nigellus Black",
+        "relationshipType": "spouse",
+        "secondEntity": "Ursula Flint"
+      },
+      {
+        "firstEntity": "Phineas Nigellus Black",
+        "relationshipType": "children",
+        "secondEntity": "Sirius Black II"
+      }
+    ]
+  },
+  {
+    "sentence": "He and his wife Miriam\u0027s lives were entangled with the search for ancient magic, with Eleazar chosen to mentor a young witch or wizard who started Hogwarts late as a fifth-year and had the ability to detect and harness said ancient magic",
+    "relationships": [
+      {
+        "firstEntity": "Eleazar Fig",
+        "relationshipType": "spouse",
+        "secondEntity": "Miriam Fig"
+      }
+    ]
+  },
+  {
+    "sentence": "George revealed an item sent to him by Eleazar\u0027s late wife Miriam in desperation",
+    "relationships": [
+      {
+        "firstEntity": "Eleazar Fig",
+        "relationshipType": "spouse",
+        "secondEntity": "Miriam Fig"
+      }
+    ]
+  },
+  {
+    "sentence": "Later, they found out that it was Draco who had stolen the wand and they brought the wand back to Lucius",
+    "relationships": [
+      {
+        "firstEntity": "Lucius Malfoy",
+        "relationshipType": "children",
+        "secondEntity": "Draco Malfoy"
+      }
+    ]
+  },
+  {
+    "sentence": "She talked with Jacob\u0027s sibling like there was someone else there, who turned out to be Peregrine, their father",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling and Peregrine speaking privately\r\nPeregrine led his child to the lower floor to talk privately",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling asked if that was when he got mixed up with R, but Peregrine said it happened much later as a side gig",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Peregrine said he would explain everything once Jacob\u0027s sibling joined R, but they couldn\u0027t think of a single reason to do that",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling and Peregrine rejoining the others\r\nSuddenly, they heard a noise coming from upstairs",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling questioned again if Rowan\u0027s death was part of their plans, but Peregrine insisted that Rakepick wasn\u0027t in fact representing R",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob and his sibling talking\r\nJacob\u0027s sibling said they needed time to think about all of this, and after some misunderstanding, they understood Peregrine was reminding them that they wouldn\u0027t have much time left in school",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Peregrine recalled to Jacob\u0027s sibling his mischievous school days with Dumbledore, and then the father and child went to Three Broomsticks to have Butterbeers",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling and Peregrine at the Three Broomsticks Inn\r\nAfter Peregrine ordered the drinks, he asked his child about their choice of career after graduation, and Jacob\u0027s sibling told him about the assignments they had done",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling and Peregrine talking at the train station\r\nPeregrine then brought them to Hogsmeade station, where they sat on a bench and listened to Peregrine talking about the pretend expedition he had set up for them and Jacob when they were little",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling thought they didn\u0027t know their father anymore, and so Peregrine took them down memory lane and showed them they had had good times together",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling talking to Peregrine in Three Broomsticks\r\nAfter emerging from the Pensieve, Green left in a hurry, and Jacob\u0027s sibling told Dumbledore about what they\u0027d seen",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Jacob\u0027s sibling demanded to know why he was so against the Ministry, and so Peregrine talked about Death Eaters from the First Wizarding War deemed innocent, mentioning that they destroyed \u0022his medical legacy\u0022",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "They then went to the Leaky Cauldron to meet Peregrine and told him what they had learnt, but he regarded the archives as potential lies, and wondered if Jacob\u0027s sibling was stalling for more time",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "Back at the Great Lake at Hogwarts, Jacob\u0027s sibling summoned their brother and told him about their investigation, but Jacob didn\u0027t think Peregrine had changed, and even suspected his sibling to be looking for a reason to make their dad seem like the bad guy",
+    "relationships": [
+      {
+        "firstEntity": "Peregrine",
+        "relationshipType": "children",
+        "secondEntity": "Jacob\u0027s sibling"
+      }
+    ]
+  },
+  {
+    "sentence": "It was in this capacity that Grim found himself in frequent contact with was his future wife, Penelope Padgett",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "Subsequently deemed by Harry Potter to be one of the best and brightest Aurors in the Ministry\u0027s employ, she was eventually put in charge of one of their ongoing investigations, and it was during this instance that Grim and Penelope first began working together",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "More open-minded than many of his associates, however, Grim did not judge Penelope based on the chosen allegiance of her parents; and instead dutifully accepted the task of helping her to work a case she had been put in charge of",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "Now free to continue seeing each other openly, however, Grim and Penelope eventually married one another, their wedding taking place in in West Bromwich in June of 2006",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "Although Gareth Greengrass, a high-ranking researcher of said department whom his wife were friendly with, was initially dumbfounded at the prospect of having Grim as a colleague when Penelope first told him that he was considering to apply for a job there, he quickly warmed up to to the idea when it occurred to him that the man was not only fully qualified, but also undeniably a very accomplished wizard, to the point where Greengrass himself would later remark that Grim had \u0022more magical talent in his little finger than most of us do in our whole bodies",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "To make matters worse, not only had Greengrass dismissed it as a bad job, he also implied that he was convinced that Penelope was most likely dead, throwing Grim further into a state of despair",
+    "relationships": [
+      {
+        "firstEntity": "Grim Fawley",
+        "relationshipType": "spouse",
+        "secondEntity": "Penelope Fawley"
+      }
+    ]
+  },
+  {
+    "sentence": "The source of this belief and resentment was apparently his mother being imprisoned under the accusation of being associated with NOTME despite there being no concrete evidence of this other than Kaleena performing magic in front of Muggles to save Daniel\u0027s father and brother",
+    "relationships": [
+      {
+        "firstEntity": "Kaleena Page",
+        "relationshipType": "children",
+        "secondEntity": "Daniel Page"
+      }
+    ]
+  },
+  {
+    "sentence": "Lottie was born in 1996 or 1997 to Ambrose Turner",
+    "relationships": [
+      {
+        "firstEntity": "Ambrose Turner",
+        "relationshipType": "children",
+        "secondEntity": "Lottie Turner"
+      }
+    ]
+  },
+  {
+    "sentence": "Ivy watching her sister accidentally vanish\r\nShe and her sister were accepted into Hogwarts School of Witchcraft and Wizardry, however, Winifred was not allowed to attend because their father feared her unpredictable magic could hurt someone",
+    "relationships": [
+      {
+        "firstEntity": "Ivy Warrington",
+        "relationshipType": "siblings",
+        "secondEntity": "Winifred Warrington"
+      }
+    ]
+  },
+  {
+    "sentence": "Ivy promised to speak to the professors so they could speak with her father to make him change his mind, but Winifred was resentful and stubborn about not being allowed to attend, and accused Ivy of not caring about her",
+    "relationships": [
+      {
+        "firstEntity": "Ivy Warrington",
+        "relationshipType": "siblings",
+        "secondEntity": "Winifred Warrington"
+      }
+    ]
+  },
+  {
+    "sentence": "Ivy tried to reason with her, but Winifred attempted to use Evanesco on Ivy\u0027s school trunk so she could not go to Hogwarts as well, which backfired and caused Winifred to vanish",
+    "relationships": [
+      {
+        "firstEntity": "Ivy Warrington",
+        "relationshipType": "siblings",
+        "secondEntity": "Winifred Warrington"
+      }
+    ]
+  }
+]
