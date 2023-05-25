@@ -1,0 +1,117 @@
+[
+  {
+    "sentence": "Queen Sansa Stark is the eldest daughter of Lord Eddard Stark and his wife, Lady Catelyn, sister of Robb, Arya, Bran, and Rickon Stark, and \u0022half-sister\u0022 of Jon Snow; though truthfully is his cousin",
+    "relationships": [
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Rickon Stark"
+      },
+      {
+        "firstEntity": "Jon Snow",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Eddard Stark",
+        "relationshipType": "Children",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Eddard Stark",
+        "relationshipType": "Children",
+        "secondEntity": "Sansa Stark"
+      },
+      {
+        "firstEntity": "Eddard Stark",
+        "relationshipType": "Children",
+        "secondEntity": "Rickon Stark"
+      },
+      {
+        "firstEntity": "Rickon Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Rickon Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Rickon Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Sansa Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Rickon Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Rickon Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Rickon Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Father",
+        "secondEntity": "Eddard Stark"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Jon Snow"
+      },
+      {
+        "firstEntity": "Sansa Stark",
+        "relationshipType": "Siblings",
+        "secondEntity": "Rickon Stark"
+      }
+    ]
+  }
+]
