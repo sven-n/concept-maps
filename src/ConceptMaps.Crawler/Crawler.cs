@@ -42,7 +42,8 @@ public class Crawler : ICrawler
             MinCrawlDelayPerDomainMilliSeconds = 1000,
             IsExternalPageCrawlingEnabled = false,
             CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(10).TotalSeconds,
-            MaxPagesToCrawl = 100,
+            MaxPagesToCrawl = 1000,
+            MaxLinksPerPage = int.MaxValue,
         };
 
         using var crawler = new PoliteWebCrawler(config);
@@ -108,6 +109,7 @@ public class Crawler : ICrawler
             .Select(text => text.Replace("READ MORE", string.Empty)) // filter out "READ MORE" (LOTR)
             .Select(text => text.Replace("Point me!", string.Empty)) // filter out "Point me!" (HP)
             .Where(text => !string.IsNullOrWhiteSpace(text)) // we don't want empty or white space 
+            .Select(text => text.Replace(".\"[", "\".[")) // correct sentence endings where the point was included in the citation.
             .Select(text => RemoveCitationBrackets.Replace(text, string.Empty)); // remove the citation marks, e.g. '[2]'
 
         foreach (var text in paragraphs)

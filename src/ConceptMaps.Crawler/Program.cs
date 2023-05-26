@@ -10,52 +10,68 @@ if (args.Length == 0)
 if (args.Length == 2)
 {
     // Bei 2 Parametern nehmen wir an, dass wir bereits gecrawled haben, und nun
-    // nur noch die Beziehungen analysieren wollen
+    // nur noch die Daten aufbereiten wollen
     Console.WriteLine("Analyzing for relationship sentences ...");
-    new RelationshipAnalyzer(args[1]).AnalyzeAndStoreResults(
-        textFilePath: args[0],
-        resultFilePath: args[0].Replace("_Text.txt", "_SentenceRelationships.json"));
-    return;
+    var textFilePath = args[0];
+    var relationshipFilePath = args[1];
+    var sentenceRelationshipsResultFile = args[0].Replace("_Text.txt", "_SentenceRelationships.json");
+    new RelationshipAnalyzer(relationshipFilePath).AnalyzeAndStoreResults(
+        textFilePath,
+        resultFilePath: sentenceRelationshipsResultFile);
+
+    Console.WriteLine("Generating NER training data ...");
+    new NerTrainingDataGenerator(relationshipFilePath).GenerateTrainingDataFile(textFilePath);
+}
+else
+{
+    await DoFullCrawlAsync();
 }
 
-var timestamp = DateTime.Now;
+async Task DoFullCrawlAsync()
+{
+    var timestamp = DateTime.Now;
 
-var relationshipExtractorFactory = new RelationshipExtractorFactory();
-relationshipExtractorFactory.Register(new FandomWithDataSourceAttributesRelationshipExtractor());
-relationshipExtractorFactory.Register(new HarryPotterFandomRelationshipExtractor());
+    var relationshipExtractorFactory = new RelationshipExtractorFactory();
+    relationshipExtractorFactory.Register(new FandomWithDataSourceAttributesRelationshipExtractor());
+    relationshipExtractorFactory.Register(new HarryPotterFandomRelationshipExtractor());
 
-var configName = args[0].Split('.').First();
-var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
+    var configName = args[0].Split('.').First();
+    var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
 
 // Preparing dependency injection container ...
-var serviceCollection = new ServiceCollection()
-    .AddLogging(builder => builder
-        .AddConsole()
-        .AddFile($"{fileNamePrefix}_Log.txt")
-        .AddFilter(level => level >= LogLevel.Information))
-    .AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
-    .AddSingleton(relationshipExtractorFactory)
-    .AddTransient<ICrawler, Crawler>();
+    var serviceCollection = new ServiceCollection()
+        .AddLogging(builder => builder
+            .AddConsole()
+            .AddFile($"{fileNamePrefix}_Log.txt")
+            .AddFilter(level => level >= LogLevel.Information))
+        .AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
+        .AddSingleton(relationshipExtractorFactory)
+        .AddTransient<ICrawler, Crawler>();
 
-await using var serviceProvider = serviceCollection.BuildServiceProvider();
+    await using var serviceProvider = serviceCollection.BuildServiceProvider();
 
-var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
-var settings = settingsLoader.LoadSettings(args[0]);
+    var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
+    var settings = settingsLoader.LoadSettings(args[0]);
 
-var textFilePath = $"{fileNamePrefix}_Text.txt";
-var relationshipFilePath = $"{fileNamePrefix}_Relationships.txt";
-var sentencesFilePath = $"{fileNamePrefix}_SentenceRelationships.json";
+    var textFilePath = $"{fileNamePrefix}_Text.txt";
+    var relationshipFilePath = $"{fileNamePrefix}_Relationships.txt";
+    var sentencesFilePath = $"{fileNamePrefix}_SentenceRelationships.json";
 
 // todo: Abbrechen ermöglichen.
-using var cts = new CancellationTokenSource();
+    using var cts = new CancellationTokenSource();
 
-var crawler = serviceProvider.GetRequiredService<ICrawler>();
-await crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, cts.Token);
+    var crawler = serviceProvider.GetRequiredService<ICrawler>();
+    await crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, cts.Token);
 
-Console.WriteLine("Finished Crawling, starting analyzing for relationship sentences ...");
+    Console.WriteLine("Finished Crawling, starting analyzing for relationship sentences ...");
 
 // After crawling analyze the sentences for possible relationships
-var relationshipAnalyzer = new RelationshipAnalyzer(relationshipFilePath);
-relationshipAnalyzer.AnalyzeAndStoreResults(textFilePath, sentencesFilePath);
+    var relationshipAnalyzer = new RelationshipAnalyzer(relationshipFilePath);
+    relationshipAnalyzer.AnalyzeAndStoreResults(textFilePath, sentencesFilePath);
 
-Console.WriteLine("Finished");
+    Console.WriteLine("Generating NER training data ...");
+    var trainingDataGenerator = new NerTrainingDataGenerator(relationshipFilePath);
+    trainingDataGenerator.GenerateTrainingDataFile(textFilePath);
+
+    Console.WriteLine("Finished");
+}
