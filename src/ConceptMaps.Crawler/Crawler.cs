@@ -42,7 +42,8 @@ public class Crawler : ICrawler
             MinCrawlDelayPerDomainMilliSeconds = 1000,
             IsExternalPageCrawlingEnabled = false,
             CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(10).TotalSeconds,
-            MaxPagesToCrawl = 100,
+            MaxPagesToCrawl = 1000,
+            MaxLinksPerPage = int.MaxValue,
         };
 
         using var crawler = new PoliteWebCrawler(config);
