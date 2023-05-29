@@ -21,6 +21,12 @@ public class NerTrainingDataGenerator
         this._entityNames = File.ReadAllLines(relationshipFilePath)
             .Select(line => line.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             .Where(tokens => tokens.Length == 3)
+            .Select(tokens =>
+            {
+                tokens[0] = tokens[0].GetCleanEntityName();
+                tokens[2] = tokens[2].GetCleanEntityName();
+                return tokens;
+            })
             .SelectMany(tokens => new[] { tokens[0], tokens[2] }
                 .Append(tokens[0].Split(' ').First()) // Die Vornamen auch einzeln
                 .Append(tokens[2].Split(' ').First()))
