@@ -42,7 +42,7 @@ public class Crawler : ICrawler
             MinCrawlDelayPerDomainMilliSeconds = 1000,
             IsExternalPageCrawlingEnabled = false,
             CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(10).TotalSeconds,
-            MaxPagesToCrawl = 10,
+            MaxPagesToCrawl = 1000,
             MaxLinksPerPage = int.MaxValue,
         };
 
