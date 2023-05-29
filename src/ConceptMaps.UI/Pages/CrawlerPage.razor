@@ -1,0 +1,53 @@
+﻿@page "/crawler"
+
+<h3>Data Retrieval</h3>
+
+<div>
+    <p>
+        <label for="selection">Website:</label>
+        <InputSelect TValue="string" @bind-Value="@_selectedFile" id="selection">
+            @foreach (var (fileName, websiteSettings) in this._websiteSettings.OrderBy(kvp => kvp.Key))
+            {
+                <option value="@fileName" selected="@(this._selectedFile == fileName)">@websiteSettings.BaseUri.ToString()</option>
+            }
+
+        </InputSelect>
+    </p>
+    <p>
+        @if (!_isCrawling)
+        {
+            <Button class="btn btn-primary" onclick="@this.StartCrawling"><span class="oi oi-media-play"></span> Start Crawling</Button>
+        }
+        else
+        {
+            <Button class="btn btn-primary" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Crawling...</span>
+            </Button>
+            <Button class="btn btn-secondary" onclick="@this.CancelCrawling" disabled="@(_crawlCts?.IsCancellationRequested is true)"><span class="oi oi-media-stop"></span> Cancel Crawling</Button>
+        }
+        
+        @if (this._resultFiles != default)
+        {
+            <hr />
+            <span>Results: </span>
+            <ul>
+                <li><a href="@this._resultFiles.textFilePath" target="_blank">Crawled Text</a></li>
+                <li><a href="@this._resultFiles.relationshipFilePath" target="_blank">Extracted Relationships</a></li>
+                <li><a href="@this._resultFiles.sentencesFilePath" target="_blank">Sentences with Relationships (json)</a></li>
+                <li><a href="@this._resultFiles.trainingDataFilePath" target="_blank">NER Training data (Python)</a></li>
+            </ul>
+        }
+
+        <hr />
+        <ul>
+        @foreach (var line in this._progressLog.TakeLast(50).Reverse())
+        {
+            <li>@line</li>
+        }
+        </ul>
+    </p>
+</div>
+@code {
+    
+}

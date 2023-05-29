@@ -34,7 +34,7 @@ public class Crawler : ICrawler
     }
     
     /// <inheritdoc />
-    public async Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, CancellationToken cancellationToken = default)
+    public async Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         var crawledPages = new HashSet<Uri>();
         var config = new CrawlConfiguration
@@ -42,7 +42,7 @@ public class Crawler : ICrawler
             MinCrawlDelayPerDomainMilliSeconds = 1000,
             IsExternalPageCrawlingEnabled = false,
             CrawlTimeoutSeconds = (int)TimeSpan.FromMinutes(10).TotalSeconds,
-            MaxPagesToCrawl = 1000,
+            MaxPagesToCrawl = 10,
             MaxLinksPerPage = int.MaxValue,
         };
 
@@ -55,18 +55,27 @@ public class Crawler : ICrawler
                 // we could try again later
                 crawledPages.Remove(args.CrawledPage.Uri);
             }
+            else
+            {
+                progress?.Report($"Crawled page {args.CrawledPage.Uri} ...");
+            }
         };
         crawler.PageCrawlStarting += (sender, args) =>
         {
+            progress?.Report($"Crawling page {args.PageToCrawl.Uri} ...");
             this._logger.LogInformation("Crawling page {page} ...", args.PageToCrawl.Uri);
             crawledPages.Add(args.PageToCrawl.Uri);
         };
+
         crawler.ShouldCrawlPageDecisionMaker += OnShouldCrawlPage;
         
-        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         foreach (var entryUri in settings.EntryUris)
         {
-            await crawler.CrawlAsync(entryUri, cts);
+            // We are not passing the cancellationToken here, because that would
+            // crash the program.
+            // Unfortunately, Abot doesn't catch the OperationCancelledExceptions
+            // in it's started threads.
+            await crawler.CrawlAsync(entryUri);
         }
 
         CrawlDecision OnShouldCrawlPage(PageToCrawl page, CrawlContext context)
@@ -77,6 +86,7 @@ public class Crawler : ICrawler
                         && !settings.BlockUris.Contains(page.Uri)
                         && !crawledPages.Contains(page.Uri)
                         && !page.Uri.AbsoluteUri.Contains("/File:")
+                        && !cancellationToken.IsCancellationRequested
             };
         }
     }

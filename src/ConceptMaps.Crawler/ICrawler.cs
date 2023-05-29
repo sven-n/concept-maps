@@ -1,5 +1,6 @@
 ﻿namespace ConceptMaps.Crawler;
 
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
 /// <summary>
@@ -13,8 +14,10 @@ public interface ICrawler
     /// <param name="settings">The settings for the website which should be crawled.</param>
     /// <param name="contentWriter">The text writer where the content of the page is written to.</param>
     /// <param name="relationsWriter">The text writer to which the relationships between persons are written to.</param>
+    /// <param name="progress">The progress callback object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, CancellationToken cancellationToken = default);
+    /// <returns></returns>
+    Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -29,12 +32,24 @@ public static class CrawlerExtensions
     /// <param name="settings">The settings for the website which should be crawled.</param>
     /// <param name="textFilePath">The target text file path.</param>
     /// <param name="relationshipFilePath">The target relationship file path.</param>
+    /// <param name="progress">The progress callback object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    public static async ValueTask CrawlAsync(this ICrawler crawler, WebsiteSettings settings, string textFilePath, string relationshipFilePath, CancellationToken cancellationToken)
+    /// <returns></returns>
+    public static async ValueTask CrawlAsync(this ICrawler crawler, WebsiteSettings settings, string textFilePath, string relationshipFilePath, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         await using var contentWriter = CreateUtf8StreamWriter(textFilePath);
         await using var relationsWriter = CreateUtf8StreamWriter(relationshipFilePath);
-        await crawler.CrawlAsync(settings, contentWriter, relationsWriter, cancellationToken);
+        await crawler.CrawlAsync(settings, contentWriter, relationsWriter, progress, cancellationToken);
+    }
+
+    public static IServiceCollection AddCrawler(this IServiceCollection serviceCollection)
+    {
+        var relationshipExtractorFactory = new RelationshipExtractorFactory();
+        relationshipExtractorFactory.Register(new FandomWithDataSourceAttributesRelationshipExtractor());
+        relationshipExtractorFactory.Register(new HarryPotterFandomRelationshipExtractor());
+        return serviceCollection.AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
+            .AddSingleton(relationshipExtractorFactory)
+            .AddTransient<ICrawler, Crawler>();
     }
 
     private static StreamWriter CreateUtf8StreamWriter(string path)

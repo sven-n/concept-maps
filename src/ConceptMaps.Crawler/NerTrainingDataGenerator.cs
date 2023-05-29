@@ -8,7 +8,7 @@ using System.Text;
 /// It takes the names (full and first) based on the known relationships
 /// and searches for them in the sentences of the full text.
 /// </summary>
-internal class NerTrainingDataGenerator
+public class NerTrainingDataGenerator
 {
     private readonly ImmutableList<string> _entityNames;
 
@@ -33,7 +33,8 @@ internal class NerTrainingDataGenerator
     /// Generates the training data file based on the text and the known entity names.
     /// </summary>
     /// <param name="textFilePath">The text file path.</param>
-    public void GenerateTrainingDataFile(string textFilePath)
+    /// <returns>The path to the created file.</returns>
+    public string GenerateTrainingDataFile(string textFilePath)
     {
         var sourceName = textFilePath.Split('_').FirstOrDefault() ?? string.Empty;
         var text = File.ReadAllText(textFilePath);
@@ -45,6 +46,7 @@ internal class NerTrainingDataGenerator
 
         var sourceFileName = textFilePath.Replace("_Text.txt", "_NerTrainingData.py");
         File.WriteAllText(sourceFileName, trainingDataPythonCode, Encoding.UTF8);
+        return sourceFileName;
     }
 
     /// <remarks>
