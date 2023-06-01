@@ -18,14 +18,16 @@ The ```ConceptMaps``` solution can be built using the .NET SDK with the followin
 ### Running
 
 0. Ensure, that you're in the `src` folder.
-1. Start the web application: `dotnet run bin/net7.0/Debug/ConceptMaps.UI.exe`
+1. Start the web application: `dotnet run bin/net7.0/Debug/publish/ConceptMaps.UI.exe`
+  * It's then available in the Browser at `http://localhost:5000/`
 2. Start the python service for triple generation: `python python/service.py`
+  * It's then available at `http://localhost:5001/get-triples`
 
 ### Nice to know
 
 ## HTTP request url
 
-The web application is requesting the url `http://localhost:5000/get-triples` with the input text in the body.
+The web application is requesting the url `http://localhost:5001/get-triples` with the input text in the body.
 
 The python service is then analyzing the input text and returns the triples as json in the body as well.
 

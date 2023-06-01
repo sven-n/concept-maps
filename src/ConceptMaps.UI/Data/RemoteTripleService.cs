@@ -10,7 +10,7 @@ public class RemoteTripleService
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new(JsonSerializerDefaults.Web);
 
-    private static readonly string RemoteServiceUrl = @"http://localhost:5000/get-triples"; // TODO: Make configurable
+    private static readonly string RemoteServiceUrl = @"http://localhost:5001/get-triples"; // TODO: Make configurable
 
     /// <summary>
     /// Generates the triples for the specified text.

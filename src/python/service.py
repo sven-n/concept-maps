@@ -4,7 +4,7 @@ from triplegen import TripleGenerator
 import json
 
 hostName = "localhost"
-serverPort = 5000
+serverPort = 5001
 endpoint_path = "/get-triples"
 tripleGenerator = TripleGenerator()
 default_encoding = "utf-8"
