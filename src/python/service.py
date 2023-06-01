@@ -37,7 +37,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         print("GET received")
         self.send_response(400)
         self.end_headers()
-        self.wfile.write(bytes("Wrong HTTP Method. The service supports expects POST instead of GET.", default_encoding))
+        self.wfile.write(bytes("Wrong HTTP Method. The service expects POST instead of GET.", default_encoding))
 
     def do_POST(self):
         print("POST received")
