@@ -16,15 +16,15 @@
     <p>
         @if (!_isCrawling)
         {
-            <Button class="btn btn-primary" onclick="@this.StartCrawling"><span class="oi oi-media-play"></span> Start Crawling</Button>
+            <button class="btn btn-primary" onclick="@this.StartCrawling"><span class="oi oi-media-play"></span> Start Crawling</button>
         }
         else
         {
-            <Button class="btn btn-primary" disabled>
+            <button class="btn btn-primary" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span class="sr-only">Crawling...</span>
-            </Button>
-            <Button class="btn btn-secondary" onclick="@this.CancelCrawling" disabled="@(_crawlCts?.IsCancellationRequested is true)"><span class="oi oi-media-stop"></span> Cancel Crawling</Button>
+            </button>
+            <button class="btn btn-secondary" onclick="@this.CancelCrawling" disabled="@(_crawlCts?.IsCancellationRequested is true)"><span class="oi oi-media-stop"></span> Cancel Crawling</button>
         }
         
         @if (this._resultFiles != default)
