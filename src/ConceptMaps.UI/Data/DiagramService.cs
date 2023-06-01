@@ -128,30 +128,30 @@ public class DiagramService
 
     private static void AdaptLayoutParameters(ILayoutParameters layoutParameters)
     {
-        // TODO: Set height/width by actual canvas size
         // TODO: Make configurable on the UI
         switch (layoutParameters)
         {
             case SimpleTreeLayoutParameters treeParameters:
                 treeParameters.LayerGap = 50;
                 treeParameters.VertexGap = 50;
+                treeParameters.Direction = LayoutDirection.TopToBottom;
                 break;
             case BalloonTreeLayoutParameters balloonTreeParameters:
                 balloonTreeParameters.MinRadius = 50;
                 break;
             case BoundedFRLayoutParameters boundedFrLayoutParameters:
-                boundedFrLayoutParameters.Height = 500;
-                boundedFrLayoutParameters.Width = 800;
+                boundedFrLayoutParameters.Height = GraphicConstants.GraphicsHeight;
+                boundedFrLayoutParameters.Width = GraphicConstants.GraphicsWidth;
                 break;
             case ISOMLayoutParameters isoMLayoutParameters:
                 isoMLayoutParameters.MinRadius = 300;
                 isoMLayoutParameters.InitialRadius = 300;
-                isoMLayoutParameters.Height = 500 * 2;
-                isoMLayoutParameters.Width = 800 * 2;
+                isoMLayoutParameters.Height = GraphicConstants.GraphicsHeight;
+                isoMLayoutParameters.Width = GraphicConstants.GraphicsWidth;
                 break;
             case KKLayoutParameters kkLayoutParameters:
-                kkLayoutParameters.Height = 500;
-                kkLayoutParameters.Width = 800;
+                kkLayoutParameters.Height = GraphicConstants.GraphicsHeight;
+                kkLayoutParameters.Width = GraphicConstants.GraphicsWidth;
                 break;
             case LinLogLayoutParameters linLogLayoutParameters:
                 // LinLogLayoutParameters.AttractionExponent = 20;
@@ -160,10 +160,11 @@ public class DiagramService
             case SugiyamaLayoutParameters sugiyamaLayoutParameters:
                 sugiyamaLayoutParameters.LayerGap = 50;
                 sugiyamaLayoutParameters.SliceGap = 50;
+                sugiyamaLayoutParameters.WidthPerHeight = GraphicConstants.GraphicsWidthCm / GraphicConstants.GraphicsHeightCm;
                 break;
             case RandomLayoutParameters randomLayoutParameters:
-                randomLayoutParameters.Width = 800;
-                randomLayoutParameters.Height = 500;
+                randomLayoutParameters.Width = GraphicConstants.GraphicsWidth;
+                randomLayoutParameters.Height = GraphicConstants.GraphicsHeight;
                 break;
             case CompoundFDPLayoutParameters compoundFdpLayoutParameters:
                 compoundFdpLayoutParameters.IdealEdgeLength = 75;
