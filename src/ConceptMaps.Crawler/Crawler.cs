@@ -80,14 +80,18 @@ public class Crawler : ICrawler
 
         CrawlDecision OnShouldCrawlPage(PageToCrawl page, CrawlContext context)
         {
-            return new CrawlDecision
+            var decision = new CrawlDecision
             {
                 Allow = settings.BaseUri.IsBaseOf(page.Uri)
                         && !settings.BlockUris.Contains(page.Uri)
                         && !crawledPages.Contains(page.Uri)
                         && !page.Uri.AbsoluteUri.Contains("/File:")
-                        && !cancellationToken.IsCancellationRequested
+                        && !cancellationToken.IsCancellationRequested,
+                ShouldStopCrawl = cancellationToken.IsCancellationRequested,
+                ShouldHardStopCrawl = cancellationToken.IsCancellationRequested,
             };
+
+            return decision;
         }
     }
 
