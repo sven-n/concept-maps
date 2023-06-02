@@ -6,13 +6,16 @@
 * Installed [Python 3.11](https://www.python.org/downloads/)
     * Installed python packages:
         * spaCy, see also [https://spacy.io/usage](https://spacy.io/usage):
-            `pip install -U pip setuptools wheel`
-            `pip install -U spacy`
-            `python -m spacy download en_core_web_sm`
+            ```
+            pip install -U pip setuptools wheel
+            pip install -U spacy
+            python -m spacy download en_core_web_sm
+            ```
 
 ### Building
 
 The ```ConceptMaps``` solution can be built using the .NET SDK with the following command when the current directory is `src`:
+
 `dotnet publish`
 
 ### Running
