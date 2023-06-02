@@ -11,6 +11,9 @@
 public class SimpleWebsiteSettingsLoader : IWebsiteSettingsLoader
 {
     /// <inheritdoc />
+    public IEnumerable<string> AvailableSettings => Directory.EnumerateFiles(Path.GetDirectoryName(this.GetType().Assembly.Location), "*.cfg", SearchOption.TopDirectoryOnly);
+
+    /// <inheritdoc />
     public WebsiteSettings LoadSettings(string settingsFilePath)
     {
         var lines = File.ReadLines(settingsFilePath)
