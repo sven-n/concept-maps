@@ -1,0 +1,96 @@
+﻿@page "/test"
+@using ConceptMaps.UI.Data
+@using Blazor.Diagrams.Core
+@using Blazor.Diagrams.Components;
+
+@inject RemoteTripleService RemoteTripleService
+@inject DiagramService DiagramService
+
+<PageTitle>Concept Map Generator</PageTitle>
+
+<h1>Test Page</h1>
+
+<div>
+    <div class="mb-3">
+        <label for="textInput">Input:</label>
+        <InputTextArea class="form-control" id="textInput" @bind-Value="@this.TextInput"></InputTextArea>
+    </div>
+    <div class="mb-3">
+        <p>
+        <button class="btn btn-primary" @onclick="this.OnRunAsync">Run ></button>
+        </p>
+    </div>
+    @if (this.TriplesOutput is not null)
+    {
+        <div class="mb-3">
+            <label for="rdfOutput">Output:</label>
+            <InputTextArea class="form-control" id="rdfOutput" @bind-Value="@this.TriplesOutput"></InputTextArea>
+        </div>
+    }
+
+    @if (this._diagram is not null)
+    {
+        <div>
+            <InputSelect @bind-Value="@this.SelectedAlgorithm">
+                @foreach (var algorithmType in this.DiagramService.AlgorithmTypes)
+                {
+                    <option id="@algorithmType" selected="@(this.SelectedAlgorithm == algorithmType ? "true" : null)">@algorithmType</option>
+                }
+            </InputSelect>
+        </div>
+        <div style="height: 500px;width: 800px;">
+            <CascadingValue Value="_diagram">
+                <DiagramCanvas></DiagramCanvas>
+            </CascadingValue>
+        </div>
+            }
+        </div>
+
+
+@code {
+    private Diagram? _diagram;
+    private string _selectedAlgorithm = string.Empty;
+
+    private string? TextInput { get; set; } = "The sun is a star. A star is bright.";
+    private string? TriplesOutput { get; set; }
+
+    public string SelectedAlgorithm
+    {
+        get => _selectedAlgorithm;
+        set
+        {
+            _selectedAlgorithm = value;
+            this.ArrangeNodes();
+        }
+    }
+
+    private async Task OnRunAsync()
+    {
+        this._diagram = null;
+        this.StateHasChanged();
+
+        // TODO: Show loading indicator
+
+        var triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
+        this.TriplesOutput = string.Join(Environment.NewLine, triples);
+        this._diagram = this.DiagramService.CreateDiagram(triples);
+        
+        // This is required to render it once, so we can arrange the elements in the next step
+        this.StateHasChanged();
+
+        if (string.IsNullOrWhiteSpace(this.SelectedAlgorithm))
+        {
+            // Implicitly arranges nodes.
+            this.SelectedAlgorithm = "Circular";
+        }
+    }
+
+    private void ArrangeNodes()
+    {
+        if (this._diagram is not null
+            && !string.IsNullOrWhiteSpace(this._selectedAlgorithm))
+        {
+            this.DiagramService.ArrangeNodes(this._diagram, this._selectedAlgorithm);
+        }
+    }
+}

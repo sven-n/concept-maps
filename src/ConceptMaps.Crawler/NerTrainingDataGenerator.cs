@@ -8,7 +8,7 @@ using System.Text;
 /// It takes the names (full and first) based on the known relationships
 /// and searches for them in the sentences of the full text.
 /// </summary>
-public class NerTrainingDataGenerator
+internal class NerTrainingDataGenerator
 {
     private readonly ImmutableList<string> _entityNames;
 
@@ -21,12 +21,6 @@ public class NerTrainingDataGenerator
         this._entityNames = File.ReadAllLines(relationshipFilePath)
             .Select(line => line.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             .Where(tokens => tokens.Length == 3)
-            .Select(tokens =>
-            {
-                tokens[0] = tokens[0].GetCleanEntityName();
-                tokens[2] = tokens[2].GetCleanEntityName();
-                return tokens;
-            })
             .SelectMany(tokens => new[] { tokens[0], tokens[2] }
                 .Append(tokens[0].Split(' ').First()) // Die Vornamen auch einzeln
                 .Append(tokens[2].Split(' ').First()))
@@ -39,8 +33,7 @@ public class NerTrainingDataGenerator
     /// Generates the training data file based on the text and the known entity names.
     /// </summary>
     /// <param name="textFilePath">The text file path.</param>
-    /// <returns>The path to the created file.</returns>
-    public string GenerateTrainingDataFile(string textFilePath)
+    public void GenerateTrainingDataFile(string textFilePath)
     {
         var sourceName = textFilePath.Split('_').FirstOrDefault() ?? string.Empty;
         var text = File.ReadAllText(textFilePath);
@@ -52,7 +45,6 @@ public class NerTrainingDataGenerator
 
         var sourceFileName = textFilePath.Replace("_Text.txt", "_NerTrainingData.py");
         File.WriteAllText(sourceFileName, trainingDataPythonCode, Encoding.UTF8);
-        return sourceFileName;
     }
 
     /// <remarks>

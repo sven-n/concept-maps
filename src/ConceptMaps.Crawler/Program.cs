@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using ConceptMaps.Crawler;
+﻿using ConceptMaps.Crawler;
 using Microsoft.Extensions.DependencyInjection;
 
 if (args.Length == 0)
@@ -32,17 +31,22 @@ async Task DoFullCrawlAsync()
 {
     var timestamp = DateTime.Now;
 
+    var relationshipExtractorFactory = new RelationshipExtractorFactory();
+    relationshipExtractorFactory.Register(new FandomWithDataSourceAttributesRelationshipExtractor());
+    relationshipExtractorFactory.Register(new HarryPotterFandomRelationshipExtractor());
+
     var configName = args[0].Split('.').First();
     var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
 
 // Preparing dependency injection container ...
-    // Preparing dependency injection container ...
     var serviceCollection = new ServiceCollection()
         .AddLogging(builder => builder
             .AddConsole()
             .AddFile($"{fileNamePrefix}_Log.txt")
             .AddFilter(level => level >= LogLevel.Information))
-        .AddCrawler();
+        .AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
+        .AddSingleton(relationshipExtractorFactory)
+        .AddTransient<ICrawler, Crawler>();
 
     await using var serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -53,15 +57,15 @@ async Task DoFullCrawlAsync()
     var relationshipFilePath = $"{fileNamePrefix}_Relationships.txt";
     var sentencesFilePath = $"{fileNamePrefix}_SentenceRelationships.json";
 
-    // todo: Abbrechen über die Konsole ermöglichen.
+// todo: Abbrechen ermöglichen.
     using var cts = new CancellationTokenSource();
 
     var crawler = serviceProvider.GetRequiredService<ICrawler>();
-    await crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, null, cts.Token);
+    await crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, cts.Token);
 
     Console.WriteLine("Finished Crawling, starting analyzing for relationship sentences ...");
 
-    // After crawling analyze the sentences for possible relationships
+// After crawling analyze the sentences for possible relationships
     var relationshipAnalyzer = new RelationshipAnalyzer(relationshipFilePath);
     relationshipAnalyzer.AnalyzeAndStoreResults(textFilePath, sentencesFilePath);
 

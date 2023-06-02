@@ -52,7 +52,7 @@ public class FandomWithDataSourceAttributesRelationshipExtractor : IRelationship
 
             if (!string.IsNullOrWhiteSpace(relativeName) && !string.IsNullOrWhiteSpace(relationType))
             {
-                yield return (currentPerson.GetCleanEntityName(), relationType, relativeName.GetCleanEntityName());
+                yield return (currentPerson, relationType, relativeName);
             }
         }
     }
