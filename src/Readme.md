@@ -1,17 +1,51 @@
-## Current state
+## How to run locally
 
-This project is under development. The code is not polished yet ;-)
+### Prerequisites
 
-I added a DummyTripleService to generate triples out of simple text.
-This will be replaced later by a more advanced Python service.
+* Installed [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* Installed [Python 3.11](https://www.python.org/downloads/)
+    * Installed python packages:
+        * spaCy, see also [https://spacy.io/usage](https://spacy.io/usage):
+            `pip install -U pip setuptools wheel`
+            `pip install -U spacy`
+            `python -m spacy download en_core_web_sm`
 
-## How to run
+### Building
 
-First, build the entire solution with Visual Studio 2022 or the dotnet command line interface of .NET 7 (SDK).
+The ```ConceptMaps``` solution can be built using the .NET SDK with the following command when the current directory is `src`:
+`dotnet publish`
 
-For the UI to work, you'd need the DummyTripleService running at port 5000.
-The UI requests the text triples from ```http://localhost:5000/get-triples``` with
-the text in the http request body. You can find the code [here](ConceptMaps.UI\Data\RemoteTripleService.cs).
-For testing, simple double click the built exe file (see folder ```ConceptMaps.DummyTripleService/bin/Debug/```).
+### Running
 
-When the service runs, you can run ```ConceptMaps.UI``` and run your tests.
+0. Ensure, that you're in the `src` folder.
+1. Start the web application: `dotnet run bin/net7.0/Debug/ConceptMaps.UI.exe`
+2. Start the python service for triple generation: `python python/service.py`
+
+### Nice to know
+
+## HTTP request url
+
+The web application is requesting the url `http://localhost:5000/get-triples` with the input text in the body.
+
+The python service is then analyzing the input text and returns the triples as json in the body as well.
+
+All texts are encoded as `UTF-8`.
+
+## JSON format between ```ConceptMaps.UI``` and python service
+
+Example, when `Thomas` has a child `Andreas` which is married with `Marie`:
+
+```json
+[
+    {
+        "fromWord": "Thomas",
+        "edgeWord": "has_child",
+        "toWord": "Andreas"
+    },
+    {
+        "fromWord": "Andreas",
+        "edgeWord": "spouse",
+        "toWord": "Marie"
+    }
+]
+```

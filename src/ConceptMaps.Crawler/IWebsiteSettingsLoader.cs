@@ -11,4 +11,9 @@ public interface IWebsiteSettingsLoader
     /// <param name="settingsFilePath">The settings file path.</param>
     /// <returns>The loaded settings.</returns>
     WebsiteSettings LoadSettings(string settingsFilePath);
+
+    /// <summary>
+    /// Gets the available settings.
+    /// </summary>
+    IEnumerable<string> AvailableSettings { get; }
 }

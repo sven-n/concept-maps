@@ -66,7 +66,7 @@ public class HarryPotterFandomRelationshipExtractor : IRelationshipExtractor
             if (!string.IsNullOrWhiteSpace(relativeName) && !string.IsNullOrWhiteSpace(relationType)
                 && !relativeName.EndsWith("family"))
             {
-                yield return (currentPerson, relationType, relativeName);
+                yield return (currentPerson.GetCleanEntityName(), relationType, relativeName.GetCleanEntityName());
             }
         }
     }

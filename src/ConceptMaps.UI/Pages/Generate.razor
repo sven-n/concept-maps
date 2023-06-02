@@ -1,0 +1,148 @@
+﻿@page "/generate"
+@using ConceptMaps.UI.Data
+@using Blazor.Diagrams.Core
+@using Blazor.Diagrams.Components;
+
+@inject RemoteTripleService RemoteTripleService
+@inject DiagramService DiagramService
+
+<PageTitle>Concept Map Generator</PageTitle>
+
+<div>
+    <div class="mb-3">
+        <label for="textInput">Input:</label>
+        <InputTextArea class="form-control" id="textInput" @bind-Value="@this.TextInput"></InputTextArea>
+    </div>
+    <div class="mb-3">
+        <p>
+            @if (this._isRunning)
+            {
+                <button class="btn btn-primary" @onclick="this.OnRunAsync" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Running ..</span>
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="this.OnRunAsync"><span class="oi oi-media-play"></span> Run</button>
+            }
+        </p>
+    </div>
+
+    @if (this.ErrorMessage is not null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @this.ErrorMessage
+        </div>
+    }
+
+    @if (this.TriplesOutput is not null)
+    {
+        <div class="mb-3">
+            <label for="rdfOutput">Output:</label>
+            <InputTextArea class="form-control" id="rdfOutput" @bind-Value="@this.TriplesOutput"></InputTextArea>
+        </div>
+    }
+
+    @if (this._diagram is not null)
+    {
+        <div>
+            <span>Layout algorithm:</span>
+            <InputSelect @bind-Value="@this.SelectedAlgorithm">
+                @foreach (var algorithmType in this.DiagramService.AlgorithmTypes)
+                {
+                    <option id="@algorithmType" selected="@(this.SelectedAlgorithm == algorithmType ? "true" : null)">@algorithmType</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="canvas-host shadow p-3 mb-5 rounded">
+            <CascadingValue Value="_diagram">
+                <DiagramCanvas></DiagramCanvas>
+            </CascadingValue>
+        </div>
+    }
+</div>
+
+
+@code {
+    private Diagram? _diagram;
+    private string _selectedAlgorithm = string.Empty;
+    private bool _isRunning;
+
+    private string? TextInput { get; set; } = "The sun is a star. A star is bright.";
+    private string? TriplesOutput { get; set; }
+
+    private RenderFragment? ErrorMessage { get; set; }
+
+    public string SelectedAlgorithm
+    {
+        get => _selectedAlgorithm;
+        set
+        {
+            _selectedAlgorithm = value;
+            this.ArrangeNodes();
+        }
+    }
+
+    private async Task OnRunAsync()
+    {
+        this._diagram = null;
+        this.TriplesOutput = null;
+        this.ErrorMessage = null;
+
+        this._isRunning = true;
+        try
+        {
+            this.StateHasChanged();
+            IList<Triple> triples;
+            try
+            {
+                triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
+                this.TriplesOutput = string.Join(Environment.NewLine, triples);
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = builder => builder.AddMarkupContent(
+                    0, 
+                    $"Unexpected error occurred when generating triples: {ex}".ReplaceLineEndings("<br>"));
+                return;
+            }
+
+            try
+            {
+                this._diagram = this.DiagramService.CreateDiagram(triples);
+
+                // This is required to render it once, so we can arrange the elements in the next step
+                this.StateHasChanged();
+                await Task.Delay(100);
+
+                if (string.IsNullOrWhiteSpace(this.SelectedAlgorithm))
+                {
+                    // Implicitly arranges nodes.
+                    this._selectedAlgorithm = "Tree";
+                }
+
+                ArrangeNodes();
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = builder => builder.AddMarkupContent(
+                    0,
+                    $"Unexpected error occurred when generating or arranging the diagram: {ex}".ReplaceLineEndings("<br>"));
+            }
+        }
+        finally
+        {
+            this._isRunning = false;
+        }
+    }
+
+    private void ArrangeNodes()
+    {
+        if (this._diagram is not null
+            && !string.IsNullOrWhiteSpace(this._selectedAlgorithm))
+        {
+            this.DiagramService.ArrangeNodes(this._diagram, this._selectedAlgorithm);
+        }
+    }
+}

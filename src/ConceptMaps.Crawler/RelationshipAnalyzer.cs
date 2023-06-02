@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 /// If both (fore) names of a relationship are included in the sentence, we assume the
 /// sentence is about describing the relationship.
 /// </summary>
-internal class RelationshipAnalyzer
+public class RelationshipAnalyzer
 {
     private readonly List<Relationship> _relationships;
     private readonly HashSet<string> _uniqueFirstNames;
