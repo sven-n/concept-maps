@@ -27,9 +27,9 @@ The ```ConceptMaps``` solution can be built using the .NET SDK with the followin
   * Alternatively, double click on the `ConceptMaps.UI.exe` in the folder `src\ConceptMaps.UI\bin\Debug\net7.0\publish`
   * It's then available in the Browser at `http://localhost:5000/`
 
-### Nice to know
+## Nice to know
 
-## HTTP request url
+### HTTP request url
 
 The web application is requesting the url `http://localhost:5001/get-triples` with the input text in the body.
 
@@ -37,7 +37,7 @@ The python service is then analyzing the input text and returns the triples as j
 
 All texts are encoded as `UTF-8`.
 
-## JSON format between ```ConceptMaps.UI``` and python service
+### JSON format between ```ConceptMaps.UI``` and python service
 
 Example, when `Thomas` has a child `Andreas` which is married with `Marie`:
 
@@ -55,3 +55,10 @@ Example, when `Thomas` has a child `Andreas` which is married with `Marie`:
     }
 ]
 ```
+
+### UI Components
+
+* UI Technology: [Blazor Server](https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-7.0#blazor-server)
+* CSS Styling: [Bootstrap 5.1](https://getbootstrap.com/)
+* Graph rendering: [Z.Blazor.Diagrams](https://github.com/Blazor-Diagrams/Blazor.Diagrams)
+* Graph layouting: [GraphShape](https://github.com/KeRNeLith/GraphShape)
