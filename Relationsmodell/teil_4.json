@@ -1,0 +1,89 @@
+[
+    {
+        "document": "Lancel remorsefully tells Jaime what he told to the High Septon earlier about Cersei and Robert's death",
+        "tokens": [
+            {
+                "text": "Jaime",
+                "start": 26,
+                "end": 31,
+                "token_start": 3,
+                "token_end": 3,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Cersei",
+                "start": 78,
+                "end": 84,
+                "token_start": 13,
+                "token_end": 13,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 13,
+                "head": 3,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "document": "The confession confirms what Tyrion told Jaime earlier about Cersei (that she sleeps with other men, among them Lancel), and makes Jaime realizes that she is responsible for both the deaths of Robert and the High Septon",
+        "tokens": [
+            {
+                "text": "Tyrion",
+                "start": 29,
+                "end": 35,
+                "token_start": 4,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Jaime",
+                "start": 41,
+                "end": 46,
+                "token_start": 6,
+                "token_end": 6,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Jaime",
+                "start": 131,
+                "end": 136,
+                "token_start": 25,
+                "token_end": 25,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Cersei",
+                "start": 61,
+                "end": 67,
+                "token_start": 9,
+                "token_end": 9,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 4,
+                "head": 9,
+                "relationLabel": "SIBLINGS"
+            },
+            {
+                "child": 4,
+                "head": 6,
+                "relationLabel": "SIBLINGS"
+            },
+            {
+                "child": 9,
+                "head": 6,
+                "relationLabel": "SIBLINGS"
+            },
+            {
+                "child": 9,
+                "head": 4,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    }
+]
