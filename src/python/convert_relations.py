@@ -35,10 +35,16 @@ def process_sentence(sentence: str, relationships : list[(str, str, str)]):
     tokens = []
     names1 = set([r[0] for r in relationships])
     names2 = set([r[2] for r in relationships])
-    entity_names = names1.union(names2)
-
+    first_names1 = set([n.split()[0] for n in names1])
+    first_names2 = set([n.split()[0] for n in names2])
+    entity_names = names1.union(names2).union(first_names1).union(first_names2)
+    entity_names = list(entity_names)
+    entity_names.sort(reverse=True)
+    last_entity_name = ''
     for entity_name in entity_names:
-        add_entity_tokens(doc, sentence, entity_name, tokens)
+        if last_entity_name.find(entity_name) == -1:
+            if add_entity_tokens(doc, sentence, entity_name, tokens):
+                last_entity_name = entity_name
 
     relations = []
     
@@ -73,11 +79,8 @@ def find_token_by_name(tokens: list, name: str):
             return token
 
 def add_entity_tokens(doc: Language, sentence: str, entity_name: str, tokens: list):
+    foundAny = False
     lastFoundIndex = sentence.find(entity_name)
-    if lastFoundIndex == -1:
-        entity_name = entity_name.split()[0] # Nur nach Vornamen suchen
-        lastFoundIndex = sentence.find(entity_name)
-
     while lastFoundIndex >= 0:
         endIndex = lastFoundIndex + len(entity_name)
         start_token = find_token_by_start(doc, lastFoundIndex)
@@ -93,7 +96,9 @@ def add_entity_tokens(doc: Language, sentence: str, entity_name: str, tokens: li
                 }
             
             tokens.append(token)
+            foundAny = True
         lastFoundIndex = sentence.find(entity_name, endIndex)
+    return foundAny
 
 def find_token_by_start(doc: Language, startIndex: int) -> Token:
     for token in doc:

@@ -37,6 +37,9 @@ public class DiagramService
     {
         var diagram = new Diagram();
 
+        // temporary fix for zooming exceptions, see https://github.com/Blazor-Diagrams/Blazor.Diagrams/issues/322
+        diagram.Options.EnableVirtualization = false;
+
         var nodes = new Dictionary<string, NodeModel>();
         NodeModel AddIfNotExists(string word)
         {
