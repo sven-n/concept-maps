@@ -1,16 +1,16 @@
 train_cpu:
   cmd: python -m spacy run train_cpu
   script:
-    - python -m spacy train configs/rel_tok2vec.cfg --output training --paths.train
-      data/relations_training.spacy --paths.dev data/relations_dev.spacy -c ./scripts/custom_functions.py
+    - python -m spacy train configs/rel_trf.cfg --output training --paths.train data/relations_training.spacy
+      --paths.dev data/relations_dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/relations_training.spacy
-      md5: 2b570a59e9cc4dbfc89e2bc2a07ea308
+      md5: e32f9dcf9b30f7e7d7dc0863466a36b5
     - path: data/relations_dev.spacy
-      md5: 7fb0c7c231d68e2daacb63db3096a3cc
+      md5: ddb86976150b0c509dd92d1eb9acc243
   outs:
     - path: training/model-best
-      md5: 9cc76ee33f949c79a70841dbba702a1c
+      md5: c4be12ac88cfd33c1f29e44710f3d400
   spacy_version: 3.5.3
   spacy_git_version: '512241e12'
 evaluate:
