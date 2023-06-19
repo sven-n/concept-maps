@@ -5,12 +5,12 @@ train_cpu:
       --paths.dev data/relations_dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/relations_training.spacy
-      md5: e32f9dcf9b30f7e7d7dc0863466a36b5
+      md5: 50daa4fcf80779ed4207f4f79d072868
     - path: data/relations_dev.spacy
-      md5: ddb86976150b0c509dd92d1eb9acc243
+      md5: 979ce3c1ede193253ac6ff322f5940fe
   outs:
     - path: training/model-best
-      md5: c4be12ac88cfd33c1f29e44710f3d400
+      md5: f204a87b3d4d58b4410c54ab022246d4
   spacy_version: 3.5.3
   spacy_git_version: '512241e12'
 evaluate:
