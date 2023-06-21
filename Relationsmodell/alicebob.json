@@ -1,0 +1,966 @@
+[
+    {
+        "sentence": "Jon Snow and Sansa Stark are siblings, born to the same parents.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "As brother and sister, Jon Snow and Sansa Stark share a special bond.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 23,
+                "end": 31,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 36,
+                "end": 47,
+                "token_start": 7,
+                "token_end": 8,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 7,
+                "head": 4,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark grew up together as brother and sister, creating cherished childhood memories.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Being siblings, Jon Snow and Sansa Stark often rely on each other for support and advice.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 16,
+                "end": 24,
+                "token_start": 2,
+                "token_end": 3,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 29,
+                "end": 40,
+                "token_start": 5,
+                "token_end": 6,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 5,
+                "head": 2,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a strong sibling connection that is unbreakable.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "As brother and sister, Jon Snow and Sansa Stark share a common family heritage.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 23,
+                "end": 31,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 36,
+                "end": 47,
+                "token_start": 7,
+                "token_end": 8,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 7,
+                "head": 4,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark are proud to be siblings and value their relationship.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "The sibling rivalry between Jon Snow and Sansa Stark can be intense at times, but it only strengthens their bond.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 28,
+                "end": 36,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 41,
+                "end": 52,
+                "token_start": 7,
+                "token_end": 8,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 7,
+                "head": 4,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a deep understanding of each other's quirks and idiosyncrasies, thanks to their sibling relationship.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Being siblings, Jon Snow and Sansa Stark have a unique shorthand communication that only they understand.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 16,
+                "end": 24,
+                "token_start": 2,
+                "token_end": 3,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 29,
+                "end": 40,
+                "token_start": 5,
+                "token_end": 6,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 5,
+                "head": 2,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark are always there for each other, supporting one another through thick and thin.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark often reminisce about their childhood adventures as brother and sister.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "As siblings, Jon Snow and Sansa Stark have a shared history and countless inside jokes.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 13,
+                "end": 21,
+                "token_start": 2,
+                "token_end": 3,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 26,
+                "end": 37,
+                "token_start": 5,
+                "token_end": 6,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 5,
+                "head": 2,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark may have their differences, but they always come together as brother and sister when it matters.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a strong sense of loyalty to each other as siblings.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "As brother and sister, Jon Snow and Sansa Stark have a lifelong connection that transcends time and distance.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 23,
+                "end": 31,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 36,
+                "end": 47,
+                "token_start": 7,
+                "token_end": 8,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 7,
+                "head": 4,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a sibling bond that is unbreakable, even in the face of adversity.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark's sibling relationship is characterized by love, understanding, and unwavering support.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Being siblings, Jon Snow and Sansa Stark have a built-in support system for life's ups and downs.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 16,
+                "end": 24,
+                "token_start": 2,
+                "token_end": 3,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 29,
+                "end": 40,
+                "token_start": 5,
+                "token_end": 6,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 5,
+                "head": 2,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark's relationship as brother and sister is a testament to the power of family ties.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "SIBLINGS"
+            }
+        ]
+    },
+    {
+        "sentence": "",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have known each other since they were young.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark share a close and enduring relationship.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Whenever Jon Snow and Sansa Stark are together, laughter fills the air.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 9,
+                "end": 17,
+                "token_start": 1,
+                "token_end": 2,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 22,
+                "end": 33,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 4,
+                "head": 1,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a deep understanding of one another's thoughts and feelings.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "They have been through thick and thin, always standing by each other's side.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have a unique connection that goes beyond words.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Whenever Jon Snow and Sansa Stark meet, there is an instant spark of familiarity.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 9,
+                "end": 17,
+                "token_start": 1,
+                "token_end": 2,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 22,
+                "end": 33,
+                "token_start": 4,
+                "token_end": 5,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 4,
+                "head": 1,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "They have a bond that can weather any storm that comes their way.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have created countless memories together.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Their companionship brings joy and warmth to those around them.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark complement each other perfectly, like two puzzle pieces fitting together.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "They have a knack for making even the simplest moments feel extraordinary.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark have an unspoken understanding that transcends words.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Whenever they're apart, Jon Snow and Sansa Stark find themselves missing each other's company.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 24,
+                "end": 32,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 37,
+                "end": 48,
+                "token_start": 6,
+                "token_end": 7,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 6,
+                "head": 3,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "They have a way of bringing out the best in one another.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark share a deep sense of trust and reliability.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "Their connection is built on a foundation of mutual respect and admiration.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark support each other's dreams and aspirations wholeheartedly.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    },
+    {
+        "sentence": "They have an innate ability to lift each other up during challenging times.",
+        "tokens": [],
+        "relations": []
+    },
+    {
+        "sentence": "Jon Snow and Sansa Stark's bond is a testament to the power of genuine friendship.",
+        "tokens": [
+            {
+                "text": "Jon Snow",
+                "start": 0,
+                "end": 8,
+                "token_start": 0,
+                "token_end": 1,
+                "entityLabel": "PERSON"
+            },
+            {
+                "text": "Sansa Stark",
+                "start": 13,
+                "end": 24,
+                "token_start": 3,
+                "token_end": 4,
+                "entityLabel": "PERSON"
+            }
+        ],
+        "relations": [
+            {
+                "child": 3,
+                "head": 0,
+                "relationLabel": "undefined"
+            }
+        ]
+    }
+]
