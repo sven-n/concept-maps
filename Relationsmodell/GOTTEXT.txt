@@ -1,0 +1,151 @@
+[
+ {
+  "document": "Queen Sansa Stark is the eldest daughter of Lord Eddard Stark and his wife, Lady Catelyn, sister of Robb, Arya, Bran, and Rickon Stark, and \"half-sister\" of Jon Snow; though truthfully is his cousin",
+  "tokens": [
+   {
+    "text": "Sansa Stark",
+    "start": 6,
+    "end": 17,
+    "token_start": 1,
+    "token_end": 2,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Robb",
+    "start": 100,
+    "end": 104,
+    "token_start": 20,
+    "token_end": 20,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Rickon Stark",
+    "start": 122,
+    "end": 134,
+    "token_start": 27,
+    "token_end": 28,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Jon Snow",
+    "start": 157,
+    "end": 165,
+    "token_start": 37,
+    "token_end": 38,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Eddard Stark",
+    "start": 49,
+    "end": 61,
+    "token_start": 9,
+    "token_end": 10,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Catelyn",
+    "start": 81,
+    "end": 88,
+    "token_start": 16,
+    "token_end": 16,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Bran",
+    "start": 112,
+    "end": 116,
+    "token_start": 24,
+    "token_end": 24,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Arya",
+    "start": 106,
+    "end": 110,
+    "token_start": 22,
+    "token_end": 22,
+    "entityLabel": "PERSON"
+   }
+  ],
+  "relations": [
+   {
+    "child": 9,
+    "head": 1,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 16,
+    "head": 1,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 9,
+    "head": 37,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 9,
+    "head": 20,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 9,
+    "head": 22,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 9,
+    "head": 24,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 9,
+    "head": 27,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 16,
+    "head": 22,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 16,
+    "head": 24,
+    "relationLabel": "CHILDREN"
+   },
+   {
+    "child": 16,
+    "head": 27,
+    "relationLabel": "CHILDREN"
+   }
+  ]
+ },
+ {
+  "document": "Renly, on the other hand, acts diplomatically in that matter: he makes it clear to Catelyn that he won't let Robb secede the North from the authority of the Iron Throne, but he's willing to let him rule the North and the Riverlands, and even hold the title of King in the North - but he demands Robb to swear fealty to him, and accept him as his overlord",
+  "tokens": [
+   {
+    "text": "Robb",
+    "start": 109,
+    "end": 113,
+    "token_start": 24,
+    "token_end": 24,
+    "entityLabel": "PERSON"
+   },
+   {
+    "text": "Catelyn",
+    "start": 83,
+    "end": 90,
+    "token_start": 18,
+    "token_end": 18,
+    "entityLabel": "PERSON"
+   }
+  ],
+  "relations": [
+   {
+    "child": 18,
+    "head": 24,
+    "relationLabel": "CHILDREN"
+   }
+  ]
+ }
+]
