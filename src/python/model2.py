@@ -21,7 +21,7 @@ class Model2:
                 doc.ents
 
                 # We load the relation extraction (REL) model
-        nlp2 = spacy.load("C:\\Users\\Adriana\\Desktop\\Uni\\Fachpraktikum\\Repos\\concept-maps\\Relationsmodell\\training\\model-best")
+        nlp2 = spacy.load("C:\\Users\\Adriana\\Desktop\\Uni\\Fachpraktikum\\Repos\\concept-maps\\Relationsmodell\\training\\model-last")
             # We take the entities generated from the NER pipeline and input them to the REL pipeline
         for name, proc in nlp2.pipeline:
                         doc = proc(doc)
@@ -31,24 +31,12 @@ class Model2:
                 for e in sent.ents:
                     for b in sent.ents:
                         if e.start == value[0] and b.start == value[1]:
-                            if rel_dict['CHILDREN'] >=0.9 :
-                                #print(f" entities: {e.text, b.text} --> predicted relation: {rel_dict}")
-                                token_head = e.text
-                                token_child = b.text
-                                relation = 'child'
-                                liste_triple.append(Triple(token_head, relation, token_child))
-                            if rel_dict['SPOUSE'] >=0.9 :
-                                #print(f" entities: {e.text, b.text} --> predicted relation: {rel_dict}")
-                                token_head = e.text
-                                token_child = b.text
-                                relation = 'spouse'
-                                liste_triple.append(Triple(token_head, relation, token_child))
-                            if rel_dict['SIBLINGS'] >=0.9 :
-                                #print(f" entities: {e.text, b.text} --> predicted relation: {rel_dict}")
-                                token_head = e.text
-                                token_child = b.text
-                                relation = 'siblings'
-                                liste_triple.append(Triple(token_head, relation, token_child))
+                            max_label = max(rel_dict, key=rel_dict.get)
+                            token_head = e.text
+                            token_child = b.text
+                            relation = max_label
+                            liste_triple.append(Triple(token_head, relation, token_child))
+                           
 
         return liste_triple
                         
