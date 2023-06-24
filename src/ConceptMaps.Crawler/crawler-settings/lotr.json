@@ -1,0 +1,23 @@
+{
+  "name": "LOTR Wiki",
+  "baseUri": "https://lotr.fandom.com/wiki/",
+  "entryUris": [
+    "https://lotr.fandom.com/wiki/Category:Ring_bearers",
+    "https://lotr.fandom.com/wiki/Category:Villains",
+    "https://lotr.fandom.com/wiki/Category:The_Lord_of_the_Rings_Characters",
+    "https://lotr.fandom.com/wiki/Category:The_Hobbit_Characters",
+    "https://lotr.fandom.com/wiki/Category:The_Silmarillion_Characters",
+    "https://lotr.fandom.com/wiki/Category:Kings",
+    "https://lotr.fandom.com/wiki/Category:Queens"
+  ],
+  "blockUris": [
+    "https://lotr.fandom.com/wiki/Category:Production",
+    "https://lotr.fandom.com/wiki/Special:AllPages",
+    "https://lotr.fandom.com/wiki/Special:AllMaps",
+    "https://lotr.fandom.com/wiki/Special:Community",
+    "https://lotr.fandom.com/wiki/Main_Page",
+    "https://lotr.fandom.com/wiki/New",
+    "https://lotr.fandom.com/wiki/Category:Books",
+    "https://lotr.fandom.com/wiki/Category:Reference_works"
+  ]
+}

@@ -15,14 +15,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="hp.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="crawler-settings\got.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
-    <None Update="lotr.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="crawler-settings\hp.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
-    <None Update="got.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="crawler-settings\lotr.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 

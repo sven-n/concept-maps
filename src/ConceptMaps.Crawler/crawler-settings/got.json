@@ -1,0 +1,38 @@
+{
+  "name": "Game of Thrones Wiki",
+  "baseUri": "https://gameofthrones.fandom.com/wiki/",
+  "entryUris": [
+    "https://gameofthrones.fandom.com/wiki/Sansa_Stark",
+    "https://gameofthrones.fandom.com/wiki/Tyrion_Lannister",
+    "https://gameofthrones.fandom.com/wiki/Jon_Snow"
+  ],
+  "blockUris": [
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_Wiki",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_1",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_2",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_3",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_4",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_5",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_6",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_7",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones:_Season_8",
+    "https://gameofthrones.fandom.com/wiki/Category:Production",
+    "https://gameofthrones.fandom.com/wiki/Category:Seasons_of_Game_of_Thrones",
+    "https://gameofthrones.fandom.com/wiki/Special:AllPages",
+    "https://gameofthrones.fandom.com/wiki/Special:AllMaps",
+    "https://gameofthrones.fandom.com/wiki/Special:Community",
+    "https://gameofthrones.fandom.com/wiki/HBO",
+    "https://gameofthrones.fandom.com/wiki/A_Knight_of_the_Seven_Kingdoms:_The_Hedge_Knight",
+    "https://gameofthrones.fandom.com/wiki/World_of_Westeros",
+    "https://gameofthrones.fandom.com/wiki/Differences_in_adaptation",
+    "https://gameofthrones.fandom.com/wiki/Pronunciation_guide",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_filming_locations",
+    "https://gameofthrones.fandom.com/wiki/Costumes",
+    "https://gameofthrones.fandom.com/wiki/A_Song_of_Ice_and_Fire",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_merchandise",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_pilot",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_title_sequence",
+    "https://gameofthrones.fandom.com/wiki/Game_of_Thrones_references_in_other_media"
+  ]
+}

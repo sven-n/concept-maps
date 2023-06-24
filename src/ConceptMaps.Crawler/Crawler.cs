@@ -34,7 +34,7 @@ public class Crawler : ICrawler
     }
     
     /// <inheritdoc />
-    public async Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task CrawlAsync(IWebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         var crawledPages = new HashSet<Uri>();
         var config = new CrawlConfiguration

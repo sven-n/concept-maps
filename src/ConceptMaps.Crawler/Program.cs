@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using ConceptMaps.Crawler;
+﻿using ConceptMaps.Crawler;
 using Microsoft.Extensions.DependencyInjection;
 
 if (args.Length == 0)
@@ -35,7 +34,6 @@ async Task DoFullCrawlAsync()
     var configName = args[0].Split('.').First();
     var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
 
-// Preparing dependency injection container ...
     // Preparing dependency injection container ...
     var serviceCollection = new ServiceCollection()
         .AddLogging(builder => builder
@@ -46,7 +44,7 @@ async Task DoFullCrawlAsync()
 
     await using var serviceProvider = serviceCollection.BuildServiceProvider();
 
-    var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsLoader>();
+    var settingsLoader = serviceProvider.GetRequiredService<IWebsiteSettingsProvider>();
     var settings = settingsLoader.LoadSettings(args[0]);
 
     var textFilePath = $"{fileNamePrefix}_Text.txt";

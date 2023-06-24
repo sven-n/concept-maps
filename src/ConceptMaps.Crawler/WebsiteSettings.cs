@@ -1,37 +1,32 @@
 ﻿namespace ConceptMaps.Crawler;
 
-using System.Collections.Immutable;
-
 /// <summary>
 /// Website specific settings for the crawler.
 /// </summary>
-public class WebsiteSettings
+public class WebsiteSettings : IWebsiteSettings
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="WebsiteSettings"/> class.
-    /// </summary>
-    /// <param name="baseUri">The base URI. All pages which should be crawled should have this address as base.</param>
-    /// <param name="entryUris">The URIs of the entry points for the crawler.</param>
-    /// <param name="blockUris">The URIs which should not be crawled.</param>
-    public WebsiteSettings(string baseUri, IEnumerable<string> entryUris, IEnumerable<string> blockUris)
+    /// <inheritdoc />
+    public string Name { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public Uri BaseUri { get; set; } = new Uri("http://localhost");
+
+    /// <inheritdoc />
+    public List<Uri> EntryUris { get; set; } = new ();
+
+    /// <inheritdoc />
+    public ISet<Uri> BlockUris { get; set; } = new HashSet<Uri>();
+
+    public void Assign(IWebsiteSettings settings)
     {
-        EntryUris = entryUris.Select(uri => new Uri(uri)).ToImmutableList();
-        BaseUri = new Uri(baseUri);
-        BlockUris = blockUris.Select(u => Uri.IsWellFormedUriString(u, UriKind.Absolute) ? new Uri(u) : new Uri(BaseUri, u)).ToImmutableHashSet();
+        this.Name = settings.Name;
+        this.BaseUri = settings.BaseUri;
+        this.BlockUris = new HashSet<Uri>(settings.BlockUris);
+        this.EntryUris = new List<Uri>(settings.EntryUris);
+
+        if (string.IsNullOrWhiteSpace(this.Name))
+        {
+            this.Name = this.BaseUri.ToString();
+        }
     }
-
-    /// <summary>
-    /// Gets the URI of the entry point for the crawler.
-    /// </summary>
-    public IReadOnlyCollection<Uri> EntryUris { get; }
-
-    /// <summary>
-    /// Gets the base URI. All pages which should be crawled should have this address as base.
-    /// </summary>
-    public Uri BaseUri { get; }
-
-    /// <summary>
-    /// Gets the URIs which should not be crawled.
-    /// </summary>
-    public IReadOnlySet<Uri> BlockUris { get; }
 }

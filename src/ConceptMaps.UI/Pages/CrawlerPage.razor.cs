@@ -15,12 +15,15 @@ public partial class CrawlerPage
     private ICrawler Crawler { get; set; }
 
     /// <summary>
-    /// THe injected <see cref="IWebsiteSettingsLoader"/>.
+    /// THe injected <see cref="IWebsiteSettingsProvider"/>.
     /// </summary>
     [Inject]
-    private IWebsiteSettingsLoader SettingsLoader { get; set; }
+    private IWebsiteSettingsProvider SettingsProvider { get; set; }
 
-    private SortedList<string, WebsiteSettings> _websiteSettings = new();
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private SortedList<string, IWebsiteSettings> _websiteSettings = new();
 
     private string? _selectedFile;
 
@@ -33,7 +36,7 @@ public partial class CrawlerPage
 
     protected override void OnInitialized()
     {
-        this._websiteSettings = new SortedList<string, WebsiteSettings>(this.SettingsLoader.AvailableSettings.Select(path => (Path.GetFileName(path), this.SettingsLoader.LoadSettings(path))).ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2));
+        this._websiteSettings = new SortedList<string, IWebsiteSettings>(this.SettingsProvider.AvailableSettings.Select(path => (Path.GetFileName(path), this.SettingsProvider.LoadSettings(path))).ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2));
         this._selectedFile = this._websiteSettings.Keys.FirstOrDefault()?.ToString();
         base.OnInitialized();
     }

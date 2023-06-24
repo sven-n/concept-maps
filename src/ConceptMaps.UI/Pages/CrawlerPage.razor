@@ -8,10 +8,10 @@
         <InputSelect TValue="string" @bind-Value="@_selectedFile" id="selection">
             @foreach (var (fileName, websiteSettings) in this._websiteSettings.OrderBy(kvp => kvp.Key))
             {
-                <option value="@fileName" selected="@(this._selectedFile == fileName)">@websiteSettings.BaseUri.ToString()</option>
+                <option value="@fileName" selected="@(this._selectedFile == fileName)">@websiteSettings.Name (@websiteSettings.BaseUri)</option>
             }
-
         </InputSelect>
+        <button class="btn btn-secondary btn-sm mx-1" onclick="@(() => this.NavigationManager.NavigateTo($"/crawler-config/{this._selectedFile?.Split(Path.DirectorySeparatorChar).LastOrDefault()}"))" disabled="@(_crawlCts?.IsCancellationRequested is false)"><span class="oi oi-cog"></span></button>
     </p>
     <p>
         @if (!_isCrawling)
@@ -41,13 +41,10 @@
 
         <hr />
         <ul>
-        @foreach (var line in this._progressLog.TakeLast(50).Reverse())
-        {
-            <li>@line</li>
-        }
+            @foreach (var line in this._progressLog.TakeLast(50).Reverse())
+            {
+                <li>@line</li>
+            }
         </ul>
     </p>
 </div>
-@code {
-    
-}

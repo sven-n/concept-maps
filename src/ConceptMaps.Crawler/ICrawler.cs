@@ -17,7 +17,7 @@ public interface ICrawler
     /// <param name="progress">The progress callback object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    Task CrawlAsync(WebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default);
+    Task CrawlAsync(IWebsiteSettings settings, TextWriter contentWriter, TextWriter relationsWriter, IProgress<string>? progress = null, CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -35,7 +35,7 @@ public static class CrawlerExtensions
     /// <param name="progress">The progress callback object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    public static async ValueTask CrawlAsync(this ICrawler crawler, WebsiteSettings settings, string textFilePath, string relationshipFilePath, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public static async ValueTask CrawlAsync(this ICrawler crawler, IWebsiteSettings settings, string textFilePath, string relationshipFilePath, IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         await using var contentWriter = CreateUtf8StreamWriter(textFilePath);
         await using var relationsWriter = CreateUtf8StreamWriter(relationshipFilePath);
@@ -47,7 +47,7 @@ public static class CrawlerExtensions
         var relationshipExtractorFactory = new RelationshipExtractorFactory();
         relationshipExtractorFactory.Register(new FandomWithDataSourceAttributesRelationshipExtractor());
         relationshipExtractorFactory.Register(new HarryPotterFandomRelationshipExtractor());
-        return serviceCollection.AddTransient<IWebsiteSettingsLoader, SimpleWebsiteSettingsLoader>()
+        return serviceCollection.AddTransient<IWebsiteSettingsProvider, JsonWebsiteSettingsProvider>()
             .AddSingleton(relationshipExtractorFactory)
             .AddTransient<ICrawler, Crawler>();
     }

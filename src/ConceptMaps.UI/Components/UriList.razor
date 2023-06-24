@@ -1,0 +1,41 @@
+﻿@using ConceptMaps.UI.Data
+@using System.ComponentModel.DataAnnotations
+
+@if (this.Uris is null)
+{
+    return;
+}
+
+@foreach (var uri in this.Uris)
+{
+    <div class="input-group input-group-sm mb-1">
+        <div class="input-group-prepend">
+            <button class="btn btn-warning btn-sm" type="button" onclick="@(() => OnRemoveClick(uri))" title="Remove"><span class="oi oi-minus"></span></button>
+        </div>
+        <InputText class="form-control" @bind-Value="@uri.UriString"></InputText>
+    </div>
+}
+
+<div>
+    <button class="btn btn-success btn-sm mb-1" type="button" onclick="@OnAddClick"><span class="oi oi-plus"></span> Add</button>
+</div>
+
+@code {
+    [Parameter]
+    [Required]
+    public List<UriViewModel> Uris { get; set; }
+
+    [Parameter]
+    [Required]
+    public Uri DefaultUri { get; set; }
+
+    void OnRemoveClick(UriViewModel uri)
+    {
+        this.Uris.Remove(uri);
+    }
+
+    void OnAddClick()
+    {
+        this.Uris.Add(new UriViewModel(this.DefaultUri));
+    }
+}

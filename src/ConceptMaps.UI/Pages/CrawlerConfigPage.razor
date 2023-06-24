@@ -1,0 +1,66 @@
+﻿@page "/crawler-config/{settingsId}"
+
+@using ConceptMaps.UI.Components
+
+<h3>Crawler - website configuration</h3>
+
+<div>
+    <p>
+        <label for="selection">Website:</label>
+        <InputSelect TValue="string" @bind-Value="@SelectedId" id="selection">
+            @foreach (var (id, websiteSettings) in this._websiteSettings.OrderBy(kvp => kvp.Key))
+            {
+                <option value="@id" selected="@(this.SelectedId == id)">@websiteSettings.Name (@websiteSettings.BaseUri)</option>
+            }
+        </InputSelect>
+        @if (IsNewAndUnsaved)
+        {
+            <button class="btn btn-warning btn-sm mx-2" @onclick="OnCancelNew"><span class="oi oi-circle-x"></span></button>
+        }
+        else
+        {
+            <button class="btn btn-secondary btn-sm mx-2" @onclick="OnCreateNew"><span class="oi oi-plus"></span></button>
+             
+            @if (this._selectedId is not null)
+            {
+                <button class="btn btn-danger btn-sm mx-2" type="button" @onclick="OnDeleteSelectedConfiguration"><span class="oi oi-trash"></span></button>
+            }
+        }
+        
+    </p>
+</div>
+
+@if (this._selectedSettings is null)
+{
+    return;
+}
+
+<hr />
+<EditForm Model="_selectedSettings" OnValidSubmit="this.SaveSettings">
+<div>
+    <label for="websiteId">Id:</label>
+    <InputText class="form-control" id="websiteId" @bind-Value="@this._selectedSettings.Id" disabled="@(this._selectedId is not null)"></InputText>
+
+    <label for="websiteName">Name:</label>
+    <InputText class="form-control" id="websiteName" @bind-Value="@this._selectedSettings.Name"></InputText>
+
+    <label for="baseUri">Base Address:</label>
+    <InputText class="form-control" id="baseUri" @bind-Value="@this._selectedSettings.BaseUri.UriString"></InputText>
+    <hr/>
+    <h4>Entry URLs:</h4>
+    <UriList DefaultUri="this._selectedSettings.BaseUri.Uri" Uris="@this._selectedSettings.EntryUris"/>
+    <hr/>
+    <h4>Blocked URLs:</h4>
+    <UriList DefaultUri="this._selectedSettings.BaseUri.Uri" Uris="@this._selectedSettings.BlockUris"/>
+    <hr/>
+    <ValidationSummary></ValidationSummary>
+    @if (this._isSaved)
+    {
+        <button class="btn btn-success mb-3"  type="submit" formaction="submit">Saved!</button>
+    }
+    else
+    {
+        <button class="btn btn-primary mb-3" type="submit" formaction="submit">Save</button>
+    }
+</div>
+</EditForm>
