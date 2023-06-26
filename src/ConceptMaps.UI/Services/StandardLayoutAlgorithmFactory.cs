@@ -1,4 +1,4 @@
-﻿namespace ConceptMaps.UI.Data;
+﻿namespace ConceptMaps.UI.Services;
 
 using Blazor.Diagrams.Core.Models;
 using GraphShape.Algorithms.Layout;

@@ -1,7 +1,8 @@
-﻿namespace ConceptMaps.UI.Data;
+﻿namespace ConceptMaps.UI.Services;
 
 using Blazor.Diagrams.Core;
 using Blazor.Diagrams.Core.Models;
+using ConceptMaps.UI.Data;
 using GraphShape;
 using GraphShape.Algorithms.Layout;
 using QuikGraph;
@@ -20,13 +21,13 @@ public class DiagramService
     /// <param name="layoutAlgorithmFactory">The layout algorithm factory.</param>
     public DiagramService(ILayoutAlgorithmFactory layoutAlgorithmFactory)
     {
-        this._layoutAlgorithmFactory = layoutAlgorithmFactory;
+        _layoutAlgorithmFactory = layoutAlgorithmFactory;
     }
 
     /// <summary>
     /// Gets the available algorithm types.
     /// </summary>
-    public IEnumerable<string> AlgorithmTypes => this._layoutAlgorithmFactory.AlgorithmTypes;
+    public IEnumerable<string> AlgorithmTypes => _layoutAlgorithmFactory.AlgorithmTypes;
 
     /// <summary>
     /// Creates a new diagram based on the given triples.
@@ -67,7 +68,7 @@ public class DiagramService
                 TargetMarker = LinkMarker.Arrow,
             };
 
-            if (!string.IsNullOrWhiteSpace(triple.EdgeName))
+            if (!string.IsNullOrWhiteSpace(triple.EdgeName) && triple.EdgeName != "SIBLINGS")
             {
                 link.Labels.Add(new LinkLabelModel(link, triple.EdgeName)
                 {
@@ -85,7 +86,7 @@ public class DiagramService
     public void ArrangeNodes(Diagram diagram, string algorithm)
     {
         var graph = MakeGraph(diagram);
-        
+
         var nodePositions = CalculateNodePositions(graph, algorithm);
         foreach (var (node, position) in nodePositions)
         {
@@ -117,10 +118,10 @@ public class DiagramService
     private IDictionary<NodeModel, Point> CalculateNodePositions(BidirectionalGraph<NodeModel, Edge<NodeModel>> graph, string algorithmName)
     {
         var layoutContext = CreateLayoutContext(graph);
-        var layoutParameters = this._layoutAlgorithmFactory.CreateParameters(algorithmName, null);
+        var layoutParameters = _layoutAlgorithmFactory.CreateParameters(algorithmName, null);
         AdaptLayoutParameters(layoutParameters);
 
-        if (this._layoutAlgorithmFactory.CreateAlgorithm(algorithmName, layoutContext, layoutParameters) is { } algorithm)
+        if (_layoutAlgorithmFactory.CreateAlgorithm(algorithmName, layoutContext, layoutParameters) is { } algorithm)
         {
             algorithm.Compute();
             return algorithm.VerticesPositions;
@@ -138,6 +139,7 @@ public class DiagramService
                 treeParameters.LayerGap = 50;
                 treeParameters.VertexGap = 50;
                 treeParameters.Direction = LayoutDirection.TopToBottom;
+                treeParameters.SpanningTreeGeneration = SpanningTreeGeneration.DFS;
                 break;
             case BalloonTreeLayoutParameters balloonTreeParameters:
                 balloonTreeParameters.MinRadius = 50;
@@ -183,5 +185,5 @@ public class DiagramService
         return new LayoutContext<NodeModel, Edge<NodeModel>, BidirectionalGraph<NodeModel, Edge<NodeModel>>>(graph, positions, sizes, LayoutMode.Simple);
     }
 
-    private static GraphShape.Size ConvertSize(Size size) => new (size?.Width ?? 100, size?.Height ?? 80);
+    private static GraphShape.Size ConvertSize(Size size) => new(size?.Width ?? 100, size?.Height ?? 80);
 }

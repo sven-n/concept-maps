@@ -15,7 +15,7 @@ def convertJsonFile(inputJsonPath: str, outputTraininigDataJsonPath: str):
     with open(outputTraininigDataJsonPath, "w") as outputFile:
         json.dump(result, outputFile, indent=True)
 
-def convert(jsonObj : str):
+def convert(jsonObj) -> list:
     results = []
     for jsonSentence in jsonObj:
         sentence = jsonSentence['sentence']

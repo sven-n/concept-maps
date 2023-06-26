@@ -1,4 +1,4 @@
-﻿namespace ConceptMaps.UI.Data;
+﻿namespace ConceptMaps.UI.Services;
 
 internal static class GraphicConstants
 {

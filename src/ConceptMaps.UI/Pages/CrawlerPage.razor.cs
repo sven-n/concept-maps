@@ -75,7 +75,7 @@ public partial class CrawlerPage
 
             var timestamp = DateTime.Now;
             var configName = this._selectedFile.Split('.').First();
-            var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_');
+            var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_').Replace('-', '_');
 
             var textFilePath = $"crawl-results\\{fileNamePrefix}_Text.txt";
             var relationshipFilePath = $"crawl-results\\{fileNamePrefix}_Relationships.txt";

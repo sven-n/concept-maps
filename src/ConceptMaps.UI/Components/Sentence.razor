@@ -1,0 +1,119 @@
+﻿@using ConceptMaps.UI.Data
+
+@if (this.Context is null)
+{
+    return;
+}
+
+<div class="alert @this.AlertClass" role="alert">
+    @if (this.Context.State is SentenceState.Initial or SentenceState.Processing)
+    {
+        <InputTextArea class="form-control" @bind-Value="this.Context.Sentence" disabled="@this.SentenceAnalyzer.IsAnalyzing" />
+        <hr/>
+        @if (this.Context.State == SentenceState.Processing)
+        {
+            <button type="button" class="btn btn-sm btn-outline-primary" disabled="@this.SentenceAnalyzer.IsAnalyzing">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Analyzing ...</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger"
+                    aria-label="Cancel"
+                    @onclick="this.SentenceAnalyzer.Cancel">
+                <span class="oi oi-media-stop"> Cancel</span>
+            </button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-sm btn-outline-primary" @onclick="this.StartResolveSentence" disabled="@this.SentenceAnalyzer.IsAnalyzing">
+                <span class="oi oi-media-play" role="status" aria-hidden="true"></span> Analyze
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove"
+                    aria-label="Remove" @onclick="() => this.Context.State = SentenceState.Removed"
+                    disabled="@this.SentenceAnalyzer.IsAnalyzing">
+                <span class="oi oi-trash"> Remove</span>
+            </button>
+        }
+        @if (this.Context.LastException is not null)
+        {
+            <p>
+                <span>Last Error: </span>
+                <span>@this.Context.LastException.Message</span>
+            </p>
+        }
+    }
+    else
+    {
+        <!-- todo: highlight named entities -->
+        <h5 class="alert-heading">@this.Context.Sentence</h5>
+    }
+
+    @if (this.Context.State == SentenceState.Processed)
+    {
+        <table class="table table-striped">
+            <tbody>
+            @foreach (var rel in this.Context.Relationships)
+            {
+                <tr class="row justify-content-start">
+                    <td class="col-md-auto">
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove" aria-label="Remove" @onclick="() => this.Context.Relationships.Remove(rel)">
+                            <span class="oi oi-trash"></span>
+                        </button>
+                    </td>
+                    <td class="col-2">
+                        <span class="entityName">@rel.FirstEntity</span>
+                    </td>
+                    <td class="col-3">
+                        <InputSelect @bind-Value="@rel.RelationshipTypeInSentence">
+                            <option selected="@(rel.IsUndefined())">undefined</option>
+                            <option selected="@(rel.IsSiblings())">SIBLINGS</option>
+                            <option selected="@(rel.IsSpouse())">SPOUSE</option>
+                            <option selected="@(rel.IsChildren())">CHILDREN</option>
+                        </InputSelect>
+                        @if (!rel.IsUndefined()
+                             && !rel.RelationshipTypeInSentence.Equals(rel.KnownRelationshipType, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            <span class="oi oi-bolt" title="Differs from known relationship. Expected undefined or @rel.KnownRelationshipType"></span>
+                        }
+                    </td>
+                    <td class="col-2">
+                        <span class="entityName">@rel.SecondEntity</span>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <hr />
+        <button type="button" class="btn btn-sm btn-outline-danger btn-remove" aria-label="Remove" @onclick="() => this.Context.State = SentenceState.Removed">
+            <span class="oi oi-trash"> Remove</span>
+        </button>
+
+        <button type="button" class="btn btn-sm btn-outline-success btn-accept" aria-label="Accept" @onclick="() => this.Context.State = SentenceState.Reviewed">
+            <span class="oi oi-check"> Accept</span>
+        </button>
+    }
+    else if (this.Context.State == SentenceState.Reviewed)
+    {
+        <table class="table table-striped">
+            <tbody>
+                @foreach (var rel in this.Context.Relationships)
+                {
+                    <tr class="row justify-content-start">
+                        <td class="col-2">
+                            <span class="entityName">@rel.FirstEntity</span>
+                        </td>
+                        <td class="col-2">
+                            <span>@rel.RelationshipTypeInSentence"</span>
+                        </td>
+                        <td class="col-2">
+                            <span class="entityName">@rel.SecondEntity</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+        <button type="button" class="btn btn-sm btn-outline-primary btn-edit" aria-label="Edit" @onclick="() => this.Context.State = SentenceState.Processed">
+            <span class="oi oi-pencil"> Edit</span>
+        </button>
+    }
+</div>

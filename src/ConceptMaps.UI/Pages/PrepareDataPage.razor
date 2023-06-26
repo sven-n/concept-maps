@@ -1,0 +1,64 @@
+﻿@page "/prepare-data"
+@using ConceptMaps.UI.Data
+@using ConceptMaps.UI.Components
+
+<h3>Data Preparation</h3>
+
+<p>On this page we prepare our crawled data, so that it can be trained into the model.</p>
+
+<div>
+    <p>
+        <label for="selection">Data:</label>
+        <InputSelect TValue="string" @bind-Value="@SelectedFile" id="selection">
+            <option value="" selected="@(this.SelectedFile == string.Empty)">Select a crawled file or add a sentence</option>
+            @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
+            {
+                <option value="@fileName" selected="@(this.SelectedFile == fileName)">@(Path.GetFileName(fileName))</option>
+            }
+        </InputSelect>
+    </p>
+    <p>
+        @if (!this.SentenceAnalyzer.IsAnalyzing)
+        {
+            <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll"><span class="oi oi-media-play"></span> Analyze all</button>
+            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
+            @if (this.PrepareContext?.ReviewedSentences > 0)
+            {
+                <!-- todo: show spinner -->
+                <button class="btn btn-primary mx-1" onclick="@(() =>this.GetTrainingDataAsync(default))"><span class="oi oi-loop-square"></span> Generate Training Data (@(this.PrepareContext.ReviewedSentences) selected)</button>
+                if (this.DownloadPath is not null)
+                {
+                    <a class="btn btn-success mx-1" href="@this.DownloadPath" target="_blank"><span class="oi oi-data-transfer-download"></span> Save</a>
+                }
+            }
+        }
+        else
+        {
+            <button class="btn btn-primary mx-1" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Analyzing ...</span>
+            </button>
+            <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
+        }
+        <hr />
+    </p>
+    @if (this.PrepareContext is { } context)
+    {
+        @foreach (var sentenceContext in context.Sentences.Where(s => s.State != SentenceState.Removed))
+        {
+            <Sentence Context="@sentenceContext" />
+        }
+    }
+    
+    @if (!this.SentenceAnalyzer.IsAnalyzing)
+    {
+        <hr/>
+        <p>
+            <button class="btn btn-primary" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
+            @if (this.PrepareContext is not null)
+            {
+                <button class="btn btn-primary mx-1" onclick="@this.PrepareContext.Save"><span class="oi oi-data-transfer-download"></span> Save</button>
+            }
+        </p>
+    }
+</div>

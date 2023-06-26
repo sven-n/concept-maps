@@ -1,5 +1,5 @@
 using ConceptMaps.Crawler;
-using ConceptMaps.UI.Data;
+using ConceptMaps.UI.Services;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<SentenceAnalyzer>();
 builder.Services.AddSingleton<RemoteTripleService>();
+builder.Services.AddSingleton<RemoteTrainingDataConversionService>();
 builder.Services.AddSingleton<DiagramService>();
 builder.Services.AddSingleton<ILayoutAlgorithmFactory, StandardLayoutAlgorithmFactory>();
+builder.Services.AddSingleton<ICrawledDataProvider, CrawledDataProvider>();
 builder.Services.AddCrawler();
 
 var app = builder.Build();
@@ -26,11 +29,23 @@ if (!Path.Exists(crawlResultsFolder))
     Directory.CreateDirectory(crawlResultsFolder);
 }
 
+var trainingDataFolder = Path.Combine(Environment.CurrentDirectory, "training-data");
+if (!Path.Exists(trainingDataFolder))
+{
+    Directory.CreateDirectory(trainingDataFolder);
+}
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(crawlResultsFolder),
     RequestPath = "/crawl-results",
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(trainingDataFolder),
+    RequestPath = "/training-data",
 });
 
 app.UseRouting();

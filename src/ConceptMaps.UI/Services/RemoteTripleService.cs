@@ -1,7 +1,9 @@
-namespace ConceptMaps.UI.Data;
+namespace ConceptMaps.UI.Services;
 
 using System.Text;
 using System.Text.Json;
+using System.Threading;
+using ConceptMaps.UI.Data;
 
 /// <summary>
 /// A service which creates triples out of a text in a remote service.
@@ -22,7 +24,7 @@ public class RemoteTripleService
     {
         using var client = new HttpClient();
         var response = await client.PostAsync(
-            RemoteServiceUrl, 
+            RemoteServiceUrl,
             new StringContent($"\"{text}\"", Encoding.UTF8, mediaType: "application/json"),
             cancellationToken);
         var result = await response.Content.ReadFromJsonAsync<List<Triple>>(
