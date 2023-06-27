@@ -51,7 +51,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         print("POST received")
         if self.path == triples_endpoint_path:
             self.handle_triples_request()
-        if self.path == convertrel_endpoint_path:
+        elif self.path == convertrel_endpoint_path:
             self.handle_relations_conversion()
         else:
             self.send_response(400)
