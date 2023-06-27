@@ -1,5 +1,8 @@
 """Functions to train the relation model."""
 
+from pathlib import Path
+import os
+import binary_converter
 import subprocess
 
 class TrainingStatus:
@@ -25,15 +28,12 @@ class RelationModelTraining:
         :param training_data: The training data as string in json format.
         """
 
-        working_dir = '../../Relationsmodell/'
-
-        # todo: ggf. Backup von vorhandenen Modellen
+        cwd = Path(os.getcwd())
+        working_dir = cwd.joinpath('../../models/relations').resolve()
+        # todo: ggf. Backup von vorhandenen Modellen und Daten?
 
         subprocess.run(['spacy', 'project', 'run', 'clean'], cwd = working_dir, check=False)
-
-        # todo: convert training data
-
-        # todo: set up project file accordingly
+        binary_converter.create_relation_training_files(training_data, working_dir.joinpath('data'))
 
         self.training_process = subprocess.Popen(
             ['spacy', 'project', 'run', 'all'],
