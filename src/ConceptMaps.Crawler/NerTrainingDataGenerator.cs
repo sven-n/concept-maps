@@ -115,7 +115,44 @@ public class NerTrainingDataGenerator
         return new SentenceEntities(sentence, entityNames ?? Array.Empty<NamedEntity>());
     }
 
-    private record SentenceEntities(string Sentence, IList<NamedEntity> Entities);
+    
+}
 
-    private record NamedEntity(string Name, int StartIndex, int EndIndex);
+public class SentenceEntities
+{
+    public SentenceEntities(string sentence, IList<NamedEntity> entities)
+    {
+        this.Sentence = sentence;
+        this.Entities = entities;
+    }
+
+    public string Sentence { get; set; }
+    public IList<NamedEntity> Entities { get; set; }
+
+    //public void Deconstruct(out string Sentence, out IList<NamedEntity> Entities)
+    //{
+    //    Sentence = this.Sentence;
+    //    Entities = this.Entities;
+    //}
+}
+
+public class NamedEntity
+{
+    public NamedEntity(string name, int startIndex, int endIndex)
+    {
+        this.Name = name;
+        this.StartIndex = startIndex;
+        this.EndIndex = endIndex;
+    }
+
+    public string Name { get; set; }
+    public int StartIndex { get; set; }
+    public int EndIndex { get; set; }
+
+    //public void Deconstruct(out string Name, out int StartIndex, out int EndIndex)
+    //{
+    //    Name = this.Name;
+    //    StartIndex = this.StartIndex;
+    //    EndIndex = this.EndIndex;
+    //}
 }

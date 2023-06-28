@@ -10,7 +10,7 @@ using System.Text.Json;
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
 /// </summary>
-public partial class PrepareDataPage
+public partial class ModelsPage
 {
     /// <summary>
     /// The injected <see cref="ICrawledDataProvider"/>.
@@ -19,7 +19,13 @@ public partial class PrepareDataPage
     private ICrawledDataProvider DataProvider { get; set; } = null!;
 
     [Inject]
-    private SentenceAnalyzer SentenceAnalyzer { get; set; } = null!;
+    private RemoteTrainingService TrainingService { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the injected <see cref="IModelProvider"/>.
+    /// </summary>
+    [Inject]
+    private IModelProvider ModelProvider { get; set; } = null!;
 
     private string? DownloadPath { get; set; }
     private DataPrepareContext? PrepareContext { get; set; }
@@ -73,3 +79,4 @@ public partial class PrepareDataPage
         this.DownloadPath = targetPath;
     }
 }
+
