@@ -21,7 +21,6 @@ public partial class PrepareDataPage
     [Inject]
     private SentenceAnalyzer SentenceAnalyzer { get; set; } = null!;
 
-    private string? DownloadPath { get; set; }
     private DataPrepareContext? PrepareContext { get; set; }
 
     private string? SelectedFile
@@ -32,7 +31,6 @@ public partial class PrepareDataPage
             if (this.SelectedFile != value)
             {
                 this.PrepareContext = new DataPrepareContext(value);
-                this.DownloadPath = null;
             }
         }
     }
@@ -59,17 +57,15 @@ public partial class PrepareDataPage
             return;
         }
 
-        this.DownloadPath = null;
         await this.InvokeAsync(this.StateHasChanged);
 
         var crawlerData = this.PrepareContext.AsCrawlerData();
         var serializedData = JsonSerializer.Serialize(crawlerData.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
-        var targetFolderPath = Path.Combine("training-data", "relations");
+        var targetFolderPath = Path.Combine("training-data", ModelType.Relation.AsString());
         Directory.CreateDirectory(targetFolderPath);
         var fileName = Path.GetFileName(this.PrepareContext.SelectedFile);
         var targetPath = Path.Combine(targetFolderPath, fileName);
         await File.WriteAllTextAsync(targetPath, serializedData, Encoding.UTF8, cancellationToken);
-        this.DownloadPath = targetPath;
     }
 }

@@ -14,20 +14,19 @@ msg = Printer()
 SYMM_LABELS = ["Binds"]
 DIRECTED_LABELS = {"CHILDREN", "SPOUSE", "SIBLINGS", "undefined"}
 
-def create_relation_training_files(json_str: str, output_dir: Path,
+def create_relation_training_files(training_data: list[dict], output_dir: Path,
                                    test_portion: float = 0.2, dev_portion : float = 0.3):
     """Creating the corpus from the annotations."""
 
     nlp = spacy.load("en_core_web_sm") # we need the NLP for tokenization
 
-    Doc.set_extension("rel", default={})
+    Doc.set_extension("rel", default={}, force=True)
     failed_examples = []
     docs = {"train": [], "dev": [], "test": [], "total": []}
 
-    json_sentences_array = json.loads(json_str)
-    for sentence in json_sentences_array:
-        try:
-            is_simple = "relationship" in sentence
+    for sentence in training_data:
+        #try:
+            is_simple = "relationships" in sentence
             if is_simple:
                 (doc, contains_relation) = parse_simple_sentence(nlp, sentence)
             else:
@@ -36,8 +35,8 @@ def create_relation_training_files(json_str: str, output_dir: Path,
             # only keeping documents with at least 1 positive case
             if contains_relation:
                 randomized_append(docs, doc, test_portion, dev_portion)
-        except:
-            failed_examples.append(sentence)
+        #except Exception as e:
+        #    failed_examples.append(sentence)
 
     save_spacy_docs(docs, output_dir)
 
@@ -99,7 +98,7 @@ def prepare_rels(doc: Doc, span_starts: list[int]) -> dict:
 def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
                            span_end_to_start: dict) -> bool:
     """Parses the relations for the "simple" json format."""
-
+    positives = 0
     for relationship in example["relationships"]:
         label = relationship['relationshipType'].upper()
 
@@ -108,11 +107,11 @@ def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
         if first_entity_token is not None and second_entity_token is not None:
             # the 'head' and 'child' annotations refer to the end token in the span
             # but we want the first token
-            child = first_entity_token["start_token"]
-            head = second_entity_token["start_token"]
+            child_end = first_entity_token["token_end"]
+            head_end = second_entity_token["token_end"]
 
-            start = span_end_to_start[head]
-            end = span_end_to_start[child]
+            start = span_end_to_start[head_end]
+            end = span_end_to_start[child_end]
             if label not in DIRECTED_LABELS:
                 msg.warn(f"Found label '{label}' not defined in DIRECTED_LABELS - skipping")
                 break
@@ -150,7 +149,7 @@ def extract_entity_names(relationships: list[dict[str, str]]) -> list:
 
 def extract_entity_tokens(doc: Doc, relationships: list[dict[str, str]]) -> list[dict]:
     """Extracts all entity tokens of the given relationships."""
-    tokens = [str]
+    tokens = []
     entity_names = extract_entity_names(relationships)
     last_entity_name = ''
     for entity_name in entity_names:
@@ -173,8 +172,8 @@ def add_entity_tokens(doc: Doc, entity_name: str, tokens: list[dict]) -> bool:
                 "text" : entity_name,
                 "start": last_found_index,
                 "end": end_index,
-                "start_token":  start_token.i,
-                "end_token": end_token.i,
+                "token_start":  start_token.i,
+                "token_end": end_token.i,
                 }
             
             tokens.append(token)
@@ -206,7 +205,7 @@ def find_token_by_end(doc: Doc, end_index: int) -> (Token|None):
         if token.idx + len(token.text) == end_index:
             return token
 
-def parse_entities(doc: Doc, entity_tokens: list[str], span_end_to_start: dict, span_starts: set):
+def parse_entities(doc: Doc, entity_tokens: list[dict], span_end_to_start: dict, span_starts: set):
     """Parses the entities and sets it in the given document."""
     entities = []
     for entity_token in entity_tokens:
@@ -233,4 +232,7 @@ def save_spacy_doc(docs: dict[str, list], name: str, path: Path):
     docbin = DocBin(docs=docs[name], store_user_data=True)
     docbin.to_disk(path)
 
-    msg.info(f"{len(docs[name])} {name} sentences, {len(docs[name]) / len(docs['total'])} pos instances.")
+    if len(docs['total']) == 0:
+        msg.warn("no sentences saved!")
+    else:
+        msg.info(f"{len(docs[name])} {name} sentences, {len(docs[name]) / len(docs['total'])} pos instances.")

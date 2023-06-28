@@ -6,7 +6,8 @@ public class TrainingDataProvider : ITrainingDataProvider
     {
         get
         {
-            var folderPath = Path.Combine("training-data", ModelType.Relation.AsString());
+            // todo: this must be improved...
+            var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Relation.AsString());
             return Directory.EnumerateFiles(folderPath, "*.json").Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }
@@ -15,7 +16,8 @@ public class TrainingDataProvider : ITrainingDataProvider
     {
         get
         {
-            var folderPath = Path.Combine("training-data", ModelType.Nrt.AsString());
+            var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Nrt.AsString());
             return Directory.EnumerateFiles(folderPath, "*.json").Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }
+}

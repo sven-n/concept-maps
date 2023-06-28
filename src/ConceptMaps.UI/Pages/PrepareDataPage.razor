@@ -1,6 +1,7 @@
 ﻿@page "/prepare-data"
 @using ConceptMaps.UI.Data
 @using ConceptMaps.UI.Components
+@using AngleSharp.Dom
 
 <h3>Data Preparation</h3>
 
@@ -22,14 +23,10 @@
         {
             <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll"><span class="oi oi-media-play"></span> Analyze all</button>
             <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
-            @if (this.PrepareContext?.ReviewedSentences > 0)
+            @if (this.PrepareContext is not null)
             {
                 <!-- todo: show spinner -->
-                <button class="btn btn-primary mx-1" onclick="@(() =>this.GetTrainingDataAsync(default))"><span class="oi oi-loop-square"></span> Generate Training Data (@(this.PrepareContext.ReviewedSentences) selected)</button>
-                if (this.DownloadPath is not null)
-                {
-                    <a class="btn btn-success mx-1" href="@this.DownloadPath" target="_blank"><span class="oi oi-data-transfer-download"></span> Save</a>
-                }
+                <button class="btn btn-primary mx-1" onclick="@(() =>this.GetTrainingDataAsync(default))"><span class="oi oi-loop-square"></span> Save Training Data (@(this.PrepareContext.ReviewedSentences) selected)</button>
             }
         }
         else

@@ -1,6 +1,29 @@
-﻿<h3>Start Training</h3>
+﻿@using ConceptMaps.UI.Services
+
+<h3>Start Training</h3>
 
 <div>
-    <h6>Source Model:</h6>
-    @this.ModelProvider.ActiveNrtModel
+    <ul>
+    @foreach (var trainingFile in this.TrainingDataProvider.GetFiles(this.ModelType))
+    {
+        <li>
+            <!-- todo: use check input -->
+            @if (this._selectedFiles.Contains(trainingFile))
+            {
+                <button class="btn btn-outline-success" @onclick="() => this._selectedFiles.Remove(trainingFile)"><span class="oi oi-check"></span></button>
+            }
+            else
+            {
+                <button class="btn btn-outline-secondary" @onclick="() => this._selectedFiles.Add(trainingFile)"><span class="oi"></span></button>
+            }
+            
+            <span>@Path.GetFileName(trainingFile)</span>
+        </li>
+    }
+    </ul>
+    
+    
+    <button class="btn btn-primary" @onclick="@this.OnStartButtonClick" disabled="@(this._selectedFiles.Count == 0)">Start</button>
+
+    <button class="btn btn-primary" @onclick="@this.OnCancelButtonClick" disabled="@this._startSuccess">Cancel</button>
 </div>

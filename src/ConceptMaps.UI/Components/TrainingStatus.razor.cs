@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using ConceptMaps.UI.Services;
 using Microsoft.AspNetCore.Components;
 
-public sealed partial class TrainingStatus: IDisposable
+public sealed partial class TrainingStatus
 {
     [Parameter]
     [Required]
@@ -31,11 +31,6 @@ public sealed partial class TrainingStatus: IDisposable
         {
             this._isStopping = false;
         }
-    }
-
-    public void Dispose()
-    {
-        this._stopCts?.Dispose();
     }
 }
 

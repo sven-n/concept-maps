@@ -7,8 +7,10 @@ public class ModelProvider : IModelProvider
     {
         get
         {
-            var folderPath = Path.Combine("../../models", ModelType.Relation.AsString());
-            return Directory.EnumerateDirectories(folderPath).Select(Path.GetDirectoryName).Where(name => !string.IsNullOrWhiteSpace(name))!;
+            yield break;
+            
+            //var folderPath = Path.Combine(Environment.ProcessPath, "..", "..", "..", "..", "..", "..", "models", ModelType.Relation.AsString());
+            //return Directory.EnumerateDirectories(folderPath).Select(Path.GetDirectoryName).Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }
 
@@ -16,8 +18,9 @@ public class ModelProvider : IModelProvider
     {
         get
         {
-            var folderPath = Path.Combine("../../models", ModelType.Nrt.AsString());
-            return Directory.EnumerateDirectories(folderPath).Select(Path.GetDirectoryName).Where(name => !string.IsNullOrWhiteSpace(name))!;
+            yield break;
+            //var folderPath = Path.Combine(Environment.ProcessPath, "..", "..", "..", "..", "..", "..", "models", ModelType.Nrt.AsString());
+            //return Directory.EnumerateDirectories(folderPath).Select(Path.GetDirectoryName).Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }
 

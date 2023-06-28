@@ -25,15 +25,17 @@ class ModelTrainingBase:
     def __init__(self):
         # Initialization of this instance.
         self.training_process: subprocess.Popen = None
+        self.output = []
+        self.error = []
     
     def get_model_type(self):
         return None
     
-    def convert_training_data(self, training_data: str, working_dir: Path):
+    def convert_training_data(self, training_data: list[dict], working_dir: Path):
         # to be overwritten
         raise Exception("convert_training must be overwritten")
 
-    def start_training(self, training_data: str, target: str, source: (str|None) = None):
+    def start_training(self, training_data: list[dict], target: str, source: (str|None) = None):
         """Starts the training of the relation model with the specified training data
         by starting a new process.
         
@@ -44,7 +46,7 @@ class ModelTrainingBase:
         cwd = Path(os.getcwd())
         working_dir = cwd.joinpath('training').joinpath(self.get_model_type()).resolve()
 
-        subprocess.run(['spacy', 'project', 'run', 'clean'], cwd = working_dir, check=False)
+        # subprocess.run(['spacy', 'project', 'run', 'clean'], cwd = working_dir, check=False)
         self.convert_training_data(training_data, working_dir)
 
         args = ['spacy', 'project', 'run', 'all', f"--vars.target_model_name={target}"]
@@ -54,6 +56,8 @@ class ModelTrainingBase:
         # if (source is not None):
             #args.append(f"--vars.source_model_name={source}")
 
+        self.output.clear()
+        self.error.clear()
         self.training_process = subprocess.Popen(
             args,
             cwd = working_dir,
@@ -85,6 +89,8 @@ class ModelTrainingBase:
             return
         process.terminate()
         self.training_process = None
+        self.output.clear()
+        self.error.clear
 
     def get_status(self) -> TrainingStatus:
         """Get the status of the training process
@@ -95,12 +101,14 @@ class ModelTrainingBase:
         if process is None:
             return TrainingStatus(False, 'inactive', '', '')
 
-        # todo: p.communicate required?
-        output = process.stdout.read()
-        error = process.stderr.read()
+        if not process.stdout.closed:
+            (output, error) = process.communicate(timeout=1000)
+            self.output.append(output)
+            self.error.append(error)
+
         returncode = process.poll()
         if returncode is None:
-            return TrainingStatus(True, 'training', output, error)
+            return TrainingStatus(True, 'training', self.output, self.error)
 
         state = 'success'
         if returncode != 0:
@@ -114,7 +122,7 @@ class RelationModelTraining(ModelTrainingBase):
     def get_model_type(self):
         return 'relations'
 
-    def convert_training_data(self, training_data: str, working_dir: Path):
+    def convert_training_data(self, training_data: list[dict], working_dir: Path):
         binary_converter.create_relation_training_files(training_data, working_dir.joinpath('data'))
 
 
@@ -124,6 +132,6 @@ class NrtModelTraining(ModelTrainingBase):
     def get_model_type(self):
         return 'nrt'
 
-    def data_conversion(self, training_data: str):
+    def data_conversion(self, training_data: list[dict]):
         # to be implemented ...
         raise NotImplementedError()

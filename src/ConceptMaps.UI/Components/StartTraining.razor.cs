@@ -50,7 +50,7 @@ public partial class StartTraining : IDisposable
     private async Task<bool> StartTrainingAsync<T>(CancellationToken cancellationToken)
     {
         var sentences = await CollectSelectedDataAsync<T>(cancellationToken);
-        await this.TrainingService.StartTrainingAsync(this.ModelType, sentences, this._selectedSourceModel, cancellationToken);
+        return await this.TrainingService.StartTrainingAsync(this.ModelType, sentences, this._selectedSourceModel, "todo", cancellationToken);
     }
 
     private async Task<List<T>> CollectSelectedDataAsync<T>(CancellationToken cancellationToken)
@@ -66,6 +66,8 @@ public partial class StartTraining : IDisposable
                 sentences.AddRange(relationships);
             }
         }
+
+        return sentences;
     }
 
     private void OnCancelButtonClick()
