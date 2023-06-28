@@ -42,14 +42,15 @@ class ModelTrainingBase:
         """
 
         cwd = Path(os.getcwd())
-        working_dir = cwd.joinpath('../../models/').joinpath(self.get_model_type()).resolve()
+        working_dir = cwd.joinpath('training').joinpath(self.get_model_type()).resolve()
 
         subprocess.run(['spacy', 'project', 'run', 'clean'], cwd = working_dir, check=False)
         self.convert_training_data(training_data, working_dir)
 
         args = ['spacy', 'project', 'run', 'all', f"--vars.target_model_name={target}"]
 
-        self.set_model_source(TRAINING_CONFIG_PATH, source)
+        config_path = working_dir.joinpath(TRAINING_CONFIG_PATH)
+        self.set_model_source(config_path, source)
         # if (source is not None):
             #args.append(f"--vars.source_model_name={source}")
 
@@ -73,7 +74,7 @@ class ModelTrainingBase:
             replacement = f"source = \"{source}\"\n"
 
         with open(config_path, 'w',
-                  encoding=RelationModelTraining.DEFAULT_ENCODING) as out_file:
+                  encoding = DEFAULT_ENCODING) as out_file:
             result = re.sub("source = (.+)?\\n", replacement, content)
             out_file.write(result)
 
