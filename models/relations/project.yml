@@ -8,6 +8,7 @@ vars:
   dev_file: "data/relations_dev.spacy"
   test_file: "data/relations_test.spacy"
   trained_model: "training/model-best"
+  target_model_name: ""
 
 # These are the directories that the project needs. The project CLI will make
 # sure that they always exist.
@@ -17,9 +18,11 @@ workflows:
   all:
     - train_cpu
     - evaluate
+    - copy_model
   all_gpu:
     - train_gpu
     - evaluate
+    - copy_model
 
 # Project commands, specified in a style similar to CI config files (e.g. Azure
 # pipelines). The name is the command name that lets you trigger the command
@@ -54,9 +57,15 @@ commands:
       - ${vars.trained_model}
       - ${vars.test_file}
 
-
   - name: "clean"
     help: "Remove intermediate files to start data preparation and training from a clean slate."
     script:
       - "rm -rf data/*"
       - "rm -rf training/*"
+
+  - name: "copy_model"
+    help: "Copies the trained model to the target folder."
+    script:
+      - "xcopy /s /i training ${vars.target_model_name}"
+    deps:
+      - ${vars.trained_model}
