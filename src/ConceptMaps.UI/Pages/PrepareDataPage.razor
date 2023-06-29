@@ -9,32 +9,44 @@
 <div>
     <p>
         <div class="btn-group">
-            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-plus"></span> Add new sentence</button>
+            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                <span class="oi oi-plus"></span> Add new
+            </button>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mx-1" type="button"
                         data-toggle="dropdown"
                         aria-expanded="@this._showCrawledDataSelection"
                         disabled="@this._showBatchAdding"
                         @onclick="() => this._showCrawledDataSelection = !this._showCrawledDataSelection">
-                    <span class="oi oi-plus"></span> Add crawled sentences
+                    <span class="oi oi-plus"></span> Add crawled
                 </button>
             </div>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mx-1"
                         type="button" id="freeTextMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="@this._showBatchAdding"
-                    disabled="@(this._showCrawledDataSelection || this.SentenceAnalyzer.IsAnalyzing)"
-                    @onclick="() => this._showBatchAdding = !this._showBatchAdding">
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="@this._showBatchAdding"
+                        disabled="@(this._showCrawledDataSelection || this.SentenceAnalyzer.IsAnalyzing)"
+                        @onclick="() => this._showBatchAdding = !this._showBatchAdding">
                     <span class="oi oi-plus"></span> Batch
                 </button>
             </div>
 
+            <button class="btn btn-primary mx-1" onclick="@this.OnLoadContextAsync" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                <span class="oi oi-cloud-download"></span> Load Session
+            </button>
+            <button class="btn btn-primary mx-1" onclick="@this.OnSaveContextAsync" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                <span class="oi oi-cloud-upload"></span> Save Session
+            </button>
+            <button class="btn btn-primary mx-1" onclick="@this.OnClearContext" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                <span class="oi oi-trash"></span> Clear Session
+            </button>
+
             @if (!this.SentenceAnalyzer.IsAnalyzing)
             {
-                <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-media-play"></span> Analyze all</button>
-                <button class="btn btn-primary mx-1" onclick="@(() => this.SaveTrainingDataAsync(default))" disabled="@(this.PrepareContext.ReviewedSentences == 0 || this._showBatchAdding || this._showCrawledDataSelection)">
+                <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this.IsDialogOpen)"><span class="oi oi-media-play"></span> Analyze all</button>
+                <button class="btn btn-primary mx-1" onclick="@(() => this.SaveTrainingDataAsync(default))" disabled="@(this.PrepareContext.ReviewedSentences == 0 || this.IsDialogOpen)">
                     <span class="oi oi-loop-square"></span> Save (@(this.PrepareContext.ReviewedSentences) accepted)
                 </button>
             }
@@ -59,12 +71,14 @@
             }
             else
             {
-                <div class="list-group">
-                    <h5>Available crawled data:</h5>
-                    @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
-                    {
-                        <a class="list-group-item list-group-item-action" @onclick="() => this.OnLoadCrawledDataClick(fileName)">@(Path.GetFileName(fileName))</a>
-                    }
+                <div class="alert alert-secondary shadow" role="alert">
+                    <div class="list-group">
+                        <h4>Available crawled data:</h4>
+                        @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
+                        {
+                            <a class="list-group-item list-group-item-action" @onclick="() => this.OnLoadCrawledDataClick(fileName)">@(Path.GetFileName(fileName))</a>
+                        }
+                    </div>
                 </div>
             }
         </div>
@@ -78,47 +92,46 @@
         @if (this.PrepareContext.Sentences.Count > 0)
         {
             <div>
-                <div class="form-check form-check-inline">
-                    <span>Visible sentences: </span>
+                <div class="form-check-inline">
+                    <Pager PaginationState="@this._paginationState"/>
                 </div>
                 <div class="form-check form-check-inline">
-                    <InputCheckbox id="showInitial" class="form-check-input" @bind-Value="@this.ShowInitial"/>
+                    <span>Show: </span>
+                </div>
+                <div class="form-check-inline bg-secondary text-light rounded p-1">
+                    <InputCheckbox id="showInitial" class="form-check-input bg-secondary" @bind-Value="@this.ShowInitial" />
                     <label class="form-check-label" for="showInitial">Unprocessed</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <InputCheckbox id="showProcessed" class="form-check-input" @bind-Value="@this.ShowProcessed"/>
+                <div class="form-check-inline bg-primary text-light rounded p-1">
+                    <InputCheckbox id="showProcessed" class="form-check-input bg-primary" @bind-Value="@this.ShowProcessed" />
                     <label class="form-check-label" for="showProcessed">Analyzed</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <InputCheckbox id="showReviewed" class="form-check-input" @bind-Value="@this.ShowReviewed"/>
+                <div class="form-check-inline bg-success text-light rounded p-1">
+                    <InputCheckbox id="showReviewed" class="form-check-input bg-success" @bind-Value="@this.ShowReviewed" />
                     <label class="form-check-label" for="showReviewed">Accepted</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <InputCheckbox id="showRemoved" class="form-check-input" @bind-Value="@this.ShowRemoved"/>
-                    <label class="form-check-label" for="showRemoved">Removed</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <button type="button" class="btn btn-primary btn-sm" disabled="@(!this.PreviousPageAvailable)" @onclick="() => this.CurrentPageIndex--">
-                        <span class="oi oi-chevron-left"></span>
-                    </button>
-                    <span>Page @this.CurrentPageIndex of @this.TotalPageCount</span>
-                    <button type="button" class="btn btn-primary btn-sm" disabled="@(!this.NextPageAvailable)" @onclick="() => this.CurrentPageIndex++">
-                        <span class="oi oi-chevron-right"></span>
-                    </button>
+                <div class="form-check-inline bg-warning text-dark rounded p-1">
+                    <InputCheckbox id="showHidden" class="form-check-input bg-warning" @bind-Value="@this.ShowHidden" />
+                    <label class="form-check-label" for="showHidden">Hidden</label>
                 </div>
             </div>
+            <hr />
         }
-        @foreach (var sentenceContext in this.FilteredAndPagedSentences)
+        @foreach (var sentenceContext in this._paginationState.ItemsOfPage)
         {
-            <Sentence Context="@sentenceContext" OnStateChange="this.StateHasChanged"/>
+            <Sentence Context="@sentenceContext" OnStateChange="this.StateHasChanged" OnDelete="this.OnDeleteSentenceClick"/>
         }
 
-        @if (!this.SentenceAnalyzer.IsAnalyzing && this.PrepareContext.Sentences.Count > 0)
+        @if (!this.IsDialogOpen)
         {
             <hr/>
             <p>
-                <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-plus"></span> Add new sentence</button>
+                @if (this._paginationState.TotalPageCount > 1)
+                {
+                    <Pager PaginationState="@this._paginationState" />
+                }
+
+                <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Add new sentence</button>
             </p>
         }
     }

@@ -8,9 +8,9 @@
 
 <div class="alert @this.AlertClass" role="alert">
     <InputTextArea class="form-control" @bind-Value="this.Context.Sentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.Context.State is SentenceState.Reviewed)" />
-    <hr />
+    <hr class="border-0 opacity-25"/>
     <RelationsTable Relationships="@this.Context.Relationships" IsReadOnly="@(this.SentenceAnalyzer.IsAnalyzing || this.Context.State is SentenceState.Reviewed)"></RelationsTable>
-    <hr />
+    <hr class="border-0 opacity-25" />
 
     @if (this.Context.State is SentenceState.Processing)
     {
@@ -24,7 +24,7 @@
             <span class="oi oi-media-stop"> Cancel</span>
         </button>
     }
-    else if (this.Context.State is not (SentenceState.Reviewed or SentenceState.Removed))
+    else if (this.Context.State is not (SentenceState.Reviewed or SentenceState.Hidden))
     {
         <button type="button" class="btn btn-sm btn-outline-success btn-accept" aria-label="Accept" @onclick="OnAcceptClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-check"> Accept</span>
@@ -32,13 +32,18 @@
         <button type="button" class="btn btn-sm btn-outline-primary" @onclick="this.StartResolveSentence" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-media-play" role="status" aria-hidden="true"></span> Analyze
         </button>
-        <button type="button" class="btn btn-sm btn-outline-danger btn-remove"
-                aria-label="Remove" @onclick="OnRemoveClickAsync"
+        <button type="button" class="btn btn-sm btn-outline-info"
+                aria-label="Hide" @onclick="OnHideClickAsync"
                 disabled="@this.SentenceAnalyzer.IsAnalyzing">
-            <span class="oi oi-trash"> Remove</span>
+            <span class="oi oi-minus"> Hide</span>
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-danger"
+                aria-label="Delete" @onclick="OnDeleteClickAsync"
+                disabled="@this.SentenceAnalyzer.IsAnalyzing">
+            <span class="oi oi-trash"> Delete</span>
         </button>
     }
-    @if (this.Context.State is SentenceState.Reviewed or SentenceState.Removed)
+    @if (this.Context.State is SentenceState.Reviewed or SentenceState.Hidden)
     {
         <button type="button" class="btn btn-sm btn-outline-primary btn-edit" aria-label="Edit" @onclick="OnEditClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-pencil"> Edit</span>
@@ -48,7 +53,7 @@
     @if (this.Context.State is SentenceState.Processed
         && this.Context.LastException is not null)
     {
-        <hr/>
+        <hr class="border-0 border-danger opacity-25" />
         <p>
             <span>Last analyze Error: </span>
             <span>@this.Context.LastException.Message</span>

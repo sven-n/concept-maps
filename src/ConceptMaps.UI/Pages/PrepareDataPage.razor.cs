@@ -1,10 +1,13 @@
-﻿namespace ConceptMaps.UI.Pages;
+﻿using System.Security.AccessControl;
+
+namespace ConceptMaps.UI.Pages;
 
 using System.Text;
 using Microsoft.AspNetCore.Components;
 using ConceptMaps.Crawler;
-using ConceptMaps.UI.Services;
+using ConceptMaps.UI.Components;
 using ConceptMaps.UI.Data;
+using ConceptMaps.UI.Services;
 using System.Text.Json;
 
 /// <summary>
@@ -18,9 +21,9 @@ public partial class PrepareDataPage
 
     private bool _isLoadingCrawledData;
 
-    private int _currentPageIndex;
+    private bool _showPrepareDataSelection;
 
-    private int _pageSize = 10;
+    private readonly PaginationState<SentenceContext> _paginationState = new PaginationState<SentenceContext>();
 
     private HashSet<SentenceState> _visibleStates = new HashSet<SentenceState>
     {
@@ -28,8 +31,10 @@ public partial class PrepareDataPage
         { SentenceState.Processed },
         { SentenceState.Reviewed },
         { SentenceState.Processing },
-        { SentenceState.Removed },
+        { SentenceState.Hidden },
     };
+
+    private bool IsDialogOpen => this._showBatchAdding || this._showCrawledDataSelection || this._isLoadingCrawledData || this._showPrepareDataSelection;
 
     /// <summary>
     /// The injected <see cref="ICrawledDataProvider"/>.
@@ -39,6 +44,9 @@ public partial class PrepareDataPage
 
     [Inject]
     private SentenceAnalyzer SentenceAnalyzer { get; set; } = null!;
+
+    [Inject]
+    private IPrepareDataManager PrepareDataManager { get; set; } = null!;
 
     private DataPrepareContext PrepareContext { get; set; } = new();
 
@@ -60,44 +68,17 @@ public partial class PrepareDataPage
         set => _ = value ? this._visibleStates.Add(SentenceState.Reviewed) : this._visibleStates.Remove(SentenceState.Reviewed);
     }
 
-    private bool ShowRemoved
+    private bool ShowHidden
     {
-        get => this._visibleStates.Contains(SentenceState.Removed);
-        set => _ = value ? this._visibleStates.Add(SentenceState.Removed) : this._visibleStates.Remove(SentenceState.Removed);
+        get => this._visibleStates.Contains(SentenceState.Hidden);
+        set => _ = value ? this._visibleStates.Add(SentenceState.Hidden) : this._visibleStates.Remove(SentenceState.Hidden);
     }
 
-    private bool NextPageAvailable => this.TotalPageCount > this._currentPageIndex + 1;
-
-    private bool PreviousPageAvailable => this._currentPageIndex > 0;
-
-    private bool CurrentPageAvailable => this._currentPageIndex < this.TotalPageCount;
-
-    private int TotalPageCount
+    protected override void OnInitialized()
     {
-        get
-        {
-            var sentenceCount = this.FilteredSentences.Count();
-            var pageCount = sentenceCount / this._pageSize;
-            if (sentenceCount % this._pageSize > 0)
-            {
-                pageCount++;
-            }
-
-            return pageCount;
-        }
-    }
-
-    private int CurrentPageIndex
-    {
-        get
-        {
-            return Math.Min(this._currentPageIndex, this.TotalPageCount - 1);
-        }
-
-        set
-        {
-            this._currentPageIndex = Math.Min(value, this.TotalPageCount - 1);
-        }
+        this._paginationState.Items = this.FilteredSentences;
+        this._paginationState.PropertyChanged += (_, _) => this.InvokeAsync(this.StateHasChanged);
+        base.OnInitialized();
     }
 
     private IEnumerable<SentenceContext> FilteredSentences
@@ -109,19 +90,18 @@ public partial class PrepareDataPage
         }
     }
 
-    private IEnumerable<SentenceContext> FilteredAndPagedSentences
+    private void OnLoadContextAsync()
     {
-        get
-        {
-            if (!this.CurrentPageAvailable)
-            {
-                this._currentPageIndex = this.TotalPageCount - 1;
-            }
+        //this.PrepareDataManager.LoadAsync()
+    }
 
-            return this.FilteredSentences
-                .Skip(this._currentPageIndex * this._pageSize)
-                .Take(this._pageSize);
-        }
+    private async Task OnSaveContextAsync()
+    {
+        await PrepareDataManager.SaveAsync(this.PrepareContext);
+    }
+
+    private void OnClearContext()
+    {
     }
 
     public void StartAnalyzeAll()
@@ -136,6 +116,12 @@ public partial class PrepareDataPage
     private void AddNewSentence()
     {
         this.PrepareContext.Sentences.Add(new SentenceContext());
+    }
+
+    private void OnDeleteSentenceClick(SentenceContext sentence)
+    {
+        this.PrepareContext.Sentences.Remove(sentence);
+        this.StateHasChanged();
     }
 
     private async Task OnLoadCrawledDataClick(string path)

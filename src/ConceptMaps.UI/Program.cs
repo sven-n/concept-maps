@@ -13,6 +13,7 @@ builder.Services.AddSingleton<RemoteTripleService>();
 builder.Services.AddSingleton<RemoteTrainingService>();
 builder.Services.AddSingleton<IModelProvider, ModelProvider>();
 builder.Services.AddSingleton<ITrainingDataProvider, TrainingDataProvider>();
+builder.Services.AddSingleton<IPrepareDataManager, PrepareDataManager>();
 builder.Services.AddSingleton<DiagramService>();
 builder.Services.AddSingleton<ILayoutAlgorithmFactory, StandardLayoutAlgorithmFactory>();
 builder.Services.AddSingleton<ICrawledDataProvider, CrawledDataProvider>();

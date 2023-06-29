@@ -13,4 +13,15 @@ public class Relationship
 
     [JsonPropertyName("relationshipType")]
     public string? KnownRelationshipType { get; set; }
+
+    public Relationship Clone()
+    {
+        return new Relationship
+        {
+            FirstEntity = this.FirstEntity,
+            SecondEntity = this.SecondEntity,
+            RelationshipTypeInSentence = this.RelationshipTypeInSentence,
+            KnownRelationshipType = this.KnownRelationshipType,
+        };
+    }
 }

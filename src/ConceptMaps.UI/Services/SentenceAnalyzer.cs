@@ -1,4 +1,6 @@
-﻿namespace ConceptMaps.UI.Services;
+﻿using Microsoft.AspNetCore.Components;
+
+namespace ConceptMaps.UI.Services;
 
 using ConceptMaps.Crawler;
 using ConceptMaps.UI.Data;
@@ -14,7 +16,22 @@ public class SentenceAnalyzer
         _remoteTripleService = remoteTripleService;
     }
 
-    public bool IsAnalyzing => this._isAnalyzing;
+    public bool IsAnalyzing
+    {
+        get => this._isAnalyzing;
+        set
+        {
+            if (this._isAnalyzing == value)
+            {
+                return;
+            }
+
+            this._isAnalyzing = value;
+            this.IsAnalyzingChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public event EventHandler IsAnalyzingChanged;
 
     public bool IsCancelled => this._resolveCts?.IsCancellationRequested ?? false;
 
@@ -41,6 +58,7 @@ public class SentenceAnalyzer
             throw new InvalidOperationException("Can only start one resolve action at a time.");
         }
 
+        this.IsAnalyzing = true;
         var cts = this._resolveCts = new CancellationTokenSource();
         _ = Task.Run(async () =>
         {
@@ -59,6 +77,7 @@ public class SentenceAnalyzer
             finally
             {
                 progress.Report(i);
+                this.IsAnalyzing = false;
             }
         });
     }
@@ -66,7 +85,7 @@ public class SentenceAnalyzer
 
     private async Task DoAnalyzeAllAsync(DataPrepareContext prepareContext, IProgress<int> progress, CancellationToken cancellationToken)
     {
-        this._isAnalyzing = true;
+        this.IsAnalyzing = true;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -88,7 +107,7 @@ public class SentenceAnalyzer
         }
         finally
         {
-            this._isAnalyzing = false;
+            this.IsAnalyzing = false;
             this._resolveCts?.Dispose();
             this._resolveCts = null;
             progress.Report(-2);

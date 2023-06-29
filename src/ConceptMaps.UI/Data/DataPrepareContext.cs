@@ -10,25 +10,21 @@ public class DataPrepareContext
         this.Sentences = new();
     }
 
+    public string Name { get; set; } = DateTime.Now.ToString("yyyyMMdd_hhmmss");
+
     public List<SentenceContext> Sentences { get; set; }
 
     public int ReviewedSentences => this.Sentences.Count(s => s.State == SentenceState.Reviewed);
 
-    public void Save()
-    {
-        // todo: save this instance, so someone can continue to work after a crash or break
-    }
-
     public async Task LoadCrawlDataAsync(string selectedFile)
     {
-        // todo: check if file already loaded?
         await using var fileStream = File.OpenRead(selectedFile);
         var crawledData = await JsonSerializer.DeserializeAsync<SentenceRelationships[]>(fileStream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         crawledData ??= Array.Empty<SentenceRelationships>();
         Sentences.AddRange(crawledData.Select(cd => new SentenceContext(cd.Sentence)
         {
             Relationships = cd.Relationships,
-            State = SentenceState.Processed,
+            State = SentenceState.Initial,
         }));
     }
 

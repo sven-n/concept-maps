@@ -40,7 +40,14 @@ public partial class AddSentenceBatch
                 finalSentence = match.Groups[2].Value;
             }
 
-            this.PrepareContext.Sentences.Add(new SentenceContext(finalSentence));
+            var sentenceContext = new SentenceContext(finalSentence);
+            sentenceContext.Relationships.AddRange(this.Relationships.Select(r => r.Clone()));
+            if (sentenceContext.Relationships.Count > 0)
+            {
+                sentenceContext.State = SentenceState.Reviewed;
+            }
+
+            this.PrepareContext.Sentences.Add(sentenceContext);
         }
 
         this.FreeText = null;

@@ -10,5 +10,7 @@ public enum SentenceState
 
     Reviewed,
 
-    Removed,
+    Hidden,
+
+    Deleted,
 }
