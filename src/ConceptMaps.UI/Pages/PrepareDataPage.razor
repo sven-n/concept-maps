@@ -1,7 +1,6 @@
 ﻿@page "/prepare-data"
-@using ConceptMaps.UI.Data
+
 @using ConceptMaps.UI.Components
-@using AngleSharp.Dom
 
 <h3>Data Preparation</h3>
 
@@ -9,53 +8,118 @@
 
 <div>
     <p>
-        <label for="selection">Data:</label>
-        <InputSelect TValue="string" @bind-Value="@SelectedFile" id="selection">
-            <option value="" selected="@(this.SelectedFile == string.Empty)">Select a crawled file or add a sentence</option>
-            @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
+        <div class="btn-group">
+            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-plus"></span> Add new sentence</button>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle mx-1" type="button"
+                        data-toggle="dropdown"
+                        aria-expanded="@this._showCrawledDataSelection"
+                        disabled="@this._showBatchAdding"
+                        @onclick="() => this._showCrawledDataSelection = !this._showCrawledDataSelection">
+                    <span class="oi oi-plus"></span> Add crawled sentences
+                </button>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle mx-1"
+                        type="button" id="freeTextMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="@this._showBatchAdding"
+                    disabled="@(this._showCrawledDataSelection || this.SentenceAnalyzer.IsAnalyzing)"
+                    @onclick="() => this._showBatchAdding = !this._showBatchAdding">
+                    <span class="oi oi-plus"></span> Batch
+                </button>
+            </div>
+
+            @if (!this.SentenceAnalyzer.IsAnalyzing)
             {
-                <option value="@fileName" selected="@(this.SelectedFile == fileName)">@(Path.GetFileName(fileName))</option>
+                <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-media-play"></span> Analyze all</button>
+                <button class="btn btn-primary mx-1" onclick="@(() => this.SaveTrainingDataAsync(default))" disabled="@(this.PrepareContext.ReviewedSentences == 0 || this._showBatchAdding || this._showCrawledDataSelection)">
+                    <span class="oi oi-loop-square"></span> Save (@(this.PrepareContext.ReviewedSentences) accepted)
+                </button>
             }
-        </InputSelect>
-    </p>
-    <p>
-        @if (!this.SentenceAnalyzer.IsAnalyzing)
-        {
-            <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll"><span class="oi oi-media-play"></span> Analyze all</button>
-            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
-            @if (this.PrepareContext is not null)
+            else
             {
-                <!-- todo: show spinner -->
-                <button class="btn btn-primary mx-1" onclick="@(() =>this.GetTrainingDataAsync(default))"><span class="oi oi-loop-square"></span> Save Training Data (@(this.PrepareContext.ReviewedSentences) selected)</button>
+                <button class="btn btn-primary mx-1" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Analyzing ...</span>
+                </button>
+                <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
             }
-        }
-        else
-        {
-            <button class="btn btn-primary mx-1" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span class="sr-only">Analyzing ...</span>
-            </button>
-            <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
-        }
-        <hr />
-    </p>
-    @if (this.PrepareContext is { } context)
-    {
-        @foreach (var sentenceContext in context.Sentences.Where(s => s.State != SentenceState.Removed))
-        {
-            <Sentence Context="@sentenceContext" />
-        }
-    }
-    
-    @if (!this.SentenceAnalyzer.IsAnalyzing)
-    {
+        </div>
         <hr/>
-        <p>
-            <button class="btn btn-primary" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
-            @if (this.PrepareContext is not null)
+    </p>
+    @if (this._showCrawledDataSelection)
+    {
+        <div>
+            @if (this._isLoadingCrawledData)
             {
-                <button class="btn btn-primary mx-1" onclick="@this.PrepareContext.Save"><span class="oi oi-data-transfer-download"></span> Save</button>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Adding crawled data ...</span>
             }
-        </p>
+            else
+            {
+                <div class="list-group">
+                    <h5>Available crawled data:</h5>
+                    @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
+                    {
+                        <a class="list-group-item list-group-item-action" @onclick="() => this.OnLoadCrawledDataClick(fileName)">@(Path.GetFileName(fileName))</a>
+                    }
+                </div>
+            }
+        </div>
+    }
+    @if (this._showBatchAdding)
+    {
+        <AddSentenceBatch PrepareContext="@PrepareContext" OnAdded="this.OnAddedBatchSentences" OnCancel="this.OnCancelBatchSentences"></AddSentenceBatch>
+    }
+    else
+    {
+        @if (this.PrepareContext.Sentences.Count > 0)
+        {
+            <div>
+                <div class="form-check form-check-inline">
+                    <span>Visible sentences: </span>
+                </div>
+                <div class="form-check form-check-inline">
+                    <InputCheckbox id="showInitial" class="form-check-input" @bind-Value="@this.ShowInitial"/>
+                    <label class="form-check-label" for="showInitial">Unprocessed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <InputCheckbox id="showProcessed" class="form-check-input" @bind-Value="@this.ShowProcessed"/>
+                    <label class="form-check-label" for="showProcessed">Analyzed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <InputCheckbox id="showReviewed" class="form-check-input" @bind-Value="@this.ShowReviewed"/>
+                    <label class="form-check-label" for="showReviewed">Accepted</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <InputCheckbox id="showRemoved" class="form-check-input" @bind-Value="@this.ShowRemoved"/>
+                    <label class="form-check-label" for="showRemoved">Removed</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <button type="button" class="btn btn-primary btn-sm" disabled="@(!this.PreviousPageAvailable)" @onclick="() => this.CurrentPageIndex--">
+                        <span class="oi oi-chevron-left"></span>
+                    </button>
+                    <span>Page @this.CurrentPageIndex of @this.TotalPageCount</span>
+                    <button type="button" class="btn btn-primary btn-sm" disabled="@(!this.NextPageAvailable)" @onclick="() => this.CurrentPageIndex++">
+                        <span class="oi oi-chevron-right"></span>
+                    </button>
+                </div>
+            </div>
+        }
+        @foreach (var sentenceContext in this.FilteredAndPagedSentences)
+        {
+            <Sentence Context="@sentenceContext" OnStateChange="this.StateHasChanged"/>
+        }
+
+        @if (!this.SentenceAnalyzer.IsAnalyzing && this.PrepareContext.Sentences.Count > 0)
+        {
+            <hr/>
+            <p>
+                <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this._showBatchAdding || this._showCrawledDataSelection)"><span class="oi oi-plus"></span> Add new sentence</button>
+            </p>
+        }
     }
 </div>

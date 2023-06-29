@@ -1,0 +1,38 @@
+﻿<h5>Relationships:</h5>
+<table class="table table-striped">
+    <tbody>
+    @foreach (var rel in this.Relationships)
+    {
+        <tr class="row justify-content-start">
+            <td class="col-md-auto">
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" aria-label="Remove" @onclick="() => this.Relationships.Remove(rel)">
+                    <span class="oi oi-trash"></span>
+                </button>
+            </td>
+            <td class="col-3">
+                <InputText class="form-control form-control-sm" @bind-Value="rel.FirstEntity" placeholder="Enter Name" disabled="@this.IsReadOnly"></InputText>
+            </td>
+            <td class="col-3">
+                <InputSelect class="form-select form-select-sm" @bind-Value="@rel.RelationshipTypeInSentence" disabled="@this.IsReadOnly">
+                    <option selected="@(rel.IsUndefined())" value="undefined">unrelated</option>
+                    <option selected="@(rel.IsSiblings())" value="SIBLINGS">is sibling of</option>
+                    <option selected="@(rel.IsSpouse())" value="SPOUSE">is married with</option>
+                    <option selected="@(rel.IsChildren())" value="CHILDRED">is child of</option>
+                </InputSelect>
+            </td>
+            <td class="col-3">
+                    <InputText class="form-control form-control-sm" @bind-Value="rel.SecondEntity" placeholder="Enter Name" disabled="@this.IsReadOnly"></InputText>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <button type="button" class="btn btn-outline-primary" aria-label="Add Relationship" @onclick="this.OnAddRelationshipClick">
+                <span class="oi oi-plus"> Add Relationship</span>
+            </button>
+        </td>
+    </tr>
+    </tfoot>
+</table>

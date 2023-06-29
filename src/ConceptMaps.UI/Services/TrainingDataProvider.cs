@@ -8,6 +8,11 @@ public class TrainingDataProvider : ITrainingDataProvider
         {
             // todo: this must be improved...
             var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Relation.AsString());
+            if (!Directory.Exists(folderPath))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             return Directory.EnumerateFiles(folderPath, "*.json").Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }
@@ -17,6 +22,11 @@ public class TrainingDataProvider : ITrainingDataProvider
         get
         {
             var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Nrt.AsString());
+            if (!Directory.Exists(folderPath))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             return Directory.EnumerateFiles(folderPath, "*.json").Where(name => !string.IsNullOrWhiteSpace(name))!;
         }
     }

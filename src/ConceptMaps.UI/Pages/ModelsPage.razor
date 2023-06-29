@@ -1,5 +1,5 @@
 ﻿@page "/models"
-@using ConceptMaps.UI.Data
+
 @using ConceptMaps.UI.Components
 @using ConceptMaps.UI.Services
 
@@ -13,8 +13,14 @@
             {
                 <Model ModelType="ModelType.Nrt" ModelName="@model"></Model>
             }
-            
-            <StartTraining ModelType="ModelType.Nrt" />
+
+            @if (!this._relationTrainingStatus.IsActive)
+            {
+                <hr />
+                <StartTraining ModelType="ModelType.Nrt"/>
+            }
+            <hr />
+            <TrainingStatus ModelType="ModelType.Nrt" Status="this._nrtTrainingStatus"></TrainingStatus>
         </div>
         <div class="col-6">
             <h5>Relations</h5>
@@ -22,8 +28,14 @@
             {
                 <Model ModelType="ModelType.Nrt" ModelName="@model"></Model>
             }
-            
-            <StartTraining ModelType="ModelType.Relation" />
+
+            @if (!this._relationTrainingStatus.IsActive)
+            {
+                <hr />
+                <StartTraining ModelType="ModelType.Relation"/>
+            }
+            <hr />
+            <TrainingStatus ModelType="ModelType.Relation" Status="this._relationTrainingStatus"></TrainingStatus>
         </div>
     </div>
 </div>
