@@ -39,10 +39,13 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         # Zu JSON serialisieren und in den response body schreiben:
-        serialized = json.dumps(obj, default=vars)
-        result_bytes = bytes(serialized, DEFAULT_ENCODING)
-        self.wfile.write(result_bytes)
-        print(f"Wrote {result_bytes} bytes as response.")
+        try:
+            serialized = json.dumps(obj, default=vars)
+            result_bytes = bytes(serialized, DEFAULT_ENCODING)
+            self.wfile.write(result_bytes)
+            print(f"Wrote {result_bytes} bytes as response.")
+        except Exception as ex:
+            print(ex)
 
     def get_body_as_str(self) -> str:
         """Get the request body as string.
@@ -77,10 +80,16 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(bytes("Training is already in progress.", DEFAULT_ENCODING))
         else:
-            body_string = self.get_body_as_str()
-            json_obj = json.loads(body_string)
-            model_source_name = self.path.replace(TRAINING_RELATIONS_START_PATH, '', 1).split('/')[0]
-            trainer.start_training(json_obj, model_source_name)
+            try:
+                body_string = self.get_body_as_str()
+                json_obj = json.loads(body_string)
+                model_source_name = self.path.replace(TRAINING_RELATIONS_START_PATH, '', 1).split('/')[0]
+                trainer.start_training(json_obj, model_source_name)
+                self.send_response(200)
+            except Exception as ex:
+                self.wfile.write(bytes(ex, DEFAULT_ENCODING))
+                self.send_response(500)
+            self.end_headers()
 
     def handle_train_cancel(self, trainer: ModelTrainingBase):
         """Handle training cancellation."""
@@ -90,6 +99,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes("Training is not in progress.", DEFAULT_ENCODING))
         else:
             trainer.cancel_training()
+            self.send_response(200)
+            self.end_headers()
 
     def handle_train_status(self, trainer: ModelTrainingBase):
         """Handle the training status request."""

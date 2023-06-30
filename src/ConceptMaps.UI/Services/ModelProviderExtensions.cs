@@ -4,7 +4,7 @@ public static class ModelProviderExtensions
 {
     public static bool IsActiveModel(this IModelProvider provider, ModelType modelType, string modelName)
     {
-        if (modelType == ModelType.Nrt)
+        if (modelType == ModelType.Ner)
         {
             return provider.ActiveNrtModel == modelName;
         }

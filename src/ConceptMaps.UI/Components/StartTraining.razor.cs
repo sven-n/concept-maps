@@ -41,7 +41,7 @@ public partial class StartTraining : IDisposable
         {
             this._startSuccess = await this.StartTrainingAsync<SentenceRelationships>(this._startCts.Token);
         }
-        else if (this.ModelType == ModelType.Nrt)
+        else if (this.ModelType == ModelType.Ner)
         {
             this._startSuccess = await this.StartTrainingAsync<SentenceEntities>(this._startCts.Token);
         }

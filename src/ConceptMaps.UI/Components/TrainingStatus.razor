@@ -11,20 +11,21 @@
 else
 {
     <div>
-        State: @this.Status.State
+        State: @(this.Status.State ?? "-")
     </div>
 }
 
-@if (!string.IsNullOrWhiteSpace(this.Status.Output))
+@if (this.Status.Output?.Any() ?? false)
 {
     <div class="alert alert-dark" role="alert">
         <h6 class="alert-heading">Standard Output</h6>
         <hr/>
+        
         <pre><code>@this.Status.Output</code></pre>
     </div>
 }
 
-@if (!string.IsNullOrWhiteSpace(this.Status.Error))
+@if (this.Status.Error?.Any() ?? false)
 {
     <div class="alert alert-warning" role="alert">
         <h6 class="alert-heading">Error Output</h6>

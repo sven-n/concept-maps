@@ -7,7 +7,7 @@ using ConceptMaps.UI.Services;
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
 /// </summary>
-public partial class ModelsPage
+public partial class ModelsPage : IDisposable
 {
     /// <summary>
     /// Gets or sets the injected <see cref="IModelProvider"/>.
@@ -20,10 +20,8 @@ public partial class ModelsPage
     
     private Task _refreshStatusTask;
 
-    private CancellationTokenSource _disposeCts = new();
-
-    private TrainingStatus _nrtTrainingStatus = new();
-
+    private CancellationTokenSource? _disposeCts;
+    
     private TrainingStatus _relationTrainingStatus = new();
 
     protected override Task OnInitializedAsync()
@@ -34,25 +32,37 @@ public partial class ModelsPage
 
     private async Task RefreshStatusLoopAsync()
     {
-        var cancellationToken = this._disposeCts.Token;
+        var cancellationToken = (this._disposeCts ??= new()).Token;
         while (true)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                this._nrtTrainingStatus = await this.TrainingService.GetTrainingStatus(ModelType.Nrt, cancellationToken).ConfigureAwait(false);
                 this._relationTrainingStatus = await this.TrainingService.GetTrainingStatus(ModelType.Relation, cancellationToken).ConfigureAwait(false);
+                await this.InvokeAsync(this.StateHasChanged);
                 await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
-                break;
+                // The exception may also occur, when the http client runs into a timeout.
+                // In that case, we don't want to stop the loop.
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    break;
+                }
             }
             catch
             {
                 // try again next time ...
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _disposeCts?.Cancel();
+        _disposeCts?.Dispose();
+        _disposeCts = null;
     }
 }
 

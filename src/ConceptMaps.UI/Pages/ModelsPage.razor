@@ -5,37 +5,41 @@
 
 <h3>Models</h3>
 
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <h5>NRT</h5>
-            @foreach (var model in this.ModelProvider.NrtModels)
-            {
-                <Model ModelType="ModelType.Nrt" ModelName="@model"></Model>
-            }
+<div class="accordion" id="modelsAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headerRelation">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRelation" aria-expanded="true" aria-controls="collapseRelation">
+                @if (_relationTrainingStatus.IsActive)
+                {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                }
+                else if (this.ModelProvider.ActiveRelationsModel is null)
+                {
+                    <span class="oi oi-circle-x" role="status" aria-hidden="true"></span>
+                }
+                else
+                {
+                    <span class="oi oi-circle-check" role="status" aria-hidden="true"></span>
+                }
+                <span>  </span>
+                <span> Relations</span>
+            </button>
+        </h2>
+        <div id="collapseRelation" class="accordion-collapse collapse show" aria-labelledby="headerRelation" data-bs-parent="#modelsAccordion">
+            <div class="accordion-body">
+                @foreach (var model in this.ModelProvider.RelationsModels)
+                {
+                    <Model ModelType="ModelType.Relation" ModelName="@model"></Model>
+                }
 
-            @if (!this._relationTrainingStatus.IsActive)
-            {
+                @if (!this._relationTrainingStatus.IsActive)
+                {
+                    <hr />
+                    <StartTraining ModelType="ModelType.Relation" />
+                }
                 <hr />
-                <StartTraining ModelType="ModelType.Nrt"/>
-            }
-            <hr />
-            <TrainingStatus ModelType="ModelType.Nrt" Status="this._nrtTrainingStatus"></TrainingStatus>
-        </div>
-        <div class="col-6">
-            <h5>Relations</h5>
-            @foreach (var model in this.ModelProvider.RelationsModels)
-            {
-                <Model ModelType="ModelType.Nrt" ModelName="@model"></Model>
-            }
-
-            @if (!this._relationTrainingStatus.IsActive)
-            {
-                <hr />
-                <StartTraining ModelType="ModelType.Relation"/>
-            }
-            <hr />
-            <TrainingStatus ModelType="ModelType.Relation" Status="this._relationTrainingStatus"></TrainingStatus>
+                <TrainingStatus ModelType="ModelType.Relation" Status="this._relationTrainingStatus"></TrainingStatus>
+            </div>
         </div>
     </div>
 </div>

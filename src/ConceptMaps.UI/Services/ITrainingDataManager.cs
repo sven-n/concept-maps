@@ -19,7 +19,7 @@ public static class TrainingDataProviderExtensions
 {
     public static IEnumerable<string> GetFiles(this ITrainingDataManager dataManager, ModelType modelType)
     {
-        if (modelType is ModelType.Nrt)
+        if (modelType is ModelType.Ner)
         {
             return dataManager.NrtDataFiles;
         }

@@ -4,7 +4,7 @@ public interface IModelProvider
 {
     IEnumerable<string> RelationsModels { get; }
 
-    IEnumerable<string> NrtModels { get; }
+    IEnumerable<string> NerModels { get; }
 
     string? ActiveRelationsModel { get; }
 

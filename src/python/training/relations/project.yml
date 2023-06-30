@@ -18,11 +18,11 @@ workflows:
   all:
     - train_cpu
     - evaluate
-    - copy_model
+    #- copy_model
   all_gpu:
     - train_gpu
     - evaluate
-    - copy_model
+    #- copy_model
 
 # Project commands, specified in a style similar to CI config files (e.g. Azure
 # pipelines). The name is the command name that lets you trigger the command

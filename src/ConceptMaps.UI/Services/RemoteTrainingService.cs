@@ -15,14 +15,21 @@ public class RemoteTrainingService
 
     public async Task<bool> StartTrainingAsync<T>(ModelType modelType, IList<T> sentences, string? sourceModel, string targetModel, CancellationToken cancellationToken = default)
     {
-        var uri = GetStartUri(modelType, sourceModel);
-        var serializedInput = JsonSerializer.Serialize(sentences.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
-        using var client = new HttpClient();
-        var response = await client.PostAsync(
-            uri,
-            new StringContent(serializedInput, Encoding.UTF8, mediaType: "application/json"),
-            cancellationToken);
-        return response.IsSuccessStatusCode;
+        try
+        {
+            var uri = GetStartUri(modelType, sourceModel);
+            var serializedInput = JsonSerializer.Serialize(sentences.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            using var client = new HttpClient();
+            var response = await client.PostAsync(
+                uri,
+                new StringContent(serializedInput, Encoding.UTF8, mediaType: "application/json"),
+                cancellationToken);
+            return response.IsSuccessStatusCode;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public async Task<bool> StopTrainingAsync(ModelType modelType, CancellationToken cancellationToken = default)
@@ -40,10 +47,22 @@ public class RemoteTrainingService
     {
         var uri = GetUri(modelType, ActionStatus);
         using var client = new HttpClient();
-        return await client.GetFromJsonAsync<TrainingStatus>(
-            uri,
-            JsonSerializerOptions,
-            cancellationToken);
+        try
+        {
+            return await client.GetFromJsonAsync<TrainingStatus>(
+                uri,
+                JsonSerializerOptions,
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            return new TrainingStatus
+            {
+                IsActive = false,
+                State = "no connection",
+                Error = ex.Message,
+            };
+        }
     }
 
     private static string GetStartUri(ModelType modelType, string? sourceModel)

@@ -10,7 +10,7 @@ public static class ModelTypeExtensions
     {
         switch (modelType)
         {
-            case ModelType.Nrt:
+            case ModelType.Ner:
                 return NrtModelType;
             case ModelType.Relation:
                 return RelationModelType;

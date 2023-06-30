@@ -31,7 +31,7 @@ public class TrainingDataManager : ITrainingDataManager
     {
         get
         {
-            var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Nrt.AsString());
+            var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Ner.AsString());
             if (!Directory.Exists(folderPath))
             {
                 return Enumerable.Empty<string>();

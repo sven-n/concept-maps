@@ -4,5 +4,5 @@ public enum ModelType
 {
     Relation,
 
-    Nrt,
+    Ner,
 }

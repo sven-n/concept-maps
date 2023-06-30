@@ -14,7 +14,7 @@ public class ModelProvider : IModelProvider
         }
     }
 
-    public IEnumerable<string> NrtModels
+    public IEnumerable<string> NerModels
     {
         get
         {

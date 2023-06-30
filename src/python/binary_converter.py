@@ -5,7 +5,9 @@ import random
 from pathlib import Path
 from typing import Tuple
 import spacy
+from spacy.language import Language
 from spacy.tokens import DocBin, Doc, Token
+from spacy.vocab import Vocab
 
 from wasabi import Printer
 
@@ -14,29 +16,32 @@ msg = Printer()
 SYMM_LABELS = ["Binds"]
 DIRECTED_LABELS = {"CHILDREN", "SPOUSE", "SIBLINGS", "undefined"}
 
+nlp = spacy.load("en_core_web_sm") # we need the NLP parse sentence strings to tokens
+Doc.set_extension("rel", default={}, force=True)
+vocab = Vocab()
+
 def create_relation_training_files(training_data: list[dict], output_dir: Path,
                                    test_portion: float = 0.2, dev_portion : float = 0.3):
     """Creating the corpus from the annotations."""
 
-    nlp = spacy.load("en_core_web_sm") # we need the NLP for tokenization
-
-    Doc.set_extension("rel", default={}, force=True)
     failed_examples = []
     docs = {"train": [], "dev": [], "test": [], "total": []}
 
+    random.shuffle(training_data)
     for sentence in training_data:
-        #try:
+        try:
             is_simple = "relationships" in sentence
             if is_simple:
-                (doc, contains_relation) = parse_simple_sentence(nlp, sentence)
+                (doc, contains_relation) = parse_simple_sentence(sentence)
             else:
-                (doc, contains_relation) = parse_sentence(nlp, sentence)
+                (doc, contains_relation) = parse_sentence(sentence)
 
             # only keeping documents with at least 1 positive case
             if contains_relation:
                 randomized_append(docs, doc, test_portion, dev_portion)
-        #except Exception as e:
-        #    failed_examples.append(sentence)
+        except Exception as ex:
+            failed_examples.append(sentence)
+            msg.fail(f"failed to include '{sentence['sentence']}' in the training data set. Exception: {ex}")
 
     save_spacy_docs(docs, output_dir)
 
@@ -50,22 +55,26 @@ def randomized_append(docs: dict[str, list], doc: Doc, test_portion: float, dev_
     else:
         docs["train"].append(doc)
 
-def parse_sentence(nlp, example) -> Tuple[Doc, bool]:
+def parse_sentence(example: dict) -> Tuple[Doc, bool]:
     """
     Parses the sentence data into a spaCy Doc.
     
     :return: Tuple of the parsed document, and a value if the document contains a relation.
     """
 
-    doc = nlp(example["sentence"])
-    span_end_to_start = {}
+    tokens=nlp(example["sentence"])
+    spaces=[]
+    spaces = [True if tok.whitespace_ else False for tok in tokens]
+    words = [t.text for t in tokens]
+    doc = Doc(nlp.vocab, words=words, spaces=spaces)
+
     span_starts = set()
-    parse_entities(doc, example["tokens"], span_end_to_start, span_starts)
+    parse_entities(doc, example["tokens"], span_starts)
     rels = prepare_rels(doc, span_starts)
-    contains_relations = parse_relations(rels, example, span_end_to_start)
+    contains_relations = parse_relations(rels, example)
     return doc, contains_relations
 
-def parse_simple_sentence(nlp, example) -> Tuple[Doc, bool]:
+def parse_simple_sentence(example: dict) -> Tuple[Doc, bool]:
     """
     Parses the "simple" sentence data into a spaCy Doc.
     The "simple" json format just contain the sentence and each relation, but without
@@ -74,7 +83,12 @@ def parse_simple_sentence(nlp, example) -> Tuple[Doc, bool]:
     :return: Tuple of the parsed document, and a value if the document contains a relation.
     """
 
-    doc=nlp(example["sentence"])
+    tokens = nlp(example["sentence"])
+    spaces=[]
+    spaces = [True if tok.whitespace_ else False for tok in tokens]
+    words = [t.text for t in tokens]
+    doc = Doc(nlp.vocab, words=words, spaces=spaces)
+    
     span_starts = set()
     span_end_to_start = {}
     entity_tokens = extract_entity_tokens(doc, example["relationships"])
@@ -87,12 +101,12 @@ def parse_simple_sentence(nlp, example) -> Tuple[Doc, bool]:
 def prepare_rels(doc: Doc, span_starts: list[int]) -> dict:
     "Prepares the dictionary for the relations."
     rels = {}
-    doc._.rel = rels
     for i in span_starts:
         for j in span_starts:
             rels[(i, j)] = {}
             for label in DIRECTED_LABELS:
                 rels[(i, j)][label] = 0.0
+    doc._.rel = rels
     return rels
 
 def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
@@ -105,13 +119,10 @@ def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
         first_entity_token = find_token_by_name(entity_tokens, relationship['firstEntity'])
         second_entity_token = find_token_by_name(entity_tokens, relationship['secondEntity'])
         if first_entity_token is not None and second_entity_token is not None:
-            # the 'head' and 'child' annotations refer to the end token in the span
-            # but we want the first token
-            child_end = first_entity_token["token_end"]
-            head_end = second_entity_token["token_end"]
-
-            start = span_end_to_start[head_end]
-            end = span_end_to_start[child_end]
+            child_start = first_entity_token["token_start"]
+            head_start = second_entity_token["token_start"]
+            start = head_start
+            end = child_start
             if label not in DIRECTED_LABELS:
                 msg.warn(f"Found label '{label}' not defined in DIRECTED_LABELS - skipping")
                 break
@@ -119,15 +130,15 @@ def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
             positives += 1
     return positives > 0
 
-def parse_relations(rels: dict, example, span_end_to_start: dict) -> bool:
+def parse_relations(rels: dict, example) -> bool:
     """Parses the relations for the "normal" json format."""
     positives = 0
     relations = example["relations"]
     for relation in relations:
         # the 'head' and 'child' annotations refer to the end token in the span
         # but we want the first token
-        start = span_end_to_start[relation["head"]]
-        end = span_end_to_start[relation["child"]]
+        start = relation["head"]
+        end =  relation["child"]
         label = relation["relationLabel"]
         if label not in DIRECTED_LABELS:
             msg.warn(f"Found label '{label}' not defined in DIRECTED_LABELS - skipping")
@@ -205,14 +216,13 @@ def find_token_by_end(doc: Doc, end_index: int) -> (Token|None):
         if token.idx + len(token.text) == end_index:
             return token
 
-def parse_entities(doc: Doc, entity_tokens: list[dict], span_end_to_start: dict, span_starts: set):
+def parse_entities(doc: Doc, entity_tokens: list[dict], span_starts: set):
     """Parses the entities and sets it in the given document."""
     entities = []
     for entity_token in entity_tokens:
         start = entity_token['start']
         end = entity_token['end']
         entity = doc.char_span(start, end, label = "PERSON")
-        span_end_to_start[entity_token["token_end"]] = entity_token["token_start"]
         entities.append(entity)
         span_starts.add(entity_token["token_start"])
     doc.ents = entities

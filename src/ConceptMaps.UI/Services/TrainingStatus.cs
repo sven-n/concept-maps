@@ -8,11 +8,11 @@ public class TrainingStatus
     public bool IsActive { get; set; }
 
     [JsonPropertyName("state")]
-    public string State { get; set; }
+    public string? State { get; set; }
 
     [JsonPropertyName("output")]
-    public string Output { get; set; }
+    public string? Output { get; set; }
 
     [JsonPropertyName("error")]
-    public string Error { get; set; }
+    public string? Error { get; set; }
 }
