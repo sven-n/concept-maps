@@ -6,7 +6,9 @@ public class CrawledDataProvider : ICrawledDataProvider
 {
     private const string FileNameExtension = "json";
 
-    private static string ConfigFolder { get; } = Path.Combine(Path.GetDirectoryName(typeof(JsonWebsiteSettingsProvider).Assembly.Location)!, "crawl-results");
+    public static string SubFolder => "crawl-results";
+
+    private static string ConfigFolder { get; } = Path.Combine(Path.GetDirectoryName(typeof(JsonWebsiteSettingsProvider).Assembly.Location)!, SubFolder);
     private static JsonSerializerOptions SerializerOptions { get; } = new(JsonSerializerDefaults.Web) { WriteIndented = true };
 
     /// <inheritdoc />

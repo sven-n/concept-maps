@@ -51,7 +51,7 @@ public class PaginationState<T> : INotifyPropertyChanged
                 pageCount++;
             }
 
-            return pageCount;
+            return Math.Max(pageCount, 1);
         }
     }
 

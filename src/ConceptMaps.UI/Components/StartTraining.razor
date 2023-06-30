@@ -4,7 +4,7 @@
 
 <div>
     <ul class="list-group mb-3">
-        @foreach (var trainingFile in this.TrainingDataProvider.GetFiles(this.ModelType))
+        @foreach (var trainingFile in this.TrainingDataManager.GetFiles(this.ModelType))
         {
             <li class="list-group-item">
                 <nobr>

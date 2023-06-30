@@ -17,15 +17,11 @@ public partial class PrepareDataPage
 {
     private bool _showBatchAdding;
 
-    private bool _showCrawledDataSelection;
-
     private bool _isLoadingCrawledData;
-
-    private bool _showPrepareDataSelection;
 
     private readonly PaginationState<SentenceContext> _paginationState = new PaginationState<SentenceContext>();
 
-    private HashSet<SentenceState> _visibleStates = new HashSet<SentenceState>
+    private readonly HashSet<SentenceState> _visibleStates = new HashSet<SentenceState>
     {
         { SentenceState.Initial },
         { SentenceState.Processed },
@@ -34,7 +30,7 @@ public partial class PrepareDataPage
         { SentenceState.Hidden },
     };
 
-    private bool IsDialogOpen => this._showBatchAdding || this._showCrawledDataSelection || this._isLoadingCrawledData || this._showPrepareDataSelection;
+    private bool IsDialogOpen => this._showBatchAdding || this._isLoadingCrawledData;
 
     /// <summary>
     /// The injected <see cref="ICrawledDataProvider"/>.
@@ -47,6 +43,9 @@ public partial class PrepareDataPage
 
     [Inject]
     private IPrepareDataManager PrepareDataManager { get; set; } = null!;
+
+    [Inject]
+    private ITrainingDataManager TrainingDataManager { get; set; } = null!;
 
     private DataPrepareContext PrepareContext { get; set; } = new();
 
@@ -90,9 +89,14 @@ public partial class PrepareDataPage
         }
     }
 
-    private void OnLoadContextAsync()
+    private async Task OnLoadContextAsync(string fileName)
     {
-        //this.PrepareDataManager.LoadAsync()
+        if (await this.PrepareDataManager.LoadAsync(fileName) is { } loaded)
+        {
+            this.PrepareContext = loaded;
+            this._paginationState.Items = loaded.Sentences;
+            this._paginationState.CurrentPageIndex = 0;
+        }
     }
 
     private async Task OnSaveContextAsync()
@@ -131,7 +135,6 @@ public partial class PrepareDataPage
         try
         {
             await this.PrepareContext.LoadCrawlDataAsync(path);
-            this._showCrawledDataSelection = false;
         }
         catch
         {
@@ -155,7 +158,7 @@ public partial class PrepareDataPage
         this.StateHasChanged();
     }
 
-    private async Task SaveTrainingDataAsync(CancellationToken cancellationToken)
+    private async Task SaveTrainingDataAsync()
     {
         if (this.PrepareContext.ReviewedSentences == 0)
         {
@@ -163,14 +166,6 @@ public partial class PrepareDataPage
         }
 
         await this.InvokeAsync(this.StateHasChanged);
-
-        var crawlerData = this.PrepareContext.AsCrawlerData();
-        var serializedData = JsonSerializer.Serialize(crawlerData.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
-
-        var targetFolderPath = Path.Combine("training-data", ModelType.Relation.AsString());
-        Directory.CreateDirectory(targetFolderPath);
-        var fileName = DateTime.Now.ToString("s").Replace(":", string.Empty).Replace("-", string.Empty) + "_Sentences.json";
-        var targetPath = Path.Combine(targetFolderPath, fileName);
-        await File.WriteAllTextAsync(targetPath, serializedData, Encoding.UTF8, cancellationToken);
+        await this.TrainingDataManager.SaveRelationsAsync(this.PrepareContext);
     }
 }

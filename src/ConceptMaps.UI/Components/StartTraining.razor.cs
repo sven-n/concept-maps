@@ -20,7 +20,7 @@ public partial class StartTraining : IDisposable
     public ModelType ModelType { get; set; }
 
     [Inject]
-    private ITrainingDataProvider TrainingDataProvider { get; set; } = null!;
+    private ITrainingDataManager TrainingDataManager { get; set; } = null!;
 
     [Inject]
     private RemoteTrainingService TrainingService { get; set; } = null!;

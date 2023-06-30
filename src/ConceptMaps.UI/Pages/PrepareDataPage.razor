@@ -1,88 +1,95 @@
 ﻿@page "/prepare-data"
 
 @using ConceptMaps.UI.Components
+@using ConceptMaps.UI.Services
 
 <h3>Data Preparation</h3>
 
 <p>On this page we prepare our crawled data, so that it can be trained into the model.</p>
 
 <div>
-    <p>
-        <div class="btn-group">
-            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
-                <span class="oi oi-plus"></span> Add new
+    <div class="btn-group">
+        
+        <div class="btn-group mx-1">
+            <button type="button" class="btn btn-primary" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Sentence</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
             </button>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle mx-1" type="button"
-                        data-toggle="dropdown"
-                        aria-expanded="@this._showCrawledDataSelection"
-                        disabled="@this._showBatchAdding"
-                        @onclick="() => this._showCrawledDataSelection = !this._showCrawledDataSelection">
-                    <span class="oi oi-plus"></span> Add crawled
-                </button>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle mx-1"
-                        type="button" id="freeTextMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="@this._showBatchAdding"
-                        disabled="@(this._showCrawledDataSelection || this.SentenceAnalyzer.IsAnalyzing)"
-                        @onclick="() => this._showBatchAdding = !this._showBatchAdding">
-                    <span class="oi oi-plus"></span> Batch
-                </button>
-            </div>
-
-            <button class="btn btn-primary mx-1" onclick="@this.OnLoadContextAsync" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
-                <span class="oi oi-cloud-download"></span> Load Session
-            </button>
-            <button class="btn btn-primary mx-1" onclick="@this.OnSaveContextAsync" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
-                <span class="oi oi-cloud-upload"></span> Save Session
-            </button>
-            <button class="btn btn-primary mx-1" onclick="@this.OnClearContext" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
-                <span class="oi oi-trash"></span> Clear Session
-            </button>
-
-            @if (!this.SentenceAnalyzer.IsAnalyzing)
-            {
-                <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this.IsDialogOpen)"><span class="oi oi-media-play"></span> Analyze all</button>
-                <button class="btn btn-primary mx-1" onclick="@(() => this.SaveTrainingDataAsync(default))" disabled="@(this.PrepareContext.ReviewedSentences == 0 || this.IsDialogOpen)">
-                    <span class="oi oi-loop-square"></span> Save (@(this.PrepareContext.ReviewedSentences) accepted)
-                </button>
-            }
-            else
-            {
-                <button class="btn btn-primary mx-1" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span class="sr-only">Analyzing ...</span>
-                </button>
-                <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
-            }
-        </div>
-        <hr/>
-    </p>
-    @if (this._showCrawledDataSelection)
-    {
-        <div>
-            @if (this._isLoadingCrawledData)
-            {
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span class="sr-only">Adding crawled data ...</span>
-            }
-            else
-            {
-                <div class="alert alert-secondary shadow" role="alert">
-                    <div class="list-group">
-                        <h4>Available crawled data:</h4>
-                        @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
+            <ul class="dropdown-menu">
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-plus"></span> Crawled &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.DataProvider.AvailableRelationalData)
                         {
-                            <a class="list-group-item list-group-item-action" @onclick="() => this.OnLoadCrawledDataClick(fileName)">@(Path.GetFileName(fileName))</a>
+                            <li>
+                                <a role="button" class="dropdown-item" @onclick="() => this.OnLoadCrawledDataClick(dataFile)"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
                         }
-                    </div>
-                </div>
-            }
+                    </ul>
+                </li>
+                <li><a role="button" class="dropdown-item" @onclick="() => this._showBatchAdding = !this._showBatchAdding"><span class="oi oi-plus"></span> Batch</a></li>
+            </ul>
         </div>
-    }
+        <div class="dropdown mx-1">
+            <a role="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                @if (this._isLoadingCrawledData)
+                {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                }
+                <span class="oi oi-cloud"></span> Data
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><h6 class="dropdown-header">Session</h6></li>
+                <li><div class="dropdown-item"><nobr>Name: <InputText @bind-Value="@this.PrepareContext.Name"/></nobr></div></li>
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-cloud-download"></span> Load Session &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.PrepareDataManager.DataFiles)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" @onclick="() => this.OnLoadContextAsync(dataFile)"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li><a role="button" class="dropdown-item" onclick="@this.OnSaveContextAsync"><span class="oi oi-cloud-upload"></span> Save Session</a></li>
+                <li><a role="button" class="dropdown-item" onclick="@this.OnClearContext"><span class="oi oi-trash"></span> Clear Session</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><h6 class="dropdown-header">Training</h6></li>
+                <li>
+                    <a role="button" class="dropdown-item" onclick="@(this.SaveTrainingDataAsync)" >
+                        <span class="oi oi-loop-square"></span> Save for training (@this.PrepareContext.ReviewedSentences accepted)
+                    </a>
+                </li>
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-data-transfer-download"></span> Download &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.TrainingDataManager.RelationsDataFiles)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" href="@this.TrainingDataManager.SubFolder/@ModelType.Relation.AsString()/@Path.GetFileName(dataFile)" target="_blank"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        @if (!this.SentenceAnalyzer.IsAnalyzing)
+        {
+            <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this.IsDialogOpen)"><span class="oi oi-media-play"></span> Analyze all</button>
+        }
+        else
+        {
+            <button class="btn btn-primary mx-1" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Analyzing ...</span>
+            </button>
+            <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
+        }
+    </div> <!-- end of button row -->
+    <hr />
+    
     @if (this._showBatchAdding)
     {
         <AddSentenceBatch PrepareContext="@PrepareContext" OnAdded="this.OnAddedBatchSentences" OnCancel="this.OnCancelBatchSentences"></AddSentenceBatch>
@@ -130,8 +137,11 @@
                 {
                     <Pager PaginationState="@this._paginationState" />
                 }
-
-                <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Add new sentence</button>
+                
+                @if (this._paginationState.ItemsOfPage.Any())
+                {
+                    <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Sentence</button>
+                }
             </p>
         }
     }
