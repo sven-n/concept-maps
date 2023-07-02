@@ -15,5 +15,5 @@ class TripleGenerator:
         :param input_text: The input text, given by the user.
         """
 
-        result = Model2.runNLP(input_text[0])
+        result = Model2.runNLP(input_text)
         return result
