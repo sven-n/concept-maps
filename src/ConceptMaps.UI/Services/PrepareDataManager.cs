@@ -41,6 +41,20 @@ public class PrepareDataManager : IPrepareDataManager
     {
         var targetFilePath = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString(), fileName);
         await using var fileStream = File.OpenRead(targetFilePath);
-        return await JsonSerializer.DeserializeAsync<DataPrepareContext>(fileStream, SerializerOptions);
+        var result = await JsonSerializer.DeserializeAsync<DataPrepareContext>(fileStream, SerializerOptions);
+        if (result is null)
+        {
+            return null;
+        }
+
+        foreach (var rel in result.Sentences.SelectMany(s => s.Relationships))
+        {
+            if (!string.IsNullOrEmpty(rel.KnownRelationshipType))
+            {
+                rel.RelationshipTypeInSentence = rel.KnownRelationshipType;
+            }
+        }
+
+        return result;
     }
 }
