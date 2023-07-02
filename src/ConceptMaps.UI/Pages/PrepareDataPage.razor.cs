@@ -101,11 +101,14 @@ public partial class PrepareDataPage
 
     private async Task OnSaveContextAsync()
     {
-        await PrepareDataManager.SaveAsync(this.PrepareContext);
+        await this.PrepareDataManager.SaveAsync(this.PrepareContext);
     }
 
     private void OnClearContext()
     {
+        this.PrepareContext = new DataPrepareContext();
+        this._paginationState.Items = this.PrepareContext.Sentences;
+        this._paginationState.CurrentPageIndex = 0;
     }
 
     public void StartAnalyzeAll()

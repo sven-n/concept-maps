@@ -26,6 +26,11 @@ public class PrepareDataManager : IPrepareDataManager
 
     public async Task SaveAsync(DataPrepareContext prepareContext)
     {
+        foreach (var s in prepareContext.Sentences.Where(s => s.State == SentenceState.Reviewed).SelectMany(s => s.Relationships))
+        {
+            s.KnownRelationshipType = s.RelationshipTypeInSentence;
+        }
+
         var targetFolder = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString());
         Directory.CreateDirectory(targetFolder); // Ensure that the directory exists.
         await using var fileStream = File.Create(Path.Combine(targetFolder, prepareContext.Name + ".json"));

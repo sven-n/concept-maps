@@ -69,6 +69,11 @@ public sealed partial class Sentence : IDisposable
 
     private async Task OnAcceptClickAsync()
     {
+        foreach (var relationship in this.Context!.Relationships)
+        {
+            relationship.KnownRelationshipType = relationship.RelationshipTypeInSentence;
+        }
+
         this.Context!.State = SentenceState.Reviewed;
         await this.RaiseChangeEventAsync();
     }

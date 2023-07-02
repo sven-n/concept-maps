@@ -45,12 +45,16 @@ public partial class AddSentenceBatch
             if (sentenceContext.Relationships.Count > 0)
             {
                 sentenceContext.State = SentenceState.Reviewed;
+                foreach (var relationship in sentenceContext.Relationships)
+                {
+                    relationship.KnownRelationshipType = relationship.RelationshipTypeInSentence;
+                }
             }
 
             this.PrepareContext.Sentences.Add(sentenceContext);
         }
 
-        this.FreeText = null;
+        this.FreeText = string.Empty;
         if (this.OnAdded is { } onAdded)
         {
             await onAdded.InvokeAsync();
@@ -63,10 +67,5 @@ public partial class AddSentenceBatch
         {
             await onCancel.InvokeAsync();
         }
-    }
-
-    private void OnAddRelationshipClick()
-    {
-        this.Relationships.Add(new Relationship());
     }
 }
