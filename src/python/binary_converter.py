@@ -90,11 +90,10 @@ def parse_simple_sentence(example: dict) -> Tuple[Doc, bool]:
     doc = Doc(nlp.vocab, words=words, spaces=spaces)
     
     span_starts = set()
-    span_end_to_start = {}
     entity_tokens = extract_entity_tokens(doc, example["relationships"])
-    parse_entities(doc, entity_tokens, span_end_to_start, span_starts)
+    parse_entities(doc, entity_tokens, span_starts)
     rels = prepare_rels(doc, span_starts)
-    contains_relations = parse_relations_simple(rels, example, entity_tokens, span_end_to_start)
+    contains_relations = parse_relations_simple(rels, example, entity_tokens)
 
     return doc, contains_relations
 
@@ -109,12 +108,11 @@ def prepare_rels(doc: Doc, span_starts: list[int]) -> dict:
     doc._.rel = rels
     return rels
 
-def parse_relations_simple(rels: dict, example, entity_tokens: list[str],
-                           span_end_to_start: dict) -> bool:
+def parse_relations_simple(rels: dict, example, entity_tokens: list[str]) -> bool:
     """Parses the relations for the "simple" json format."""
     positives = 0
     for relationship in example["relationships"]:
-        label = relationship['relationshipType'].upper()
+        label = str.upper(relationship['relationshipType'])
 
         first_entity_token = find_token_by_name(entity_tokens, relationship['firstEntity'])
         second_entity_token = find_token_by_name(entity_tokens, relationship['secondEntity'])
