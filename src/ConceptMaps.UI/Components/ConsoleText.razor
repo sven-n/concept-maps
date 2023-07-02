@@ -1,4 +1,6 @@
-﻿@foreach(var span in this.Spans)
+﻿<div class="training-console">
+@foreach(var span in this.Spans)
 {
     <span style="@span.CssStyle">@((MarkupString)span.Text)</span>
 }
+</div>

@@ -112,9 +112,9 @@ public partial class ConsoleText
                 this.ParseTextAttributes(lineSpan, ref currentBackColor, ref currentForeColor, ref isBold, ref isUnderlined);
                 if (RestOfLineRegex.Match(lineSpan) is { Success: true } rest)
                 {
-                    if (!string.IsNullOrEmpty(rest.Groups[3].Value))
+                    if (!string.IsNullOrEmpty(rest.Groups[1].Value))
                     {
-                        this.Spans.Add(new TextSpan(rest.Groups[3].Value, currentForeColor, currentBackColor, isBold, isUnderlined));
+                        this.Spans.Add(new TextSpan(rest.Groups[1].Value, currentForeColor, currentBackColor, isBold, isUnderlined));
                         lineContentAdded = true;
                     }
                 }

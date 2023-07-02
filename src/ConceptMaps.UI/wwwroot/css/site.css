@@ -72,6 +72,11 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+.training-console {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
 /* Fix for https://github.com/Blazor-Diagrams/Blazor.Diagrams/issues/288 */
 .link foreignObject {
     width: 1px;
