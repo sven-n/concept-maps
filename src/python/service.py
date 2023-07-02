@@ -43,7 +43,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             serialized = json.dumps(obj, default=vars)
             result_bytes = bytes(serialized, DEFAULT_ENCODING)
             self.wfile.write(result_bytes)
-            print(f"Wrote {result_bytes} bytes as response.")
+            print(f"Wrote {len(result_bytes)} bytes as response.")
         except Exception as ex:
             print(ex)
 

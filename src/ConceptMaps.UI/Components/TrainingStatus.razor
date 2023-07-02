@@ -1,18 +1,24 @@
-﻿<h5>Training Status</h5>
-@if (this.Status.IsActive)
+﻿@if (this.Status.IsActive)
 {
+    <h3>
     <div>
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span class="sr-only">Training ...</span>
+        <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+            <span class="sr-only">Training (@this.Status.State)...</span>
     </div>
 
     <button class="btn btn-secondary mx-1" onclick="@this.OnStopClickAsync" disabled="@this._isStopping"><span class="oi oi-media-stop"></span> Stop</button>
+    </h3>
 }
 else
 {
-    <div>
-        State: @(this.Status.State ?? "-")
-    </div>
+    <StartTraining ModelType="this.ModelType"/>
+    <hr />
+    @if (this.Status.State is not null)
+    {
+        <div>
+            Last State: @(this.Status.State ?? "-")
+        </div>
+    }
 }
 
 @if (this.Status.Output?.Any() ?? false)
@@ -20,8 +26,7 @@ else
     <div class="alert alert-dark" role="alert">
         <h6 class="alert-heading">Standard Output</h6>
         <hr/>
-        
-        <pre><code>@this.Status.Output</code></pre>
+        <ConsoleText Text="@this.Status.Output" />
     </div>
 }
 
@@ -30,6 +35,6 @@ else
     <div class="alert alert-warning" role="alert">
         <h6 class="alert-heading">Error Output</h6>
         <hr />
-        <pre><code>@this.Status.Error</code></pre>
+        <ConsoleText Text="@this.Status.Error" />
     </div>
 }

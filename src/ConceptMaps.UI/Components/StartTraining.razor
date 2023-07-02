@@ -1,14 +1,13 @@
 ﻿@using ConceptMaps.UI.Services
 
 <h3>Start Training</h3>
-
+<span>Select the training data which should be applied.</span>
 <div>
     <ul class="list-group mb-3">
         @foreach (var trainingFile in this.TrainingDataManager.GetFiles(this.ModelType))
         {
             <li class="list-group-item">
                 <nobr>
-                    <!-- todo: use check input -->
                     @if (this._selectedFiles.Contains(trainingFile))
                     {
                         <button class="btn btn-outline-success btn-sm" @onclick="() => this._selectedFiles.Remove(trainingFile)"><span class="oi oi-check"></span></button>

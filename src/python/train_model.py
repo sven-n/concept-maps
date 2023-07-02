@@ -32,6 +32,7 @@ class ModelTrainingBase:
         self.read_error_thread: Thread = None
         self.output = []
         self.error = []
+        self.training_state : str = None
 
     def get_model_type(self):
         """Returns the model type which is handled by this training class."""
@@ -48,24 +49,26 @@ class ModelTrainingBase:
         :param training_data: The training data as string in json format.
         :param source: The name of the source model, if an existing model should be improved.
         """
-
+        self.output.clear()
+        self.error.clear()
         cwd = Path(os.getcwd())
         working_dir = cwd.joinpath('training').joinpath(self.get_model_type()).resolve()
+        
+        self.training_state = 'preparing data'
 
         # subprocess.run(['spacy', 'project', 'run', 'clean'], cwd = working_dir, check=False)
-        self.convert_training_data(training_data, working_dir)
+        if not self.convert_training_data(training_data, working_dir):
+            return
 
         args = ['spacy', 'project', 'run', 'all']
-
         # todo: source and target models
         # args = ['spacy', 'project', 'run', 'all', f"--vars.target_model_name={target}"]
         # config_path = working_dir.joinpath(TRAINING_CONFIG_PATH)
         # todo self.set_model_source(config_path, source)
         # if (source is not None):
             #args.append(f"--vars.source_model_name={source}")
-
-        self.output.clear()
-        self.error.clear()
+        
+        self.training_state = 'starting process'
         self.training_process = subprocess.Popen(
             args,
             cwd = working_dir,
@@ -75,6 +78,7 @@ class ModelTrainingBase:
             target = self.watch_training,
             args = [self.training_process, self.training_process.stdout, self.output],
             name='reading training output')
+        self.output.append("training process started\r\n")
         self.read_output_thread.start()
 
         self.read_error_thread = Thread(
@@ -88,11 +92,13 @@ class ModelTrainingBase:
             try:
                 line = str(source_io.readline(), encoding='utf-8')
                 if len(line) > 0:
-                    self.output.append(line)
+                    targetlist.append(line)
                 if training_process.poll() is not None:
                     break
-            except:
+            except Exception as ex:
+                targetlist.append(f'stopped reading process output by error: {ex}')
                 break
+        self.training_state = None
 
     def set_model_source(self, config_path, source: (str|None)):
         """Sets the source model in the components of the model."""
@@ -117,8 +123,11 @@ class ModelTrainingBase:
         process = self.training_process
         if process is None:
             return
+        self.output.append("terminating training process...\r\n")
         process.terminate()
         self.training_process = None
+        self.training_state = None
+        self.output.append("training process terminated.\r\n")
 
     def get_status(self) -> TrainingStatus:
         """Get the status of the training process
@@ -128,8 +137,11 @@ class ModelTrainingBase:
         output = "".join(self.output)
         error = "".join(self.error)
         process = self.training_process
+        state = self.training_state
+        if state is None:
+            state = 'inactive'
         if process is None:
-            return TrainingStatus(False, 'inactive', output, error)
+            return TrainingStatus(False, state, output, error)
 
         #if process.stdout is not None and not process.stdout.closed:
             #(output, error) = process.communicate(timeout=1)
@@ -152,8 +164,16 @@ class RelationModelTraining(ModelTrainingBase):
     def get_model_type(self):
         return 'relations'
 
-    def convert_training_data(self, training_data: list[dict], working_dir: Path):
-        binary_converter.create_relation_training_files(training_data, working_dir.joinpath('data'))
+    def convert_training_data(self, training_data: list[dict], working_dir: Path) -> bool:
+        self.output.append('Converting json data to spacy Docs...\r\n')
+        try:
+            binary_converter.create_relation_training_files(training_data, working_dir.joinpath('data'))
+            self.output.append('Conversion completed\r\n')
+            return True
+        except Exception as ex:
+            self.output.append(f'Conversion failed with error: {ex}\r\n')
+
+        return False
 
 
 class NrtModelTraining(ModelTrainingBase):

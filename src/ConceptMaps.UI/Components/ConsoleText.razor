@@ -1,0 +1,4 @@
+﻿@foreach(var span in this.Spans)
+{
+    <span style="@span.CssStyle">@((MarkupString)span.Text)</span>
+}
