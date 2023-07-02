@@ -14,7 +14,7 @@ from wasabi import Printer
 msg = Printer()
 
 SYMM_LABELS = ["Binds"]
-DIRECTED_LABELS = {"CHILDREN", "SPOUSE", "SIBLINGS", "undefined"}
+DIRECTED_LABELS = {"CHILDREN", "SPOUSE", "SIBLINGS", "UNDEFINED"}
 
 nlp = spacy.load("en_core_web_sm") # we need the NLP parse sentence strings to tokens
 Doc.set_extension("rel", default={}, force=True)
