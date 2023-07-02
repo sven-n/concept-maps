@@ -1,42 +1,111 @@
-﻿namespace ConceptMaps.UI.Pages;
+﻿using System.Security.AccessControl;
+
+namespace ConceptMaps.UI.Pages;
 
 using System.Text;
 using Microsoft.AspNetCore.Components;
 using ConceptMaps.Crawler;
-using ConceptMaps.UI.Services;
+using ConceptMaps.UI.Components;
 using ConceptMaps.UI.Data;
+using ConceptMaps.UI.Services;
+using System.Text.Json;
 
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
 /// </summary>
 public partial class PrepareDataPage
 {
+    private bool _showBatchAdding;
+
+    private bool _isLoadingCrawledData;
+
+    private readonly PaginationState<SentenceContext> _paginationState = new PaginationState<SentenceContext>();
+
+    private readonly HashSet<SentenceState> _visibleStates = new HashSet<SentenceState>
+    {
+        { SentenceState.Initial },
+        { SentenceState.Processed },
+        { SentenceState.Reviewed },
+        { SentenceState.Processing },
+        { SentenceState.Hidden },
+    };
+
+    private bool IsDialogOpen => this._showBatchAdding || this._isLoadingCrawledData;
+
     /// <summary>
-    /// THe injected <see cref="ICrawledDataProvider"/>.
+    /// The injected <see cref="ICrawledDataProvider"/>.
     /// </summary>
     [Inject]
-    private ICrawledDataProvider DataProvider { get; set; }
+    private ICrawledDataProvider DataProvider { get; set; } = null!;
 
     [Inject]
-    private SentenceAnalyzer SentenceAnalyzer { get; set; }
+    private SentenceAnalyzer SentenceAnalyzer { get; set; } = null!;
 
     [Inject]
-    private RemoteTrainingDataConversionService ConversionService { get; set; }
+    private IPrepareDataManager PrepareDataManager { get; set; } = null!;
 
-    private string? DownloadPath { get; set; }
-    private DataPrepareContext? PrepareContext { get; set; }
+    [Inject]
+    private ITrainingDataManager TrainingDataManager { get; set; } = null!;
 
-    private string? SelectedFile
+    private DataPrepareContext PrepareContext { get; set; } = new();
+
+    private bool ShowInitial
     {
-        get => this.PrepareContext?.SelectedFile;
-        set
+        get => this._visibleStates.Contains(SentenceState.Initial);
+        set => _ = value ? this._visibleStates.Add(SentenceState.Initial) : this._visibleStates.Remove(SentenceState.Initial);
+    }
+
+    private bool ShowProcessed
+    {
+        get => this._visibleStates.Contains(SentenceState.Processed);
+        set => _ = value ? this._visibleStates.Add(SentenceState.Processed) : this._visibleStates.Remove(SentenceState.Processed);
+    }
+
+    private bool ShowReviewed
+    {
+        get => this._visibleStates.Contains(SentenceState.Reviewed);
+        set => _ = value ? this._visibleStates.Add(SentenceState.Reviewed) : this._visibleStates.Remove(SentenceState.Reviewed);
+    }
+
+    private bool ShowHidden
+    {
+        get => this._visibleStates.Contains(SentenceState.Hidden);
+        set => _ = value ? this._visibleStates.Add(SentenceState.Hidden) : this._visibleStates.Remove(SentenceState.Hidden);
+    }
+
+    protected override void OnInitialized()
+    {
+        this._paginationState.Items = this.FilteredSentences;
+        this._paginationState.PropertyChanged += (_, _) => this.InvokeAsync(this.StateHasChanged);
+        base.OnInitialized();
+    }
+
+    private IEnumerable<SentenceContext> FilteredSentences
+    {
+        get
         {
-            if (this.SelectedFile != value)
-            {
-                this.PrepareContext = new DataPrepareContext(value);
-                this.DownloadPath = null;
-            }
+            return this.PrepareContext.Sentences
+                .Where(c => this._visibleStates.Contains(c.State));
         }
+    }
+
+    private async Task OnLoadContextAsync(string fileName)
+    {
+        if (await this.PrepareDataManager.LoadAsync(fileName) is { } loaded)
+        {
+            this.PrepareContext = loaded;
+            this._paginationState.Items = loaded.Sentences;
+            this._paginationState.CurrentPageIndex = 0;
+        }
+    }
+
+    private async Task OnSaveContextAsync()
+    {
+        await PrepareDataManager.SaveAsync(this.PrepareContext);
+    }
+
+    private void OnClearContext()
+    {
     }
 
     public void StartAnalyzeAll()
@@ -48,35 +117,55 @@ public partial class PrepareDataPage
         _ = Task.Run(() => this.SentenceAnalyzer.StartAnalyzeAllAsync(this.PrepareContext, progress));
     }
 
-    protected override void OnInitialized()
-    {
-        //this.SelectedFile = this.DataProvider.AvailableRelationalData.FirstOrDefault();
-        base.OnInitialized();
-    }
-
     private void AddNewSentence()
     {
-        this.PrepareContext ??= new DataPrepareContext(string.Empty);
-        this.PrepareContext.Sentences.Add(new SentenceContext(string.Empty));
+        this.PrepareContext.Sentences.Add(new SentenceContext());
     }
 
-    private async Task GetTrainingDataAsync(CancellationToken cancellationToken)
+    private void OnDeleteSentenceClick(SentenceContext sentence)
     {
-        if (this.PrepareContext is null)
+        this.PrepareContext.Sentences.Remove(sentence);
+        this.StateHasChanged();
+    }
+
+    private async Task OnLoadCrawledDataClick(string path)
+    {
+        _isLoadingCrawledData = true;
+        this.StateHasChanged();
+        try
+        {
+            await this.PrepareContext.LoadCrawlDataAsync(path);
+        }
+        catch
+        {
+            // ignore for now...
+        }
+        finally
+        {
+            _isLoadingCrawledData = false;
+        }
+    }
+
+    private void OnAddedBatchSentences()
+    {
+        this._showBatchAdding = false;
+        this.StateHasChanged();
+    }
+
+    private void OnCancelBatchSentences()
+    {
+        this._showBatchAdding = false;
+        this.StateHasChanged();
+    }
+
+    private async Task SaveTrainingDataAsync()
+    {
+        if (this.PrepareContext.ReviewedSentences == 0)
         {
             return;
         }
 
-        this.DownloadPath = null;
         await this.InvokeAsync(this.StateHasChanged);
-
-        var crawlerData = this.PrepareContext.AsCrawlerData();
-        var result = await this.ConversionService.ConvertToJsonTrainingData(crawlerData, cancellationToken);
-        var targetFolderPath = Path.Combine("training-data", "relations");
-        Directory.CreateDirectory(targetFolderPath);
-        var fileName = Path.GetFileName(this.PrepareContext.SelectedFile);
-        var targetPath = Path.Combine(targetFolderPath, fileName.Replace(".json", "TrainingData.json"));
-        await File.WriteAllTextAsync(targetPath, result, Encoding.UTF8, cancellationToken);
-        this.DownloadPath = targetPath;
+        await this.TrainingDataManager.SaveRelationsAsync(this.PrepareContext);
     }
 }

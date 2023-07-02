@@ -1,36 +1,83 @@
 ﻿@page "/prepare-data"
-@using ConceptMaps.UI.Data
+
 @using ConceptMaps.UI.Components
+@using ConceptMaps.UI.Services
 
 <h3>Data Preparation</h3>
 
 <p>On this page we prepare our crawled data, so that it can be trained into the model.</p>
 
 <div>
-    <p>
-        <label for="selection">Data:</label>
-        <InputSelect TValue="string" @bind-Value="@SelectedFile" id="selection">
-            <option value="" selected="@(this.SelectedFile == string.Empty)">Select a crawled file or add a sentence</option>
-            @foreach (var fileName in this.DataProvider.AvailableRelationalData.Order())
-            {
-                <option value="@fileName" selected="@(this.SelectedFile == fileName)">@(Path.GetFileName(fileName))</option>
-            }
-        </InputSelect>
-    </p>
-    <p>
+    <div class="btn-group">
+        
+        <div class="btn-group mx-1">
+            <button type="button" class="btn btn-primary" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Sentence</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-plus"></span> Crawled &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.DataProvider.AvailableRelationalData)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" @onclick="() => this.OnLoadCrawledDataClick(dataFile)"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li><a role="button" class="dropdown-item" @onclick="() => this._showBatchAdding = !this._showBatchAdding"><span class="oi oi-plus"></span> Batch</a></li>
+            </ul>
+        </div>
+        <div class="dropdown mx-1">
+            <a role="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)">
+                @if (this._isLoadingCrawledData)
+                {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                }
+                <span class="oi oi-cloud"></span> Data
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><h6 class="dropdown-header">Session</h6></li>
+                <li><div class="dropdown-item"><nobr>Name: <InputText @bind-Value="@this.PrepareContext.Name"/></nobr></div></li>
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-cloud-download"></span> Load Session &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.PrepareDataManager.DataFiles)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" @onclick="() => this.OnLoadContextAsync(dataFile)"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li><a role="button" class="dropdown-item" onclick="@this.OnSaveContextAsync"><span class="oi oi-cloud-upload"></span> Save Session</a></li>
+                <li><a role="button" class="dropdown-item" onclick="@this.OnClearContext"><span class="oi oi-trash"></span> Clear Session</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><h6 class="dropdown-header">Training</h6></li>
+                <li>
+                    <a role="button" class="dropdown-item" onclick="@(this.SaveTrainingDataAsync)" >
+                        <span class="oi oi-loop-square"></span> Save for training (@this.PrepareContext.ReviewedSentences accepted)
+                    </a>
+                </li>
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-data-transfer-download"></span> Download &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.TrainingDataManager.RelationsDataFiles)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" href="@this.TrainingDataManager.SubFolder/@ModelType.Relation.AsString()/@Path.GetFileName(dataFile)" target="_blank"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
         @if (!this.SentenceAnalyzer.IsAnalyzing)
         {
-            <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll"><span class="oi oi-media-play"></span> Analyze all</button>
-            <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
-            @if (this.PrepareContext?.ReviewedSentences > 0)
-            {
-                <!-- todo: show spinner -->
-                <button class="btn btn-primary mx-1" onclick="@(() =>this.GetTrainingDataAsync(default))"><span class="oi oi-loop-square"></span> Generate Training Data (@(this.PrepareContext.ReviewedSentences) selected)</button>
-                if (this.DownloadPath is not null)
-                {
-                    <a class="btn btn-success mx-1" href="@this.DownloadPath" target="_blank"><span class="oi oi-data-transfer-download"></span> Save</a>
-                }
-            }
+            <button class="btn btn-success mx-1" onclick="@this.StartAnalyzeAll" disabled="@(this.IsDialogOpen)"><span class="oi oi-media-play"></span> Analyze all</button>
         }
         else
         {
@@ -40,25 +87,62 @@
             </button>
             <button class="btn btn-secondary mx-1" onclick="@this.SentenceAnalyzer.Cancel" disabled="@this.SentenceAnalyzer.IsCancelled"><span class="oi oi-media-stop"></span> Cancel</button>
         }
-        <hr />
-    </p>
-    @if (this.PrepareContext is { } context)
-    {
-        @foreach (var sentenceContext in context.Sentences.Where(s => s.State != SentenceState.Removed))
-        {
-            <Sentence Context="@sentenceContext" />
-        }
-    }
+    </div> <!-- end of button row -->
+    <hr />
     
-    @if (!this.SentenceAnalyzer.IsAnalyzing)
+    @if (this._showBatchAdding)
     {
-        <hr/>
-        <p>
-            <button class="btn btn-primary" onclick="@this.AddNewSentence"><span class="oi oi-plus"></span> Add new sentence</button>
-            @if (this.PrepareContext is not null)
-            {
-                <button class="btn btn-primary mx-1" onclick="@this.PrepareContext.Save"><span class="oi oi-data-transfer-download"></span> Save</button>
-            }
-        </p>
+        <AddSentenceBatch PrepareContext="@PrepareContext" OnAdded="this.OnAddedBatchSentences" OnCancel="this.OnCancelBatchSentences"></AddSentenceBatch>
+    }
+    else
+    {
+        @if (this.PrepareContext.Sentences.Count > 0)
+        {
+            <div>
+                <div class="form-check-inline">
+                    <Pager PaginationState="@this._paginationState"/>
+                </div>
+                <div class="form-check form-check-inline">
+                    <span>Show: </span>
+                </div>
+                <div class="form-check-inline bg-secondary text-light rounded p-1">
+                    <InputCheckbox id="showInitial" class="form-check-input bg-secondary" @bind-Value="@this.ShowInitial" />
+                    <label class="form-check-label" for="showInitial">Unprocessed</label>
+                </div>
+                <div class="form-check-inline bg-primary text-light rounded p-1">
+                    <InputCheckbox id="showProcessed" class="form-check-input bg-primary" @bind-Value="@this.ShowProcessed" />
+                    <label class="form-check-label" for="showProcessed">Analyzed</label>
+                </div>
+                <div class="form-check-inline bg-success text-light rounded p-1">
+                    <InputCheckbox id="showReviewed" class="form-check-input bg-success" @bind-Value="@this.ShowReviewed" />
+                    <label class="form-check-label" for="showReviewed">Accepted</label>
+                </div>
+                <div class="form-check-inline bg-warning text-dark rounded p-1">
+                    <InputCheckbox id="showHidden" class="form-check-input bg-warning" @bind-Value="@this.ShowHidden" />
+                    <label class="form-check-label" for="showHidden">Hidden</label>
+                </div>
+            </div>
+            <hr />
+        }
+        @foreach (var sentenceContext in this._paginationState.ItemsOfPage)
+        {
+            <Sentence Context="@sentenceContext" OnStateChange="this.StateHasChanged" OnDelete="this.OnDeleteSentenceClick"/>
+        }
+
+        @if (!this.IsDialogOpen)
+        {
+            <hr/>
+            <p>
+                @if (this._paginationState.TotalPageCount > 1)
+                {
+                    <Pager PaginationState="@this._paginationState" />
+                }
+                
+                @if (this._paginationState.ItemsOfPage.Any())
+                {
+                    <button class="btn btn-primary mx-1" onclick="@this.AddNewSentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.IsDialogOpen)"><span class="oi oi-plus"></span> Sentence</button>
+                }
+            </p>
+        }
     }
 </div>

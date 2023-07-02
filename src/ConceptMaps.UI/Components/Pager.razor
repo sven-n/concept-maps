@@ -1,0 +1,9 @@
+﻿@typeparam T
+
+<button type="button" class="btn btn-primary btn-sm" disabled="@(!this.PaginationState.IsPreviousPageAvailable)" @onclick="() => this.PaginationState.CurrentPageIndex--">
+    <span class="oi oi-chevron-left"></span>
+</button>
+<span>Page @(this.PaginationState.CurrentPageIndex + 1) of @this.PaginationState.TotalPageCount</span>
+<button type="button" class="btn btn-primary btn-sm" disabled="@(!this.PaginationState.IsNextPageAvailable)" @onclick="() => this.PaginationState.CurrentPageIndex++">
+    <span class="oi oi-chevron-right"></span>
+</button>

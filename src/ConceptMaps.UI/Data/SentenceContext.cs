@@ -1,9 +1,15 @@
 ﻿namespace ConceptMaps.UI.Data;
 
+using System.Text.Json.Serialization;
 using ConceptMaps.Crawler;
 
 public class SentenceContext
 {
+    public SentenceContext()
+    {
+        this.Sentence = string.Empty;
+    }
+
     public SentenceContext(string sentence)
     {
         Sentence = sentence;
@@ -19,5 +25,6 @@ public class SentenceContext
 
     public List<Relationship> Relationships { get; set; } = new();
 
+    [JsonIgnore]
     public Exception? LastException { get; set; }
 }

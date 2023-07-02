@@ -5,30 +5,27 @@ using ConceptMaps.Crawler;
 
 public class DataPrepareContext
 {
-    public DataPrepareContext(string selectedFile)
+    public DataPrepareContext()
     {
-        SelectedFile = selectedFile;
         this.Sentences = new();
-        if (!string.IsNullOrWhiteSpace(this.SelectedFile))
-        {
-            var crawledData = JsonSerializer.Deserialize<SentenceRelationships[]>(File.ReadAllText(selectedFile), new JsonSerializerOptions(JsonSerializerDefaults.Web))?.ToList() ?? new();
-            Sentences.AddRange(crawledData.Select(cd => new SentenceContext(cd.Sentence)
-            {
-                Relationships = cd.Relationships,
-                State = SentenceState.Processed,
-            }));
-        }
     }
 
-    public string SelectedFile { get; }
+    public string Name { get; set; } = DateTime.Now.ToString("yyyyMMdd_hhmmss");
 
     public List<SentenceContext> Sentences { get; set; }
 
     public int ReviewedSentences => this.Sentences.Count(s => s.State == SentenceState.Reviewed);
 
-    public void Save()
+    public async Task LoadCrawlDataAsync(string selectedFile)
     {
-        // todo: save this instance, so someone can continue to work after a crash or break
+        await using var fileStream = File.OpenRead(selectedFile);
+        var crawledData = await JsonSerializer.DeserializeAsync<SentenceRelationships[]>(fileStream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        crawledData ??= Array.Empty<SentenceRelationships>();
+        Sentences.AddRange(crawledData.Select(cd => new SentenceContext(cd.Sentence)
+        {
+            Relationships = cd.Relationships,
+            State = SentenceState.Initial,
+        }));
     }
 
     public IList<SentenceRelationships> AsCrawlerData()

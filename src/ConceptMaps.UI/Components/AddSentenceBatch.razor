@@ -1,0 +1,24 @@
+﻿@using ConceptMaps.UI.Data
+
+@if (this.PrepareContext is null)
+{
+    return;
+}
+
+<div class="alert alert-secondary shadow" role="alert">
+    <h4>Batch adding</h4>
+    <p>Add a free text with multiple sentences here. Sentences should be separated by a line break.</p>
+    <p>The configured relationships will be applied to all sentences of the text. Therefore the selected relationships should actually be described in each of the sentences.</p>
+    <p>Unrelated pairs of persons should be defined, too.</p>
+    <InputTextArea class="form-control" @bind-Value="this.FreeText" placeholder="Enter text."/>
+    <hr/>
+    <RelationsTable Relationships="@this.Relationships"></RelationsTable>
+    <hr/>
+    <button type="button" class="btn btn-sm btn-outline-danger" aria-label="Cancel" @onclick="this.OnCancelClickAsync">
+        <span class="oi oi-x"> Cancel</span>
+    </button>
+
+    <button type="button" class="btn btn-sm btn-outline-success" aria-label="Add all" @onclick="this.OnAddBatchClickAsync">
+        <span class="oi oi-spreadsheet"> Add all</span>
+    </button>
+</div>

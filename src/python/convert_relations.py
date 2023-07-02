@@ -5,17 +5,17 @@ from spacy.language import Language
 
 
 # Laden des Basismodells
-nlp = spacy.load("en_core_web_sm")
+default_nlp = spacy.load("en_core_web_sm")
 
 # Einstiegsmethode:
-def convertJsonFile(inputJsonPath: str, outputTraininigDataJsonPath: str):
+def convertJsonFile(inputJsonPath: str, outputTraininigDataJsonPath: str, nlp = default_nlp):
     with open(inputJsonPath, "r", encoding="utf-8-sig") as inputFile:
         input = json.load(inputFile)
-    result = convert(input)
+    result = convert(input, nlp)
     with open(outputTraininigDataJsonPath, "w") as outputFile:
         json.dump(result, outputFile, indent=True)
 
-def convert(jsonObj) -> list:
+def convert(jsonObj, nlp = default_nlp) -> list:
     results = []
     for jsonSentence in jsonObj:
         sentence = jsonSentence['sentence']
@@ -69,26 +69,28 @@ def process_sentence(sentence: str, relationships : list[(str, str, str)]):
         "relations": relations
     }
 
+
+
 def find_token_by_name(tokens: list, name: str):
     for token in tokens:
         if (token["text"] == name):
             return token
-    firstName = name.split()[0] # Nochmal nur nach Vornamen suchen
+    first_name = name.split()[0] # Nochmal nur nach Vornamen suchen
     for token in tokens:
-        if (token["text"] == firstName):
+        if (token["text"] == first_name):
             return token
 
 def add_entity_tokens(doc: Language, sentence: str, entity_name: str, tokens: list):
-    foundAny = False
-    lastFoundIndex = sentence.find(entity_name)
-    while lastFoundIndex >= 0:
-        endIndex = lastFoundIndex + len(entity_name)
-        start_token = find_token_by_start(doc, lastFoundIndex)
+    found_any = False
+    last_found_index = sentence.find(entity_name)
+    while last_found_index >= 0:
+        endIndex = last_found_index + len(entity_name)
+        start_token = find_token_by_start(doc, last_found_index)
         end_token = find_token_by_end(doc, endIndex)
         if start_token != None and end_token != None:
             token = {
                 "text" : entity_name,
-                "start": lastFoundIndex,
+                "start": last_found_index,
                 "end": endIndex,
                 "start_token":  start_token.i,
                 "end_token": end_token.i,
@@ -96,9 +98,9 @@ def add_entity_tokens(doc: Language, sentence: str, entity_name: str, tokens: li
                 }
             
             tokens.append(token)
-            foundAny = True
-        lastFoundIndex = sentence.find(entity_name, endIndex)
-    return foundAny
+            found_any = True
+        last_found_index = sentence.find(entity_name, endIndex)
+    return found_any
 
 def find_token_by_start(doc: Language, startIndex: int) -> Token:
     for token in doc:

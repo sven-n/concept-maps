@@ -6,11 +6,24 @@ public class CrawledDataProvider : ICrawledDataProvider
 {
     private const string FileNameExtension = "json";
 
-    private static string ConfigFolder { get; } = Path.Combine(Path.GetDirectoryName(typeof(JsonWebsiteSettingsProvider).Assembly.Location)!, "crawl-results");
+    public static string SubFolder => "crawl-results";
+
+    private static string ConfigFolder { get; } = Path.Combine(Path.GetDirectoryName(typeof(JsonWebsiteSettingsProvider).Assembly.Location)!, SubFolder);
     private static JsonSerializerOptions SerializerOptions { get; } = new(JsonSerializerDefaults.Web) { WriteIndented = true };
 
     /// <inheritdoc />
-    public IEnumerable<string> AvailableRelationalData => Directory.EnumerateFiles(ConfigFolder, "*_SentenceRelationships." + FileNameExtension, SearchOption.TopDirectoryOnly);
+    public IEnumerable<string> AvailableRelationalData
+    {
+        get
+        {
+            if (!Directory.Exists(ConfigFolder))
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            return Directory.EnumerateFiles(ConfigFolder, "*_SentenceRelationships." + FileNameExtension, SearchOption.TopDirectoryOnly);
+        }
+    }
 
     /// <inheritdoc />
     public IEnumerable<SentenceRelationships> GetRelationships(string filePath)

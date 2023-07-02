@@ -1,0 +1,26 @@
+﻿@page "/models"
+
+@using ConceptMaps.UI.Components
+@using ConceptMaps.UI.Services
+
+<h3>Models</h3>
+
+@foreach (var model in this.ModelProvider.RelationsModels)
+{
+    <Model ModelType="ModelType.Relation" ModelName="@model"></Model>
+}
+
+<h3>Training</h3>
+
+@if (this._relationTrainingStatus.State is null)
+{
+    <h2>
+        <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+        <span> Loading training status ...</span>
+    </h2>
+}
+else
+{
+    <TrainingStatus ModelType="ModelType.Relation" Status="this._relationTrainingStatus"></TrainingStatus>
+}
+

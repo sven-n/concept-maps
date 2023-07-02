@@ -9,7 +9,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<SentenceAnalyzer>();
 builder.Services.AddSingleton<RemoteTripleService>();
-builder.Services.AddSingleton<RemoteTrainingDataConversionService>();
+builder.Services.AddSingleton<RemoteTrainingService>();
+builder.Services.AddSingleton<IModelProvider, ModelProvider>();
+builder.Services.AddSingleton<ITrainingDataManager, TrainingDataManager>();
+builder.Services.AddSingleton<IPrepareDataManager, PrepareDataManager>();
 builder.Services.AddSingleton<DiagramService>();
 builder.Services.AddSingleton<ILayoutAlgorithmFactory, StandardLayoutAlgorithmFactory>();
 builder.Services.AddSingleton<ICrawledDataProvider, CrawledDataProvider>();
@@ -23,13 +26,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
-var crawlResultsFolder = Path.Combine(Environment.CurrentDirectory, "crawl-results");
+var crawlResultsFolder = Path.Combine(Environment.CurrentDirectory, CrawledDataProvider.SubFolder);
 if (!Path.Exists(crawlResultsFolder))
 {
     Directory.CreateDirectory(crawlResultsFolder);
 }
 
-var trainingDataFolder = Path.Combine(Environment.CurrentDirectory, "training-data");
+var trainingDataFolder = Path.Combine(Environment.CurrentDirectory, TrainingDataManager.SubFolder);
 if (!Path.Exists(trainingDataFolder))
 {
     Directory.CreateDirectory(trainingDataFolder);
@@ -39,13 +42,13 @@ app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(crawlResultsFolder),
-    RequestPath = "/crawl-results",
+    RequestPath = $"/{CrawledDataProvider.SubFolder}",
 });
 
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(trainingDataFolder),
-    RequestPath = "/training-data",
+    RequestPath = $"/{TrainingDataManager.SubFolder}",
 });
 
 app.UseRouting();

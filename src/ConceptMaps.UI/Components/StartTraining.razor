@@ -1,0 +1,29 @@
+﻿@using ConceptMaps.UI.Services
+
+<h3>Start Training</h3>
+<span>Select the training data which should be applied.</span>
+<div>
+    <ul class="list-group mb-3">
+        @foreach (var trainingFile in this.TrainingDataManager.GetFiles(this.ModelType))
+        {
+            <li class="list-group-item">
+                <nobr>
+                    @if (this._selectedFiles.Contains(trainingFile))
+                    {
+                        <button class="btn btn-outline-success btn-sm" @onclick="() => this._selectedFiles.Remove(trainingFile)"><span class="oi oi-check"></span></button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-secondary btn-sm" @onclick="() => this._selectedFiles.Add(trainingFile)"><span class="oi oi-placeholder"></span></button>
+                    }
+
+                    <span class="mx-1">@Path.GetFileName(trainingFile)</span>
+                </nobr>
+            </li>
+        }
+    </ul>
+
+    <button class="btn btn-primary" @onclick="@this.OnStartButtonClick" disabled="@(this._selectedFiles.Count == 0)">Start</button>
+
+    <button class="btn btn-primary" @onclick="@this.OnCancelButtonClick" disabled="@this._startSuccess">Cancel</button>
+</div>

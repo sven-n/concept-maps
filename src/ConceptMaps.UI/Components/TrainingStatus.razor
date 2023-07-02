@@ -1,0 +1,40 @@
+﻿@if (this.Status.IsActive)
+{
+    <h3>
+    <div>
+        <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+            <span class="sr-only">Training (@this.Status.State)...</span>
+    </div>
+
+    <button class="btn btn-secondary mx-1" onclick="@this.OnStopClickAsync" disabled="@this._isStopping"><span class="oi oi-media-stop"></span> Stop</button>
+    </h3>
+}
+else
+{
+    <StartTraining ModelType="this.ModelType"/>
+    <hr />
+    @if (this.Status.State is not null)
+    {
+        <div>
+            Last State: @(this.Status.State ?? "-")
+        </div>
+    }
+}
+
+@if (this.Status.Output?.Any() ?? false)
+{
+    <div class="alert alert-dark" role="alert">
+        <h6 class="alert-heading">Standard Output</h6>
+        <hr/>
+        <ConsoleText Text="@this.Status.Output" />
+    </div>
+}
+
+@if (this.Status.Error?.Any() ?? false)
+{
+    <div class="alert alert-warning" role="alert">
+        <h6 class="alert-heading">Error Output</h6>
+        <hr />
+        <ConsoleText Text="@this.Status.Error" />
+    </div>
+}
