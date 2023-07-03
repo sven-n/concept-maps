@@ -23,6 +23,8 @@ class Model2:
         text = [inputText[1:-1]] # muss im Input angepasst werden
         
         for doc in self.ner_model.pipe(text):
+            filtered_ents = [e for e in doc.ents if e.label_ == "PERSON"]
+            doc.ents = filtered_ents
             for name, proc in self.rel_model.pipeline:
                 doc = proc(doc)
             result.extend(self.process_document(doc))
@@ -40,8 +42,6 @@ class Model2:
                         pairs.append((a, b))
 
         for pair in pairs:
-            foo: dict = {}
-            foo.get
             a_to_b_dict = doc._.rel.get((pair[0].start, pair[1].start))
             b_to_a_dict = doc._.rel.get((pair[1].start, pair[0].start))
 

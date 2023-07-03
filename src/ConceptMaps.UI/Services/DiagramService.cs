@@ -21,7 +21,7 @@ public class DiagramService
     /// <param name="layoutAlgorithmFactory">The layout algorithm factory.</param>
     public DiagramService(ILayoutAlgorithmFactory layoutAlgorithmFactory)
     {
-        _layoutAlgorithmFactory = layoutAlgorithmFactory;
+        this._layoutAlgorithmFactory = layoutAlgorithmFactory;
     }
 
     /// <summary>
@@ -154,8 +154,8 @@ public class DiagramService
         switch (layoutParameters)
         {
             case SimpleTreeLayoutParameters treeParameters:
-                treeParameters.LayerGap = 50;
-                treeParameters.VertexGap = 50;
+                treeParameters.LayerGap = 100;
+                treeParameters.VertexGap = 100;
                 treeParameters.Direction = LayoutDirection.TopToBottom;
                 treeParameters.SpanningTreeGeneration = SpanningTreeGeneration.DFS;
                 break;
