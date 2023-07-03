@@ -65,15 +65,19 @@ public class DiagramService
 
             var link = new LinkModel(triple.ToString(), fromNode, toNode)
             {
-                TargetMarker = LinkMarker.Arrow,
+                SourceMarker = triple.EdgeName == "CHILDREN" ? LinkMarker.Arrow: null,
             };
 
             if (!string.IsNullOrWhiteSpace(triple.EdgeName) && triple.EdgeName != "SIBLINGS")
             {
                 link.Labels.Add(new LinkLabelModel(link, triple.EdgeName)
                 {
-                    Content = triple.EdgeName,
+                    Content = GetEdgeCaption(triple.EdgeName),
                 });
+            }
+            else
+            {
+                link.Color = "LightGray";
             }
 
             diagram.Links.Add(link);
@@ -98,6 +102,18 @@ public class DiagramService
         diagram.ZoomToFit();
     }
 
+    private static string GetEdgeCaption(string label)
+    {
+        switch (label)
+        {
+            case "CHILDREN": return "is child of";
+            case "SPOUSE": return "is married with";
+            case "SIBLINGS": return "is sibling of";
+        }
+
+        return string.Empty;
+    }
+
     private static BidirectionalGraph<NodeModel, Edge<NodeModel>> MakeGraph(Diagram diagram)
     {
         var graph = new BidirectionalGraph<NodeModel, Edge<NodeModel>>(true);
@@ -107,7 +123,9 @@ public class DiagramService
             graph.AddVertex(node);
         }
 
-        foreach (var diagramLink in diagram.Links.Where(l => l.TargetNode is not null))
+        foreach (var diagramLink in diagram.Links
+                     .Where(l => l.TargetNode is not null)
+                     .Where(l => l.Labels.Any())) // Siblings have no label
         {
             graph.AddEdge(new Edge<NodeModel>(diagramLink.SourceNode, diagramLink.TargetNode!));
         }
