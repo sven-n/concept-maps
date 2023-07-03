@@ -12,7 +12,7 @@ from rel_model import create_relation_model, create_classification_layer, create
 class Model2:
 
     def __init__(self):
-        self.ner_model : Language = spacy.load("en_core_web_sm")
+        self.ner_model : Language = spacy.load("en_core_web_trf")
         self.rel_model : Language = spacy.load("training/relations/training/model-best")
 
     def set_rel_model(self, model_path: (str|Path)):

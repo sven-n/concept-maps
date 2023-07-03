@@ -5,7 +5,7 @@ from spacy.language import Language
 
 
 # Laden des Basismodells
-default_nlp = spacy.load("en_core_web_sm")
+default_nlp = spacy.load("en_core_web_trf")
 
 # Einstiegsmethode:
 def convertJsonFile(inputJsonPath: str, outputTraininigDataJsonPath: str, nlp = default_nlp):
