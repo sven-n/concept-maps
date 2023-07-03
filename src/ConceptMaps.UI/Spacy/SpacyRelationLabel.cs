@@ -9,7 +9,7 @@ public static class SpacyRelationLabel
     /// Gets the <see cref="SpacyRelation.RelationLabel"/> for an undefined relation,
     /// when there isn't a relation between two entities.
     /// </summary>
-    public static string Undefined { get; } = "undefined";
+    public static string Undefined { get; } = "UNDEFINED";
 
     /// <summary>
     /// Gets the <see cref="SpacyRelation.RelationLabel"/> for entities which are spouses.

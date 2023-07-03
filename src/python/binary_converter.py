@@ -108,7 +108,7 @@ def prepare_rels(doc: Doc, span_starts: list[int]) -> dict:
     doc._.rel = rels
     return rels
 
-def parse_relations_simple(rels: dict, example, entity_tokens: list[str]) -> bool:
+def parse_relations_simple(rels: dict, example, entity_tokens: list[dict]) -> bool:
     """Parses the relations for the "simple" json format."""
     positives = 0
     for relationship in example["relationships"]:
@@ -125,7 +125,24 @@ def parse_relations_simple(rels: dict, example, entity_tokens: list[str]) -> boo
                 msg.warn(f"Found label '{label}' not defined in DIRECTED_LABELS - skipping")
                 break
             rels[(start, end)][label] = 1.0
+            if (label == "SIBLINGS" or label == "SPOUSE"):
+                # Also label the other direction of the relationship if it's not about children
+                rels[(end, start)][label] = 1.0
             positives += 1
+    for a in entity_tokens:
+        for b in entity_tokens:
+            if a == b:
+                continue
+            # set to UNDEFINED, if no other relation is defined
+            is_any_defined = False
+            for label in DIRECTED_LABELS:
+                is_any_defined |= rels[(a["token_start"], b["token_start"])][label] == 1
+            if not is_any_defined:
+                has_children_relation = rels[(b["token_start"], a["token_start"])]['CHILDREN'] == 1
+                is_any_defined = has_children_relation
+            if not is_any_defined:
+                rels[(a["token_start"], b["token_start"])]['UNDEFINED'] = 1
+
     return positives > 0
 
 def parse_relations(rels: dict, example) -> bool:
