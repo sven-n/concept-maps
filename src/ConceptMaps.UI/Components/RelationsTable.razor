@@ -1,4 +1,5 @@
-﻿<div class="alert alert-light" role="alert">
+﻿@using ConceptMaps.UI.Spacy
+<div class="alert alert-light" role="alert">
     <h6 class="alert-heading">Relationships:</h6>
     <table class="table table-striped table-borderless">
         <tbody>
@@ -18,10 +19,10 @@
                 </td>
                 <td class="col-3">
                     <InputSelect class="form-select form-select-sm" @bind-Value="@rel.RelationshipTypeInSentence" disabled="@this.IsReadOnly">
-                        <option selected="@(rel.IsUndefined())" value="undefined">unrelated</option>
-                        <option selected="@(rel.IsSiblings())" value="SIBLINGS">is sibling of</option>
-                        <option selected="@(rel.IsSpouse())" value="SPOUSE">is married with</option>
-                        <option selected="@(rel.IsChildren())" value="CHILDREN">is child of</option>
+                        <option selected="@(rel.IsUndefined())" value="@SpacyRelationLabel.Undefined">unrelated</option>
+                        <option selected="@(rel.IsSiblings())" value="@SpacyRelationLabel.Siblings">is sibling of</option>
+                        <option selected="@(rel.IsSpouse())" value="@SpacyRelationLabel.Spouse">is married with</option>
+                        <option selected="@(rel.IsChildren())" value="@SpacyRelationLabel.Children">is child of</option>
                     </InputSelect>
                 </td>
                 <td class="col-3">

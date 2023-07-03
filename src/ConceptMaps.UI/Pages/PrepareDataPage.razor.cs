@@ -1,14 +1,10 @@
-﻿using System.Security.AccessControl;
+﻿namespace ConceptMaps.UI.Pages;
 
-namespace ConceptMaps.UI.Pages;
-
-using System.Text;
 using Microsoft.AspNetCore.Components;
 using ConceptMaps.Crawler;
 using ConceptMaps.UI.Components;
 using ConceptMaps.UI.Data;
 using ConceptMaps.UI.Services;
-using System.Text.Json;
 
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
@@ -94,7 +90,7 @@ public partial class PrepareDataPage
         if (await this.PrepareDataManager.LoadAsync(fileName) is { } loaded)
         {
             this.PrepareContext = loaded;
-            this._paginationState.Items = loaded.Sentences;
+            this._paginationState.Items = this.FilteredSentences;
             this._paginationState.CurrentPageIndex = 0;
         }
     }
@@ -107,7 +103,7 @@ public partial class PrepareDataPage
     private void OnClearContext()
     {
         this.PrepareContext = new DataPrepareContext();
-        this._paginationState.Items = this.PrepareContext.Sentences;
+        this._paginationState.Items = this.FilteredSentences;
         this._paginationState.CurrentPageIndex = 0;
     }
 

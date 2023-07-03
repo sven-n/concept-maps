@@ -116,7 +116,7 @@ public class DiagramService
 
     private static BidirectionalGraph<NodeModel, Edge<NodeModel>> MakeGraph(Diagram diagram)
     {
-        var graph = new BidirectionalGraph<NodeModel, Edge<NodeModel>>(true);
+        var graph = new BidirectionalGraph<NodeModel, Edge<NodeModel>>(false);
 
         foreach (var node in diagram.Nodes)
         {
@@ -127,7 +127,14 @@ public class DiagramService
                      .Where(l => l.TargetNode is not null)
                      .Where(l => l.Labels.Any())) // Siblings have no label
         {
-            graph.AddEdge(new Edge<NodeModel>(diagramLink.SourceNode, diagramLink.TargetNode!));
+            graph.AddEdge(new Edge<NodeModel>(diagramLink.TargetNode!, diagramLink.SourceNode));
+            if (diagramLink.Labels.FirstOrDefault(l => l.Content == "is married with") is { } marriedLabel)
+            {
+                var dummyNode = new NodeModel(marriedLabel.Id + "dummy");
+                graph.AddVertex(dummyNode);
+                graph.AddEdge(new Edge<NodeModel>(dummyNode, diagramLink.SourceNode));
+                graph.AddEdge(new Edge<NodeModel>(dummyNode, diagramLink.TargetNode));
+            }
         }
 
         return graph;
@@ -156,7 +163,7 @@ public class DiagramService
             case SimpleTreeLayoutParameters treeParameters:
                 treeParameters.LayerGap = 100;
                 treeParameters.VertexGap = 100;
-                treeParameters.Direction = LayoutDirection.TopToBottom;
+                treeParameters.Direction = LayoutDirection.BottomToTop;
                 treeParameters.SpanningTreeGeneration = SpanningTreeGeneration.DFS;
                 break;
             case BalloonTreeLayoutParameters balloonTreeParameters:
