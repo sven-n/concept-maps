@@ -17,4 +17,11 @@ public partial class RelationsTable
     {
         this.Relationships.Add(new Relationship());
     }
+
+    private void OnSwitchEntities(Relationship relationship)
+    {
+        var newFirstEntity = relationship.SecondEntity;
+        relationship.SecondEntity = relationship.FirstEntity;
+        relationship.FirstEntity = newFirstEntity;
+    }
 }

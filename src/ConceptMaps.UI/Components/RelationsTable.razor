@@ -8,10 +8,11 @@
             <tr class="row justify-content-start">
                 @if (!this.IsReadOnly)
                 {
-                    <td class="col-md-auto">
-                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove" aria-label="Remove" @onclick="() => this.Relationships.Remove(rel)">
+                    <td class="btn-group col-md-auto">
+                        <button type="button" class="btn btn-sm btn-danger btn-remove" aria-label="Remove" @onclick="() => this.Relationships.Remove(rel)">
                             <span class="oi oi-trash"></span>
                         </button>
+                        <button type="button" class="btn btn-sm btn-secondary" title="Switch entities" @onclick="() => this.OnSwitchEntities(rel)"><span class="oi oi-transfer"></span></button>
                     </td>
                 }
                 <td class="col-3">
