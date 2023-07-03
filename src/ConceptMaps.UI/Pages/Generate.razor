@@ -5,6 +5,7 @@
 @using Blazor.Diagrams.Components;
 @using ConceptMaps.Crawler
 @using ConceptMaps.UI.Services;
+@using ConceptMaps.UI.Spacy
 
 @inject RemoteTripleService RemoteTripleService
 @inject DiagramService DiagramService
@@ -120,13 +121,16 @@
             try
             {
                 triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
+                triples = triples.Where(t => t.EdgeName != SpacyRelationLabel.Undefined).ToList();
                 this.TriplesOutput = string.Join(Environment.NewLine, triples);
-                this.Relationships = triples.Select(t => new Relationship()
-                {
-                    FirstEntity = t.FromWord,
-                    RelationshipTypeInSentence = t.EdgeName ?? "UNDEFINED",
-                    SecondEntity = t.ToWord,
-                }).ToList();
+                this.Relationships = triples
+                    .Select(t => new Relationship
+                    {
+                        FirstEntity = t.FromWord,
+                        RelationshipTypeInSentence = t.EdgeName ?? SpacyRelationLabel.Undefined,
+                        SecondEntity = t.ToWord,
+                    })
+                    .ToList();
             }
             catch (Exception ex)
             {
