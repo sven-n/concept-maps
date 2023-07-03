@@ -6,6 +6,8 @@ triples of word relations.
 from triple import Triple
 from model2 import Model2
 
+model = Model2()
+
 class TripleGenerator:
     """Generates relationship-triples based on an input text."""
 
@@ -15,5 +17,5 @@ class TripleGenerator:
         :param input_text: The input text, given by the user.
         """
 
-        result = Model2.runNLP(input_text)
+        result = model.get_triples(input_text)
         return result
