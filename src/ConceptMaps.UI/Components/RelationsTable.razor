@@ -8,18 +8,22 @@
             <tr class="row justify-content-start">
                 @if (!this.IsReadOnly)
                 {
-                    <td class="btn-group col-md-auto">
+                    <td class="btn-group col-3">
                         <button type="button" class="btn btn-sm btn-danger btn-remove" aria-label="Remove" @onclick="() => this.Relationships.Remove(rel)">
                             <span class="oi oi-trash"></span>
                         </button>
                         <button type="button" class="btn btn-sm btn-secondary" title="Switch entities" @onclick="() => this.OnSwitchEntities(rel)"><span class="oi oi-transfer"></span></button>
+                        @if (rel.Score < 0.9)
+                        {
+                            <span class="btn oi oi-warning" title="@($"Score for {rel.RelationshipTypeInSentence}: {rel.Score}")"></span>
+                        }
                     </td>
                 }
                 <td class="col-3">
                     <InputText class="form-control form-control-sm" @bind-Value="rel.FirstEntity" placeholder="Enter Name" disabled="@this.IsReadOnly"></InputText>
                 </td>
                 <td class="col-3">
-                    <InputSelect class="form-select form-select-sm" @bind-Value="@rel.RelationshipTypeInSentence" disabled="@this.IsReadOnly">
+                    <InputSelect class="form-select form-select-sm" @bind-Value="@rel.RelationshipTypeInSentence" disabled="@this.IsReadOnly" title="@(rel.Score > 0 ? $"Score for {rel.RelationshipTypeInSentence}: {rel.Score}" : null)">
                         <option selected="@(rel.IsUndefined())" value="@SpacyRelationLabel.Undefined">unrelated</option>
                         <option selected="@(rel.IsSiblings())" value="@SpacyRelationLabel.Siblings">is sibling of</option>
                         <option selected="@(rel.IsSpouse())" value="@SpacyRelationLabel.Spouse">is married with</option>

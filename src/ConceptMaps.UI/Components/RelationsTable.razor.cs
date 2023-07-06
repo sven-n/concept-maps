@@ -20,8 +20,7 @@ public partial class RelationsTable
 
     private void OnSwitchEntities(Relationship relationship)
     {
-        var newFirstEntity = relationship.SecondEntity;
-        relationship.SecondEntity = relationship.FirstEntity;
-        relationship.FirstEntity = newFirstEntity;
+        (relationship.SecondEntity, relationship.FirstEntity)
+            = (relationship.FirstEntity, relationship.SecondEntity);
     }
 }

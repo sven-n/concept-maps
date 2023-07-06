@@ -162,7 +162,7 @@
             try
             {
                 triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
-                triples = triples.Where(t => t.EdgeName != SpacyRelationLabel.Undefined).ToList();
+
                 this.TriplesOutput = string.Join(Environment.NewLine, triples);
                 this.Entities = triples.Select(t => t.FromWord).Concat(triples.Select(t => t.ToWord)).Distinct().Order().ToList();
                 this.Relationships = triples
@@ -171,18 +171,20 @@
                         FirstEntity = t.FromWord,
                         RelationshipTypeInSentence = t.EdgeName ?? SpacyRelationLabel.Undefined,
                         SecondEntity = t.ToWord,
+                        Score = t.Score,
                     })
                     .ToList();
+
+                // For the diagram, we filter out all undefined edges.
+                triples = triples.Where(t => t.EdgeName != SpacyRelationLabel.Undefined).ToList();
+                await this.CreateDiagramAsync(triples);
             }
             catch (Exception ex)
             {
                 this.ErrorMessage = builder => builder.AddMarkupContent(
-                    0, 
+                    0,
                     $"Unexpected error occurred when generating triples: {ex}".ReplaceLineEndings("<br>"));
-                return;
             }
-
-            await CreateDiagramAsync(triples);
         }
         finally
         {

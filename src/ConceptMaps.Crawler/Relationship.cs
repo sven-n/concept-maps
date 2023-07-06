@@ -14,6 +14,9 @@ public class Relationship
     [JsonPropertyName("relationshipType")]
     public string? KnownRelationshipType { get; set; }
 
+    [JsonIgnore]
+    public double Score { get; set; } = double.NaN;
+
     public Relationship Clone()
     {
         return new Relationship
@@ -22,6 +25,7 @@ public class Relationship
             SecondEntity = this.SecondEntity,
             RelationshipTypeInSentence = this.RelationshipTypeInSentence,
             KnownRelationshipType = this.KnownRelationshipType,
+            Score = this.Score,
         };
     }
 }

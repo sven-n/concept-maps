@@ -65,8 +65,8 @@ class Model2:
             label_b_score = b_to_a_dict[max_label_b]
 
             if (label_a_score > label_b_score):
-                result.append(Triple(pair[1].text, max_label_a, pair[0].text))
+                result.append(Triple(pair[1].text, max_label_a, pair[0].text, float(label_a_score)))
             else:
-                result.append(Triple(pair[0].text, max_label_b, pair[1].text))
+                result.append(Triple(pair[0].text, max_label_b, pair[1].text, float(label_b_score)))
 
         return result

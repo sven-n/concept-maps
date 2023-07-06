@@ -29,7 +29,7 @@ public static class RelationshipExtensions
 
     public static IEnumerable<Triple> ToTriples(this IEnumerable<Relationship>? relationships)
     {
-        return relationships?.Select(rel => new Triple(rel.FirstEntity, rel.RelationshipTypeInSentence, rel.SecondEntity))
+        return relationships?.Select(rel => new Triple(rel.FirstEntity, rel.RelationshipTypeInSentence, rel.SecondEntity, rel.Score))
             ?? Enumerable.Empty<Triple>();
     }
 }
