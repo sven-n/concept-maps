@@ -9,8 +9,8 @@ using QuikGraph;
 /// </summary>
 public class StandardLayoutAlgorithmFactory : StandardLayoutAlgorithmFactory<
         NodeModel,
-        Edge<NodeModel>,
-        BidirectionalGraph<NodeModel, Edge<NodeModel>>>,
+        TaggedEdge<NodeModel, string>,
+        BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>>>,
     ILayoutAlgorithmFactory
 {
 }

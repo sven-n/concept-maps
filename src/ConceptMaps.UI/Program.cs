@@ -1,6 +1,9 @@
+using System.Runtime.CompilerServices;
 using ConceptMaps.Crawler;
 using ConceptMaps.UI.Services;
 using Microsoft.Extensions.FileProviders;
+
+[assembly:InternalsVisibleTo("ConceptMaps.Tests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,7 @@ builder.Services.AddSingleton<IModelProvider, ModelProvider>();
 builder.Services.AddSingleton<ITrainingDataManager, TrainingDataManager>();
 builder.Services.AddSingleton<IPrepareDataManager, PrepareDataManager>();
 builder.Services.AddSingleton<DiagramService>();
-builder.Services.AddSingleton<ILayoutAlgorithmFactory, StandardLayoutAlgorithmFactory>();
+builder.Services.AddSingleton<ILayoutAlgorithmFactory, FamilyTreeLayoutAlgorithmFactory>();
 builder.Services.AddSingleton<ICrawledDataProvider, CrawledDataProvider>();
 builder.Services.AddCrawler();
 
@@ -57,3 +60,4 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+

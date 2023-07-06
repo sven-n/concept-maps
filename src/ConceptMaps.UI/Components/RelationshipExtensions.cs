@@ -3,6 +3,8 @@ using ConceptMaps.UI.Spacy;
 
 namespace ConceptMaps.UI.Components;
 
+using ConceptMaps.UI.Data;
+
 public static class RelationshipExtensions
 {
     public static bool IsUndefined(this Relationship relationship)
@@ -23,5 +25,11 @@ public static class RelationshipExtensions
     public static bool IsSiblings(this Relationship relationship)
     {
         return SpacyRelationLabel.Siblings.Equals(relationship.RelationshipTypeInSentence, StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    public static IEnumerable<Triple> ToTriples(this IEnumerable<Relationship>? relationships)
+    {
+        return relationships?.Select(rel => new Triple(rel.FirstEntity, rel.RelationshipTypeInSentence, rel.SecondEntity))
+            ?? Enumerable.Empty<Triple>();
     }
 }

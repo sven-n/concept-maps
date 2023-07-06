@@ -1,13 +1,13 @@
 ﻿@if (this.Status.IsActive)
 {
-    <h3>
     <div>
-        <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
-            <span class="sr-only">Training (@this.Status.State)...</span>
+        <button class="btn btn-primary" disabled="true">
+            <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span> Training
+        </button>
+        <button class="btn btn-secondary mx-1" onclick="@this.OnStopClickAsync" disabled="@(this._isStopping || !this.Status.IsActive)">
+            <span class="oi oi-media-stop"></span> Stop
+        </button>
     </div>
-
-    <button class="btn btn-secondary mx-1" onclick="@this.OnStopClickAsync" disabled="@this._isStopping"><span class="oi oi-media-stop"></span> Stop</button>
-    </h3>
 }
 else
 {

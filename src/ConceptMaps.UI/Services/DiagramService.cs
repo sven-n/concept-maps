@@ -2,7 +2,9 @@
 
 using Blazor.Diagrams.Core;
 using Blazor.Diagrams.Core.Models;
+using ConceptMaps.UI.Components;
 using ConceptMaps.UI.Data;
+using ConceptMaps.UI.Spacy;
 using GraphShape;
 using GraphShape.Algorithms.Layout;
 using QuikGraph;
@@ -25,11 +27,6 @@ public class DiagramService
     }
 
     /// <summary>
-    /// Gets the available algorithm types.
-    /// </summary>
-    public IEnumerable<string> AlgorithmTypes => _layoutAlgorithmFactory.AlgorithmTypes;
-
-    /// <summary>
     /// Creates a new diagram based on the given triples.
     /// </summary>
     /// <param name="triples">The triples.</param>
@@ -37,9 +34,11 @@ public class DiagramService
     public Diagram CreateDiagram(IList<Triple> triples)
     {
         var diagram = new Diagram();
+        diagram.RegisterModelComponent<SpouseLinkLabel, SpouseLinkLabelWidget>();
 
         // temporary fix for zooming exceptions, see https://github.com/Blazor-Diagrams/Blazor.Diagrams/issues/322
         diagram.Options.EnableVirtualization = false;
+        diagram.Options.GridSize = 10; // For the snapping
 
         var nodes = new Dictionary<string, NodeModel>();
         NodeModel AddIfNotExists(string word)
@@ -63,27 +62,38 @@ public class DiagramService
             var fromNode = AddIfNotExists(triple.FromWord);
             var toNode = AddIfNotExists(triple.ToWord);
 
-            var link = new LinkModel(triple.ToString(), fromNode, toNode)
+            LinkModel link;
+            if (triple.EdgeName == SpacyRelationLabel.Spouse)
             {
-                SourceMarker = triple.EdgeName == "CHILDREN" ? LinkMarker.Arrow: null,
-            };
-
-            if (!string.IsNullOrWhiteSpace(triple.EdgeName) && triple.EdgeName != "SIBLINGS")
-            {
-                link.Labels.Add(new LinkLabelModel(link, triple.EdgeName)
+                link = new LinkModel(triple.ToString(), fromNode, toNode)
                 {
-                    Content = GetEdgeCaption(triple.EdgeName),
-                });
+                    PathGenerator = PathGenerators.Straight,
+                };
+                link.Labels.Add(new SpouseLinkLabel(link, "💍"));
+            }
+            else if (triple.EdgeName == SpacyRelationLabel.Children)
+            {
+                link = new LinkModel(triple.ToString(), fromNode, toNode);
+                link.SourceMarker = LinkMarker.Arrow;
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
+            }
+            else if (triple.EdgeName == SpacyRelationLabel.Siblings)
+            {
+                link = new LinkModel(triple.ToString(), fromNode, toNode)
+                {
+                    Color = "LightGray",
+                };
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
             }
             else
             {
-                link.Color = "LightGray";
+                link = new LinkModel(triple.ToString(), fromNode, toNode);
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
             }
 
             diagram.Links.Add(link);
         }
 
-        // diagram.ZoomToFit();
         return diagram;
     }
 
@@ -95,28 +105,81 @@ public class DiagramService
         foreach (var (node, position) in nodePositions)
         {
             node.Position = new Blazor.Diagrams.Core.Geometry.Point(position.X, position.Y);
-            node.RefreshAll();
+            node.Refresh();
         }
 
-        diagram.Refresh();
+        RemoveSiblingLinksWithParents(diagram);
+        RemoveChildrenLabels(diagram);
+
         diagram.ZoomToFit();
+        diagram.Refresh();
+    }
+
+    /// <summary>
+    /// Clean up unneeded children labels. The relations between parents and childrens are
+    /// visible through the arrow marker.
+    /// </summary>
+    /// <param name="diagram">The diagram.</param>
+    private static void RemoveChildrenLabels(Diagram diagram)
+    {
+        var links = diagram.Links
+            .Select(l => (Link: l, l.SourceNode, TargetNode: l.TargetNode!, RelationType: l.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType));
+        var childrenLinks = links
+            .Where(l => l.RelationType == SpacyRelationLabel.Children)
+            .ToList();
+        foreach (var childrenLink in childrenLinks)
+        {
+            childrenLink.Link.Labels.Clear();
+        }
+    }
+
+    /// <summary>
+    /// lean up unneeded links. The relation between siblings is already visible
+    /// through their parent-child connections, so we can remove them.
+    /// </summary>
+    /// <param name="diagram">The diagram.</param>
+    private static void RemoveSiblingLinksWithParents(Diagram diagram)
+    {
+        var links = diagram.Links
+            .Select(l => (Link: l, l.SourceNode, TargetNode: l.TargetNode!, RelationType: l.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType));
+        var childrenWithParents = links
+            .Where(l => l.RelationType == SpacyRelationLabel.Children)
+            .Select(l => l.SourceNode)
+            .ToHashSet();
+        var siblingLinksWithParents = links
+            .Where(l => l.RelationType == SpacyRelationLabel.Siblings)
+            .Where(l => childrenWithParents.Contains(l.SourceNode) && childrenWithParents.Contains(l.TargetNode))
+            .Select(l => l.Link)
+            .ToList();
+        diagram.Links.Remove(siblingLinksWithParents);
+        
+        foreach (var valueTuple in links.Where(l => l.RelationType == SpacyRelationLabel.Siblings))
+        {
+            valueTuple.Link.Labels.Clear();
+        }
+    }
+
+    private static Blazor.Diagrams.Core.Geometry.Point GetVerticePosition(PortModel port, int addX, int addY)
+    {
+        var sourcePosition = port.Parent.Position.Add(port.MiddlePosition.X, port.MiddlePosition.Y);
+        return sourcePosition.Add(addX, addY);
     }
 
     private static string GetEdgeCaption(string label)
     {
         switch (label)
         {
-            case "CHILDREN": return "is child of";
+            case "CHILDREN": return "child";
             case "SPOUSE": return "is married with";
-            case "SIBLINGS": return "is sibling of";
+            case "SIBLINGS": return "siblings";
         }
 
-        return string.Empty;
+        return label;
     }
 
-    private static BidirectionalGraph<NodeModel, Edge<NodeModel>> MakeGraph(Diagram diagram)
+    private static BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>> MakeGraph(Diagram diagram)
     {
-        var graph = new BidirectionalGraph<NodeModel, Edge<NodeModel>>(false);
+        var graph = new BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>>(false);
 
         foreach (var node in diagram.Nodes)
         {
@@ -127,20 +190,18 @@ public class DiagramService
                      .Where(l => l.TargetNode is not null)
                      .Where(l => l.Labels.Any())) // Siblings have no label
         {
-            graph.AddEdge(new Edge<NodeModel>(diagramLink.TargetNode!, diagramLink.SourceNode));
-            if (diagramLink.Labels.FirstOrDefault(l => l.Content == "is married with") is { } marriedLabel)
-            {
-                var dummyNode = new NodeModel(marriedLabel.Id + "dummy");
-                graph.AddVertex(dummyNode);
-                graph.AddEdge(new Edge<NodeModel>(dummyNode, diagramLink.SourceNode));
-                graph.AddEdge(new Edge<NodeModel>(dummyNode, diagramLink.TargetNode));
-            }
+            var relationType = diagramLink.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType ?? string.Empty;
+            graph.AddEdge(
+                new TaggedEdge<NodeModel, string>(
+                    diagramLink.TargetNode!,
+                    diagramLink.SourceNode,
+                    relationType));
         }
 
         return graph;
     }
 
-    private IDictionary<NodeModel, Point> CalculateNodePositions(BidirectionalGraph<NodeModel, Edge<NodeModel>> graph, string algorithmName)
+    private IDictionary<NodeModel, Point> CalculateNodePositions(BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>> graph, string algorithmName)
     {
         var layoutContext = CreateLayoutContext(graph);
         var layoutParameters = _layoutAlgorithmFactory.CreateParameters(algorithmName, null);
@@ -157,57 +218,21 @@ public class DiagramService
 
     private static void AdaptLayoutParameters(ILayoutParameters layoutParameters)
     {
-        // TODO: Make configurable on the UI
-        switch (layoutParameters)
+        if (layoutParameters is SimpleTreeLayoutParameters treeParameters)
         {
-            case SimpleTreeLayoutParameters treeParameters:
-                treeParameters.LayerGap = 100;
-                treeParameters.VertexGap = 100;
-                treeParameters.Direction = LayoutDirection.BottomToTop;
-                treeParameters.SpanningTreeGeneration = SpanningTreeGeneration.DFS;
-                break;
-            case BalloonTreeLayoutParameters balloonTreeParameters:
-                balloonTreeParameters.MinRadius = 50;
-                break;
-            case BoundedFRLayoutParameters boundedFrLayoutParameters:
-                boundedFrLayoutParameters.Height = GraphicConstants.GraphicsHeight;
-                boundedFrLayoutParameters.Width = GraphicConstants.GraphicsWidth;
-                break;
-            case ISOMLayoutParameters isoMLayoutParameters:
-                isoMLayoutParameters.MinRadius = 300;
-                isoMLayoutParameters.InitialRadius = 300;
-                isoMLayoutParameters.Height = GraphicConstants.GraphicsHeight;
-                isoMLayoutParameters.Width = GraphicConstants.GraphicsWidth;
-                break;
-            case KKLayoutParameters kkLayoutParameters:
-                kkLayoutParameters.Height = GraphicConstants.GraphicsHeight;
-                kkLayoutParameters.Width = GraphicConstants.GraphicsWidth;
-                break;
-            case LinLogLayoutParameters linLogLayoutParameters:
-                // LinLogLayoutParameters.AttractionExponent = 20;
-                linLogLayoutParameters.GravitationMultiplier = 0.01;
-                break;
-            case SugiyamaLayoutParameters sugiyamaLayoutParameters:
-                sugiyamaLayoutParameters.LayerGap = 50;
-                sugiyamaLayoutParameters.SliceGap = 50;
-                sugiyamaLayoutParameters.WidthPerHeight = GraphicConstants.GraphicsWidthCm / GraphicConstants.GraphicsHeightCm;
-                break;
-            case RandomLayoutParameters randomLayoutParameters:
-                randomLayoutParameters.Width = GraphicConstants.GraphicsWidth;
-                randomLayoutParameters.Height = GraphicConstants.GraphicsHeight;
-                break;
-            case CompoundFDPLayoutParameters compoundFdpLayoutParameters:
-                compoundFdpLayoutParameters.IdealEdgeLength = 75;
-                break;
+            treeParameters.LayerGap = 100;
+            treeParameters.VertexGap = 100;
+            treeParameters.Direction = LayoutDirection.TopToBottom;
+            treeParameters.SpanningTreeGeneration = SpanningTreeGeneration.DFS;
         }
     }
 
-    private static LayoutContext<NodeModel, Edge<NodeModel>, BidirectionalGraph<NodeModel, Edge<NodeModel>>> CreateLayoutContext(BidirectionalGraph<NodeModel, Edge<NodeModel>> graph)
+    private static LayoutContext<NodeModel, TaggedEdge<NodeModel, string>, BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>>> CreateLayoutContext(BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>> graph)
     {
         var positions = new Dictionary<NodeModel, Point>();
         var sizes = graph.Vertices.ToDictionary(node => node, node => ConvertSize(node.Size!));
 
-        return new LayoutContext<NodeModel, Edge<NodeModel>, BidirectionalGraph<NodeModel, Edge<NodeModel>>>(graph, positions, sizes, LayoutMode.Simple);
+        return new LayoutContext<NodeModel, TaggedEdge<NodeModel, string>, BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>>>(graph, positions, sizes, LayoutMode.Simple);
     }
 
     private static GraphShape.Size ConvertSize(Size size) => new(size?.Width ?? 100, size?.Height ?? 80);

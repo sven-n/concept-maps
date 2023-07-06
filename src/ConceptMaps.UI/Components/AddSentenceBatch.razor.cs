@@ -55,7 +55,7 @@ public partial class AddSentenceBatch
         }
 
         this.FreeText = string.Empty;
-        if (this.OnAdded is { } onAdded)
+        if (this.OnAdded is { HasDelegate: true } onAdded)
         {
             await onAdded.InvokeAsync();
         }
@@ -63,7 +63,7 @@ public partial class AddSentenceBatch
 
     private async Task OnCancelClickAsync()
     {
-        if (this.OnCancel is { } onCancel)
+        if (this.OnCancel is { HasDelegate: true } onCancel)
         {
             await onCancel.InvokeAsync();
         }

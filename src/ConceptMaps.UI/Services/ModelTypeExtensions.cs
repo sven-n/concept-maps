@@ -4,14 +4,14 @@ public static class ModelTypeExtensions
 {
     public static string RelationModelType => "relations";
 
-    public static string NrtModelType => "nrt";
+    public static string NerModelType => "ner";
 
     public static string AsString(this ModelType modelType)
     {
         switch (modelType)
         {
             case ModelType.Ner:
-                return NrtModelType;
+                return NerModelType;
             case ModelType.Relation:
                 return RelationModelType;
             default:

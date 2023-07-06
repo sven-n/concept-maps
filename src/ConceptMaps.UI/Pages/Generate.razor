@@ -47,64 +47,105 @@
             @if (this.Relationships is not null)
             {
                 <div class="alert alert-light shadow">
+                    
                     <RelationsTable IsReadOnly="false" Relationships="@this.Relationships"/>
                     <button class="btn btn-primary" @onclick="this.OnApplyAsync"><span class="oi oi-media-play"></span> Apply changes</button>
                 </div>
             }
         </div>
-        <div class="col-7">
-
-            @if (this._diagram is not null)
-            {
-                <div>
-                    <span>Layout algorithm:</span>
-                    <InputSelect @bind-Value="@this.SelectedAlgorithm">
-                        @foreach (var algorithmType in this.DiagramService.AlgorithmTypes)
+    @if (this._diagram is not null)
+    {
+        <div class="col-7 shadow p-3 mb-5 rounded">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Diagram functions">
+                <div class="btn btn-outline-primary btn-sm">
+                    <label for="entityFilter">Filter:</label>
+                    <InputSelect class="btn-outline-primary" id="entityFilter" @bind-Value="this.SelectedEntity">
+                        <option value="">(None)</option>
+                        @foreach (var entity in this.Entities)
                         {
-                            <option id="@algorithmType" selected="@(this.SelectedAlgorithm == algorithmType ? "true" : null)">@algorithmType</option>
+                            <option value="@entity">@entity</option>
                         }
                     </InputSelect>
                 </div>
-                <div class="canvas-host-a5 shadow p-3 mb-5 rounded">
-                    <CascadingValue Value="_diagram">
-                        <DiagramCanvas></DiagramCanvas>
-                    </CascadingValue>
-                </div>
-            }
+                    <button class="btn btn-outline-primary btn-sm" title="Zoom to fit" onclick="@(() => this._diagram.ZoomToFit())"><span class="oi oi-resize-both"></span></button>
+            </div>
+            <div class="canvas-host-a5">
+                <CascadingValue Value="this._diagram">
+                    <DiagramCanvas></DiagramCanvas>
+                </CascadingValue>
+            </div>
         </div>
+    }
     </div>
 </div>
 
 
 @code {
     private Diagram? _diagram;
-    private string _selectedAlgorithm = string.Empty;
     private bool _isRunning;
+    private string _selectedEntity = string.Empty;
 
     private string? TextInput { get; set; } = "As siblings, Bob and Alice share a special bond as the children of Jeff and Mary.";
     private string? TriplesOutput { get; set; }
-    
+
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; } = null!;
+
     private List<Relationship>? Relationships { get; set; }
 
-    private RenderFragment? ErrorMessage { get; set; }
-
-    public string SelectedAlgorithm
+    private IEnumerable<Triple> FilteredTriples
     {
-        get => _selectedAlgorithm;
-        set
+        get
         {
-            _selectedAlgorithm = value;
-            this.ArrangeNodes();
+            if (this.Relationships is null)
+            {
+                return Enumerable.Empty<Triple>();
+            }
+
+            if (string.IsNullOrWhiteSpace(this.SelectedEntity))
+            {
+                return this.Relationships.ToTriples();
+            }
+
+            var filteredRelationships = this.Relationships.Where(rel => rel.FirstEntity == this.SelectedEntity || rel.SecondEntity == this.SelectedEntity).ToList();
+            var entities = filteredRelationships.Select(rel => rel.FirstEntity).Concat(filteredRelationships.Select(rel => rel.SecondEntity)).Distinct().ToList();
+            var additionalLinks = this.Relationships
+                .Where(rel => entities.Contains(rel.FirstEntity) 
+                              && entities.Contains(rel.SecondEntity)
+                              && !filteredRelationships.Contains(rel))
+                .ToList();
+            filteredRelationships.AddRange(additionalLinks);
+            return filteredRelationships.ToTriples();
         }
     }
+
+    private List<string> Entities { get; set; } = new();
+
+    private string SelectedEntity
+    {
+        get => _selectedEntity;
+        set
+        {
+            if (value == this._selectedEntity)
+            {
+                return;
+            }
+
+            this._selectedEntity = value;
+
+            var filtered = this.FilteredTriples.ToList();
+            this.InvokeAsync(() => this.CreateDiagramAsync(filtered));
+        }
+    }
+
+    private RenderFragment? ErrorMessage { get; set; }
 
     private async Task OnApplyAsync()
     {
         this._diagram = null;
         await this.InvokeAsync(this.StateHasChanged);
         await Task.Delay(100);
-        var triples = this.Relationships!.Select(rel => new Triple(rel.FirstEntity, rel.RelationshipTypeInSentence, rel.SecondEntity)).ToList();
-        await this.CreateDiagramAsync(triples);
+        await this.CreateDiagramAsync(this.FilteredTriples.ToList());
     }
 
     private async Task OnRunAsync()
@@ -123,6 +164,7 @@
                 triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
                 triples = triples.Where(t => t.EdgeName != SpacyRelationLabel.Undefined).ToList();
                 this.TriplesOutput = string.Join(Environment.NewLine, triples);
+                this.Entities = triples.Select(t => t.FromWord).Concat(triples.Select(t => t.ToWord)).Distinct().Order().ToList();
                 this.Relationships = triples
                     .Select(t => new Relationship
                     {
@@ -152,19 +194,20 @@
     {
         try
         {
+            if (this._diagram is { } oldDiagram)
+            {
+                this._diagram = null;
+                oldDiagram.Links.Clear();
+                oldDiagram.Nodes.Clear();
+                await this.InvokeAsync(this.StateHasChanged);
+                await Task.Delay(200);
+            }
             this._diagram = this.DiagramService.CreateDiagram(triples);
 
             // This is required to render it once, so we can arrange the elements in the next step
-            this.StateHasChanged();
-            await Task.Delay(100);
-
-            if (string.IsNullOrWhiteSpace(this.SelectedAlgorithm))
-            {
-                // Implicitly arranges nodes.
-                this._selectedAlgorithm = "Tree";
-            }
-
-            ArrangeNodes();
+            await this.InvokeAsync(this.StateHasChanged);
+            await Task.Delay(200);
+            await this.ArrangeNodesAsync();
         }
         catch (Exception ex)
         {
@@ -174,12 +217,13 @@
         }
     }
 
-    private void ArrangeNodes()
+    private async Task ArrangeNodesAsync()
     {
-        if (this._diagram is not null
-            && !string.IsNullOrWhiteSpace(this._selectedAlgorithm))
+        if (this._diagram is { } diagram)
         {
-            this.DiagramService.ArrangeNodes(this._diagram, this._selectedAlgorithm);
+            diagram.Batch(() => this.DiagramService.ArrangeNodes(diagram, "FamilyTree"));
         }
+
+        await this.InvokeAsync(this.StateHasChanged);
     }
 }

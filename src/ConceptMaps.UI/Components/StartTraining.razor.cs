@@ -16,6 +16,8 @@ public partial class StartTraining : IDisposable
 
     private bool? _startSuccess;
 
+    private bool _isStarting;
+
     [Parameter]
     public ModelType ModelType { get; set; }
 
@@ -49,8 +51,17 @@ public partial class StartTraining : IDisposable
 
     private async Task<bool> StartTrainingAsync<T>(CancellationToken cancellationToken)
     {
-        var sentences = await CollectSelectedDataAsync<T>(cancellationToken);
-        return await this.TrainingService.StartTrainingAsync(this.ModelType, sentences, this._selectedSourceModel, "todo", cancellationToken);
+        this._isStarting = true;
+        await this.InvokeAsync(this.StateHasChanged);
+        try
+        {
+            var sentences = await CollectSelectedDataAsync<T>(cancellationToken);
+            return await this.TrainingService.StartTrainingAsync(this.ModelType, sentences, this._selectedSourceModel, "todo", cancellationToken);
+        }
+        finally
+        {
+            this._isStarting = false;
+        }
     }
 
     private async Task<List<T>> CollectSelectedDataAsync<T>(CancellationToken cancellationToken)
