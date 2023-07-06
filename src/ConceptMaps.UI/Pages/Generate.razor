@@ -26,7 +26,7 @@
                         {
                             <button class="btn btn-primary" @onclick="this.OnRunAsync" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <span class="sr-only">Running ..</span>
+                                <span class="sr-only">Running ...</span>
                             </button>
                         }
                         else
@@ -59,7 +59,7 @@
             <div class="btn-group btn-group-sm" role="group" aria-label="Diagram functions">
                 <div class="btn btn-outline-primary btn-sm">
                     <label for="entityFilter">Filter:</label>
-                    <InputSelect class="btn-outline-primary" id="entityFilter" @bind-Value="this.SelectedEntity">
+                        <InputSelect class="btn-outline-primary btn-sm" id="entityFilter" @bind-Value="this.SelectedEntity">
                         <option value="">(None)</option>
                         @foreach (var entity in this.Entities)
                         {
@@ -86,7 +86,6 @@
     private string _selectedEntity = string.Empty;
 
     private string? TextInput { get; set; } = "As siblings, Bob and Alice share a special bond as the children of Jeff and Mary.";
-    private string? TriplesOutput { get; set; }
 
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
@@ -104,14 +103,18 @@
 
             if (string.IsNullOrWhiteSpace(this.SelectedEntity))
             {
-                return this.Relationships.ToTriples();
+                return this.Relationships
+                    .Where(rel => rel.RelationshipTypeInSentence != SpacyRelationLabel.Undefined)
+                    .ToTriples();
             }
 
-            var filteredRelationships = this.Relationships.Where(rel => rel.FirstEntity == this.SelectedEntity || rel.SecondEntity == this.SelectedEntity).ToList();
-            var entities = filteredRelationships.Select(rel => rel.FirstEntity).Concat(filteredRelationships.Select(rel => rel.SecondEntity)).Distinct().ToList();
+            var filteredRelationships = this.Relationships
+                .Where(rel => rel.RelationshipTypeInSentence != SpacyRelationLabel.Undefined)
+                .Where(rel => rel.FirstEntity == this.SelectedEntity || rel.SecondEntity == this.SelectedEntity)
+                .ToList();
             var additionalLinks = this.Relationships
-                .Where(rel => entities.Contains(rel.FirstEntity) 
-                              && entities.Contains(rel.SecondEntity)
+                .Where(rel => this.Entities.Contains(rel.FirstEntity) 
+                              && this.Entities.Contains(rel.SecondEntity)
                               && !filteredRelationships.Contains(rel))
                 .ToList();
             filteredRelationships.AddRange(additionalLinks);
@@ -132,9 +135,7 @@
             }
 
             this._selectedEntity = value;
-
-            var filtered = this.FilteredTriples.ToList();
-            this.InvokeAsync(() => this.CreateDiagramAsync(filtered));
+            this.InvokeAsync(this.CreateDiagramAsync);
         }
     }
 
@@ -145,25 +146,21 @@
         this._diagram = null;
         await this.InvokeAsync(this.StateHasChanged);
         await Task.Delay(100);
-        await this.CreateDiagramAsync(this.FilteredTriples.ToList());
+        await this.CreateDiagramAsync();
     }
 
     private async Task OnRunAsync()
     {
         this._diagram = null;
-        this.TriplesOutput = null;
         this.ErrorMessage = null;
 
         this._isRunning = true;
         try
         {
             this.StateHasChanged();
-            IList<Triple> triples;
             try
             {
-                triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
-
-                this.TriplesOutput = string.Join(Environment.NewLine, triples);
+                var triples = await this.RemoteTripleService.GenerateTriplesAsync(this.TextInput);
                 this.Entities = triples.Select(t => t.FromWord).Concat(triples.Select(t => t.ToWord)).Distinct().Order().ToList();
                 this.Relationships = triples
                     .Select(t => new Relationship
@@ -174,10 +171,7 @@
                         Score = t.Score,
                     })
                     .ToList();
-
-                // For the diagram, we filter out all undefined edges.
-                triples = triples.Where(t => t.EdgeName != SpacyRelationLabel.Undefined).ToList();
-                await this.CreateDiagramAsync(triples);
+                await this.CreateDiagramAsync();
             }
             catch (Exception ex)
             {
@@ -192,7 +186,7 @@
         }
     }
 
-    private async Task CreateDiagramAsync(IList<Triple> triples)
+    private async Task CreateDiagramAsync()
     {
         try
         {
@@ -204,7 +198,7 @@
                 await this.InvokeAsync(this.StateHasChanged);
                 await Task.Delay(200);
             }
-            this._diagram = this.DiagramService.CreateDiagram(triples);
+            this._diagram = this.DiagramService.CreateDiagram(this.FilteredTriples.ToList());
 
             // This is required to render it once, so we can arrange the elements in the next step
             await this.InvokeAsync(this.StateHasChanged);
