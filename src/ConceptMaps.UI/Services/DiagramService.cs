@@ -3,8 +3,8 @@
 using Blazor.Diagrams.Core;
 using Blazor.Diagrams.Core.Models;
 using ConceptMaps.UI.Components;
-using ConceptMaps.UI.Data;
-using ConceptMaps.UI.Spacy;
+using ConceptMaps.DataModel;
+using ConceptMaps.DataModel.Spacy;
 using GraphShape;
 using GraphShape.Algorithms.Layout;
 using QuikGraph;
@@ -29,9 +29,9 @@ public class DiagramService
     /// <summary>
     /// Creates a new diagram based on the given triples.
     /// </summary>
-    /// <param name="triples">The triples.</param>
+    /// <param name="relationships">The triples.</param>
     /// <returns>The created diagram.</returns>
-    public Diagram CreateDiagram(IList<Triple> triples)
+    public Diagram CreateDiagram(IList<Relationship> relationships)
     {
         var diagram = new Diagram();
         diagram.RegisterModelComponent<SpouseLinkLabel, SpouseLinkLabelWidget>();
@@ -57,38 +57,38 @@ public class DiagramService
             return nodeModel;
         }
 
-        foreach (var triple in triples)
+        foreach (var relationship in relationships)
         {
-            var fromNode = AddIfNotExists(triple.FromWord);
-            var toNode = AddIfNotExists(triple.ToWord);
+            var fromNode = AddIfNotExists(relationship.FirstEntity);
+            var toNode = AddIfNotExists(relationship.SecondEntity);
 
             LinkModel link;
-            if (triple.EdgeName == SpacyRelationLabel.Spouse)
+            if (relationship.IsSpouse())
             {
-                link = new LinkModel(triple.ToString(), fromNode, toNode)
+                link = new LinkModel(relationship.ToString(), fromNode, toNode)
                 {
                     PathGenerator = PathGenerators.Straight,
                 };
                 link.Labels.Add(new SpouseLinkLabel(link, "💍"));
             }
-            else if (triple.EdgeName == SpacyRelationLabel.Children)
+            else if (relationship.IsChildren())
             {
-                link = new LinkModel(triple.ToString(), fromNode, toNode);
+                link = new LinkModel(relationship.ToString(), fromNode, toNode);
                 link.SourceMarker = LinkMarker.Arrow;
-                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(relationship.RelationshipType), relationship.RelationshipType));
             }
-            else if (triple.EdgeName == SpacyRelationLabel.Siblings)
+            else if (relationship.IsSiblings())
             {
-                link = new LinkModel(triple.ToString(), fromNode, toNode)
+                link = new LinkModel(relationship.ToString(), fromNode, toNode)
                 {
                     Color = "LightGray",
                 };
-                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(relationship.RelationshipType), relationship.RelationshipType));
             }
             else
             {
-                link = new LinkModel(triple.ToString(), fromNode, toNode);
-                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(triple.EdgeName), triple.EdgeName));
+                link = new LinkModel(relationship.ToString(), fromNode, toNode);
+                link.Labels.Add(new RelationLabel(link, GetEdgeCaption(relationship.RelationshipType), relationship.RelationshipType));
             }
 
             diagram.Links.Add(link);
@@ -141,7 +141,8 @@ public class DiagramService
     private static void RemoveSiblingLinksWithParents(Diagram diagram)
     {
         var links = diagram.Links
-            .Select(l => (Link: l, l.SourceNode, TargetNode: l.TargetNode!, RelationType: l.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType));
+            .Select(l => (Link: l, l.SourceNode, TargetNode: l.TargetNode!, RelationType: l.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType))
+            .ToList();
         var childrenWithParents = links
             .Where(l => l.RelationType == SpacyRelationLabel.Children)
             .Select(l => l.SourceNode)

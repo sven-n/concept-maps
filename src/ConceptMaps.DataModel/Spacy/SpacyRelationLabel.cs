@@ -1,4 +1,4 @@
-﻿namespace ConceptMaps.UI.Spacy;
+﻿namespace ConceptMaps.DataModel.Spacy;
 
 /// <summary>
 /// Defines the possible values for <see cref="SpacyRelation.RelationLabel"/>.
@@ -25,4 +25,22 @@ public static class SpacyRelationLabel
     /// Gets the <see cref="SpacyRelation.RelationLabel"/> for entities which are children.
     /// </summary>
     public static string Children { get; } = "CHILDREN";
+    
+    private static readonly Dictionary<string, string> DisplayNames = new()
+    {
+        { Undefined, "is unrelated with" },
+        { Spouse, "is married with" },
+        { Siblings, "is sibling of" },
+        { Children, "is child of" },
+    };
+
+    public static string GetDisplayName(string label)
+    {
+        if (DisplayNames.TryGetValue(label, out var displayName))
+        {
+            return displayName;
+        }
+
+        return label;
+    }
 }

@@ -1,7 +1,7 @@
 ﻿namespace ConceptMaps.UI.Data;
 
 using System.Text.Json;
-using ConceptMaps.Crawler;
+using ConceptMaps.DataModel;
 
 public class DataPrepareContext
 {
@@ -16,19 +16,7 @@ public class DataPrepareContext
 
     public int ReviewedSentences => this.Sentences.Count(s => s.State == SentenceState.Reviewed);
 
-    public async Task LoadCrawlDataAsync(string selectedFile)
-    {
-        await using var fileStream = File.OpenRead(selectedFile);
-        var crawledData = await JsonSerializer.DeserializeAsync<SentenceRelationships[]>(fileStream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-        crawledData ??= Array.Empty<SentenceRelationships>();
-        Sentences.AddRange(crawledData.Select(cd => new SentenceContext(cd.Sentence)
-        {
-            Relationships = cd.Relationships,
-            State = SentenceState.Initial,
-        }));
-    }
-
-    public IList<SentenceRelationships> AsCrawlerData()
+    public IList<SentenceRelationships> GetReviewedData()
     {
         return this.Sentences
             .Where(s => s.State == SentenceState.Reviewed)

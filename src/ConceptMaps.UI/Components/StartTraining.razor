@@ -1,6 +1,6 @@
 ﻿@using ConceptMaps.UI.Services
 
-<h3>Start Training</h3>
+<h4>Start Training</h4>
 <span>Select the training data which should be applied.</span>
 <div>
     <ul class="list-group mb-3">
@@ -26,7 +26,7 @@
     <button class="btn btn-primary" @onclick="@this.OnStartButtonClick" disabled="@(this._selectedFiles.Count == 0 || this._isStarting)">
         @if (this._isStarting)
         {
-            <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+            <span class="spinner-border spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             <span> Starting ...</span>
         }
         else
@@ -35,7 +35,4 @@
             <span> Start</span>
         }
     </button>
-    <!--
-    <button class="btn btn-primary" @onclick="@this.OnCancelButtonClick" disabled="@this._startSuccess">Cancel</button>
-    -->
 </div>

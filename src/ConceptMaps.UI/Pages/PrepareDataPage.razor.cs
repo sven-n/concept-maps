@@ -133,7 +133,13 @@ public partial class PrepareDataPage
         this.StateHasChanged();
         try
         {
-            await this.PrepareContext.LoadCrawlDataAsync(path);
+            var crawledData = (await this.DataProvider.GetRelationshipsAsync(path)).ToList();
+            this.PrepareContext.Sentences.AddRange(crawledData.Select(cd => new SentenceContext(cd.Sentence)
+            {
+                Relationships = cd.Relationships.Select(r => r with { RelationshipType = r.RelationshipType.ToUpperInvariant() }).ToList(),
+                KnownRelationships = cd.Relationships.Select(r => r with { RelationshipType = r.RelationshipType.ToUpperInvariant() }).ToList(),
+                State = SentenceState.Initial,
+            }));
         }
         catch
         {

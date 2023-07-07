@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace ConceptMaps.UI.Services;
 
-namespace ConceptMaps.UI.Services;
-
-using ConceptMaps.Crawler;
 using ConceptMaps.UI.Data;
+using ConceptMaps.DataModel;
 
 public class SentenceAnalyzer
 {
@@ -13,7 +11,7 @@ public class SentenceAnalyzer
 
     public SentenceAnalyzer(RemoteTripleService remoteTripleService)
     {
-        _remoteTripleService = remoteTripleService;
+        this._remoteTripleService = remoteTripleService;
     }
 
     public bool IsAnalyzing
@@ -130,8 +128,7 @@ public class SentenceAnalyzer
                 {
                     FirstEntity = triple.FromWord,
                     SecondEntity = triple.ToWord,
-                    KnownRelationshipType = currentSentence.Relationships.FirstOrDefault(r => r.FirstEntity == triple.FromWord && r.SecondEntity == triple.ToWord)?.KnownRelationshipType,
-                    RelationshipTypeInSentence = triple.EdgeName,
+                    RelationshipType = triple.EdgeName,
                 };
 
                 foundRelationships.Add(relation);

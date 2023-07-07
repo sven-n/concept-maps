@@ -3,6 +3,7 @@
 using System.Text.Json;
 using System.Threading;
 using ConceptMaps.Crawler;
+using ConceptMaps.DataModel;
 using ConceptMaps.UI.Services;
 using Microsoft.AspNetCore.Components;
 
@@ -26,9 +27,6 @@ public partial class StartTraining : IDisposable
 
     [Inject]
     private RemoteTrainingService TrainingService { get; set; } = null!;
-
-    [Inject]
-    private IModelProvider ModelProvider { get; set; } = null!;
 
     public async Task OnStartButtonClick()
     {

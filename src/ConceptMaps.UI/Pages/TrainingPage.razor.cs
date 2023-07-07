@@ -7,7 +7,7 @@ using ConceptMaps.UI.Services;
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
 /// </summary>
-public partial class ModelsPage : IDisposable
+public partial class TrainingPage : IDisposable
 {
     /// <summary>
     /// Gets or sets the injected <see cref="IModelProvider"/>.

@@ -1,4 +1,4 @@
-﻿namespace ConceptMaps.UI.Spacy;
+﻿namespace ConceptMaps.DataModel.Spacy;
 
 using System.Text.Json.Serialization;
 

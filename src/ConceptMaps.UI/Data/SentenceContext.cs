@@ -1,7 +1,7 @@
 ﻿namespace ConceptMaps.UI.Data;
 
 using System.Text.Json.Serialization;
-using ConceptMaps.Crawler;
+using ConceptMaps.DataModel;
 
 public class SentenceContext
 {
@@ -22,6 +22,11 @@ public class SentenceContext
     public SentenceState State { get; set; }
 
     public string Sentence { get; set; }
+
+    /// <summary>
+    /// Gets or sets the relationships which are known by crawling (e.g. a fandom).
+    /// </summary>
+    public List<Relationship> KnownRelationships { get; set; } = new();
 
     public List<Relationship> Relationships { get; set; } = new();
 

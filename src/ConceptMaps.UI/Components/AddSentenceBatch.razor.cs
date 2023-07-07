@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using ConceptMaps.Crawler;
+using ConceptMaps.DataModel;
 using ConceptMaps.UI.Data;
 using Microsoft.AspNetCore.Components;
 
@@ -41,14 +41,10 @@ public partial class AddSentenceBatch
             }
 
             var sentenceContext = new SentenceContext(finalSentence);
-            sentenceContext.Relationships.AddRange(this.Relationships.Select(r => r.Clone()));
+            sentenceContext.Relationships.AddRange(this.Relationships.Select(r => r with { }));
             if (sentenceContext.Relationships.Count > 0)
             {
                 sentenceContext.State = SentenceState.Reviewed;
-                foreach (var relationship in sentenceContext.Relationships)
-                {
-                    relationship.KnownRelationshipType = relationship.RelationshipTypeInSentence;
-                }
             }
 
             this.PrepareContext.Sentences.Add(sentenceContext);

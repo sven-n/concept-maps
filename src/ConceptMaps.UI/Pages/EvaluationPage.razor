@@ -1,0 +1,75 @@
+﻿@page "/evaluation"
+@using ConceptMaps.DataModel.Spacy
+
+<h3>Model Evaluation</h3>
+
+<p>On this page we can evaluate the trained relation model with another set of training data.</p>
+
+<div>
+    @if (!this._isEvaluating)
+    {
+        <ul>
+        @foreach (var dataFile in this.TrainingDataManager.RelationsDataFiles)
+        {
+            <li>
+                <span>@(Path.GetFileName(dataFile))</span> <button role="button" class="btn btn-primary btn-sm" @onclick="() => this.OnStartEvaluationAsync(dataFile)"><span class="oi oi-media-play"></span></button>
+            </li>
+        }
+        </ul>
+    }
+    else
+    {
+        <span class="spinner-border spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span>Evaluating... </span>
+    }
+    
+    @if (this._summary is not null)
+    {
+        <hr/>
+        <h5>Summary of <span class="fw-lighter fst-italic">@Path.GetFileName(this._summary.FilePath)</span>: </h5>
+        <ul>
+            <li>Total: @this._summary.TotalSentences</li>
+            <li>Processed: @this._summary.ProcessedSentences (@this._summary.ProcessedPercentage %)
+                <ul>
+                    <li>Correct: @this._summary.CorrectSentences (@this._summary.CorrectPercentage %)</li>
+                    <li>Failed: @this._summary.FailedSentences (@this._summary.FailedPercentage %)</li>
+                </ul>
+            </li>
+        </ul>
+        @if (!this._isEvaluating && this._summary.CorrectPercentage < 100)
+        {
+            <h6>Failed Sentences:</h6>
+            foreach (var sentence in this.EvaluatedSentences.Where(s => !s.AreAllCorrect))
+            {
+                <div class="alert alert-secondary" role="alert">
+                    <h5 class="alert-heading">@sentence.Sentence</h5>
+                    <ul class="list-group">
+                        @foreach (var relation in sentence.Relationships)
+                        {
+                        
+                            @if (relation.ActualRelationship == relation.ExpectedRelationship)
+                            {
+                                <li class="list-group-item list-group-item-success">
+                                    <span class="oi oi-circle-check"></span>
+                                    <span>'@relation.FirstEntity' @SpacyRelationLabel.GetDisplayName(relation.ActualRelationship) '@relation.SecondEntity'; Score: @relation.Score.ToString("F3")</span>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item list-group-item-warning">
+                                    <span class="oi oi-circle-x"></span>
+                                    <span>'@relation.FirstEntity' @SpacyRelationLabel.GetDisplayName(relation.ActualRelationship) '@relation.SecondEntity', but expected relation: '@SpacyRelationLabel.GetDisplayName(relation.ExpectedRelationship)'. Score: @relation.Score.ToString("F3")</span>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+            
+        }
+    }
+    @if (this._cts is { } cts)
+    {
+        <button class="btn btn-secondary mx-1" onclick="@(() => cts.Cancel())"><span class="oi oi-media-stop"></span> Cancel</button>
+    }
+</div>

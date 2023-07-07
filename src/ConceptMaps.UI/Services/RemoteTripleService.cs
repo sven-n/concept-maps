@@ -3,7 +3,7 @@ namespace ConceptMaps.UI.Services;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
-using ConceptMaps.UI.Data;
+using ConceptMaps.DataModel;
 
 /// <summary>
 /// A service which creates triples out of a text in a remote service.
@@ -30,6 +30,11 @@ public class RemoteTripleService
         var result = await response.Content.ReadFromJsonAsync<List<Triple>>(
             JsonSerializerOptions,
             cancellationToken);
-        return result ?? new List<Triple>();
+        return FilterDuplicates(result ?? new List<Triple>());
+    }
+
+    private static List<Triple> FilterDuplicates(IEnumerable<Triple> triples)
+    {
+        return triples.GroupBy(t => (t.FromWord, t.ToWord)).Select(grouped => grouped.MaxBy(g => g.Score)).ToList();
     }
 }

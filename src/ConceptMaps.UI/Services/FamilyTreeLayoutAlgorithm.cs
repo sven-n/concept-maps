@@ -1,6 +1,6 @@
 ﻿namespace ConceptMaps.UI.Services;
 
-using ConceptMaps.UI.Spacy;
+using ConceptMaps.DataModel.Spacy;
 using GraphShape;
 using GraphShape.Algorithms.Layout;
 using Node = Blazor.Diagrams.Core.Models.NodeModel;

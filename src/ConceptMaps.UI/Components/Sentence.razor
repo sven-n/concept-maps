@@ -9,7 +9,10 @@
 <div class="alert @this.AlertClass" role="alert">
     <InputTextArea class="form-control" @bind-Value="this.Context.Sentence" disabled="@(this.SentenceAnalyzer.IsAnalyzing || this.Context.State is SentenceState.Reviewed)" />
     <hr class="border-0 opacity-25"/>
-    <RelationsTable Relationships="@this.Context.Relationships" IsReadOnly="@(this.SentenceAnalyzer.IsAnalyzing || this.Context.State is SentenceState.Reviewed)"></RelationsTable>
+    <RelationsTable 
+        Relationships="@this.Context.Relationships"
+        KnownRelationships="@this.Context.KnownRelationships"
+        IsReadOnly="@(this.SentenceAnalyzer.IsAnalyzing || this.Context.State is SentenceState.Reviewed)"></RelationsTable>
     <hr class="border-0 opacity-25" />
 
     @if (this.Context.State is SentenceState.Processing)

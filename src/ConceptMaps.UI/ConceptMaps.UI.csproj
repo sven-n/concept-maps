@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConceptMaps.Crawler\ConceptMaps.Crawler.csproj" />
+    <ProjectReference Include="..\ConceptMaps.DataModel\ConceptMaps.DataModel.csproj" />
   </ItemGroup>
 
 </Project>

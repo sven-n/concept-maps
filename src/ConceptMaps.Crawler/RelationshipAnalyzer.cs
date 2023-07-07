@@ -2,7 +2,7 @@
 
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using ConceptMaps.DataModel;
 
 /// <summary>
 /// Analyzes the text for possible sentences which include hints to the relationships
@@ -26,7 +26,17 @@ public class RelationshipAnalyzer
         this._relationships = File.ReadAllLines(relationshipFilePath)
             .Select(line => line.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             .Where(tokens => tokens.Length == 3)
-            .Select(tokens => new Relationship(tokens[0], tokens[1].ToLower(), tokens[2]))
+            // now we have a line <Entity A> <relationtype> <Entity B>, which means: "A has <relationtype> B".
+            // Examples: "A is mother of B", "A has child B".
+            // In our further training data, the meaning is slightly different.
+            // For spouses and siblings the order doesn't matter. For the parent-child connection we have to
+            // normalize that. There we only got the convention "A is child of B".
+            .Select(tokens => new Relationship
+                {
+                    FirstEntity = tokens[2],
+                    RelationshipType = tokens[1].ToLower(),
+                    SecondEntity = tokens[0],
+                })
             .Select(NormalizeRelationship)
             .Distinct()
             .ToList();
@@ -67,7 +77,12 @@ public class RelationshipAnalyzer
         {
             case "mother":
             case "father":
-                return new Relationship(relationship.SecondEntity, "children", relationship.FirstEntity);
+                return new Relationship
+                {
+                    FirstEntity = relationship.SecondEntity,
+                    RelationshipType = "children",
+                    SecondEntity = relationship.FirstEntity,
+                };
             default:
                 return relationship;
         }
@@ -92,25 +107,29 @@ public class RelationshipAnalyzer
     {
         return new SentenceRelationships(
             sentence,
-            this._relationships.Where(
-                    rel => SentenceContainsName(sentence, rel.FirstEntity, rel.FirstEntityForeName)
-                           && SentenceContainsName(sentence, rel.SecondEntity, rel.SecondEntityForeName))
-            .ToList());
+            this._relationships
+                .Where(rel => SentenceContainsName(sentence, rel.FirstEntity, rel.FirstEntityForeName)
+                              && SentenceContainsName(sentence, rel.SecondEntity, rel.SecondEntityForeName))
+                .Select(rel => rel with
+                    {
+                        FirstEntity = NameInSentence(sentence, rel.FirstEntity, rel.FirstEntityForeName),
+                        SecondEntity = NameInSentence(sentence, rel.SecondEntity, rel.SecondEntityForeName),
+                    })
+                .ToList());
+    }
+
+    private string NameInSentence(string sentence, string fullName, string foreName)
+    {
+        if (sentence.Contains(fullName))
+        {
+            return fullName;
+        }
+
+        return foreName;
     }
 
     private bool SentenceContainsName(string sentence, string fullName, string foreName)
     {
         return sentence.Contains(this._uniqueFirstNames.Contains(foreName) ? foreName : fullName);
     }
-
-    private record Relationship(string FirstEntity, string RelationshipType, string SecondEntity)
-    {
-        [JsonIgnore]
-        public string FirstEntityForeName { get; } = FirstEntity.Split(' ').First();
-
-        [JsonIgnore]
-        public string SecondEntityForeName { get; } = SecondEntity.Split(' ').First();
-    }
-
-    private record SentenceRelationships(string Sentence, List<Relationship> Relationships);
 }

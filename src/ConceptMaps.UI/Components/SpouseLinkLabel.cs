@@ -1,9 +1,8 @@
 ﻿namespace ConceptMaps.UI.Components;
 
-using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Models.Base;
-using ConceptMaps.UI.Spacy;
+using ConceptMaps.DataModel.Spacy;
 
 public class SpouseLinkLabel : RelationLabel
 {

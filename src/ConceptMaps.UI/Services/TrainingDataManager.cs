@@ -4,7 +4,6 @@ using System.Text;
 using System.Text.Json;
 using ConceptMaps.UI.Data;
 
-
 public class TrainingDataManager : ITrainingDataManager
 {
     internal static readonly string SubFolder = "training-data";
@@ -43,12 +42,7 @@ public class TrainingDataManager : ITrainingDataManager
 
     public async Task SaveRelationsAsync(DataPrepareContext prepareContext)
     {
-        var crawlerData = prepareContext.AsCrawlerData();
-        foreach (var rel in crawlerData.SelectMany(s => s.Relationships))
-        {
-            rel.KnownRelationshipType = rel.RelationshipTypeInSentence;
-        }
-
+        var crawlerData = prepareContext.GetReviewedData();
         var serializedData = JsonSerializer.Serialize(crawlerData.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
         var targetFolderPath = this.GetFolderPath(ModelType.Relation);

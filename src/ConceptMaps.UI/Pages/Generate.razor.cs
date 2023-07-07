@@ -1,11 +1,10 @@
 ﻿namespace ConceptMaps.UI.Pages;
 
 using Blazor.Diagrams.Core;
-using ConceptMaps.Crawler;
-using ConceptMaps.UI.Components;
-using ConceptMaps.UI.Data;
+using ConceptMaps.DataModel;
+using ConceptMaps.DataModel.Spacy;
 using ConceptMaps.UI.Services;
-using ConceptMaps.UI.Spacy;
+
 using Microsoft.AspNetCore.Components;
 
 public partial class Generate
@@ -26,24 +25,23 @@ public partial class Generate
 
     private List<Relationship>? Relationships { get; set; }
 
-    private IEnumerable<Triple> FilteredTriples
+    private IEnumerable<Relationship> FilteredRelationships
     {
         get
         {
             if (this.Relationships is null)
             {
-                return Enumerable.Empty<Triple>();
+                return Enumerable.Empty<Relationship>();
             }
 
             if (string.IsNullOrWhiteSpace(this.SelectedEntity))
             {
                 return this.Relationships
-                    .Where(rel => rel.RelationshipTypeInSentence != SpacyRelationLabel.Undefined)
-                    .ToTriples();
+                    .Where(rel => !rel.IsUndefined());
             }
 
             var filteredRelationships = this.Relationships
-                .Where(rel => rel.RelationshipTypeInSentence != SpacyRelationLabel.Undefined)
+                .Where(rel => !rel.IsUndefined())
                 .Where(rel => rel.FirstEntity == this.SelectedEntity || rel.SecondEntity == this.SelectedEntity)
                 .ToList();
             var additionalLinks = this.Relationships
@@ -52,7 +50,7 @@ public partial class Generate
                               && !filteredRelationships.Contains(rel))
                 .ToList();
             filteredRelationships.AddRange(additionalLinks);
-            return filteredRelationships.ToTriples();
+            return filteredRelationships;
         }
     }
 
@@ -98,7 +96,7 @@ public partial class Generate
                     .Select(t => new Relationship
                     {
                         FirstEntity = t.FromWord,
-                        RelationshipTypeInSentence = t.EdgeName ?? SpacyRelationLabel.Undefined,
+                        RelationshipType = t.EdgeName ?? SpacyRelationLabel.Undefined,
                         SecondEntity = t.ToWord,
                         Score = t.Score,
                     })
@@ -130,7 +128,7 @@ public partial class Generate
                 await this.InvokeAsync(this.StateHasChanged);
                 await Task.Delay(200);
             }
-            this._diagram = this.DiagramService.CreateDiagram(this.FilteredTriples.ToList());
+            this._diagram = this.DiagramService.CreateDiagram(this.FilteredRelationships.ToList());
 
             // This is required to render it once, so we can arrange the elements in the next step
             await this.InvokeAsync(this.StateHasChanged);

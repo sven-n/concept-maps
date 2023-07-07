@@ -1,7 +1,7 @@
 namespace ConceptMaps.Tests;
 
 using Blazor.Diagrams.Core.Models;
-using ConceptMaps.UI.Data;
+using ConceptMaps.DataModel;
 using ConceptMaps.UI.Services;
 using GraphShape;
 using QuikGraph;

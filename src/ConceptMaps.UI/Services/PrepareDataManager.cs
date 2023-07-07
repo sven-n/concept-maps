@@ -26,11 +26,6 @@ public class PrepareDataManager : IPrepareDataManager
 
     public async Task SaveAsync(DataPrepareContext prepareContext)
     {
-        foreach (var s in prepareContext.Sentences.Where(s => s.State == SentenceState.Reviewed).SelectMany(s => s.Relationships))
-        {
-            s.KnownRelationshipType = s.RelationshipTypeInSentence;
-        }
-
         var targetFolder = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString());
         Directory.CreateDirectory(targetFolder); // Ensure that the directory exists.
         await using var fileStream = File.Create(Path.Combine(targetFolder, prepareContext.Name + ".json"));
@@ -42,19 +37,6 @@ public class PrepareDataManager : IPrepareDataManager
         var targetFilePath = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString(), fileName);
         await using var fileStream = File.OpenRead(targetFilePath);
         var result = await JsonSerializer.DeserializeAsync<DataPrepareContext>(fileStream, SerializerOptions);
-        if (result is null)
-        {
-            return null;
-        }
-
-        foreach (var rel in result.Sentences.SelectMany(s => s.Relationships))
-        {
-            if (!string.IsNullOrEmpty(rel.KnownRelationshipType))
-            {
-                rel.RelationshipTypeInSentence = rel.KnownRelationshipType;
-            }
-        }
-
         return result;
     }
 }

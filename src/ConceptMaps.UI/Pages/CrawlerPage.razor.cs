@@ -23,6 +23,9 @@ public partial class CrawlerPage
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
+    [Inject]
+    private ICrawledDataProvider CrawledDataProvider { get; set; }
+
     private SortedList<string, IWebsiteSettings> _websiteSettings = new();
 
     private string? _selectedFile;
@@ -77,9 +80,12 @@ public partial class CrawlerPage
             var configName = this._selectedFile.Split('.').First();
             var fileNamePrefix = $"{configName}_{timestamp:s}".Replace(':', '_').Replace('-', '_');
 
-            var textFilePath = $"crawl-results\\{fileNamePrefix}_Text.txt";
-            var relationshipFilePath = $"crawl-results\\{fileNamePrefix}_Relationships.txt";
-            var sentencesFilePath = $"crawl-results\\{fileNamePrefix}_SentenceRelationships.json";
+            var folderPath = this.CrawledDataProvider.FolderPath;
+
+            var textFilePath = Path.Combine(folderPath,$"{fileNamePrefix}_Text.txt");
+            var relationshipFilePath = Path.Combine(folderPath, $"{fileNamePrefix}_Relationships.txt");
+            var sentencesFilePath = Path.Combine(folderPath, $"{fileNamePrefix}_SentenceRelationships.json");
+
             progress.Report("Started Crawling ...");
             await this.Crawler.CrawlAsync(settings, textFilePath, relationshipFilePath, progress, cancellationToken);
             progress.Report("Finished Crawling, starting analyzing for relationship sentences ...");
