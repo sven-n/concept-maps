@@ -167,7 +167,11 @@ class RelationModelTraining(ModelTrainingBase):
     def convert_training_data(self, training_data: list[dict], working_dir: Path) -> bool:
         self.output.append('Converting json data to spacy Docs...\r\n')
         try:
-            binary_converter.create_relation_training_files(training_data, working_dir.joinpath('data'))
+            data_folder = working_dir.joinpath('data')
+            if not os.path.exists(data_folder):
+                os.makedirs(data_folder)
+
+            binary_converter.create_relation_training_files(training_data, data_folder)
             self.output.append('Conversion completed\r\n')
             return True
         except Exception as ex:
