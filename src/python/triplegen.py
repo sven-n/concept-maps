@@ -16,6 +16,6 @@ class TripleGenerator:
         Generates relationship-triples based on an input text.
         :param input_text: The input text, given by the user.
         """
-
+        model.ensure_loaded_rel_model()
         result = model.get_triples(input_text)
         return result

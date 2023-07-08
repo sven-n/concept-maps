@@ -13,7 +13,17 @@ class Model2:
 
     def __init__(self):
         self.ner_model : Language = spacy.load("en_core_web_trf")
-        self.rel_model : Language = spacy.load("training/relations/training/model-best")
+        try:
+            # Try to load the previously trained model-best.
+            self.rel_model : Language = spacy.load("training/relations/training/model-best")
+        except:
+            self.rel_model = None
+
+    def ensure_loaded_rel_model(self):
+        if self.rel_model is None:
+            # try loading the model. if it fails here, the error should be
+            # returned to the caller.
+            self.rel_model = spacy.load("training/relations/training/model-best")
 
     def set_rel_model(self, model_path: (str|Path)):
         self.rel_model = spacy.load(model_path)
@@ -29,7 +39,6 @@ class Model2:
                 doc = proc(doc)
             result.extend(self.process_document(doc))
         return result
-    
     
     def process_document(self, doc: Doc) -> list:
         result : list = []
