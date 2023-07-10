@@ -27,6 +27,15 @@ The ```ConceptMaps``` solution can be built using the .NET SDK with the followin
   * Alternatively, double click on the `ConceptMaps.UI.exe` in the folder `src\ConceptMaps.UI\bin\Debug\net7.0\publish`
   * It's then available in the Browser at `http://localhost:5000/`
 
+## How to run locally with Docker
+
+You can also run it with docker (compose):
+* Open the console and navigate into the *deploy* subfolder.
+* Enter the command `docker compose up -d´
+    * The images are created and started.
+    * It's then available at http://localhost:80/. You can change the ports in the docker-compose.yml before running `docker compose`.
+* After an update, you should run `docker compose build` to rebuild the images. Alternatively, delete the old containers and images before running `docker compose up -d` again.
+
 ## Nice to know
 
 ### HTTP request url
@@ -46,12 +55,14 @@ Example, when `Thomas` has a child `Andreas` which is married with `Marie`:
     {
         "fromWord": "Thomas",
         "edgeWord": "has_child",
-        "toWord": "Andreas"
+        "toWord": "Andreas",
+        "score": 0.9999
     },
     {
         "fromWord": "Andreas",
         "edgeWord": "spouse",
-        "toWord": "Marie"
+        "toWord": "Marie",
+        "score": 0,9998
     }
 ]
 ```
