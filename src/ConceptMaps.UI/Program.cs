@@ -41,11 +41,23 @@ if (!Path.Exists(trainingDataFolder))
     Directory.CreateDirectory(trainingDataFolder);
 }
 
+var prepareDataFolder = Path.Combine(Environment.CurrentDirectory, PrepareDataManager.SubFolder);
+if (!Path.Exists(prepareDataFolder))
+{
+    Directory.CreateDirectory(prepareDataFolder);
+}
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(crawlResultsFolder),
     RequestPath = $"/{CrawledDataProvider.SubFolder}",
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(prepareDataFolder),
+    RequestPath = $"/{PrepareDataManager.SubFolder}",
 });
 
 app.UseStaticFiles(new StaticFileOptions
