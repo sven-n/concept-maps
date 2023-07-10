@@ -54,6 +54,21 @@
                 </li>
                 <li><a role="button" class="dropdown-item" onclick="@this.OnSaveContextAsync"><span class="oi oi-cloud-upload"></span> Save Session</a></li>
                 <li><a role="button" class="dropdown-item" onclick="@this.OnClearContext"><span class="oi oi-trash"></span> Clear Session</a></li>
+                <li>
+                    <label for="import_session" role="button" class="dropdown-item"><span class="oi oi-data-transfer-upload"></span> Upload</label>
+                    <InputFile id="import_session" OnChange="this.OnImportSessions" style="display: none;" multiple></InputFile>
+                </li>
+                <li>
+                    <a role="button" class="dropdown-item"><span class="oi oi-data-transfer-download"></span> Download &raquo;</a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        @foreach (var dataFile in this.PrepareDataManager.DataFiles)
+                        {
+                            <li>
+                                <a role="button" class="dropdown-item" href="@this.PrepareDataManager.SubFolder/@ModelType.Relation.AsString()/@Path.GetFileName(dataFile)" target="_blank"><span class="oi oi-file"></span> @(Path.GetFileName(dataFile))</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
                 <li><hr class="dropdown-divider"></li>
                 <li><h6 class="dropdown-header">Training</h6></li>
                 <li>

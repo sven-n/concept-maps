@@ -5,7 +5,7 @@ using ConceptMaps.UI.Data;
 
 public class PrepareDataManager : IPrepareDataManager
 {
-    private static readonly string SubFolder = "prepare-data";
+    internal static readonly string SubFolder = "prepare-data";
 
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
 
@@ -23,6 +23,11 @@ public class PrepareDataManager : IPrepareDataManager
             return Directory.EnumerateFiles(folderPath, "*.json").Where(name => !string.IsNullOrWhiteSpace(name)).Select(path => Path.GetFileName(path)!);
         }
     }
+
+
+    public string GetFolderPath(ModelType modelType) => Path.Combine(Environment.CurrentDirectory, SubFolder, modelType.AsString());
+
+    string IPrepareDataManager.SubFolder => SubFolder;
 
     public async Task SaveAsync(DataPrepareContext prepareContext)
     {

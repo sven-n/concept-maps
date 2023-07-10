@@ -5,6 +5,7 @@ using ConceptMaps.Crawler;
 using ConceptMaps.UI.Components;
 using ConceptMaps.UI.Data;
 using ConceptMaps.UI.Services;
+using Microsoft.AspNetCore.Components.Forms;
 
 /// <summary>
 /// Webpage for the <see cref="ICrawler"/>.
@@ -98,6 +99,19 @@ public partial class PrepareDataPage
     private async Task OnSaveContextAsync()
     {
         await this.PrepareDataManager.SaveAsync(this.PrepareContext);
+    }
+
+    private async Task OnImportSessions(InputFileChangeEventArgs e)
+    {
+        var targetFolder = this.PrepareDataManager.GetFolderPath(ModelType.Relation);
+
+        foreach (var file in e.GetMultipleFiles(100))
+        {
+            var targetPath = Path.Combine(targetFolder, file.Name);
+            await using var inputStream = file.OpenReadStream();
+            await using var writeStream = File.Create(targetPath);
+            await inputStream.CopyToAsync(writeStream);
+        }
     }
 
     private void OnClearContext()

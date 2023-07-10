@@ -10,14 +10,14 @@
                 <nobr>
                     @if (this._selectedFiles.Contains(trainingFile))
                     {
-                        <button class="btn btn-outline-success btn-sm" @onclick="() => this._selectedFiles.Remove(trainingFile)"><span class="oi oi-check"></span></button>
+                        <button class="btn btn-outline-success btn-sm mx-1" @onclick="() => this._selectedFiles.Remove(trainingFile)"><span class="oi oi-check"></span></button>
                     }
                     else
                     {
-                        <button class="btn btn-outline-secondary btn-sm" @onclick="() => this._selectedFiles.Add(trainingFile)"><span class="oi oi-placeholder"></span></button>
+                        <button class="btn btn-outline-secondary btn-sm mx-1" @onclick="() => this._selectedFiles.Add(trainingFile)"><span class="oi oi-placeholder"></span></button>
                     }
                     <a class="btn btn-light btn-sm" href="@($"/{this.TrainingDataManager.SubFolder}/{this.ModelType.AsString()}/{Path.GetFileName(trainingFile)}")" title="Download" target="_blank">
-                        <span class="oi oi-cloud-download"></span>
+                        <span class="oi oi-data-transfer-download"></span>
                     </a>
                     <button class="btn btn-light btn-sm" @onclick="() => this.DeleteFile(trainingFile)" title="Delete file"><span class="oi oi-basket"></span></button>
                     <span class="mx-1">@Path.GetFileName(trainingFile)</span>
@@ -25,7 +25,8 @@
             </li>
         }
         <li class="list-group-item">
-            <span class="oi oi-cloud-upload"></span> Import: <InputFile OnChange="@LoadFilesAsync" multiple />
+            <label for="import_data" role="button" class="dropdown-item"><span class="oi oi-data-transfer-upload"></span> Upload</label>
+            <InputFile id="import_data" OnChange="LoadFilesAsync" style="display: none;" multiple></InputFile>
         </li>
     </ul>
     

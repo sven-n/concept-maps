@@ -8,7 +8,7 @@ public class TrainingDataManager : ITrainingDataManager
 {
     internal static readonly string SubFolder = "training-data";
 
-    public string GetFolderPath(ModelType modelType) => Path.Combine(Environment.CurrentDirectory, "training-data", modelType.AsString());
+    public string GetFolderPath(ModelType modelType) => Path.Combine(Environment.CurrentDirectory, SubFolder, modelType.AsString());
 
     string ITrainingDataManager.SubFolder => SubFolder;
 
@@ -30,7 +30,7 @@ public class TrainingDataManager : ITrainingDataManager
     {
         get
         {
-            var folderPath = Path.Combine(Environment.CurrentDirectory, "training-data", ModelType.Ner.AsString());
+            var folderPath = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Ner.AsString());
             if (!Directory.Exists(folderPath))
             {
                 return Enumerable.Empty<string>();
