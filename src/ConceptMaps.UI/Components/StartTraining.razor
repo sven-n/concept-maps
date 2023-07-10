@@ -16,11 +16,17 @@
                     {
                         <button class="btn btn-outline-secondary btn-sm" @onclick="() => this._selectedFiles.Add(trainingFile)"><span class="oi oi-placeholder"></span></button>
                     }
-
+                    <a class="btn btn-light btn-sm" href="@($"/{this.TrainingDataManager.SubFolder}/{this.ModelType.AsString()}/{Path.GetFileName(trainingFile)}")" title="Download" target="_blank">
+                        <span class="oi oi-cloud-download"></span>
+                    </a>
+                    <button class="btn btn-light btn-sm" @onclick="() => this.DeleteFile(trainingFile)" title="Delete file"><span class="oi oi-basket"></span></button>
                     <span class="mx-1">@Path.GetFileName(trainingFile)</span>
                 </nobr>
             </li>
         }
+        <li class="list-group-item">
+            <span class="oi oi-cloud-upload"></span> Import: <InputFile OnChange="@LoadFilesAsync" multiple />
+        </li>
     </ul>
     
     <button class="btn btn-primary" @onclick="@this.OnStartButtonClick" disabled="@(this._selectedFiles.Count == 0 || this._isStarting)">

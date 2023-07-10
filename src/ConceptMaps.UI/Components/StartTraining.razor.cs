@@ -6,6 +6,7 @@ using ConceptMaps.Crawler;
 using ConceptMaps.DataModel;
 using ConceptMaps.UI.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 public partial class StartTraining : IDisposable
 {
@@ -90,5 +91,22 @@ public partial class StartTraining : IDisposable
     {
         this._startCts?.Dispose();
         this._startCts = null;
+    }
+
+    private async Task LoadFilesAsync(InputFileChangeEventArgs e)
+    {
+        var targetFolder = TrainingDataManager.GetFolderPath(ModelType.Relation);
+        foreach (var file in e.GetMultipleFiles(100))
+        {
+            var targetPath = Path.Combine(targetFolder, file.Name);
+            await using var inputStream = file.OpenReadStream();
+            await using var writeStream = File.Create(targetPath);
+            await inputStream.CopyToAsync(writeStream);
+        }
+    }
+
+    private void DeleteFile(string filePath)
+    {
+        File.Delete(filePath);
     }
 }
