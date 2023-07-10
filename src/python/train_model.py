@@ -4,8 +4,8 @@ from pathlib import Path
 import os
 import re
 import subprocess
-import sys
 from threading import Thread
+import triplegen
 
 import binary_converter
 
@@ -98,6 +98,9 @@ class ModelTrainingBase:
             except Exception as ex:
                 targetlist.append(f'stopped reading process output by error: {ex}')
                 break
+        if self.training_state == "success" and self.get_model_type() == "relations":
+            triplegen.model.reset_rel_model()
+
         self.training_state = None
 
     def set_model_source(self, config_path, source: (str|None)):
@@ -142,12 +145,6 @@ class ModelTrainingBase:
             state = 'inactive'
         if process is None:
             return TrainingStatus(False, state, output, error)
-
-        #if process.stdout is not None and not process.stdout.closed:
-            #(output, error) = process.communicate(timeout=1)
-            
-            #self.output.append(process.stdout.readlines())
-            #self.error.append(process.stderr.readline())
 
         returncode = process.poll()
         if returncode is None:

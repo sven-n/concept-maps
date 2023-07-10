@@ -25,6 +25,9 @@ class Model2:
             # returned to the caller.
             self.rel_model = spacy.load("training/relations/training/model-best")
 
+    def reset_rel_model(self):
+        self.rel_model = None
+
     def set_rel_model(self, model_path: (str|Path)):
         self.rel_model = spacy.load(model_path)
     
