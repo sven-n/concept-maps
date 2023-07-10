@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  concept-map-web:
+    build:
+      context: ../src
+      dockerfile: ConceptMaps.UI/Dockerfile
+    restart: "no"
+    environment:
+      ASPNETCORE_URLS: http://+:80
+    ports:
+      - "80:80"
+    container_name: concept-map-web
+    working_dir: /app/
+
+  concept-map-python:
+    build:
+      context: ../src
+      dockerfile: python/Dockerfile
+    container_name: concept-map-python
+    network_mode: "service:concept-map-web"
