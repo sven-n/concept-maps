@@ -70,6 +70,7 @@ public partial class EvaluationPage : IDisposable
         this._isEvaluating = true;
         try
         {
+            this.EvaluatedSentences.Clear();
             this._cts = new CancellationTokenSource();
             var cancellationToken = this._cts.Token;
             await using var fileStream = File.OpenRead(filePath);
