@@ -5,7 +5,8 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 
 /// <summary>
-/// 
+/// A component which displays the output of a console, considering the
+/// color codes in it.
 /// </summary>
 /// <remarks>
 /// For color codes, see also: https://talyian.github.io/ansicolors/
@@ -77,15 +78,19 @@ public partial class ConsoleText
     /// <summary>
     /// Gets or sets the console text.
     /// </summary>
-    /// <value>
-    /// The console text.
-    /// </value>
     [Parameter]
     [Required]
     public string Text { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Gets the text spans.
+    /// Span boundaries:
+    /// - New lines
+    /// - Changes in colors.
+    /// </summary>
     private List<TextSpan> Spans { get; } = new();
 
+    /// <inheritdoc />
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -132,6 +137,15 @@ public partial class ConsoleText
         }
     }
 
+    /// <summary>
+    /// Parses the text attributes at the beginning of the string, based on the
+    /// known color codes.
+    /// </summary>
+    /// <param name="lineSpan">The line span.</param>
+    /// <param name="backColor">Color of the back.</param>
+    /// <param name="foreColor">Color of the fore.</param>
+    /// <param name="isBold">If set to <c>true</c>, the text is bold.</param>
+    /// <param name="isUnderlined">If set to <c>true</c>, the text is underlined.</param>
     private void ParseTextAttributes(
         string lineSpan, ref string? backColor, ref string? foreColor, ref bool isBold, ref bool isUnderlined)
     {
@@ -204,6 +218,11 @@ public partial class ConsoleText
         }
     }
 
+    /// <summary>
+    /// Gets the color based on the ansi 256 color number.
+    /// </summary>
+    /// <param name="colorNr">The color number, 0-255.</param>
+    /// <returns>The color of the number.</returns>
     private Color GetByAnsi256Color(int colorNr)
     {
         if (colorNr >= 232)
@@ -227,6 +246,9 @@ public partial class ConsoleText
         return Color.FromArgb(r, g, b);
     }
 
+    /// <summary>
+    /// Defines a span of text with attributes (bold, underlined, colors).
+    /// </summary>
     private record TextSpan(string Text, string? ForegroundColor = null, string? BackgroundColor = null, bool IsBold = false, bool IsUnderlined = false)
     {
         public string CssStyle

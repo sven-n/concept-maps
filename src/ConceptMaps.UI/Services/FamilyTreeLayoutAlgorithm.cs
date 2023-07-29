@@ -7,85 +7,24 @@ using Node = Blazor.Diagrams.Core.Models.NodeModel;
 using Edge = QuikGraph.TaggedEdge<Blazor.Diagrams.Core.Models.NodeModel, string>;
 using Graph = QuikGraph.BidirectionalGraph<Blazor.Diagrams.Core.Models.NodeModel, QuikGraph.TaggedEdge<Blazor.Diagrams.Core.Models.NodeModel, string>>;
 
-public class FamilyTreeLayoutAlgorithmFactory : ILayoutAlgorithmFactory
-{
-    public IEnumerable<string> AlgorithmTypes { get; } = new[] { "FamilyTree" };
-
-    public ILayoutAlgorithm<Node, Edge, Graph> CreateAlgorithm(string algorithmType, ILayoutContext<Node, Edge, Graph> context, ILayoutParameters parameters)
-    {
-        return new FamilyTreeLayoutAlgorithm(
-            context.Graph,
-            context.Positions,
-            context.Sizes,
-            parameters as SimpleTreeLayoutParameters);
-    }
-
-    public ILayoutParameters CreateParameters(string algorithmType, ILayoutParameters parameters)
-    {
-        return new SimpleTreeLayoutParameters
-        {
-            LayerGap = 100,
-            VertexGap = 100,
-            Direction = LayoutDirection.BottomToTop,
-            SpanningTreeGeneration = SpanningTreeGeneration.DFS
-        };
-    }
-
-    public bool IsValidAlgorithm(string algorithmType)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string GetAlgorithmType(ILayoutAlgorithm<Node, Edge, Graph> algorithm)
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool NeedEdgeRouting(string algorithmType)
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool NeedOverlapRemoval(string algorithmType)
-    {
-        throw new NotImplementedException();
-    }
-}
-
 /// <summary>
-/// Family tree layout algorithm.
+/// A basic implementation of a tree layout algorithm for family trees.
 /// </summary>
 public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase<Node, Edge, Graph, SimpleTreeLayoutParameters>
 {
-    private sealed class Layer
-    {
-        public double Size { get; set; }
-
-        public double NextPosition { get; set; }
-
-        public IList<Node> Vertices { get; } = new List<Node>();
-
-        public double LastTranslate { get; set; }
-
-        public Layer()
-        {
-            this.LastTranslate = 0;
-        }
-    }
-
-    private sealed class VertexData
-    {
-        public (Node?, Node?) Parents { get; init; }
-
-        public double Translate { get; set; }
-
-        public double Position { get; set; }
-    }
-
+    /// <summary>
+    /// Holds the sizes of the vertices.
+    /// </summary>
     private readonly IDictionary<Node, Size> _verticesSizes;
 
+    /// <summary>
+    /// Holds the positional data of each vertex during the runtime of the algorithm.
+    /// </summary>
     private readonly IDictionary<Node, VertexData> _data = new Dictionary<Node, VertexData>();
 
+    /// <summary>
+    /// Holds the data of each <see cref="Layer"/> during the runtime of the algorithm.
+    /// </summary>
     private readonly IList<Layer> _layers = new List<Layer>();
 
     private int _direction;
@@ -128,6 +67,9 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
     /// <inheritdoc />
     protected override void InternalCompute()
     {
+        this._data.Clear();
+        this._layers.Clear();
+
         if (this.VisitedGraph.VertexCount == 0)
         {
             return;
@@ -144,7 +86,7 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         {
             var layerNodes = layeredNodes[index];
             var nodesGroupedByParents = layerNodes
-                .GroupBy(n => this.GetTuple(this.VisitedGraph.InEdges(n).Where(e => e.Tag == SpacyRelationLabel.Children).Select(e => e.Source).OrderBy(e => e.Id)))
+                .GroupBy(n => this.GetParentTuple(this.VisitedGraph.InEdges(n).Where(e => e.Tag == SpacyRelationLabel.Children).Select(e => e.Source).OrderBy(e => e.Id)))
                 .ToList();
             foreach (var grouped in nodesGroupedByParents)
             {
@@ -166,11 +108,16 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         this.AssignPositions();
     }
 
-    private (Node?, Node?) GetTuple(IEnumerable<Node> nodes)
+    /// <summary>
+    /// Gets the tuple of the enumerable nodes.
+    /// </summary>
+    /// <param name="parentNodes">The nodes of the parents.</param>
+    /// <returns>The tuple of the parents.</returns>
+    private (Node?, Node?) GetParentTuple(IEnumerable<Node> parentNodes)
     {
-        nodes = nodes.Take(2);
-        var first = nodes.FirstOrDefault();
-        var second = nodes.LastOrDefault();
+        parentNodes = parentNodes.Take(2);
+        var first = parentNodes.FirstOrDefault();
+        var second = parentNodes.LastOrDefault();
         return (first, second);
     }
 
@@ -208,6 +155,11 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         }
     }
 
+    /// <summary>
+    /// Adds the nodes to the layers which are left over after handling the
+    /// parents, children and spouses.
+    /// </summary>
+    /// <param name="layeredNodes">The layered nodes.</param>
     internal void AddLeftovers(List<HashSet<Node>> layeredNodes)
     {
         var processedNodes = layeredNodes.SelectMany(n => n).ToHashSet();
@@ -222,11 +174,14 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         layeredNodes.Add(layer);
     }
 
+    /// <summary>
+    /// Adds the spouses to the layers.
+    /// </summary>
+    /// <param name="layeredNodes">The layered nodes.</param>
     internal void AddSpouses(List<HashSet<Node>> layeredNodes)
     {
-        for (var layerIndex = 0; layerIndex < layeredNodes.Count; layerIndex++)
+        foreach (var currentLayer in layeredNodes)
         {
-            var currentLayer = layeredNodes[layerIndex];
             foreach (var node in currentLayer.ToList())
             {
                 var spouseNodesOut = this.VisitedGraph
@@ -247,33 +202,37 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         }
     }
 
+    /// <summary>
+    /// Gets the parents without being child, ordered by how many generations are coming after them.
+    /// </summary>
+    /// <returns>The parents without being child, ordered by how many generations are coming after them.</returns>
     internal List<HashSet<Node>> GetParentsWithoutBeingChild()
     {
         // First try to find the longest parent/child chain...
-        var parentNodes = this.VisitedGraph.Vertices
+        List<(Node Node, int DescendantGenerationsCount)> parentNodes = this.VisitedGraph.Vertices
             .Where(node => this.VisitedGraph.OutEdges(node).Any(edge => edge.Tag == SpacyRelationLabel.Children)) // has children
             .Where(node => !this.VisitedGraph.InEdges(node).Any(edge => edge.Tag == SpacyRelationLabel.Children)) // without being a child itself
-            .Select(node => (Node: node, Deepness: GetParentalDeepness(node))) // count how deep is the hierarchy
+            .Select(node => (Node: node, DescendantGenerationsCount: GetDescendantGenerationsCount(node))) // count how deep is the hierarchy
             .ToList();
         if (parentNodes.Count == 0)
         {
             return new List<HashSet<Node>>();
         }
 
-        var maxDeepness = parentNodes.Max(node => node.Deepness);
+        var maxDescendantGenerationsCount = parentNodes.Max(node => node.DescendantGenerationsCount);
         var result = parentNodes
-            .GroupBy(tuple => tuple.Deepness)
-            .OrderBy(g => maxDeepness - g.Key)
+            .GroupBy(tuple => tuple.DescendantGenerationsCount)
+            .OrderBy(g => maxDescendantGenerationsCount - g.Key)
             .Select(g => g.Select(l => l.Node).Distinct().ToHashSet())
             .ToList();
         return result;
 
-        int GetParentalDeepness(Node node, int current = 0)
+        int GetDescendantGenerationsCount(Node node, int current = 0)
         {
             int maximum = current;
             foreach (var edge in this.VisitedGraph.OutEdges(node).Where(e => e.Tag == SpacyRelationLabel.Children))
             {
-                maximum = Math.Max(current, GetParentalDeepness(edge.Target, current + 1));
+                maximum = Math.Max(current, GetDescendantGenerationsCount(edge.Target, current + 1));
             }
 
             return maximum;
@@ -307,8 +266,6 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         layer.Vertices.Add(node);
 
         vertexData.Translate = Math.Max(layer.NextPosition - vertexData.Position, 0);
-
-        layer.LastTranslate = vertexData.Translate;
         vertexData.Position += vertexData.Translate;
         layer.NextPosition =vertexData.Position + size.Width / 2.0 + this.Parameters.VertexGap;
 
@@ -338,5 +295,49 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
         {
             this.NormalizePositions();
         }
+    }
+
+    /// <summary>
+    /// A layer (horizontal row) of the family tree.
+    /// </summary>
+    private sealed class Layer
+    {
+        /// <summary>
+        /// Gets or sets the size (= height) of the layer.
+        /// </summary>
+        public double Size { get; set; }
+
+        /// <summary>
+        /// Gets or sets the position of the next <see cref="Node"/> within the layer.
+        /// </summary>
+        public double NextPosition { get; set; }
+
+        /// <summary>
+        /// Gets the vertices of the layer.
+        /// </summary>
+        public IList<Node> Vertices { get; } = new List<Node>();
+    }
+
+    /// <summary>
+    /// Data about the vertex/node.
+    /// </summary>
+    private sealed class VertexData
+    {
+        /// <summary>
+        /// Gets the parents of the node.
+        /// </summary>
+        public (Node?, Node?) Parents { get; init; }
+
+        /// <summary>
+        /// Gets or sets the translate value for this node, which is the x-offset
+        /// from the previous node of the layer.
+        /// </summary>
+        public double Translate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the translate value of the node, which is basically
+        /// the x-coordinate (column) within the layer.
+        /// </summary>
+        public double Position { get; set; }
     }
 }

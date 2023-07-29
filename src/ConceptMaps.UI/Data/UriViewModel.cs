@@ -51,8 +51,12 @@ public sealed class UriViewModel : INotifyPropertyChanged
         set => this.Uri = new Uri(value);
     }
 
+    /// <summary>
+    /// Raises the property changed event.
+    /// </summary>
+    /// <param name="propertyName">Name of the property.</param>
     private void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -1,35 +1,46 @@
 ﻿namespace ConceptMaps.UI.Pages;
 
 using Microsoft.AspNetCore.Components;
-using ConceptMaps.Crawler;
 using ConceptMaps.UI.Services;
 
 /// <summary>
-/// Webpage for the <see cref="ICrawler"/>.
+/// Webpage which allows to start and monitor the training of the spaCy NLP model.
+/// It retrieves the training status periodically and updates the UI accordingly.
 /// </summary>
 public partial class TrainingPage : IDisposable
 {
     /// <summary>
-    /// Gets or sets the injected <see cref="IModelProvider"/>.
+    /// Gets or sets the injected training service.
     /// </summary>
     [Inject]
-    private IModelProvider ModelProvider { get; set; } = null!;
-
-    [Inject]
     private RemoteTrainingService TrainingService { get; set; } = null!;
-    
-    private Task _refreshStatusTask;
 
+    /// <summary>
+    /// The task which updates the training status periodically.
+    /// </summary>
+    private Task? _refreshStatusTask;
+
+    /// <summary>
+    /// The <see cref="CancellationTokenSource"/> which stops the <see cref="_refreshStatusTask"/>
+    /// when this page is disposed (e.g. by leaving it).
+    /// </summary>
     private CancellationTokenSource? _disposeCts;
-    
+
+    /// <summary>
+    /// The current training status of the relation model.
+    /// </summary>
     private TrainingStatus _relationTrainingStatus = new();
 
+    /// <inheritdoc />
     protected override Task OnInitializedAsync()
     {
         this._refreshStatusTask = Task.Run(this.RefreshStatusLoopAsync);
         return base.OnInitializedAsync();
     }
 
+    /// <summary>
+    /// Refreshes the <see cref="_relationTrainingStatus"/> periodically.
+    /// </summary>
     private async Task RefreshStatusLoopAsync()
     {
         var cancellationToken = (this._disposeCts ??= new()).Token;
@@ -38,7 +49,11 @@ public partial class TrainingPage : IDisposable
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                this._relationTrainingStatus = await this.TrainingService.GetTrainingStatus(ModelType.Relation, cancellationToken).ConfigureAwait(false);
+                if (await this.TrainingService.GetTrainingStatus(ModelType.Relation, cancellationToken).ConfigureAwait(false) is { } newStatus)
+                {
+                    this._relationTrainingStatus = newStatus;
+                }
+
                 await this.InvokeAsync(this.StateHasChanged);
                 await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
             }
@@ -58,6 +73,7 @@ public partial class TrainingPage : IDisposable
         }
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         _disposeCts?.Cancel();
@@ -65,4 +81,3 @@ public partial class TrainingPage : IDisposable
         _disposeCts = null;
     }
 }
-

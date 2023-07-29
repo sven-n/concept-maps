@@ -29,10 +29,10 @@
     }
     else if (this.Context.State is not (SentenceState.Reviewed or SentenceState.Hidden))
     {
-        <button type="button" class="btn btn-sm btn-outline-success btn-accept" aria-label="Accept" @onclick="OnAcceptClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
+        <button type="button" class="btn btn-sm btn-outline-success" aria-label="Accept" @onclick="OnAcceptClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-check"> Accept</span>
         </button>
-        <button type="button" class="btn btn-sm btn-outline-primary" @onclick="this.StartResolveSentence" disabled="@this.SentenceAnalyzer.IsAnalyzing">
+        <button type="button" class="btn btn-sm btn-outline-primary" @onclick="this.StartAnalyzeSentence" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-media-play" role="status" aria-hidden="true"></span> Analyze
         </button>
         <button type="button" class="btn btn-sm btn-outline-info"
@@ -48,7 +48,7 @@
     }
     @if (this.Context.State is SentenceState.Reviewed or SentenceState.Hidden)
     {
-        <button type="button" class="btn btn-sm btn-outline-primary btn-edit" aria-label="Edit" @onclick="OnEditClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
+        <button type="button" class="btn btn-sm btn-outline-primary" aria-label="Edit" @onclick="OnEditClickAsync" disabled="@this.SentenceAnalyzer.IsAnalyzing">
             <span class="oi oi-pencil"> Edit</span>
         </button>
     }

@@ -12,31 +12,58 @@ public partial class CrawlerPage
     /// The injected <see cref="ICrawler"/>.
     /// </summary>
     [Inject]
-    private ICrawler Crawler { get; set; }
+    private ICrawler Crawler { get; set; } = null!;
 
     /// <summary>
-    /// THe injected <see cref="IWebsiteSettingsProvider"/>.
+    /// Gets or sets the injected <see cref="IWebsiteSettingsProvider"/>.
     /// </summary>
     [Inject]
-    private IWebsiteSettingsProvider SettingsProvider { get; set; }
+    private IWebsiteSettingsProvider SettingsProvider { get; set; } = null!;
 
+    /// <summary>
+    /// Gets or sets the injected navigation manager.
+    /// </summary>
     [Inject]
-    private NavigationManager NavigationManager { get; set; }
+    private NavigationManager NavigationManager { get; set; } = null!;
 
+    /// <summary>
+    /// Gets or sets the injected <see cref="ICrawledDataProvider"/>.
+    /// </summary>
     [Inject]
     private ICrawledDataProvider CrawledDataProvider { get; set; }
 
+
+    /// <summary>
+    /// The <see cref="IWebsiteSettings"/> per website file name.
+    /// </summary>
     private SortedList<string, IWebsiteSettings> _websiteSettings = new();
 
+    /// <summary>
+    /// The file name of the currently selected <see cref="IWebsiteSettings"/>.
+    /// </summary>
     private string? _selectedFile;
 
+    /// <summary>
+    /// The progress log of the crawler.
+    /// </summary>
     private List<string> _progressLog = new();
 
+    /// <summary>
+    /// The flag, if the page is currently crawling.
+    /// </summary>
     private bool _isCrawling = false;
 
+    /// <summary>
+    /// The cancellation token source, which allows to cancel the crawling.
+    /// </summary>
     private CancellationTokenSource? _crawlCts;
+
+    /// <summary>
+    /// The result files, which are set after crawling has completed.
+    /// </summary>
     private (string textFilePath, string relationshipFilePath, string sentencesFilePath, string trainingDataFilePath) _resultFiles;
 
+    /// <inheritdoc />
     protected override void OnInitialized()
     {
         this._websiteSettings = new SortedList<string, IWebsiteSettings>(this.SettingsProvider.AvailableSettings.Select(path => (Path.GetFileName(path), this.SettingsProvider.LoadSettings(path))).ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2));
@@ -44,6 +71,9 @@ public partial class CrawlerPage
         base.OnInitialized();
     }
 
+    /// <summary>
+    /// Starts the crawling of the selected website.
+    /// </summary>
     private void StartCrawling()
     {
         var cts = this._crawlCts = new CancellationTokenSource();
@@ -55,14 +85,23 @@ public partial class CrawlerPage
             progressLog.Add($"{DateTime.Now}: {s}");
             this.InvokeAsync(this.StateHasChanged);
         });
-        _ = Task.Run(() => DoCrawlAsync(progress, cts.Token));
+        _ = Task.Run(() => this.DoCrawlAsync(progress, cts.Token));
     }
 
+    /// <summary>
+    /// Cancels the crawling.
+    /// </summary>
     private void CancelCrawling()
     {
         this._crawlCts?.Cancel();
     }
 
+    /// <summary>
+    /// Does the crawling.
+    /// </summary>
+    /// <param name="progress">The progress.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <exception cref="System.InvalidOperationException">No configuration selected.</exception>
     private async Task DoCrawlAsync(IProgress<string> progress, CancellationToken cancellationToken)
     {
         this._isCrawling = true;

@@ -38,6 +38,7 @@ public class DiagramService
 
         // temporary fix for zooming exceptions, see https://github.com/Blazor-Diagrams/Blazor.Diagrams/issues/322
         diagram.Options.EnableVirtualization = false;
+
         diagram.Options.GridSize = 10; // For the snapping
 
         var nodes = new Dictionary<string, NodeModel>();
@@ -97,9 +98,14 @@ public class DiagramService
         return diagram;
     }
 
+    /// <summary>
+    /// Arranges the nodes of the diagram with the specified algorithm.
+    /// </summary>
+    /// <param name="diagram">The diagram.</param>
+    /// <param name="algorithm">The algorithm.</param>
     public void ArrangeNodes(Diagram diagram, string algorithm)
     {
-        var graph = MakeGraph(diagram);
+        var graph = diagram.AsGraph();
 
         var nodePositions = CalculateNodePositions(graph, algorithm);
         foreach (var (node, position) in nodePositions)
@@ -116,7 +122,7 @@ public class DiagramService
     }
 
     /// <summary>
-    /// Clean up unneeded children labels. The relations between parents and childrens are
+    /// Clean up unneeded children labels. The relations between parents and children are
     /// visible through the arrow marker.
     /// </summary>
     /// <param name="diagram">The diagram.</param>
@@ -134,7 +140,7 @@ public class DiagramService
     }
 
     /// <summary>
-    /// lean up unneeded links. The relation between siblings is already visible
+    /// Clean up unneeded links. The relation between siblings is already visible
     /// through their parent-child connections, so we can remove them.
     /// </summary>
     /// <param name="diagram">The diagram.</param>
@@ -160,12 +166,11 @@ public class DiagramService
         }
     }
 
-    private static Blazor.Diagrams.Core.Geometry.Point GetVerticePosition(PortModel port, int addX, int addY)
-    {
-        var sourcePosition = port.Parent.Position.Add(port.MiddlePosition.X, port.MiddlePosition.Y);
-        return sourcePosition.Add(addX, addY);
-    }
-
+    /// <summary>
+    /// Gets the caption of the edge, based on the spacy label.
+    /// </summary>
+    /// <param name="label">The spacy label.</param>
+    /// <returns>The caption of the edge.</returns>
     private static string GetEdgeCaption(string label)
     {
         switch (label)
@@ -176,30 +181,6 @@ public class DiagramService
         }
 
         return label;
-    }
-
-    private static BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>> MakeGraph(Diagram diagram)
-    {
-        var graph = new BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>>(false);
-
-        foreach (var node in diagram.Nodes)
-        {
-            graph.AddVertex(node);
-        }
-
-        foreach (var diagramLink in diagram.Links
-                     .Where(l => l.TargetNode is not null)
-                     .Where(l => l.Labels.Any())) // Siblings have no label
-        {
-            var relationType = diagramLink.Labels.OfType<RelationLabel>().FirstOrDefault()?.RelationType ?? string.Empty;
-            graph.AddEdge(
-                new TaggedEdge<NodeModel, string>(
-                    diagramLink.TargetNode!,
-                    diagramLink.SourceNode,
-                    relationType));
-        }
-
-        return graph;
     }
 
     private IDictionary<NodeModel, Point> CalculateNodePositions(BidirectionalGraph<NodeModel, TaggedEdge<NodeModel, string>> graph, string algorithmName)

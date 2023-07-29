@@ -5,28 +5,51 @@ using ConceptMaps.Crawler;
 using ConceptMaps.UI.Data;
 
 /// <summary>
-/// Webpage for the <see cref="ICrawler"/>.
+/// Webpage for the <see cref="ICrawler"/> configuration.
 /// </summary>
 public partial class CrawlerConfigPage
 {
+    /// <summary>
+    /// Flag, if the configuration was saved.
+    /// </summary>
     private bool _isSaved;
 
+    /// <summary>
+    /// The list of available website settings.
+    /// </summary>
     private SortedList<string, IWebsiteSettings> _websiteSettings = new();
 
+    /// <summary>
+    /// The identifier of the selected <see cref="IWebsiteSettings"/>.
+    /// Backing-Field for <see cref="SelectedId"/>.
+    /// </summary>
     private string? _selectedId;
 
+    /// <summary>
+    /// The view model of the selected <see cref="IWebsiteSettings"/>.
+    /// </summary>
     private WebsiteSettingsViewModel? _selectedSettings;
 
     /// <summary>
-    /// THe injected <see cref="IWebsiteSettingsProvider"/>.
+    /// The injected <see cref="IWebsiteSettingsProvider"/>.
     /// </summary>
     [Inject]
     private IWebsiteSettingsProvider SettingsProvider { get; set; } = null!;
 
-    [Parameter] public string SettingsId { get; set; } = null!;
+    /// <summary>
+    /// Gets or sets the parameter of the initially selected <see cref="IWebsiteSettings"/>.
+    /// </summary>
+    [Parameter]
+    public string SettingsId { get; set; } = null!;
 
+    /// <summary>
+    /// Gets a value indicating whether the current <see cref="_selectedSettings"/> is new and unsaved.
+    /// </summary>
     private bool IsNewAndUnsaved => !this._isSaved && this._selectedId is null;
 
+    /// <summary>
+    /// Gets or sets the identifier of the selected <see cref="IWebsiteSettings"/>.
+    /// </summary>
     private string? SelectedId
     {
         get => _selectedId;
@@ -46,6 +69,7 @@ public partial class CrawlerConfigPage
         }
     }
 
+    /// <inheritdoc />
     protected override void OnInitialized()
     {
         this._websiteSettings = new SortedList<string, IWebsiteSettings>(this.SettingsProvider.AvailableSettings.Select(path => (Path.GetFileName(path), this.SettingsProvider.LoadSettings(path)))
@@ -57,6 +81,9 @@ public partial class CrawlerConfigPage
         base.OnInitialized();
     }
 
+    /// <summary>
+    /// Saves the settings of the currently selected settings.
+    /// </summary>
     private void SaveSettings()
     {
         if (this._selectedSettings is null)
@@ -82,17 +109,28 @@ public partial class CrawlerConfigPage
         this._isSaved = true;
     }
 
+    /// <summary>
+    /// Called when the create new button is clicked. Sets a new view model as selected.
+    /// </summary>
     private void OnCreateNew()
     {
         this._selectedId = null;
         this._selectedSettings = new WebsiteSettingsViewModel();
     }
 
+    /// <summary>
+    /// Called when the cancel button is clicked for a new view model.
+    /// It resets the <see cref="SelectedId"/> back to the first of the available
+    /// settings.
+    /// </summary>
     private void OnCancelNew()
     {
         this.SelectedId = this._websiteSettings.Keys.FirstOrDefault();
     }
 
+    /// <summary>
+    /// Called when the button to delete the selected configuration is clicked.
+    /// </summary>
     private void OnDeleteSelectedConfiguration()
     {
         if (this._selectedId is null)

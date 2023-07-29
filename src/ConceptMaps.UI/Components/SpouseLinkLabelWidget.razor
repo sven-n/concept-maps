@@ -1,12 +1,25 @@
 ﻿@using Blazor.Diagrams.Core.Models;
 @using Blazor.Diagrams.Core.Geometry
 @using Blazor.Diagrams.Core.Extensions
+@using System.ComponentModel.DataAnnotations
 
 @((MarkupString)$"<foreignObject x=\"{X.ToInvariantString()}\" y=\"{Y.ToInvariantString()}\"><div class=\"spouse-label\">{Label.Content}</div></foreignObject>")
 
 @code {
-    [Parameter] public LinkLabelModel Label { get; set; }
-    [Parameter] public Point Position { get; set; }
+
+    /// <summary>
+    /// Gets or sets the label model for this component.
+    /// </summary>
+    [Parameter]
+    [Required]
+    public LinkLabelModel Label { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the Position of the label.
+    /// </summary>
+    [Parameter]
+    [Required]
+    public Point Position { get; set; } = null!;
 
     private double X => Position.X + (Label.Offset?.X ?? 0);
     private double Y => Position.Y + (Label.Offset?.Y ?? 0);

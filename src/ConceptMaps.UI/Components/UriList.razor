@@ -21,20 +21,33 @@
 </div>
 
 @code {
+    /// <summary>
+    /// Gets or sets the list of URIs which should be displayed in this component.
+    /// </summary>
     [Parameter]
     [Required]
     public List<UriViewModel> Uris { get; set; }
 
+    /// <summary>
+    /// Gets or sets the default URI.
+    /// </summary>
     [Parameter]
     [Required]
     public Uri DefaultUri { get; set; }
 
-    void OnRemoveClick(UriViewModel uri)
+    /// <summary>
+    /// Handles the click on the remove button for an URI.
+    /// </summary>
+    /// <param name="uri">The uri which should be removed.</param>
+    private void OnRemoveClick(UriViewModel uri)
     {
         this.Uris.Remove(uri);
     }
 
-    void OnAddClick()
+    /// <summary>
+    /// Handles the click on the add button. Adds a new URI to the list.
+    /// </summary>
+    private void OnAddClick()
     {
         this.Uris.Add(new UriViewModel(this.DefaultUri));
     }

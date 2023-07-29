@@ -7,24 +7,58 @@ using ConceptMaps.UI.Services;
 
 using Microsoft.AspNetCore.Components;
 
+/// <summary>
+/// The page which offers to generate the concept map based on a text.
+/// </summary>
 public partial class Generate
 {
+    /// <summary>
+    /// The diagram with the generated graph.
+    /// </summary>
     private Diagram? _diagram;
+
+    /// <summary>
+    /// Flag, if the generation is currently running.
+    /// </summary>
     private bool _isRunning;
+
+    /// <summary>
+    /// The selected entity of the filter. Backing-Field for <see cref="SelectedEntity"/>.
+    /// </summary>
     private string _selectedEntity = string.Empty;
 
+    /// <summary>
+    /// Gets or sets the text input which is bound to the input element.
+    /// </summary>
     private string? TextInput { get; set; } = "As siblings, Bob and Alice share a special bond as the children of Jeff and Mary.";
 
+    /// <summary>
+    /// Gets or sets the injected triple service.
+    /// </summary>
     [Inject]
     private RemoteTripleService RemoteTripleService { get; set; } = null!;
 
+    /// <summary>
+    /// Gets or sets the injected diagram service.
+    /// </summary>
     [Inject]
     private DiagramService DiagramService { get; set; } = null!;
 
+    /// <summary>
+    /// Gets or sets the entities which are contained in the graph.
+    /// </summary>
     private List<string> Entities { get; set; } = new();
 
+    /// <summary>
+    /// Gets or sets the relationships between the entities.
+    /// </summary>
     private List<Relationship>? Relationships { get; set; }
 
+    /// <summary>
+    /// Gets the <see cref="Relationships"/>, filtered by <see cref="SelectedEntity"/>.
+    /// It returns the relationships of all entities which are directly connected
+    /// to the <see cref="SelectedEntity"/>.
+    /// </summary>
     private IEnumerable<Relationship> FilteredRelationships
     {
         get
@@ -54,6 +88,9 @@ public partial class Generate
         }
     }
 
+    /// <summary>
+    /// Gets or sets the selected entity after which the graph should be filtered.
+    /// </summary>
     private string SelectedEntity
     {
         get => _selectedEntity;
@@ -69,8 +106,15 @@ public partial class Generate
         }
     }
 
+    /// <summary>
+    /// Gets or sets the error message which was generated when calling the triple service.
+    /// </summary>
     private RenderFragment? ErrorMessage { get; set; }
 
+    /// <summary>
+    /// Called when the apply button was clicked.
+    /// Applies the current state of the <see cref="FilteredRelationships"/> to the graph.
+    /// </summary>
     private async Task OnApplyAsync()
     {
         this._diagram = null;
@@ -79,6 +123,10 @@ public partial class Generate
         await this.CreateDiagramAsync();
     }
 
+    /// <summary>
+    /// Called when the run button was clicked. Generates the concept map by
+    /// first getting the triples and then creating the diagram.
+    /// </summary>
     private async Task OnRunAsync()
     {
         this._diagram = null;
@@ -116,6 +164,9 @@ public partial class Generate
         }
     }
 
+    /// <summary>
+    /// Creates the diagram based on the <see cref="FilteredRelationships"/>.
+    /// </summary>
     private async Task CreateDiagramAsync()
     {
         try
@@ -143,6 +194,9 @@ public partial class Generate
         }
     }
 
+    /// <summary>
+    /// Arranges the nodes by applying the <see cref="FamilyTreeLayoutAlgorithm"/>.
+    /// </summary>
     private async Task ArrangeNodesAsync()
     {
         if (this._diagram is { } diagram)
