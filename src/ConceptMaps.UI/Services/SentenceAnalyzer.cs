@@ -92,7 +92,10 @@ public class SentenceAnalyzer
             for (var i = 0; i < sentences.Count; i++)
             {
                 var currentSentence = sentences[i];
-                await ProcessSentenceAsync(currentSentence, i, progress, cancellationToken);
+                if (currentSentence.State is SentenceState.Initial)
+                {
+                    await ProcessSentenceAsync(currentSentence, i, progress, cancellationToken);
+                }
             }
         }
         catch (OperationCanceledException)
