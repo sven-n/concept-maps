@@ -20,7 +20,9 @@ zu evaluieren.
 
 ### Warum Spezialisierung auf Familienstammbäume?
 
-TODO
+Im Rahmen unseres Projekts sollen Concept Maps behandelt werden. Eine Concept Map ist eine visuelle Darstellung von Ideen und Konzepten sowie ihrer Verbindungen. Sie dient dazu, komplexe Informationen übersichtlich und strukturiert darzustellen. Die Erstellung einer Concept Map kann zeitaufwendig sein, insbesondere wenn wir eine automatisierte Erstellung planen. In diesem Fall benötigen wir im Voraus Informationen (Trainingsdaten), um eine geeignete Concept Map zu erstellen.
+
+Familiäre Beziehungen, insbesondere in fiktionalen Werken wie "Game of Thrones", sind oft schwer verständlich, wenn sie im Fließtext beschrieben werden. Durch die Verwendung eines Stammbaums können diese Informationen leichter vermittelt werden. Ein Stammbaum stellt die familiären Beziehungen in einer übersichtlichen grafischen Form dar und enstpricht somit einer Art Concept Map. Die Beziehungen der Mitglieder zu einander sind größtenteils eindeutig zu beschreiben, sodass hier auch für die Erstellung von Trainingsdaten genügend Datengrundlage vorhanden ist. Aus diesem Grund stellt ein Familienstammbaum für uns eine geeignete Spezialisierung dar.
 
 ### Eingesetzte Technologien
 
