@@ -244,14 +244,18 @@ verschiedene Kombinationen ausprobiert werden können.
 ### Training
 In der Datenaufbereitung wurden entsprechenden Sätze gespeichert, die nun für das Training genutzt werden können. Durch die Auswahl eines Trainigssets kann das Training des Modells gestartet werden.  Dabei erfolgt die Aufteilung der Traingsdaten in 50% Train, 30% Validation und 20% Test.
 
-* `E:` 
-* `#:` 
-* `LOSS TRANSFORMER:`   
-* `LOSS RELATION:`  
-* `REL_MICRO_P:` 
-* `REL_MICRO_R:` 
-* `REL_MICRO_F:` 
-* `SCORE:` 
+* `E:` Trainingsrunde für das Modell
+* `#:` Nummer des verarbeiteten Datenchargens
+* `LOSS TRANSFORMER:` Ergebnis der Verlustfunktion des Transformer-Modells 
+* `LOSS RELATION:` Ergebnis der Verlustfunktion in Beziehungsextraktion.
+* `REL_MICRO_P:` Präzision ist ein Maß, wie viele der vom Modell als positiv vorhergesagten Fälle tatsächlich positiv sind.
+* `REL_MICRO_R:` Rückruf ist ein Maß, wie viele der tatsächlich positiven Fälle vom Modell erkannt werden. 
+* `REL_MICRO_F:` F-Score beschreibt einen einzelnen Wert, der Präzision und Rückruf kombiniert und die Gesamtleistung des Modells bewertet.
+* `SCORE:` Gesamtbewertung der Modellleistung
+
+Für die Verlustfunktionen gilt: Je kleiner, desto besser.
+Für die anderen Parameter, wie Präzision, Rückruf, F-Score und Gesamtscore, gilt: Je größer, desto besser.
+
 
 
 ### Evaluation
