@@ -20,9 +20,13 @@ zu evaluieren.
 
 ### Warum Spezialisierung auf Familienstammbäume?
 
-Im Rahmen unseres Projekts sollen Concept Maps behandelt werden. Eine Concept Map ist eine visuelle Darstellung von Ideen und Konzepten sowie ihrer Verbindungen. Sie dient dazu, komplexe Informationen übersichtlich und strukturiert darzustellen. Die Erstellung einer Concept Map kann zeitaufwendig sein, insbesondere wenn wir eine automatisierte Erstellung planen. In diesem Fall benötigen wir im Voraus Informationen (Trainingsdaten), um eine geeignete Concept Map zu erstellen.
+Wir haben uns für die Spezialisierung auf Familiestammbäume entschieden, und dies aus verschiedenen Gründen. Zum einen ist dieser Anwendungsfall hinreichend eng gefasst, um sich nicht in zu vielen Sonderfällen zu verstricken und der Umfang dieser Aufgabe erscheint dem zeitlichen Horizont des Fachpraktikums angemessen.
 
-Familiäre Beziehungen, insbesondere in fiktionalen Werken wie "Game of Thrones", sind oft schwer verständlich, wenn sie im Fließtext beschrieben werden. Durch die Verwendung eines Stammbaums können diese Informationen leichter vermittelt werden. Ein Stammbaum stellt die familiären Beziehungen in einer übersichtlichen grafischen Form dar und enstpricht somit einer Art Concept Map. Die Beziehungen der Mitglieder zu einander sind größtenteils eindeutig zu beschreiben, sodass hier auch für die Erstellung von Trainingsdaten genügend Datengrundlage vorhanden ist. Aus diesem Grund stellt ein Familienstammbaum für uns eine geeignete Spezialisierung dar.
+Darüber hinaus liegt der Nutzen eines derart erstellten Stammbaums auf der Hand, insbesondere wenn man den Trend der letzten Jahre in Serien, Büchern und anderen Medien zu komplexeren "Familiendrama" sieht (Beispiele hierfür sind Das Lied von Feuer und Eis, Harry Potter, ...), aber auch für Klassiker wie "Krieg und Frieden" oder "Die Buddenbrooks", in denen leicht nachvollziehbare Informationen über die Familienstrukturen hilfreich sind. Diese familiären Beziehungen sind oft schwer verständlich, wenn sie im Fließtext beschrieben werden.
+
+Die Verwendung eines Stammbaums ermöglicht es, diese Informationen leichter zu vermitteln, indem er die familiären Beziehungen in einer übersichtlichen grafischen Form darstellt. Ein Stammbaum kann somit als eine Art Concept Map betrachtet werden. Die Beziehungen der Mitglieder zueinander sind größtenteils eindeutig zu beschreiben, sodass hier auch genügend Datengrundlage für die Erstellung von Trainingsdaten vorhanden ist.
+
+Schließlich ist der Aufbau und die Nutzung von Stammbäumen den meisten Menschen vertraut und stellt damit einen konkreten und niederschwelligen Ansatz dar, auch für Menschen, die mit dem Konzept des Content Mapping ansonsten keine Berührungspunkte hatten. In unserem Projekt werden Concept Maps behandelt, die eine visuelle Darstellung von Ideen und Konzepten sowie ihrer Verbindungen darstellen. Die Erstellung einer Concept Map kann zeitaufwendig sein, insbesondere wenn wir eine automatisierte Erstellung planen. In diesem Fall benötigen wir im Voraus Informationen (Trainingsdaten), um eine geeignete Concept Map zu erstellen.
 
 ### Eingesetzte Technologien
 
@@ -37,10 +41,20 @@ Um dieses Ziel zu erreichen, setzen wir mehrere Technologien ein:
 
 #### Warum spaCy als Toolkit?
 
-spaCy bietet vielfältige Funktionen und kann im Vergleich zu anderen Toolkits
-dank der umfassenden Dokumentation relativ einfach verwendet werden.
+spaCy bietet vielfältige Funktionen und kann im Vergleich zu anderen Toolkits wie z.B. PyTorch und NLTK getestet, dank der umfassenden Dokumentation relativ einfach verwendet werden.
 Es finden sich auch zahlreiche Beispiele, u.a. auch um Relationen zwischen Entitäten
 zu ermitteln.
+
+#### Warum über NER-Modell/Relation-Modell?
+
+
+Es wurde die Idee getestet, die in Spacy implementierten Methoden anzuwenden und sich einen Parser-Tree von jedem Verwandtschaftsverhältnisse enthaltenen Satz ausgeben zu lassen. In diesem könnte man automatisch vom  Verwandtschaftsverhältnis bezeichnete Wort (z.B. „Mutter“) ausgehend die Satzstruktur durchwandern, bis man die dazugehörigen Subjekte/Objekte findet. Diese Vorgehensweise erwies sich aus mehreren Gründen als schlecht durchführbar: Zum einem hätte man eine umfassende Liste von Verwandtschaftsverhältnis bezeichneten Schlagwörtern aufsetzen müssen, die sehr große Umfänge erreichen könnte. Zum anderen war ohne „echtes  Verständnis“ des Satzes es schwierig zu identifizieren welche Subjekte/Objekte die gesuchten sind (Beispiele: „A ist die Mutter von B“ oder „A wird von seiner Mutter B gefragt“). Zudem wäre es sehr schwierig alle Formen von verneinten Verwandtschaftsverhältnissen zu unterscheiden. Daher wurde entschieden, dass auf entsprechende Aufgaben trainierte Modelle benötigt werden.
+
+
+### Warum Wahl von Transformer beim Relation-Modell?
+
+Transformer-Modell zeigen für viele Aufgaben in der NLP eine hohe Effizienz. Durch ihre Feedforward-Architektur (im Vergleich mit rückgekoppelten Modellen wie z.B. Long-Short-Term-Memory-Modells) sind sie sehr gut darin für Worte den umgebenden Kontext zu untersuchen. Dies macht sie für unsere Fragestellung die Zusammenhänge zwischen drei Wörtern (2 Entitäten, 1 Verwandtschaftsverhältnis) zu finden.
+
 
 #### Eingesetzte Modelle
 
@@ -49,11 +63,14 @@ zum Einsatz, welche nachfolgend beschrieben werden.
 
 ##### Named Entity Recognition
 
+Als grundlegendste Basic-Modelle werden einem in Spacy die Modelle „en_core_web_sm“ und  „en_core_web_trf“ zur Verfügung gestellt. Dabei ist das Modell „en_core_web_sm“ stärker auf Effizienz mit den zur Verfügung stehenden Rechner-Ressourcen entwickelt. Dem gegenüber ist das Modell „en_core_web_trf“ auf eine höhere Genauigkeit der Ergebnisse ausgerichtet. Beides wurde in diesem Projekt getestet.
 Für die Named Entity Recognition (NER), also um die Personen innerhalb des eingegebenen
-Textes zu ermitteln, setzen wir auf das bereits trainierte spaCy-Modell `en_core_web_trf`.
+Textes zu ermitteln, setzen wir auf das bereits trainierte spaCy-Modell `en_core_web_trf`, da  die Ergebnisse  derart besser waren , dass der höhere Ressourcenaufwand als berechtigt angesehen wurde.
 
 Wir hatten während des Projekts versucht ein eigenes Modell zu trainieren, haben
 dann aber festgestellt, dass dieses Modell bereits sehr gut funktioniert.
+
+
 
 Wir beschränken uns hierbei auf die Entitäten mit dem Tag `PERSON`.
 
