@@ -242,8 +242,31 @@ verschiedene Kombinationen ausprobiert werden können.
                    Bei großen Sessions kann dies jedoch sehr lange dauern.
 
 ### Training
+In der Datenaufbereitung wurden entsprechenden Sätze gespeichert, die nun für das Training genutzt werden können. Durch die Auswahl eines Trainigssets kann das Training des Modells gestartet werden.  Dabei erfolgt die Aufteilung der Traingsdaten in 50% Train, 30% Validation und 20% Test.
+
+* `E:` 
+* `#:` 
+* `LOSS TRANSFORMER:`   
+* `LOSS RELATION:`  
+* `REL_MICRO_P:` 
+* `REL_MICRO_R:` 
+* `REL_MICRO_F:` 
+* `SCORE:` 
+
 
 ### Evaluation
+
+Sobald ein Modell trainiert wurde, kann man das Modell gegen verschiedene Sets von Sätzen auf seine Qualität hin prüfen. Die entsprechenden Sets werden ebenfalls während der Datenaufbereitung erstellt. 
+
+Die Ausgabe bei der Evaluation erfolgt wie folgt:
+* `Gesamt:` Gesamtanzahl aller Sätze
+* `Processed:` Anzahl der Sätze, gegen die evaluiert wurde
+* `Correct:` Anzahl der Sätze, die durch das Modell korrekt vorhergesagt wurden
+* `Failed:` Anzahl der Sätze, die durch das Modell falsch vorhergesagt wurden
+* `Failed Sentences:` Ausgabe, der falsch vorhergesagten Sätze mit Begründung und dem Score der Vorhersage
+
+Neben der reinen Qualitätskontrolle durch die Evaluation kann dieses Verfahren auch zur Modellverbesserung genutzt werden. Durch die Analyse der falsch vorhergesagten Sätze können Erkenntnisse darüber gewonnen werden, welche Aspekte das Modell noch nicht gut vorhersagen kann. Durch die Bereitstellung weiterer Trainingsdaten könnte die Qualität des Modells nachträglich verbessert werden.
+
 
 ### Concept Maps
 
