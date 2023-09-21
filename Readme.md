@@ -438,6 +438,17 @@ nachträglich verbessert werden.
 Wenn wir nun ein Modell trainiert haben, können wir unsere Concept Maps in Form
 von Familienstammbäumen erstellen.
 
+Beispiel:
+![Familienstammbaum Beispiel](doc/beispiel.png)
+
+Der Stammbaum kann nun noch vom Benutzer angepasst werden, u.a.:
+* In der Beziehungsliste können die Familienverhältnisse bei Bedarf angepasst werden.
+* Die Knoten der Personen können mit der Maus per Drag & Drop verschoben werden.
+* Die Knoten und Kanten können mit der Tastatur gelöscht werden, indem der Knoten
+  oder die Kante ausgewählt und anschließend die Entf-Taste gedrückt wird.
+* Falls nötig kann oben nach einer bestimmten Person gefiltert werden. Dann werden
+  nur die Personen angezeigt, welche mit der gesuchten Person in einer Beziehung stehen.
+
 ## Details zur Implementierung des Python-Services
 
 Der Quellcode zur Implementierung befindet sich unter `src/python`.
