@@ -33,11 +33,11 @@ Schließlich ist der Aufbau und die Nutzung von Stammbäumen den meisten Mensche
 Um dieses Ziel zu erreichen, setzen wir mehrere Technologien ein:
 
   * Python-Backend für die sprachtechnologische Analyse der Texte, sowie des Trainings
-    * __spaCy__ als NLP-Toolkit
-  * Web-Frontend auf Basis von __ASP.NET Blazor-Server__
-    * __Bootstrap__ für ein einheitliches CSS-Styling
-    * __Blazor.Diagrams__ für die Anzeige eines interaktiven Graphen
-    * __AbotX__ für das Crawling von Daten
+    * __[spaCy 3.5.4](https://spacy.io/)__ als NLP-Toolkit
+  * Web-Frontend auf Basis von __[ASP.NET Blazor-Server](https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-7.0#blazor-server)__
+    * __[Bootstrap 5.1](https://getbootstrap.com/)__ für ein einheitliches CSS-Styling
+    * __[Blazor.Diagrams](https://github.com/Blazor-Diagrams/Blazor.Diagrams)__ für die Anzeige eines interaktiven Graphen
+    * __[AbotX](https://github.com/sjdirect/abotx)__ für das Crawling von Webseiten
 
 #### Warum spaCy als Toolkit?
 
@@ -106,7 +106,76 @@ Benutzer nur eine Richtung explizit annotiert wurde.
 
 ## Installation
 
-TODO
+Die Anwendung läuft grundsätzlich unter Windows, Linux oder Mac OS. Wir haben dies jedoch
+nur unter Windows getestet, bzw. indirekt unter Linux in Docker Containern.
+Nachfolgend werden drei Wege beschrieben, wie die Anwendung in Betrieb genommen werden kann.
+
+### Lokal mit Hilfe von Docker
+
+Dies ist die wahrscheinlich einfachste Möglichkeit die Anwendung zu installieren und zu starten.
+Hier entfällt die Problematik, dass sich unterschiedliche Python und spaCy-Versionen
+in die Quere kommen.
+
+Hierzu sind folgende Schritte notwendig:
+* Docker bzw. Docker Desktop installieren, falls noch nicht vorhanden.
+* Dieses Repository lokal auf die Festplatte klonen.
+* Mit der Konsole in das Unterverzeichnis `deploy` des Repositories navigieren.
+* Das Kommando `docker compose up -d´ ausführen
+    * Die Docker-Images werden dadurch gebaut und gestartet.
+    * Die Anwendung ist dann unter http://localhost:80/ verfügbar.
+    * Der Port kann ggf. in der `docker-compose.yml` geändert werden bevor `docker compose` ausgeführt wird.
+
+### Lokal, mit fertigen Binaries
+
+#### Voraussetzungen
+
+* Installierte [.NET 7 ASP.NET Core Runtime oder SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* Installiertes [Python 3.11](https://www.python.org/downloads/)
+    * Installierte python packages:
+        * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
+            ```
+            pip install -U pip setuptools wheel
+            pip install -U 'spacy[transformers,lookups]=3.5.4'
+            python -m spacy download en_core_web_trf
+
+* Download des Releases: [1.0](TODO)            ```
+* Entpackter Download in ein neues Verzeichnis auf der lokalen Festplatte.
+
+#### Starten
+
+1. Doppelklick auf die Datei `python/service.py` um den Python-Service zu starten
+2. Doppelklick auf `ConceptMaps.UI.exe` um die Web-Anwendung zu starten.
+
+Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
+
+### Lokal, selbst gebaut
+
+#### Voraussetzungen
+
+* Installiertes [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* Installiertes [Python 3.11](https://www.python.org/downloads/)
+    * Installierte python packages:
+        * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
+            ```
+            pip install -U pip setuptools wheel
+            pip install -U 'spacy[transformers,lookups]=3.5.4'
+            python -m spacy download en_core_web_trf
+            ```
+
+#### Bauen
+
+Die Solution ```ConceptMaps.sln``` kann mittels .NET SDK mit dem folgendenden Konsolenbefehl gebaut werden, wenn das aktuelle Verzeichnis `src` ist:
+
+`dotnet publish`
+
+#### Ausführen
+
+0. Sicherstellen, dass man sich mit der Konsole im Verzeichnis `src` befindet.
+1. Python service mit dem folgenden Befehl starten: `python python/service.py`
+2. Web-Anwendung mit dem folgenden Befehl starten: `dotnet run --project ConceptMaps.UI --urls=http://localhost:5000/`
+  * Alternativ, Doppelklick auf `ConceptMaps.UI.exe` im Ordner `src\ConceptMaps.UI\bin\Debug\net7.0\publish`
+  * Es ist dann im Browser unter `http://localhost:5000/` verfügbar.
+
 
 ## Verwendung
 
@@ -296,8 +365,168 @@ von Familienstammbäumen erstellen.
 
 ## Details zur Implementierung des Python-Services
 
-TODO
+Der Quellcode zur Implementierung befindet sich unter `src/python`.
+Der Einstiegspunkt ist hier die Datei `service.py`.
+Es wird hier ein HTTP-Service unter dem Port 5001 gestartet, welcher die folgenden Funktionen anbietet:
+
+#### [POST] /get-triples
+
+Analysiert einen übergebenen Text und liefert die Beziehungen mit der entsprechenden Wahrscheinlichkeit (Score).
+
+Der Eingabetext wird hier als reiner String im Body der Anfrage geschickt.
+
+Das trainierte Modell analysiert den Text, und liefert die gefundenen Beziehungen.
+Der Quellcode dazu findet sich in `model2.py`.
+Zunächst werden dazu die Entitäten im Text mit dem NER-Modell ermittelt. Daraus
+werden nur diese mit `PERSON`-Label für die weitere Analyse im Relationenmodell verwendet.
+
+Das Relationenmodell liefert ein Dictionary, welches als Schlüssel die Entitätenpaare verwendet,
+und als Wert einen Wahrscheinlichkeitswert (Score) zwischen 0 und 1 enthält.
+
+Hier kann ein Ergebnis in zwei Richtungen entstehen, weshalb wir für ein Entitätenpaar nur das Ergebnis
+in der Richtung weiterverwenden, welches den höheren Score hat.
+
+Als endgültiges Ergebnis wird ein JSON im HTTP-Response zurückgeliefert,
+welches die gefundenen Beziehungen beschreibt. Beispiel:
+```json
+[
+    {
+        "fromWord": "Thomas",
+        "edgeWord": "has_child",
+        "toWord": "Andreas",
+        "score": 0.9999
+    },
+    {
+        "fromWord": "Andreas",
+        "edgeWord": "spouse",
+        "toWord": "Marie",
+        "score": 0.9998
+    }
+]
+```
+
+#### [POST] /training/relations/start
+
+Hierüber kann das Training des Relationenmodells angestoßen werden.
+Im Body der Anfrage werden die zu verwendenen Trainingsdaten (Sätze inkl. Beziehungen) übertragen.
+Die Daten werden in einem einfachen JSON-Format übertragen, welche nur die Sätze und die Beziehungen,
+aber keine Indizes o.ä. enthält.
+
+Um dies für spaCy nutzbar zu machen, werden diese Sätze in spaCy-Docs konvertiert (s. `binary_converter.py`).
+Die Web-Oberfläche liefert hier ausschließlich Daten in einem Format, welches im Code als "simple" benannt ist,
+deshalb wird hier nur darauf eingegangen.
+
+Je Satz werden zunächst alle Entitäten (Personen) anhand der mitgelieferten Beziehungen dem spaCy Doc hinzugefügt.
+
+Dazu müssen die Tokens und deren Indizes ermittelt werden.
+Die Tokenisierung wird hier mittels des Modells `en_core_web_trf` durchgeführt (`extract_entity_tokens`).
+
+Anschließend werden die Tokens der Entitäten anhand ihrer Namen ermittelt (`parse_entities`) und paarweise dem Dictionary des
+Relationenmodells mit dem Initialwert von `0.0` für alle möglichen Beziehungslabels hinzugefügt (`prepare_rels`).
+Die vom Benutzer eingegebenen Beziehungen werden anschließend in dieses Dictionary eingebracht (`parse_relations_simple`).
+
+Per Zufallsprinzip werden die Sätze dann in drei Teile (`train`, `dev`, `test`) aufgeteilt.
+In `test` landen etwa 20 % und in `dev` etwa 30 % aller Sätze. Der Rest wird für `train` verwendet.
+Als Ergebnis liegt dann jeweils eine spacy-Datei im Datenverzeichnis des spaCy-Projekts unter `src/python/training/relations/data`.
+
+Das Training wird dann in einem eigenen Prozess gestartet (`train_model.py`, `start_training`).
+Es wird dazu der Workflow `all` des spaCy-Projekts gestartet, welches das Training mittels CPU und eine anschließende Evaluation durchführt.
+
+Die Konsolenausgaben und der Status dieses Prozesses werden in eigenständigen Threads überwacht (`train_model.py`, `watch_training`),
+damit diese über `/training/relations/status` abgefragt werden können.
+
+#### [POST] /training/relations/cancel
+
+Hierüber kann ein zuvor gestarteter Trainingsprozess abgebrochen werden.
+
+#### [GET] /training/relations/status
+
+Liefert den aktuellen Status des Trainingsprozesses und die bisher aufgelaufenen Konsolenausgaben, falls verfügbar.
 
 ## Details zur Implementierung der Web-Oberfläche
 
-TODO
+Wie bereits weiter oben erwähnt, wurde die Oberfläche mit Hilfe von Blazor Server und .NET 7 implementiert.
+Die Wahl fiel darauf, weil wir einerseits Erfahrungen damit mitbringen, und andererseits die Entwicklung
+stark vereinfacht wird. Es musste z.B. kein JavaScript-Code geschrieben werden, obwohl die Oberfläche
+der Anwendung sehr interaktiv ist. Die Änderungen am DOM werden bei dieser Blazor-Variante im Server berechnet,
+und nur die Änderungen an den Client übertragen.
+
+Der Quellcode dazu findet sich unter `src/ConceptMaps.UI/`, und der Einstiegspunkt der Anwendung ist die `Program.cs`.
+In der `Program.cs` wird die Anwendung initialisiert, d.h. nötige Services für die Dependency Injection werden registriert,
+Ordner für Daten initialisiert und über den Webserver verfügbar gemacht.
+
+Zur grundsätzlichen Struktur ist zu sagen, dass die einzelnen Seiten in dem `Pages`-Unterordner implementiert sind,
+darin verwendete (wiederverwendbare) Komponenten im Ordner `Components`, und beteiligte Dienste im Ordner `Services`.
+
+Aufgrund des Umfangs werden nachfolgend nur einige interessante Aspekte der Implementierung beschrieben.
+
+### Diagrammerstellung
+
+Die Anwendung erstellt anhand der vom Python gelieferten Tripel entsprechende Graphendiagramme.
+Diese in einer sinnvollen Art und Weise darzustellen war ein wesentlicher Aspekt der Anwendung.
+
+Als Komponente dient uns hier [Blazor.Diagrams](https://github.com/Blazor-Diagrams/Blazor.Diagrams),
+welche jedoch nicht das Layouting (Anordnung der Personenknoten) für uns übernimmt.
+
+Für die Erstellung der Diagramme wurde ein eigener Service (`Services/DiagramService`) implementiert,
+welcher anhand der empfangenen Tripel ein neues `Diagram`-Objekt erstellt und die Personen
+und Beziehungen darin sinnvoll einfügt.
+
+#### Anordnung der Personenknoten
+
+Für das die Anordnung der Personen wurden verschiedene Algorithmen von
+[GraphShape](https://github.com/KeRNeLith/GraphShape) ausprobiert.
+Diese Algorithmen implementieren alle das generische Interface
+`GraphShape.Algorithms.Layout.ILayoutAlgorithm<TVertex, TEdge, TGraph>`, wobei `TGraph` eine Implementierung
+von `QuikGraph.IBidirectionalGraph<TVertex, TEdge>` sein muss. [QuckGraph](https://github.com/KeRNeLith/QuikGraph)
+ist also eine weitere Bibliothek, welches die Datenstruktur für unseren Graphen definiert.
+
+Um einen solchen Graphen zu erstellen, haben wir die Methode `DiagramExtensions.AsGraph` implementiert,
+welche als Input das (unangeordnete) `Blazor.Diagrams.Diagram` entgegennimmt, und daraus
+den nötigen bidirektionalen Graphen von `QuikGraph` erstellt.
+
+Im Verlauf des Projektes haben wir jedoch festgestellt, dass die vorhandenen Algorithmen
+jedoch nicht das gewünschte Ergebnis als Stammbaum liefern können.
+Wir haben uns deshalb entschieden, eine eigene Implementierung für das Interface `GraphShape.Algorithms.Layout.ILayoutAlgorithm<TVertex, TEdge, TGraph>`
+zu schaffen. Diese lehnt sich an `GraphShape.Algorithms.Layout.SimpleTreeLayoutAlgorithm<TVertex, TEdge, TGraph>` an,
+wurde jedoch speziell für Familenstammbäume angepasst. Sie ist in der Klasse `FamilyTreeLayoutAlgorithm` zu finden.
+
+Der Algorithmus geht folgendermaßen vor (s. `FamilyTreeLayoutAlgorithm.InternalCompute`):
+  * Es werden zunächst alle Personen ohne Eltern ermittelt und anhand der Anzahl der nachkommenden Generationen sortiert.
+    Für jede Generation wird ein eigenes Set mit darin enthaltenen Eltern erstellt.
+  * Nun werden alle Kinder der Eltern entsprechend in der Liste der darunterliegenden Generation einsortiert
+  * Nun werden die Ehepartner der Personen in der Liste in die jeweils gleiche Generation einsortiert
+  * Ggf. übrige Personen werden in einer weiteren, darunterliegenden Generation hinzugefügt
+
+Als Ergebnis kommt daraus eine Liste mit Generationen-Sets heraus, wobei im ersten Set die Familienoberhäupter zu finden sind.
+Anhand dieser Liste wird nun Generation für Generation der Graph aufgebaut, und die Koordinaten der einzelnen Knoten berechnet.
+
+Am Ende werden die berechneten Positionen auf die entsprechenden Knoten des `Blazor.Diagrams.Diagram` zugewiesen.
+
+#### Vereinfachung der Darstellung der Beziehungen
+
+Damit der Stammbaum nicht zu überladen dargestellt wird, werden nach der Anordnung der Knoten einzelne Kanten
+des Graphen aus dem fertigen Diagramm entfernt:
+  * Beziehungen zwischen Geschwistern, welche die gleichen Eltern haben.
+  * Die Beschriftung auf der Kante von Eltern zu Kindern, da die Beziehung durch einen Pfeil dargestellt wird
+
+Ansonsten werden Beziehungen als Kanten wie folgt dargestellt:
+  * Ehepartner mit einer geraden horizontalen Linie mit einem Ring-Icon 💍
+  * Geschwungene Linie mit Pfeil zum Kind
+  * Geschwister untereinander mit unterschiedlichen oder unbekannten Eltern mit einer grauen Linie
+
+### Datenablage
+
+Daten werden in unterschiedlichen Unterverzeichnissen des Working-Directories (gewöhnlicherweise der Ort des Anwendungsstarts) abgelegt:
+
+* `crawler-settings`: Die Einstellungen für den Crawler je Webseite.
+* `crawl-results`: Die Ergebnisse des Web-Crawlers.
+* `prepare-data`: Die Sessions der Data-Preparation-Seite.
+* `training-data`: Die vorbereiteten Trainingsdaten, welche u.a. auch auf der Training-Seite angezeigt werden.
+
+### Konsolenausgabe bei Training des Modells
+
+Die Trainingsseite des Modells ruft periodisch den Status vom Python-Service (s. `[GET] /training/relations/status`) ab.
+Die Konsolenausgabe davon enthält Formatierungscodes, welche von der Webanwendung entsprechend mittels CSS sichtbar umgesetzt werden.
+
+Die Interpretierung dieser Codes wurde in der Komponente `ConsoleText` implementiert, s. `Components\ConsoleText.razor.cs`.
