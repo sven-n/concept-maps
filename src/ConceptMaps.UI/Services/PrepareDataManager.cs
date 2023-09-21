@@ -3,12 +3,19 @@ namespace ConceptMaps.UI.Services;
 using System.Text.Json;
 using ConceptMaps.UI.Data;
 
+/// <summary>
+/// A manager for the prepared sentence training data (sessions on the data
+/// preparation page) which saves the data in a json format.
+/// </summary>
 public class PrepareDataManager : IPrepareDataManager
 {
     internal static readonly string SubFolder = "prepare-data";
 
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
 
+    /// <summary>
+    /// Gets the available prepared sentence training data files.
+    /// </summary>
     public IEnumerable<string> DataFiles
     {
         get
@@ -24,11 +31,13 @@ public class PrepareDataManager : IPrepareDataManager
         }
     }
 
-
+    /// <inheritdoc />
     public string GetFolderPath(ModelType modelType) => Path.Combine(Environment.CurrentDirectory, SubFolder, modelType.AsString());
 
+    /// <inheritdoc />
     string IPrepareDataManager.SubFolder => SubFolder;
 
+    /// <inheritdoc />
     public async Task SaveAsync(DataPrepareContext prepareContext)
     {
         var targetFolder = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString());
@@ -37,6 +46,7 @@ public class PrepareDataManager : IPrepareDataManager
         await JsonSerializer.SerializeAsync(fileStream, prepareContext, SerializerOptions);
     }
 
+    /// <inheritdoc />
     public async Task<DataPrepareContext?> LoadAsync(string fileName)
     {
         var targetFilePath = Path.Combine(Environment.CurrentDirectory, SubFolder, ModelType.Relation.AsString(), fileName);

@@ -209,7 +209,7 @@ public class FamilyTreeLayoutAlgorithm : DefaultParameterizedLayoutAlgorithmBase
     internal List<HashSet<Node>> GetParentsWithoutBeingChild()
     {
         // First try to find the longest parent/child chain...
-        List<(Node Node, int DescendantGenerationsCount)> parentNodes = this.VisitedGraph.Vertices
+        var parentNodes = this.VisitedGraph.Vertices
             .Where(node => this.VisitedGraph.OutEdges(node).Any(edge => edge.Tag == SpacyRelationLabel.Children)) // has children
             .Where(node => !this.VisitedGraph.InEdges(node).Any(edge => edge.Tag == SpacyRelationLabel.Children)) // without being a child itself
             .Select(node => (Node: node, DescendantGenerationsCount: GetDescendantGenerationsCount(node))) // count how deep is the hierarchy

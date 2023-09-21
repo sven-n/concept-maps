@@ -42,8 +42,8 @@ public class TrainingDataManager : ITrainingDataManager
 
     public async Task SaveRelationsAsync(DataPrepareContext prepareContext)
     {
-        var crawlerData = prepareContext.GetReviewedData();
-        var serializedData = JsonSerializer.Serialize(crawlerData.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        var reviewedData = prepareContext.GetReviewedData();
+        var serializedData = JsonSerializer.Serialize(reviewedData.ToArray(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
         var targetFolderPath = this.GetFolderPath(ModelType.Relation);
         Directory.CreateDirectory(targetFolderPath);

@@ -13,7 +13,6 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<SentenceAnalyzer>();
 builder.Services.AddSingleton<RemoteTripleService>();
 builder.Services.AddSingleton<RemoteTrainingService>();
-builder.Services.AddSingleton<IModelProvider, ModelProvider>();
 builder.Services.AddSingleton<ITrainingDataManager, TrainingDataManager>();
 builder.Services.AddSingleton<IPrepareDataManager, PrepareDataManager>();
 builder.Services.AddSingleton<DiagramService>();
