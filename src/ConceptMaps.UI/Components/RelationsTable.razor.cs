@@ -59,6 +59,12 @@ public partial class RelationsTable
     private bool IsProbablyWrong(Relationship relationship)
     {
         var expectedRelationshipType = this.GetExpectedRelationshipType(relationship);
+
+        if (string.IsNullOrEmpty(expectedRelationshipType))
+        {
+            return false;
+        }
+
         return relationship.RelationshipType != expectedRelationshipType;
     }
 
