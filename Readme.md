@@ -30,7 +30,7 @@ Schließlich ist der Aufbau und die Nutzung von Stammbäumen den meisten Mensche
 
 ### Eingesetzte Technologien
 
-Um dieses Ziel zu erreichen, setzen wir mehrere Technologien ein:
+Um dieses Ziel zu erreichen, setzen wir mehrere Technologien ein, u.a.:
 
   * Python-Backend für die sprachtechnologische Analyse der Texte, sowie des Trainings
     * __[spaCy 3.5.4](https://spacy.io/)__ als NLP-Toolkit
@@ -110,6 +110,10 @@ Die Anwendung läuft grundsätzlich unter Windows, Linux oder Mac OS. Wir haben 
 nur unter Windows getestet, bzw. indirekt unter Linux in Docker Containern.
 Nachfolgend werden drei Wege beschrieben, wie die Anwendung in Betrieb genommen werden kann.
 
+Da das Trainieren eines Modells sehr zeitintensiv sein kann, haben wir unser trainiertes
+Modell (inkl. der Trainingsdaten), welches während der Präsentation verwendet wurde,
+ebenfalls zum [Download](https://mega.nz/file/X0wQGYiK#sljp2VQfemQVp-WGKxIRoPVWb7-nEShnb0fRTAaxOMU) bereitgestellt.
+
 ### Lokal mit Hilfe von Docker
 
 Dies ist die wahrscheinlich einfachste Möglichkeit die Anwendung zu installieren und zu starten.
@@ -120,26 +124,34 @@ Hierzu sind folgende Schritte notwendig:
 * Docker bzw. Docker Desktop installieren, falls noch nicht vorhanden.
 * Dieses Repository lokal auf die Festplatte klonen.
 * Mit der Konsole in das Unterverzeichnis `deploy` des Repositories navigieren.
-* Das Kommando `docker compose up -d´ ausführen
-    * Die Docker-Images werden dadurch gebaut und gestartet.
-    * Die Anwendung ist dann unter http://localhost:80/ verfügbar.
+* Das Kommando `docker compose up -d` ausführen
+    * Die Docker-Images werden dadurch gebaut und gestartet. Dies kann einige Minuten dauern.
+    * Die Anwendung ist dann unter `http://localhost:80/` verfügbar.
     * Der Port kann ggf. in der `docker-compose.yml` geändert werden bevor `docker compose` ausgeführt wird.
+* Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best` in das Verzeichnis
+  `app/training/relations/training` importieren. Dies kann z.B. über Docker Desktop folgendermaßen bewerkstelligt werden:
+  * Auf den `...`-Button des Containers `concept-map-python` klicken, dann 'View files` aufrufen.
+  * Nach `app/training/relations/training` navigieren, Rechtsklick -> `Import`
+  * Ordner `model-best` auswählen und importieren
+  * Den `concept-map-python` ggf. neu starten, wenn bereits ein anderes Modell vorhanden war.
 
 ### Lokal, mit fertigen Binaries
 
 #### Voraussetzungen
 
-* Installierte [.NET 7 ASP.NET Core Runtime oder SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
-* Installiertes [Python 3.11](https://www.python.org/downloads/)
+* [.NET 7 ASP.NET Core Runtime oder SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* [Python 3.11](https://www.python.org/downloads/)
     * Installierte python packages:
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
             ```
             pip install -U pip setuptools wheel
             pip install -U 'spacy[transformers,lookups]=3.5.4'
             python -m spacy download en_core_web_trf
-
-* Download des Releases: [1.0](TODO)            ```
+            ```
+* Download des Releases: [1.0](TODO)
 * Entpackter Download in ein neues Verzeichnis auf der lokalen Festplatte.
+* Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best` in das Unterverzeichnis
+  `training/relations/training` kopieren.
 
 #### Starten
 
@@ -153,6 +165,7 @@ Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
 #### Voraussetzungen
 
 * Installiertes [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+  oder ein aktuelles Visual Studio 2022.
 * Installiertes [Python 3.11](https://www.python.org/downloads/)
     * Installierte python packages:
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
@@ -168,14 +181,19 @@ Die Solution ```ConceptMaps.sln``` kann mittels .NET SDK mit dem folgendenden Ko
 
 `dotnet publish`
 
-#### Ausführen
+Alternativ kann die Solution in Visual Studio geöffnet werden und dort gebaut und
+gestartet werden.
+
+* Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best` in das Unterverzeichnis
+  `training/relations/training` kopieren.
+
+#### Ausführen über die Konsole
 
 0. Sicherstellen, dass man sich mit der Konsole im Verzeichnis `src` befindet.
 1. Python service mit dem folgenden Befehl starten: `python python/service.py`
 2. Web-Anwendung mit dem folgenden Befehl starten: `dotnet run --project ConceptMaps.UI --urls=http://localhost:5000/`
   * Alternativ, Doppelklick auf `ConceptMaps.UI.exe` im Ordner `src\ConceptMaps.UI\bin\Debug\net7.0\publish`
   * Es ist dann im Browser unter `http://localhost:5000/` verfügbar.
-
 
 ## Verwendung
 
@@ -448,8 +466,8 @@ Liefert den aktuellen Status des Trainingsprozesses und die bisher aufgelaufenen
 Wie bereits weiter oben erwähnt, wurde die Oberfläche mit Hilfe von Blazor Server und .NET 7 implementiert.
 Die Wahl fiel darauf, weil wir einerseits Erfahrungen damit mitbringen, und andererseits die Entwicklung
 stark vereinfacht wird. Es musste z.B. kein JavaScript-Code geschrieben werden, obwohl die Oberfläche
-der Anwendung sehr interaktiv ist. Die Änderungen am DOM werden bei dieser Blazor-Variante im Server berechnet,
-und nur die Änderungen an den Client übertragen.
+der Anwendung sehr interaktiv ist. Die Änderungen am DOM werden bei dieser Blazor-Variante
+auf dem Server berechnet und nur die Änderungen an den Client über SignalR (u.a. über WebSockets) übertragen.
 
 Der Quellcode dazu findet sich unter `src/ConceptMaps.UI/`, und der Einstiegspunkt der Anwendung ist die `Program.cs`.
 In der `Program.cs` wird die Anwendung initialisiert, d.h. nötige Services für die Dependency Injection werden registriert,
@@ -530,3 +548,22 @@ Die Trainingsseite des Modells ruft periodisch den Status vom Python-Service (s.
 Die Konsolenausgabe davon enthält Formatierungscodes, welche von der Webanwendung entsprechend mittels CSS sichtbar umgesetzt werden.
 
 Die Interpretierung dieser Codes wurde in der Komponente `ConsoleText` implementiert, s. `Components\ConsoleText.razor.cs`.
+
+## Limitierungen der aktuellen Implementierung und Ausblick
+
+* Die URLs zum Python-Service sind in der Web-Anwendung noch festgelegt auf
+ `localhost:5000`. Es würde Sinn machen, dies konfigurierbar zu machen.
+* Der Crawler kann nicht zuverlässig abgebrochen werden, s. https://github.com/sjdirect/abot/issues/240.
+* Aktuell kann nur ein Relationenmodell gleichzeitig existieren. Das Training überschreibt
+  immer das vorherige. Sinnvoll wäre es, wenn mehrere Modelle zeitgleich vorhanden
+  sein könnten, und diese vom Benutzer auch wieder geladen und verglichen werden könnten.
+* Das Training des Relationenmodells fängt immer wieder bei null an. Daher wäre
+  es vorteilhaft, wenn ein vorhandenes Modell durch neue Trainingsdaten weiter
+  trainiert werden könnte.
+* Es wäre zu überlegen, das Relationenmodell auf das spaCy Modell `en_core_web_trf`
+  aufbauen zu lassen, so dass es nicht mehr notwendig ist, ein separates Modell für
+  das NER laden zu müssen. Somit würde der Python-Service ressourcenschonender agieren.
+* Auflösung von Cross-References im Eingabetext, bevor die Relationen ermittelt werden.
+  Beispiel:
+  * Vorher:  `Bob is the father of Alice. He is also the father of Jeff.`
+  * Nachher: `Bob is the father of Alice. Bob is also the father of Jeff.`
