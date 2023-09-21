@@ -20,13 +20,35 @@ zu evaluieren.
 
 ### Warum Spezialisierung auf Familienstammbäume?
 
-Wir haben uns für die Spezialisierung auf Familiestammbäume entschieden, und dies aus verschiedenen Gründen. Zum einen ist dieser Anwendungsfall hinreichend eng gefasst, um sich nicht in zu vielen Sonderfällen zu verstricken und der Umfang dieser Aufgabe erscheint dem zeitlichen Horizont des Fachpraktikums angemessen.
+Wir haben uns für die Spezialisierung auf Familiestammbäume entschieden, und dies
+aus verschiedenen Gründen. Zum einen ist dieser Anwendungsfall hinreichend eng gefasst,
+um sich nicht in zu vielen Sonderfällen zu verstricken und der Umfang dieser Aufgabe
+erscheint dem zeitlichen Horizont des Fachpraktikums angemessen.
 
-Darüber hinaus liegt der Nutzen eines derart erstellten Stammbaums auf der Hand, insbesondere wenn man den Trend der letzten Jahre in Serien, Büchern und anderen Medien zu komplexeren "Familiendrama" sieht (Beispiele hierfür sind Das Lied von Feuer und Eis, Harry Potter, ...), aber auch für Klassiker wie "Krieg und Frieden" oder "Die Buddenbrooks", in denen leicht nachvollziehbare Informationen über die Familienstrukturen hilfreich sind. Diese familiären Beziehungen sind oft schwer verständlich, wenn sie im Fließtext beschrieben werden.
+Darüber hinaus liegt der Nutzen eines derart erstellten Stammbaums auf der Hand,
+insbesondere wenn man den Trend der letzten Jahre in Serien, Büchern und anderen
+Medien zu komplexeren "Familiendrama" sieht (Beispiele hierfür sind Das Lied von
+Feuer und Eis, Harry Potter, ...), aber auch für Klassiker wie "Krieg und Frieden"
+oder "Die Buddenbrooks", in denen leicht nachvollziehbare Informationen über die
+Familienstrukturen hilfreich sind. Diese familiären Beziehungen sind oft schwer
+verständlich, wenn sie im Fließtext beschrieben werden.
 
-Die Verwendung eines Stammbaums ermöglicht es, diese Informationen leichter zu vermitteln, indem er die familiären Beziehungen in einer übersichtlichen grafischen Form darstellt. Ein Stammbaum kann somit als eine Art Concept Map betrachtet werden. Die Beziehungen der Mitglieder zueinander sind größtenteils eindeutig zu beschreiben, sodass hier auch genügend Datengrundlage für die Erstellung von Trainingsdaten vorhanden ist.
+Die Verwendung eines Stammbaums ermöglicht es, diese Informationen leichter zu
+vermitteln, indem er die familiären Beziehungen in einer übersichtlichen grafischen
+Form darstellt. Ein Stammbaum kann somit als eine Art Concept Map betrachtet werden.
+Die Beziehungen der Mitglieder zueinander sind größtenteils eindeutig zu beschreiben,
+sodass hier auch genügend Datengrundlage für die Erstellung von Trainingsdaten
+vorhanden ist.
 
-Schließlich ist der Aufbau und die Nutzung von Stammbäumen den meisten Menschen vertraut und stellt damit einen konkreten und niederschwelligen Ansatz dar, auch für Menschen, die mit dem Konzept des Content Mapping ansonsten keine Berührungspunkte hatten. In unserem Projekt werden Concept Maps behandelt, die eine visuelle Darstellung von Ideen und Konzepten sowie ihrer Verbindungen darstellen. Die Erstellung einer Concept Map kann zeitaufwendig sein, insbesondere wenn wir eine automatisierte Erstellung planen. In diesem Fall benötigen wir im Voraus Informationen (Trainingsdaten), um eine geeignete Concept Map zu erstellen.
+Schließlich ist der Aufbau und die Nutzung von Stammbäumen den meisten Menschen
+vertraut und stellt damit einen konkreten und niederschwelligen Ansatz dar, auch
+für Menschen, die mit dem Konzept des Content Mapping ansonsten keine Berührungspunkte
+hatten.
+
+In unserem Projekt werden Concept Maps behandelt, die eine visuelle Darstellung
+von Ideen und Konzepten sowie ihrer Verbindungen darstellen.
+Die Erstellung einer Concept Map kann zeitaufwendig sein, daher macht es Sinn diese
+automatisiert zu erstellen.
 
 ### Eingesetzte Technologien
 
@@ -41,19 +63,36 @@ Um dieses Ziel zu erreichen, setzen wir mehrere Technologien ein, u.a.:
 
 #### Warum spaCy als Toolkit?
 
-spaCy bietet vielfältige Funktionen und kann im Vergleich zu anderen Toolkits wie z.B. PyTorch und NLTK getestet, dank der umfassenden Dokumentation relativ einfach verwendet werden.
+spaCy bietet vielfältige Funktionen und kann im Vergleich zu anderen Toolkits wie
+z.B. PyTorch und NLTK, auch dank der umfassenden Dokumentation relativ einfach
+verwendet werden.
 Es finden sich auch zahlreiche Beispiele, u.a. auch um Relationen zwischen Entitäten
 zu ermitteln.
 
 #### Warum über NER-Modell/Relation-Modell?
 
-
-Es wurde die Idee getestet, die in Spacy implementierten Methoden anzuwenden und sich einen Parser-Tree von jedem Verwandtschaftsverhältnisse enthaltenen Satz ausgeben zu lassen. In diesem könnte man automatisch vom  Verwandtschaftsverhältnis bezeichnete Wort (z.B. „Mutter“) ausgehend die Satzstruktur durchwandern, bis man die dazugehörigen Subjekte/Objekte findet. Diese Vorgehensweise erwies sich aus mehreren Gründen als schlecht durchführbar: Zum einem hätte man eine umfassende Liste von Verwandtschaftsverhältnis bezeichneten Schlagwörtern aufsetzen müssen, die sehr große Umfänge erreichen könnte. Zum anderen war ohne „echtes  Verständnis“ des Satzes es schwierig zu identifizieren welche Subjekte/Objekte die gesuchten sind (Beispiele: „A ist die Mutter von B“ oder „A wird von seiner Mutter B gefragt“). Zudem wäre es sehr schwierig alle Formen von verneinten Verwandtschaftsverhältnissen zu unterscheiden. Daher wurde entschieden, dass auf entsprechende Aufgaben trainierte Modelle benötigt werden.
-
+Es wurde die Idee getestet, die in Spacy implementierten Methoden anzuwenden und
+sich einen Parser-Tree von jedem Verwandtschaftsverhältnisse enthaltenen Satz ausgeben
+zu lassen. In diesem könnte man automatisch vom Verwandtschaftsverhältnis bezeichnete
+Wort (z.B. „Mutter“) ausgehend die Satzstruktur durchwandern, bis man die dazugehörigen
+Subjekte/Objekte findet.
+Diese Vorgehensweise erwies sich aus mehreren Gründen als schlecht durchführbar:
+Zum einem hätte man eine umfassende Liste von Verwandtschaftsverhältnis bezeichneten
+Schlagwörtern aufsetzen müssen, die sehr große Umfänge erreichen könnte.
+Zum anderen war ohne „echtes  Verständnis“ des Satzes es schwierig zu identifizieren
+welche Subjekte/Objekte die gesuchten sind (Beispiele: „A ist die Mutter von B“
+oder „A wird von seiner Mutter B gefragt“).
+Zudem wäre es sehr schwierig alle Formen von verneinten Verwandtschaftsverhältnissen
+zu unterscheiden. Daher wurde entschieden, dass auf entsprechende Aufgaben trainierte
+Modelle benötigt werden.
 
 ### Warum Wahl von Transformer beim Relation-Modell?
 
-Transformer-Modell zeigen für viele Aufgaben in der NLP eine hohe Effizienz. Durch ihre Feedforward-Architektur (im Vergleich mit rückgekoppelten Modellen wie z.B. Long-Short-Term-Memory-Modells) sind sie sehr gut darin für Worte den umgebenden Kontext zu untersuchen. Dies macht sie für unsere Fragestellung die Zusammenhänge zwischen drei Wörtern (2 Entitäten, 1 Verwandtschaftsverhältnis) zu finden.
+Transformer-Modell zeigen für viele Aufgaben in der NLP eine hohe Effizienz. Durch
+ihre Feedforward-Architektur (im Vergleich mit rückgekoppelten Modellen wie z.B.
+Long-Short-Term-Memory-Modells) sind sie sehr gut darin für Worte den umgebenden
+Kontext zu untersuchen. Dies macht sie für unsere Fragestellung die Zusammenhänge
+zwischen drei Wörtern (2 Entitäten, 1 Verwandtschaftsverhältnis) zu finden.
 
 
 #### Eingesetzte Modelle
@@ -63,14 +102,20 @@ zum Einsatz, welche nachfolgend beschrieben werden.
 
 ##### Named Entity Recognition
 
-Als grundlegendste Basic-Modelle werden einem in Spacy die Modelle „en_core_web_sm“ und  „en_core_web_trf“ zur Verfügung gestellt. Dabei ist das Modell „en_core_web_sm“ stärker auf Effizienz mit den zur Verfügung stehenden Rechner-Ressourcen entwickelt. Dem gegenüber ist das Modell „en_core_web_trf“ auf eine höhere Genauigkeit der Ergebnisse ausgerichtet. Beides wurde in diesem Projekt getestet.
-Für die Named Entity Recognition (NER), also um die Personen innerhalb des eingegebenen
-Textes zu ermitteln, setzen wir auf das bereits trainierte spaCy-Modell `en_core_web_trf`, da  die Ergebnisse  derart besser waren , dass der höhere Ressourcenaufwand als berechtigt angesehen wurde.
+Als grundlegendste Basic-Modelle werden einem in Spacy die Modelle `en_core_web_sm`
+und `en_core_web_trf` zur Verfügung gestellt.
+Dabei ist das Modell `en_core_web_sm` stärker auf Effizienz mit den zur Verfügung
+stehenden Rechner-Ressourcen entwickelt.
+Dem gegenüber ist das Modell `en_core_web_trf` auf eine höhere Genauigkeit de
+ Ergebnisse ausgerichtet. Es setzt Transformer ein.
+Beide Modelle wurden in diesem Projekt getestet.
 
+Für die Named Entity Recognition (NER), also um die Personen innerhalb des eingegebenen
+Textes zu ermitteln, setzen wir auf das bereits trainierte spaCy-Modell `en_core_web_trf`,
+da die Ergebnisse derart besser waren, dass der höhere Ressourcenaufwand als berechtigt
+angesehen wurde.
 Wir hatten während des Projekts versucht ein eigenes Modell zu trainieren, haben
 dann aber festgestellt, dass dieses Modell bereits sehr gut funktioniert.
-
-
 
 Wir beschränken uns hierbei auf die Entitäten mit dem Tag `PERSON`.
 
@@ -141,21 +186,21 @@ Hierzu sind folgende Schritte notwendig:
 
 * [.NET 7 ASP.NET Core Runtime oder SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
 * [Python 3.11](https://www.python.org/downloads/)
-    * Installierte python packages:
+    * Installierte Python packages:
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
             ```
             pip install -U pip setuptools wheel
             pip install -U 'spacy[transformers,lookups]=3.5.4'
             python -m spacy download en_core_web_trf
             ```
-* Download des Releases: [1.0](TODO)
-* Entpackter Download in ein neues Verzeichnis auf der lokalen Festplatte.
+* Download des [Release 1.1](https://github.com/sven-n/concept-maps/releases/download/v1.1/concept-maps-binaries.zip)
+* Entpackter Download auf der lokalen Festplatte.
 * Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best` in das Unterverzeichnis
-  `training/relations/training` kopieren.
+  `concept-maps-binaries\PythonService\training\relations\training` kopieren.
 
 #### Starten
 
-1. Doppelklick auf die Datei `python/service.py` um den Python-Service zu starten
+1. Doppelklick auf die Datei `python/service.py` bzw. `Rechtsklick-> Öffnen mit -> Python` um den Python-Service zu starten
 2. Doppelklick auf `ConceptMaps.UI.exe` um die Web-Anwendung zu starten.
 
 Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
@@ -165,9 +210,9 @@ Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
 #### Voraussetzungen
 
 * Installiertes [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
-  oder ein aktuelles Visual Studio 2022.
+  oder ein aktuelles Visual Studio 2022 (inkl. dessen Komponenten für die Webentwicklung).
 * Installiertes [Python 3.11](https://www.python.org/downloads/)
-    * Installierte python packages:
+    * Installierte Python packages:
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
             ```
             pip install -U pip setuptools wheel
@@ -177,21 +222,22 @@ Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
 
 #### Bauen
 
-Die Solution ```ConceptMaps.sln``` kann mittels .NET SDK mit dem folgendenden Konsolenbefehl gebaut werden, wenn das aktuelle Verzeichnis `src` ist:
+Die Solution ```ConceptMaps.sln``` kann mittels .NET SDK mit dem folgendenden
+Konsolenbefehl gebaut werden, wenn das aktuelle Verzeichnis `src` ist:
 
 `dotnet publish`
 
 Alternativ kann die Solution in Visual Studio geöffnet werden und dort gebaut und
 gestartet werden.
 
-* Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best` in das Unterverzeichnis
-  `training/relations/training` kopieren.
+* Ggf. ein vortrainiertes Modell herunterladen und das Verzeichnis `training/model-best`
+  in das Unterverzeichnis `training/relations/training` kopieren.
 
 #### Ausführen über die Konsole
 
-0. Sicherstellen, dass man sich mit der Konsole im Verzeichnis `src` befindet.
-1. Python service mit dem folgenden Befehl starten: `python python/service.py`
-2. Web-Anwendung mit dem folgenden Befehl starten: `dotnet run --project ConceptMaps.UI --urls=http://localhost:5000/`
+1. Sicherstellen, dass man sich mit der Konsole im Verzeichnis `src` befindet.
+2. Python service mit dem folgenden Befehl starten: `python python/service.py`
+3. Web-Anwendung mit dem folgenden Befehl starten: `dotnet run --project ConceptMaps.UI --urls=http://localhost:5000/`
   * Alternativ, Doppelklick auf `ConceptMaps.UI.exe` im Ordner `src\ConceptMaps.UI\bin\Debug\net7.0\publish`
   * Es ist dann im Browser unter `http://localhost:5000/` verfügbar.
 
@@ -346,7 +392,11 @@ verschiedene Kombinationen ausprobiert werden können.
                    Bei großen Sessions kann dies jedoch sehr lange dauern.
 
 ### Training
-In der Datenaufbereitung wurden entsprechenden Sätze gespeichert, die nun für das Training genutzt werden können. Durch die Auswahl eines Trainigssets kann das Training des Modells gestartet werden.  Dabei erfolgt die Aufteilung der Traingsdaten in 50% Train, 30% Validation und 20% Test.
+
+In der Datenaufbereitung wurden entsprechenden Sätze gespeichert, die nun für das
+Training genutzt werden können.
+Durch die Auswahl eines Trainigssets kann das Training des Modells gestartet werden.
+Dabei erfolgt die Aufteilung der Traingsdaten in 50% Train, 30% Validation und 20% Test.
 
 * `E:` Trainingsrunde für das Modell
 * `#:` Nummer des verarbeiteten Datenchargens
@@ -364,7 +414,9 @@ Für die anderen Parameter, wie Präzision, Rückruf, F-Score und Gesamtscore, g
 
 ### Evaluation
 
-Sobald ein Modell trainiert wurde, kann man das Modell gegen verschiedene Sets von Sätzen auf seine Qualität hin prüfen. Die entsprechenden Sets werden ebenfalls während der Datenaufbereitung erstellt. 
+Sobald ein Modell trainiert wurde, kann man das Modell gegen verschiedene Sets
+von Sätzen auf seine Qualität hin prüfen.
+Die entsprechenden Sets werden ebenfalls während der Datenaufbereitung erstellt. 
 
 Die Ausgabe bei der Evaluation erfolgt wie folgt:
 * `Gesamt:` Gesamtanzahl aller Sätze
@@ -373,7 +425,12 @@ Die Ausgabe bei der Evaluation erfolgt wie folgt:
 * `Failed:` Anzahl der Sätze, die durch das Modell falsch vorhergesagt wurden
 * `Failed Sentences:` Ausgabe, der falsch vorhergesagten Sätze mit Begründung und dem Score der Vorhersage
 
-Neben der reinen Qualitätskontrolle durch die Evaluation kann dieses Verfahren auch zur Modellverbesserung genutzt werden. Durch die Analyse der falsch vorhergesagten Sätze können Erkenntnisse darüber gewonnen werden, welche Aspekte das Modell noch nicht gut vorhersagen kann. Durch die Bereitstellung weiterer Trainingsdaten könnte die Qualität des Modells nachträglich verbessert werden.
+Neben der reinen Qualitätskontrolle durch die Evaluation kann dieses Verfahren
+auch zur Modellverbesserung genutzt werden. Durch die Analyse der falsch vorhergesagten
+Sätze können Erkenntnisse darüber gewonnen werden, welche Aspekte das Modell noch
+nicht gut vorhersagen kann.
+Durch die Bereitstellung weiterer Trainingsdaten könnte die Qualität des Modells
+nachträglich verbessert werden.
 
 
 ### Concept Maps
@@ -385,11 +442,13 @@ von Familienstammbäumen erstellen.
 
 Der Quellcode zur Implementierung befindet sich unter `src/python`.
 Der Einstiegspunkt ist hier die Datei `service.py`.
-Es wird hier ein HTTP-Service unter dem Port 5001 gestartet, welcher die folgenden Funktionen anbietet:
+Es wird hier ein HTTP-Service unter dem Port 5001 gestartet, welcher die folgenden
+Funktionen anbietet:
 
 #### [POST] /get-triples
 
-Analysiert einen übergebenen Text und liefert die Beziehungen mit der entsprechenden Wahrscheinlichkeit (Score).
+Analysiert einen übergebenen Text und liefert die Beziehungen mit der entsprechenden
+Wahrscheinlichkeit (Score).
 
 Der Eingabetext wird hier als reiner String im Body der Anfrage geschickt.
 
@@ -401,8 +460,8 @@ werden nur diese mit `PERSON`-Label für die weitere Analyse im Relationenmodell
 Das Relationenmodell liefert ein Dictionary, welches als Schlüssel die Entitätenpaare verwendet,
 und als Wert einen Wahrscheinlichkeitswert (Score) zwischen 0 und 1 enthält.
 
-Hier kann ein Ergebnis in zwei Richtungen entstehen, weshalb wir für ein Entitätenpaar nur das Ergebnis
-in der Richtung weiterverwenden, welches den höheren Score hat.
+Hier kann ein Ergebnis in zwei Richtungen entstehen, weshalb wir für ein Entitätenpaar
+nur das Ergebnis in der Richtung weiterverwenden, welches den höheren Score hat.
 
 Als endgültiges Ergebnis wird ein JSON im HTTP-Response zurückgeliefert,
 welches die gefundenen Beziehungen beschreibt. Beispiel:
@@ -426,32 +485,41 @@ welches die gefundenen Beziehungen beschreibt. Beispiel:
 #### [POST] /training/relations/start
 
 Hierüber kann das Training des Relationenmodells angestoßen werden.
-Im Body der Anfrage werden die zu verwendenen Trainingsdaten (Sätze inkl. Beziehungen) übertragen.
-Die Daten werden in einem einfachen JSON-Format übertragen, welche nur die Sätze und die Beziehungen,
-aber keine Indizes o.ä. enthält.
+Im Body der Anfrage werden die zu verwendenen Trainingsdaten (Sätze inkl. Beziehungen)
+übertragen.
+Die Daten werden in einem einfachen JSON-Format übertragen, welche nur die Sätze
+und die Beziehungen, aber keine Indizes o.ä. enthält.
 
 Um dies für spaCy nutzbar zu machen, werden diese Sätze in spaCy-Docs konvertiert (s. `binary_converter.py`).
-Die Web-Oberfläche liefert hier ausschließlich Daten in einem Format, welches im Code als "simple" benannt ist,
-deshalb wird hier nur darauf eingegangen.
+Die Web-Oberfläche liefert hier ausschließlich Daten in einem Format, welches im
+Code als "simple" benannt ist, deshalb wird hier nur darauf eingegangen.
 
-Je Satz werden zunächst alle Entitäten (Personen) anhand der mitgelieferten Beziehungen dem spaCy Doc hinzugefügt.
+Je Satz werden zunächst alle Entitäten (Personen) anhand der mitgelieferten Beziehungen
+dem spaCy Doc hinzugefügt.
 
 Dazu müssen die Tokens und deren Indizes ermittelt werden.
 Die Tokenisierung wird hier mittels des Modells `en_core_web_trf` durchgeführt (`extract_entity_tokens`).
 
-Anschließend werden die Tokens der Entitäten anhand ihrer Namen ermittelt (`parse_entities`) und paarweise dem Dictionary des
-Relationenmodells mit dem Initialwert von `0.0` für alle möglichen Beziehungslabels hinzugefügt (`prepare_rels`).
-Die vom Benutzer eingegebenen Beziehungen werden anschließend in dieses Dictionary eingebracht (`parse_relations_simple`).
+Anschließend werden die Tokens der Entitäten anhand ihrer Namen ermittelt (`parse_entities`)
+und paarweise dem Dictionary des Relationenmodells mit dem Initialwert von `0.0`
+für alle möglichen Beziehungslabels hinzugefügt (`prepare_rels`).
+Die vom Benutzer eingegebenen Beziehungen werden anschließend in dieses Dictionary
+eingebracht (`parse_relations_simple`).
 
-Per Zufallsprinzip werden die Sätze dann in drei Teile (`train`, `dev`, `test`) aufgeteilt.
-In `test` landen etwa 20 % und in `dev` etwa 30 % aller Sätze. Der Rest wird für `train` verwendet.
-Als Ergebnis liegt dann jeweils eine spacy-Datei im Datenverzeichnis des spaCy-Projekts unter `src/python/training/relations/data`.
+Per Zufallsprinzip werden die Sätze dann in drei Teile (`train`, `dev`, `test`)
+aufgeteilt.
+In `test` landen etwa 20 % und in `dev` etwa 30 % aller Sätze. Der Rest wird für
+`train` verwendet.
+Als Ergebnis liegt dann jeweils eine spacy-Datei im Datenverzeichnis des spaCy-Projekts
+unter `src/python/training/relations/data`.
 
 Das Training wird dann in einem eigenen Prozess gestartet (`train_model.py`, `start_training`).
-Es wird dazu der Workflow `all` des spaCy-Projekts gestartet, welches das Training mittels CPU und eine anschließende Evaluation durchführt.
+Es wird dazu der Workflow `all` des spaCy-Projekts gestartet, welches das Training
+mittels CPU und eine anschließende Evaluation durchführt.
 
-Die Konsolenausgaben und der Status dieses Prozesses werden in eigenständigen Threads überwacht (`train_model.py`, `watch_training`),
-damit diese über `/training/relations/status` abgefragt werden können.
+Die Konsolenausgaben und der Status dieses Prozesses werden in eigenständigen Threads
+überwacht (`train_model.py`, `watch_training`), damit diese über `/training/relations/status`
+abgefragt werden können.
 
 #### [POST] /training/relations/cancel
 
@@ -459,7 +527,8 @@ Hierüber kann ein zuvor gestarteter Trainingsprozess abgebrochen werden.
 
 #### [GET] /training/relations/status
 
-Liefert den aktuellen Status des Trainingsprozesses und die bisher aufgelaufenen Konsolenausgaben, falls verfügbar.
+Liefert den aktuellen Status des Trainingsprozesses und die bisher aufgelaufenen
+Konsolenausgaben, falls verfügbar.
 
 ## Details zur Implementierung der Web-Oberfläche
 
@@ -535,7 +604,8 @@ Ansonsten werden Beziehungen als Kanten wie folgt dargestellt:
 
 ### Datenablage
 
-Daten werden in unterschiedlichen Unterverzeichnissen des Working-Directories (gewöhnlicherweise der Ort des Anwendungsstarts) abgelegt:
+Daten werden in unterschiedlichen Unterverzeichnissen des Working-Directories
+(gewöhnlicherweise der Ort des Anwendungsstarts) abgelegt:
 
 * `crawler-settings`: Die Einstellungen für den Crawler je Webseite.
 * `crawl-results`: Die Ergebnisse des Web-Crawlers.
@@ -545,9 +615,14 @@ Daten werden in unterschiedlichen Unterverzeichnissen des Working-Directories (g
 ### Konsolenausgabe bei Training des Modells
 
 Die Trainingsseite des Modells ruft periodisch den Status vom Python-Service (s. `[GET] /training/relations/status`) ab.
-Die Konsolenausgabe davon enthält Formatierungscodes, welche von der Webanwendung entsprechend mittels CSS sichtbar umgesetzt werden.
+Die Konsolenausgabe davon enthält Formatierungscodes, welche von der Webanwendung
+entsprechend mittels CSS sichtbar umgesetzt werden.
 
 Die Interpretierung dieser Codes wurde in der Komponente `ConsoleText` implementiert, s. `Components\ConsoleText.razor.cs`.
+
+Beispiel:
+
+![Konsolenausgabe](doc/training.PNG)
 
 ## Limitierungen der aktuellen Implementierung und Ausblick
 
