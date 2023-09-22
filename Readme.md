@@ -188,7 +188,7 @@ Hierzu sind folgende Schritte notwendig:
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
             ```
             pip install -U pip setuptools wheel
-            pip install -U 'spacy[transformers,lookups]=3.5.4'
+            pip install -U 'spacy[transformers,lookups]==3.5.4'
             python -m spacy download en_core_web_trf
             ```
 * Download des [Release 1.1](https://github.com/sven-n/concept-maps/releases/download/v1.1/concept-maps-binaries.zip)
@@ -214,7 +214,7 @@ Die Anwendung ist dann im Browser unter `http://localhost:5000/` verfügbar.
         * spaCy, siehe auch [https://spacy.io/usage](https://spacy.io/usage):
             ```
             pip install -U pip setuptools wheel
-            pip install -U 'spacy[transformers,lookups]=3.5.4'
+            pip install -U 'spacy[transformers,lookups]==3.5.4'
             python -m spacy download en_core_web_trf
             ```
 
