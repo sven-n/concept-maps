@@ -10,7 +10,7 @@ englischen Texten einen Familienstammbaum in Form einer Grafik generieren kann.
 Hierfür wird maschinelles Lernen eingesetzt und ein Sprachmodell trainiert.
 Details hierzu werden nachfolgend beschrieben.
 
-Die Web-Anwendung unterstützt hierbei von der der Datengewinnung, bei der Aufbereitung
+Die Web-Anwendung unterstützt hierbei von der Datengewinnung, bei der Aufbereitung
 von Trainingsdaten sowie beim Training eines Sprachmodells selbst.
 Es ist kein Programmierwissen oder explizites Wissen über die eingesetzte
 Sprach-Bibliothek nötig.
@@ -20,8 +20,8 @@ zu evaluieren.
 
 ### Warum Spezialisierung auf Familienstammbäume?
 
-Wir haben uns für die Spezialisierung auf Familiestammbäume entschieden, und dies
-aus verschiedenen Gründen. Zum einen ist dieser Anwendungsfall hinreichend eng gefasst,
+Wir haben uns für die Spezialisierung auf Familiestammbäume aus verschiedenen Gründen entschieden. 
+Zum einen ist dieser Anwendungsfall hinreichend eng gefasst,
 um sich nicht in zu vielen Sonderfällen zu verstricken und der Umfang dieser Aufgabe
 erscheint dem zeitlichen Horizont des Fachpraktikums angemessen.
 
@@ -34,8 +34,8 @@ Familienstrukturen hilfreich sind. Diese familiären Beziehungen sind oft schwer
 verständlich, wenn sie im Fließtext beschrieben werden.
 
 Die Verwendung eines Stammbaums ermöglicht es, diese Informationen leichter zu
-vermitteln, indem er die familiären Beziehungen in einer übersichtlichen grafischen
-Form darstellt. Ein Stammbaum kann somit als eine Art Concept Map betrachtet werden.
+vermitteln, indem dieser die familiären Beziehungen in einer übersichtlichen grafischen
+Form darstellt.
 Die Beziehungen der Mitglieder zueinander sind größtenteils eindeutig zu beschreiben,
 sodass hier auch genügend Datengrundlage für die Erstellung von Trainingsdaten
 vorhanden ist.
@@ -46,7 +46,7 @@ für Menschen, die mit dem Konzept des Content Mapping ansonsten keine Berührun
 hatten.
 
 In unserem Projekt werden Concept Maps behandelt, die eine visuelle Darstellung
-von Ideen und Konzepten sowie ihrer Verbindungen darstellen.
+von Ideen und Konzepten sowie ihrer Verbindungen darstellen, behandelt und somit entsprechen auch Stammbäume einer Art Concept Map.
 Die Erstellung einer Concept Map kann zeitaufwendig sein, daher macht es Sinn diese
 automatisiert zu erstellen.
 
@@ -91,8 +91,8 @@ Modelle benötigt werden.
 Transformer-Modell zeigen für viele Aufgaben in der NLP eine hohe Effizienz. Durch
 ihre Feedforward-Architektur (im Vergleich mit rückgekoppelten Modellen wie z.B.
 Long-Short-Term-Memory-Modells) sind sie sehr gut darin für Worte den umgebenden
-Kontext zu untersuchen. Dies macht sie für unsere Fragestellung die Zusammenhänge
-zwischen drei Wörtern (2 Entitäten, 1 Verwandtschaftsverhältnis) zu finden.
+Kontext zu untersuchen. Dies macht sie für unsere Fragestellung, nämlch die Zusammenhänge
+zwischen drei Wörtern (2 Entitäten, 1 Verwandtschaftsverhältnis) zu finden, geeignet.
 
 
 #### Eingesetzte Modelle
@@ -161,9 +161,7 @@ ebenfalls zum [Download](https://mega.nz/file/X0wQGYiK#sljp2VQfemQVp-WGKxIRoPVWb
 
 ### Lokal mit Hilfe von Docker
 
-Dies ist die wahrscheinlich einfachste Möglichkeit die Anwendung zu installieren und zu starten.
-Hier entfällt die Problematik, dass sich unterschiedliche Python und spaCy-Versionen
-in die Quere kommen.
+Dies ist die wahrscheinlich einfachste Möglichkeit die Anwendung zu installieren und zu starten, da hier die die Problematik entfällt, dass sich unterschiedliche Python und spaCy-Versionen in die Quere kommen.
 
 Hierzu sind folgende Schritte notwendig:
 * Docker bzw. Docker Desktop installieren, falls noch nicht vorhanden.
@@ -291,7 +289,7 @@ Informationen extrahieren:
   <div class="pi-data-value pi-font">{<a href="/wiki/Lysa_Arryn" title="Lysa Arryn">Lysa Arryn</a>}<sup id="cite_ref-GoT_105_7-0" class="reference"><a href="#cite_note-GoT_105-7">[5]</a></sup><br><a href="/wiki/Edmure_Tully" title="Edmure Tully">Edmure Tully</a><sup id="cite_ref-GoT_303_8-0" class="reference"><a href="#cite_note-GoT_303-8">[6]</a></sup></div>
 </div>
 ```
-  * ..._SentenceRelationships.json: Mit den obig genannten Daten versucht der
+  * ..._SentenceRelationships.json: Mit den oben genannten Daten versucht der
     Crawler Sätze zu finden, in denen beide Personen einer Beziehung vorkommen.
     Er sucht hierbei die Personen sowohl mit vollem als auch mit dem Vornamen.
     Diese gefundenen Beziehungen entsprechen jedoch noch nicht zwangsläufig der
@@ -584,7 +582,7 @@ welche als Input das (unangeordnete) `Blazor.Diagrams.Diagram` entgegennimmt, un
 den nötigen bidirektionalen Graphen von `QuikGraph` erstellt.
 
 Im Verlauf des Projektes haben wir jedoch festgestellt, dass die vorhandenen Algorithmen
-jedoch nicht das gewünschte Ergebnis als Stammbaum liefern können.
+nicht das gewünschte Ergebnis als Stammbaum liefern können.
 Wir haben uns deshalb entschieden, eine eigene Implementierung für das Interface `GraphShape.Algorithms.Layout.ILayoutAlgorithm<TVertex, TEdge, TGraph>`
 zu schaffen. Diese lehnt sich an `GraphShape.Algorithms.Layout.SimpleTreeLayoutAlgorithm<TVertex, TEdge, TGraph>` an,
 wurde jedoch speziell für Familenstammbäume angepasst. Sie ist in der Klasse `FamilyTreeLayoutAlgorithm` zu finden.
